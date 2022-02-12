@@ -1,0 +1,19 @@
+<h1>Log In</h1>
+
+<% if @error %>
+  <div class="error_messages">
+    <%= @error %>
+  </div>
+<% end %>
+
+<%= form_with method: :post, url: session_index_path do %>
+  <div class="field">
+    <%= label_tag :email %><br />
+    <%= text_field_tag :email, params[:email] %>
+  </div>
+  <div class="field">
+    <%= label_tag :password %><br />
+    <%= password_field_tag :password %>
+  </div>
+  <%= submit_tag 'Log In' %>
+<% end %>
