@@ -3,6 +3,7 @@
 class LinksController < ApplicationController
   before_action :authorize, only: %i[index new edit create update destroy]
   before_action :set_link, only: %i[show edit update destroy]
+  before_action :prevent_public_expired, only: %i[show update]
 
   # GET /links or /links.json
   def index
@@ -86,6 +87,12 @@ class LinksController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_link
     @link = Link.find(params[:id])
+  end
+
+  def prevent_public_expired
+    @is_expired = @link.expires <= Time.now
+
+    redirect_to root_url, alert: 'That link was expired!' if @is_expired && current_user.id != @link.user.id
   end
 
   # Only allow a list of trusted parameters through.

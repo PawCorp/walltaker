@@ -2,6 +2,7 @@
   <p>
     <strong>Expires:</strong>
     <%= link.expires.strftime '%A %e %b at %I:%M%p' %>
+    <strong><%= '⚠️ Expired' if link.expires <= Time.now %></strong>
   </p>
 
   <p>
