@@ -3,12 +3,26 @@
     --success: #30AA65;
 }
 
+h1 > a {
+    text-decoration: none;
+    background: var(--accent);
+    color: var(--bg);
+    padding: 0 1rem;
+}
+
+h1 > a:hover,
+h1 > a:visited{
+    text-decoration: none;
+    color: var(--bg);
+}
+
 body {
     font-size: 0.9rem;
 }
 
 body > header {
-    padding-bottom: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
 }
 
 header .header__inner {
@@ -147,4 +161,19 @@ form.set-post-id {
 
 form.set-post-id input {
     width: 100%;
+}
+
+.masthead {
+    width: 100%;
+    height: 215px;
+    background: url('/dog.png') center center;
+    background-size: cover;
+    display: flex;
+    align-items: flex-end;
+}
+
+.masthead h3 {
+    color: #FFF;
+    margin: 1.5rem 2rem;
+    padding: 0;
 }
