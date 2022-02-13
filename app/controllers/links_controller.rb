@@ -17,6 +17,7 @@ class LinksController < ApplicationController
   # GET /links/new
   def new
     @link = Link.new
+    @link.expires = Time.now + 1.days
   end
 
   # GET /links/1/edit
