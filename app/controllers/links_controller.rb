@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LinksController < ApplicationController
-  before_action :authorize, only: %i[index new edit create update destroy]
+  before_action :authorize, only: %i[index new edit create destroy]
   before_action :set_link, only: %i[show edit update destroy]
   before_action :prevent_public_expired, only: %i[show update]
 
@@ -41,6 +41,10 @@ class LinksController < ApplicationController
 
   # PATCH/PUT /links/1 or /links/1.json
   def update
+    if (current_user && ((current_user.id != @link.user.id) && !link_params.empty?)) || (current_user.nil? && !link_params.empty?)
+      redirect_to link_url(@link), alert: 'Not authorized.'
+      return
+    end
     current_image_post = request_post(params['link'][:post_id]) unless params['link'][:post_id].nil?
     blacklist = @link.blacklist.split(' ') unless @link.blacklist.nil?
 
@@ -74,6 +78,10 @@ class LinksController < ApplicationController
 
   # DELETE /links/1 or /links/1.json
   def destroy
+    if current_user.id != @link.user.id
+      redirect_to link_url(@link), alert: 'Not authorized.'
+      return
+    end
     @link.destroy
 
     respond_to do |format|
