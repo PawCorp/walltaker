@@ -1,5 +1,7 @@
 # Walltaker
 
+> Oh rails, how I missed you.
+
 ## What is it?
 
 Walltaker is inspired by the [WallClaimer](https://www.wallclaimer.com/) app, which allows you to set the wallpaper of
