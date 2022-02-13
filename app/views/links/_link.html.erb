@@ -2,7 +2,7 @@
   <p>
     <strong>Expires:</strong>
     <%= link.expires.strftime '%A %e %b at %I:%M%p' %>
-    <strong><%= '⚠️ Expired' if link.expires <= Time.now %></strong>
+    <strong><%= '⚠️ Expired' if link.expires <= Time.now.utc %></strong>
   </p>
 
   <p>
@@ -16,10 +16,20 @@
     <% if link.terms == '' %>
       ⚠️ No Terms
     <% else %>
-      <blockquote>
-        <%= link.terms %>
-      </blockquote>
-    <% end %>
+    <blockquote>
+      <%= link.terms %>
+    </blockquote>
+  <% end %>
   </p>
+
+  <% if link.last_ping %>
+    <p>
+      <% if link.last_ping.after? (Time.now.utc - 1.minute) %>
+        <strong class="online">Online</strong>
+      <% else %>
+        <strong class="offline">Offline (>1min since last ping)</strong>
+      <% end %>
+    </p>
+  <% end %>
 
 </div>
