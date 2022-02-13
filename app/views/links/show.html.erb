@@ -1,11 +1,13 @@
-<div class="task-tools">
-  <div class="left">
-    <%= link_to "Back to links", links_path %>
+<% if current_user && current_user.id == @link.user.id %>
+  <div class="task-tools">
+    <div class="left">
+      <%= link_to "Back to links", links_path %>
+    </div>
+    <div class="right">
+      <%= link_to "Edit this link", edit_link_path(@link) %>
+      <%= button_to "Delete this link", @link, method: :delete %>
+    </div>
   </div>
-  <div class="right">
-    <%= link_to "Edit this link", edit_link_path(@link) %>
-    <%= button_to "Delete this link", @link, method: :delete %>
-  </div>
-</div>
+<% end %>
 
 <%= render @link %>

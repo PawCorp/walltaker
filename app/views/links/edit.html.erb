@@ -1,10 +1,9 @@
-<h1>Editing link</h1>
+<div class="task-tools">
+  <div class="left">
+    <%= link_to "Back to link", @link %>
+  </div>
+</div>
+
+<h2>Editing link</h2>
 
 <%= render "form", link: @link %>
-
-<br>
-
-<div>
-  <%= link_to "Show this link", @link %> |
-  <%= link_to "Back to links", links_path %>
-</div>

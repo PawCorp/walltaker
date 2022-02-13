@@ -24,6 +24,8 @@ class LinksController < ApplicationController
   def create
     @link = Link.new(link_params)
 
+    @link.user_id = current_user.id
+
     respond_to do |format|
       if @link.save
         format.html { redirect_to link_url(@link), notice: "Link was successfully created." }
@@ -66,6 +68,6 @@ class LinksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def link_params
-      params.require(:link).permit(:expires, :user_id, :terms)
+      params.require(:link).permit(:expires, :terms)
     end
 end
