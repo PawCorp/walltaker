@@ -1,11 +1,9 @@
 <%= form_with(model: link) do |form| %>
   <% if link.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(link.errors.count, "error") %> prohibited this link from being saved:</h2>
-
+    <div class="error">
       <ul>
-        <% link.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% link.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
@@ -14,6 +12,11 @@
   <div>
     <%= form.label :expires, style: "display: block" %>
     <%= form.datetime_field :expires %>
+  </div>
+
+  <div>
+    <%= form.label :blacklist, 'Blacklist (same format as e621.net)', style: "display: block" %>
+    <%= form.text_field :blacklist %>
   </div>
 
   <div>

@@ -5,10 +5,20 @@
   </p>
 
   <p>
+    <strong>Blacklist:</strong>
+    <%= '⚠️ No Blacklisted Tags' if link.blacklist == '' %>
+    <%= link.blacklist %>
+  </p>
+
+  <p>
     <strong>Terms:</strong>
-    <blockquote>
-      <%= link.terms %>
-    </blockquote>
+    <% if link.terms == '' %>
+      ⚠️ No Terms
+    <% else %>
+      <blockquote>
+        <%= link.terms %>
+      </blockquote>
+    <% end %>
   </p>
 
 </div>
