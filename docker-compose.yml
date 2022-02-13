@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  database:
+    image: postgres
+    env_file:
+      - .env
+    volumes:
+      - ./.docker/volumes/walltaker_database:/var/lib/postgresql/data
+  web:
+    build:
+      context: .
+      dockerfile:
+    env_file:
+      - .env
+    volumes:
+      - ./ror:/ror
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
