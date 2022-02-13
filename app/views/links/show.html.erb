@@ -1,10 +1,11 @@
-<p style="color: green"><%= notice %></p>
+<div class="task-tools">
+  <div class="left">
+    <%= link_to "Back to links", links_path %>
+  </div>
+  <div class="right">
+    <%= link_to "Edit this link", edit_link_path(@link) %>
+    <%= button_to "Delete this link", @link, method: :delete %>
+  </div>
+</div>
 
 <%= render @link %>
-
-<div>
-  <%= link_to "Edit this link", edit_link_path(@link) %> |
-  <%= link_to "Back to links", links_path %>
-
-  <%= button_to "Destroy this link", @link, method: :delete %>
-</div>

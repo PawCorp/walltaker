@@ -48,6 +48,18 @@ h2 {
     margin-bottom: 1rem;
     font-size: 2.2rem;
     font-weight: normal;
+    margin-top: 3.25rem;
+}
+
+h4 {
+    text-align: center;
+    margin-top: 5rem;
+    margin-bottom: 0.25rem;
+}
+
+h4 + p {
+    margin: 0 auto 2rem auto;
+    max-width: 320px;
 }
 
 strong {
@@ -87,4 +99,40 @@ body > .flashes > .flash--danger {
 }
 body > .flashes > .flash--danger::before {
     content: "🚫"
+}
+
+.task-tools {
+    display: flex;
+    justify-content: space-between;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+.task-tools .left {
+    flex: 1 0 auto;
+}
+
+.task-tools .right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1 1 320px;
+    gap: 1.5rem;
+}
+
+.task-tools + h2 {
+    margin-top: calc(3.25rem - 2.5rem);
+}
+
+.task-tools button {
+    padding: 4px 13px;
+}
+
+.mock-button {
+    background: var(--accent);
+    padding: 0px 8px;
+    color: var(--bg);
+    display: inline-block;
+    border-radius: 4px;
 }

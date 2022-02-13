@@ -1,17 +1,14 @@
 <div id="<%= dom_id link %>">
   <p>
     <strong>Expires:</strong>
-    <%= link.expires %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= link.user_id %>
+    <%= link.expires.strftime '%A %e %b at %I:%M%p' %>
   </p>
 
   <p>
     <strong>Terms:</strong>
-    <%= link.terms %>
+    <blockquote>
+      <%= link.terms %>
+    </blockquote>
   </p>
 
 </div>

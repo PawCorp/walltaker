@@ -19,6 +19,7 @@
     <div class="user-tools">
       <% if current_user %>
         <span><%= current_user.username %></span>
+        <strong><%= link_to 'Edit Links', links_path %></strong>
         <%= link_to 'Log Out', logout_path %>
       <% else %>
         <%= link_to 'Sign Up', signup_path %>

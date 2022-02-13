@@ -4,7 +4,7 @@ class LinksController < ApplicationController
 
   # GET /links or /links.json
   def index
-    @links = Link.all
+    @links = User.find(current_user.id).link
   end
 
   # GET /links/1 or /links/1.json
