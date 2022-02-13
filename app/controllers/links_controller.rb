@@ -10,9 +10,7 @@ class LinksController < ApplicationController
   end
 
   # GET /links/1 or /links/1.json
-  def show
-    @current_image_post = request_post(@link.currentImage) unless @link.currentImage.nil?
-  end
+  def show; end
 
   # GET /links/new
   def new
@@ -42,18 +40,28 @@ class LinksController < ApplicationController
 
   # PATCH/PUT /links/1 or /links/1.json
   def update
-    current_image_post = request_post(link_params[:currentImage]) unless link_params[:currentImage].nil?
+    current_image_post = request_post(params['link'][:post_id]) unless params['link'][:post_id].nil?
     blacklist = @link.blacklist.split(' ') unless @link.blacklist.nil?
 
-    unless blacklist.nil? || current_image_post.nil? || !link_params[:currentImage]
+    unless blacklist.nil? || current_image_post.nil?
       if (blacklist & current_image_post['post']['tags']['general']).any?
         redirect_to link_url(@link), alert: 'Post was blacklisted.'
         return
       end
     end
 
+    result = if (current_image_post.nil?)
+               @link.update(link_params)
+             else
+               @link.update(HashWithIndifferentAccess.new({
+                                                            post_url: current_image_post['post']['file']['url'],
+                                                            post_thumbnail_url: current_image_post['post']['preview']['url'],
+                                                            post_description: current_image_post['post']['description']
+                                                          }).merge(link_params))
+             end
+
     respond_to do |format|
-      if @link.update(link_params)
+      if result
         format.html { redirect_to link_url(@link), notice: 'Link was successfully updated.' }
         format.json { render :show, status: :ok, location: @link }
       else
@@ -82,12 +90,12 @@ class LinksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def link_params
-    params.require(:link).permit(:expires, :terms, :blacklist, :currentImage)
+    params.require(:link).permit(:expires, :terms, :blacklist)
   end
 
   def request_post(post_id)
     response = Excon.get(
-      "https://e621.net/posts/#{post_id}.json"
+      "https://e621.net/posts/#{post_id.to_i}.json"
     )
     return nil if response.status != 200
 

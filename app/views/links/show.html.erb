@@ -14,21 +14,21 @@
 
 <h2>Change <%= @link.user.username %>'s wallpaper</h2>
 
-<% if @current_image_post %>
+<% if @link.post_thumbnail_url %>
   <figure>
-    <a href="<%= @current_image_post['post']['file']['url'] %>" target="_blank">
-      <img src="<%= @current_image_post['post']['preview']['url'] %>"/>
+    <a href="<%= @link.post_url %>" target="_blank">
+      <img src="<%= @link.post_thumbnail_url %>"/>
     </a>
     <figcaption>
-      <%= @current_image_post['post']['description'] %>
+      <%= @link.post_description %>
     </figcaption>
   </figure>
 <% end %>
 
 <%= form_with model: @link, method: 'PATCH', class: 'set-post-id' do |form| %>
   <div>
-    <%= form.label :currentImage, 'E621 Post ID', style: "display: block" %>
-    <%= form.text_field :currentImage %>
+    <%= form.label :post_id, 'E621 Post ID', style: "display: block" %>
+    <%= form.text_field :post_id %>
   </div>
 
   <div>
