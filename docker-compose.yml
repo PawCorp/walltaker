@@ -1,20 +1,24 @@
-version: "3.9"
+version: "3"
 services:
   database:
     image: postgres
-    env_file:
-      - .env
-    volumes:
-      - ./.docker/volumes/walltaker_database:/var/lib/postgresql/data
-  web:
-    build:
-      context: .
-      dockerfile:
-    env_file:
-      - .env
-    volumes:
-      - ./ror:/ror
     ports:
-      - "3000:3000"
+      - "5432:5432"
+    volumes:
+      - ./.docker/volumes/walltaker_database2:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=heffe6661
+      - POSTGRES_USER=postgres
+
+  web:
+    build: .
+    volumes:
+            - ./:/ror
+    ports:
+            - "3000:3000"
     depends_on:
-      - database
+            - database
+    environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=heffe6661
+
