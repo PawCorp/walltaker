@@ -7,7 +7,6 @@ services:
     volumes:
       - ./.docker/volumes/walltaker_database2:/var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD=heffe6661
       - POSTGRES_USER=postgres
 
   web:
@@ -20,5 +19,4 @@ services:
             - database
     environment:
             - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=heffe6661
 
