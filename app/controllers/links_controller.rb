@@ -2,6 +2,7 @@
 
 class LinksController < ApplicationController
   before_action :authorize, only: %i[index new edit create destroy]
+  after_action :log_presence, only: %i[show]
   before_action :set_link, only: %i[show edit update destroy]
   before_action :prevent_public_expired, only: %i[show update]
 
@@ -115,5 +116,12 @@ class LinksController < ApplicationController
     return nil if response.status != 200
 
     JSON.parse(response.body)
+  end
+
+  def log_presence
+    if request.format == :json
+      @link.last_ping = Time.now
+      @link.save
+    end
   end
 end
