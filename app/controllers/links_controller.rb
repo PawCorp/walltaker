@@ -17,7 +17,7 @@ class LinksController < ApplicationController
   # GET /links/new
   def new
     @link = Link.new
-    @link.expires = Time.now + 1.days
+    @link.expires = Time.now.utc + 1.days
   end
 
   # GET /links/1/edit
@@ -99,7 +99,7 @@ class LinksController < ApplicationController
   end
 
   def prevent_public_expired
-    @is_expired = @link.expires <= Time.now
+    @is_expired = @link.expires <= Time.now.utc
 
     redirect_to root_url, alert: 'That link was expired!' if @is_expired && current_user.id != @link.user.id
   end
@@ -120,7 +120,7 @@ class LinksController < ApplicationController
 
   def log_presence
     if request.format == :json
-      @link.last_ping = Time.now
+      @link.last_ping = Time.now.utc
       @link.save
     end
   end
