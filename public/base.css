@@ -69,6 +69,9 @@ strong {
 .page-break {
     margin-top: 12rem;
 }
+.half-page-break {
+    margin-top: 5rem;
+}
 
 blockquote > .byline {
     text-align: right;
@@ -135,4 +138,13 @@ body > .flashes > .flash--danger::before {
     color: var(--bg);
     display: inline-block;
     border-radius: 4px;
+}
+
+form.set-post-id {
+    max-width: 329px;
+    margin: 3rem auto 0;
+}
+
+form.set-post-id input {
+    width: 100%;
 }

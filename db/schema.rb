@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_13_013831) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_13_020742) do
   create_table "links", force: :cascade do |t|
     t.datetime "expires"
     t.integer "user_id", null: false
@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_13_013831) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "blacklist"
+    t.integer "currentImage"
     t.index ["user_id"], name: "index_links_on_user_id"
   end
 

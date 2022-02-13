@@ -11,3 +11,32 @@
 <% end %>
 
 <%= render @link %>
+
+<h2>Change <%= @link.user.username %>'s wallpaper</h2>
+
+<% if @current_image_post %>
+  <figure>
+    <a href="<%= @current_image_post['post']['file']['url'] %>" target="_blank">
+      <img src="<%= @current_image_post['post']['preview']['url'] %>"/>
+    </a>
+    <figcaption>
+      <%= @current_image_post['post']['description'] %>
+    </figcaption>
+  </figure>
+<% end %>
+
+<%= form_with model: @link, method: 'PATCH', class: 'set-post-id' do |form| %>
+  <div>
+    <%= form.label :currentImage, 'E621 Post ID', style: "display: block" %>
+    <%= form.text_field :currentImage %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<figure class="half-page-break">
+  <img src="/e621postid.gif"/>
+  <figcaption>The post ID is the main number shown in the post URL. You should only include this number, not anything after the question mark in the post URL, or anything before the number.</figcaption>
+</figure>
