@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def authorize
-    redirect_to new_session_url, notice: 'Not authorized' if session[:user_id].nil?
+    redirect_to new_session_url, alert: 'Not authorized' if session[:user_id].nil?
   end
 end

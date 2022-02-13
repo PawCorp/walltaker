@@ -1,9 +1,8 @@
-<h1>Sign Up</h1>
+<h2>Sign Up</h2>
 
 <%= form_with model: @user do |f| %>
   <% if @user.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
+    <div class="error">
       <ul>
         <% @user.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -13,19 +12,19 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :email %>
+    <%= f.label :email %><br/>
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :username %>
+    <%= f.label :username %><br/>
     <%= f.text_field :username %>
   </div>
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :password %><br/>
     <%= f.password_field :password %>
   </div>
   <div class="field">
-    <%= f.label :password_confirmation %>
+    <%= f.label :password_confirmation %><br/>
     <%= f.password_field :password_confirmation %>
   </div>
   <%= f.submit 'Sign up' %>

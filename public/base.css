@@ -1,0 +1,90 @@
+:root {
+    --danger: #CC3525;
+    --success: #30AA65;
+}
+
+body {
+    font-size: 0.9rem;
+}
+
+body > header {
+    padding-bottom: 0.5rem;
+}
+
+header .header__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+header .user-tools {
+    display: flex;
+    flex: 1 1 320px;
+    justify-content: flex-end;
+}
+
+header .user-tools > * + * {
+    margin-left: 20px;
+}
+
+header h1 {
+    display: flex;
+    justify-content: flex-start;
+    flex: 1 1 320px;
+}
+
+@media screen and (max-width: 687px) {
+    header h1 {
+        justify-content: center;
+    }
+}
+
+h2 {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    font-size: 2.2rem;
+    font-weight: normal;
+}
+
+strong {
+    color: var(--marked);
+}
+
+.page-break {
+    margin-top: 12rem;
+}
+
+blockquote > .byline {
+    text-align: right;
+    padding-right: 3rem;
+}
+
+body > .flashes {
+    display: flex;
+    flex-direction: column;
+}
+
+body > .flashes > * {
+    background: #1c1c1c;
+    padding: 0.5rem 1rem 0.6rem;
+    border: 1px solid var(--border);
+    border-top: 0;
+}
+
+body > .flashes > .flash--success {
+    color: var(--success);
+}
+body > .flashes > .flash--success::before {
+    content: "✅"
+}
+
+body > .flashes > .flash--danger {
+    color: var(--danger);
+}
+body > .flashes > .flash--danger::before {
+    content: "🚫"
+}

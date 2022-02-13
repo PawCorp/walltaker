@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_12_190813) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_12_230256) do
+  create_table "links", force: :cascade do |t|
+    t.datetime "expires"
+    t.integer "user_id", null: false
+    t.string "terms"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_links_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "username"
@@ -21,4 +30,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_12_190813) do
     t.index ["username"], name: "unique_usernames", unique: true
   end
 
+  add_foreign_key "links", "users"
 end

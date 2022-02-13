@@ -1,16 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Walltaker</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Walltaker</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <link rel="stylesheet" href="/base.css"/>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
 
-  <body>
-    <%= yield %>
-  </body>
+<body>
+<header>
+  <div class="header__inner">
+    <h1>Walltaker</h1>
+    <div class="user-tools">
+      <% if current_user %>
+        <span><%= current_user.username %></span>
+        <%= link_to 'Log Out', logout_path %>
+      <% else %>
+        <%= link_to 'Sign Up', signup_path %>
+        <%= link_to 'Log In', login_path %>
+      <% end %>
+    </div>
+  </div>
+</header>
+
+<div class="flashes">
+  <% flash.each do |type, msg| %>
+    <div class="flash--<%= type == 'notice' ? 'success' : 'danger' %>">
+      <%= msg %>
+    </div>
+  <% end %>
+</div>
+
+<main>
+  <%= yield %>
+</main>
+
+<footer>
+  <p>Want more horny debauchery? Try <a href="https://joi.how">joi.how</a>.</p>
+  <small>© joi.how 2022</small>
+</footer>
+</body>
 </html>

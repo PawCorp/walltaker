@@ -1,15 +1,28 @@
-<% flash.each do |type, msg| %>
-  <div>
-    <%= msg %>
-  </div>
-<% end %>
+<h2>What is it?</h2>
+<p>
+  Walltaker is inspired by the <a href="https://www.wallclaimer.com/">WallClaimer</a> app, which allows you to set the
+  wallpaper of your friends phones. This however leads to some weird cases where people post stuff that'd be on your
+  metaphorical blacklist. With that in mind, I wanted it to be restricted to <a href="https://e621.net">e621.net</a>
+  results, with an enforced blacklist. This keeps you in control, but not <em>too much</em> control.
+</p>
 
-<% if current_user %>
-  <div class="user">
-    <%= current_user.username %>
-    <%= link_to 'Log Out', logout_path %>
-  </div>
-<% else %>
-  <%= link_to 'Sign Up', signup_path %>
-  <%= link_to 'Log In', login_path %>
-<% end %>
+<h2>What do I need?</h2>
+<p>
+  Walltaker requires you to <strong>make an account on the website (here!) first.</strong> Once you have an account, you can generate
+  links to send to friends/enemies, which will enqueue new wallpapers for your account. When you want to start seeing
+  these new wallpapers, <strong>then you can download the <a href="">companion android app,</a></strong> which is able to listen to wallpaper changes to any
+  account. Enter your username, and then go about your day!
+</p>
+
+<h2 class="page-break">Frequently Asked Question</h2>
+<blockquote>
+  Hey Gray, this app looks and feels ancient and weird; not horny at all.
+  <div class="byline">- You, probably</div>
+</blockquote>
+
+<p>
+  Yes, I know this isn't the best app imaginable. I wanted to make something with
+  <a href="https://rubyonrails.org/" target="_blank">Ruby on Rails</a> for nostalgia. I'm still faster at cranking out
+  an
+  app in Rails than I am on anything else I actually work with on a day-to-day basis, tells you something, huh?
+</p>

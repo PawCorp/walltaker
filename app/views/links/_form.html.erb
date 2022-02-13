@@ -1,0 +1,32 @@
+<%= form_with(model: link) do |form| %>
+  <% if link.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(link.errors.count, "error") %> prohibited this link from being saved:</h2>
+
+      <ul>
+        <% link.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :expires, style: "display: block" %>
+    <%= form.datetime_field :expires %>
+  </div>
+
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div>
+    <%= form.label :terms, style: "display: block" %>
+    <%= form.text_field :terms %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
