@@ -1,8 +1,11 @@
 <div id="<%= dom_id link %>">
   <p>
     <strong>Expires:</strong>
-    <%= link.expires.strftime '%A %e %b at %I:%M%p' %>
-    <strong><%= '⚠️ Expired' if link.expires <= Time.now.utc %></strong>
+    <% if link.expires <= Time.now.utc %>
+      <%= link.expires.strftime '%A %e %b at %I:%M%p' %> ⚠️ Expired
+    <% else %>
+      in <%= time_ago_in_words link.expires %>
+    <% end %>
   </p>
 
   <p>
