@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_13_205444) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_15_222427) do
   create_table "links", force: :cascade do |t|
     t.datetime "expires"
     t.integer "user_id", null: false
@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_13_205444) do
     t.string "post_thumbnail_url"
     t.string "post_description"
     t.datetime "last_ping", precision: nil
+    t.integer "set_by_id"
     t.index ["user_id"], name: "index_links_on_user_id"
   end
 
@@ -36,4 +37,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_13_205444) do
   end
 
   add_foreign_key "links", "users"
+  add_foreign_key "links", "users", column: "set_by_id"
 end
