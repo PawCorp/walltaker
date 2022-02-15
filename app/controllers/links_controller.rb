@@ -12,7 +12,9 @@ class LinksController < ApplicationController
   end
 
   # GET /links/1 or /links/1.json
-  def show; end
+  def show
+    @set_by = User.find(@link.set_by_id) if @link.set_by_id && request.format == :json
+  end
 
   # GET /links/new
   def new
@@ -56,14 +58,15 @@ class LinksController < ApplicationController
       end
     end
 
-    result = if (current_image_post.nil?)
+    result = if current_image_post.nil?
                @link.update(link_params)
              else
                @link.update(HashWithIndifferentAccess.new({
                                                             post_url: current_image_post['post']['file']['url'],
                                                             post_thumbnail_url: current_image_post['post']['preview']['url'],
-                                                            post_description: current_image_post['post']['description']
-                                                          }).merge(link_params))
+                                                            post_description: current_image_post['post']['description'],
+                                                            set_by_id: current_user.nil? ? nil : current_user.id
+                                                          }))
              end
 
     respond_to do |format|
