@@ -1,0 +1,40 @@
+#
+#       ▄▄▌ ▐ ▄▌ ▄▄▄· ▄▄▌  ▄▄▌  ▄▄▄▄▄ ▄▄▄· ▄ •▄ ▄▄▄ .▄▄▄
+#       ██· █▌▐█▐█ ▀█ ██•  ██•  •██  ▐█ ▀█ █▌▄▌▪▀▄.▀·▀▄ █·
+#       ██▪▐█▐▐▌▄█▀▀█ ██▪  ██▪   ▐█.▪▄█▀▀█ ▐▀▀▄·▐▀▀▪▄▐▀▀▄
+#       ▐█▌██▐█▌▐█ ▪▐▌▐█▌▐▌▐█▌▐▌ ▐█▌·▐█ ▪▐▌▐█.█▌▐█▄▄▌▐█•█▌
+#        ▀▀▀▀ ▀▪ ▀  ▀ .▀▀▀ .▀▀▀  ▀▀▀  ▀  ▀ ·▀  ▀ ▀▀▀ .▀  ▀
+#                        Configuration File
+#
+# Exported at <%= Time.now %>
+#
+#####################################################################
+###########################  Base Config  ###########################
+#####################################################################
+
+[Base] # do not change
+base = "https://walltaker.joi.how/links/" # DO NOT EDIT.
+
+#####################################################################
+########################  Your Link Config  #########################
+#####################################################################
+
+[Feed] # the link number to watch
+feed = <%= @link.id %> # DO NOT EDIT.
+
+#####################################################################
+########################  Other Preferences  ########################
+#####################################################################
+
+[Preferences]
+# interval: how many seconds to wait between check-ins. Recommended: 10
+interval = 10
+
+# mode: whether to "crop" or "fit" the images
+mode = "crop"
+
+# discordPresence: whether or not to use Discord's Rich Presence to show you are running Walltaker
+discordPresence = true
+
+# saveLocally: save sent wallpapers into local files
+saveLocally = false

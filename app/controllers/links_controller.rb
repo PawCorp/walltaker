@@ -3,7 +3,7 @@
 class LinksController < ApplicationController
   before_action :authorize, only: %i[index new edit create destroy]
   after_action :log_presence, only: %i[show]
-  before_action :set_link, only: %i[show edit update destroy]
+  before_action :set_link, only: %i[show edit update destroy export]
   before_action :prevent_public_expired, only: %i[show update]
 
   # GET /links or /links.json (only your links)
@@ -111,6 +111,10 @@ class LinksController < ApplicationController
       format.html { redirect_to links_url, notice: 'Link was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def export
+    render layout: nil, content_type: 'application/toml'
   end
 
   private
