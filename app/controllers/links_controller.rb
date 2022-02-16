@@ -28,7 +28,6 @@ class LinksController < ApplicationController
   # POST /links or /links.json
   def create
     @link = Link.new(link_params)
-
     @link.user_id = current_user.id
 
     respond_to do |format|
@@ -44,29 +43,32 @@ class LinksController < ApplicationController
 
   # PATCH/PUT /links/1 or /links/1.json
   def update
-    if (current_user && ((current_user.id != @link.user.id) && !link_params.empty?)) || (current_user.nil? && !link_params.empty?)
+    if update_request_unsafe?
       redirect_to link_url(@link), alert: 'Not authorized.'
       return
     end
-    current_image_post = request_post(params['link'][:post_id]) unless params['link'][:post_id].nil?
+
+    e621_post = request_post(params['link'][:post_id]) unless params['link'][:post_id].nil?
     blacklist = @link.blacklist.split(' ') unless @link.blacklist.nil?
 
-    unless blacklist.nil? || current_image_post.nil?
-      if (blacklist & current_image_post['post']['tags']['general']).any?
-        redirect_to link_url(@link), alert: 'Post was blacklisted.'
-        return
-      end
+    if !(blacklist.nil? || e621_post.nil?) && post_blacklisted?(blacklist, e621_post)
+      redirect_to link_url(@link), alert: 'Post was blacklisted.'
+      return
     end
 
-    result = if current_image_post.nil?
+    result = if e621_post.nil?
                @link.update(link_params)
              else
-               @link.update(HashWithIndifferentAccess.new({
-                                                            post_url: current_image_post['post']['file']['url'],
-                                                            post_thumbnail_url: current_image_post['post']['preview']['url'],
-                                                            post_description: current_image_post['post']['description'],
-                                                            set_by_id: current_user.nil? ? nil : current_user.id
-                                                          }))
+               @link.update(
+                 HashWithIndifferentAccess.new(
+                   {
+                     post_url: e621_post['post']['file']['url'],
+                     post_thumbnail_url: e621_post['post']['preview']['url'],
+                     post_description: e621_post['post']['description'],
+                     set_by_id: current_user.nil? ? nil : current_user.id
+                   }
+                 )
+               )
              end
 
     respond_to do |format|
@@ -110,6 +112,19 @@ class LinksController < ApplicationController
   # Only allow a list of trusted parameters through.
   def link_params
     params.require(:link).permit(:expires, :terms, :blacklist)
+  end
+
+  def post_blacklisted?(blacklist, e621_post)
+    blacklisted_in_general_tags = (blacklist & e621_post['post']['tags']['general']).any?
+    blacklisted_in_species_tags = (blacklist & e621_post['post']['tags']['species']).any?
+    blacklisted_in_artist_tags = (blacklist & e621_post['post']['tags']['artist']).any?
+    blacklisted_in_general_tags || blacklisted_in_species_tags || blacklisted_in_artist_tags
+  end
+
+  def update_request_unsafe?
+    user_trying_to_update_others_link_restricted_values = (current_user && ((current_user.id != @link.user.id) && !link_params.empty?))
+    unauthed_user_trying_to_update_others_link_restricted_values = (current_user.nil? && !link_params.empty?)
+    user_trying_to_update_others_link_restricted_values || unauthed_user_trying_to_update_others_link_restricted_values
   end
 
   def request_post(post_id)
