@@ -51,17 +51,17 @@ class LinksController < ApplicationController
     e621_post = request_post(params['link'][:post_id]) unless params['link'][:post_id].nil?
     blacklist = @link.blacklist.split(' ') unless @link.blacklist.nil?
 
-    if e621_post.nil?
+    if e621_post.nil? && params['link'][:post_id]
       redirect_to link_url(@link), alert: 'Post could not be found.'
       return
     end
 
-    unless %w[png jpg bmp webp].include? e621_post['post']['file']['ext']
+    if !e621_post.nil? && !(%w[png jpg bmp webp].include? e621_post['post']['file']['ext'])
       redirect_to link_url(@link), alert: 'Post is not a non-animated image.'
       return
     end
 
-    if !blacklist.nil? && post_blacklisted?(blacklist, e621_post)
+    if !blacklist.nil? && !e621_post.nil? && post_blacklisted?(blacklist, e621_post)
       redirect_to link_url(@link), alert: 'Post was blacklisted.'
       return
     end
