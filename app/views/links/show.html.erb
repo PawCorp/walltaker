@@ -12,6 +12,16 @@
 
 <%= render @link %>
 
+<% if current_user && current_user.id == @link.user.id %>
+  <h2>Set up your client</h2>
+
+  <p>
+    You'll need a client that watches for changes to this link and sets your background for you. You can see a list of available clients on the <%= link_to 'homepage.', root_path %> Once you have a client set up, you can drop this configuration file in the same folder to connect to this link.
+  </p>
+
+  <a download href="<%= link_url(@link) %>.toml">feed.toml</a>
+<% end %>
+
 <h2>Change <%= @link.user.username %>'s wallpaper</h2>
 
 <% if @link.post_thumbnail_url %>
