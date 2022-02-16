@@ -1,0 +1,22 @@
+<div class="task-tools">
+  <div class="left">
+    <%= link_to "Back to dashboard", root_path %>
+  </div>
+</div>
+
+<h2>Browse online links</h2>
+
+<div id="links">
+  <% @links.each do |link| %>
+    <a href="<%= link_url(link) %>" class="clean">
+      <%= render link %>
+    </a>
+  <% end %>
+
+  <% if @links.count == 0 %>
+    <h4>No one is online!</h4>
+    <p>
+      No links are currently being used. Maybe you should use your own? Click Edit Links in the navigation bar to get started.
+    </p>
+  <% end %>
+</div>
