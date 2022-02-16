@@ -1,0 +1,63 @@
+.link {
+    display: grid;
+    position: relative;
+    grid-template-columns: 1fr 70px;
+    grid-template-rows: auto;
+    gap: 10px;
+    padding: 10px 15px;
+    border: 1px solid #66666639;
+    margin-top: 1.5rem;
+    border-radius: 8px;
+    grid-template-areas: 'expires   presence'
+                         'blacklist blacklist'
+                         'terms     terms';
+    overflow: hidden;
+}
+
+.link::after {
+    content: attr(data-feed-number);
+    font-size: 11rem;
+    font-weight: bold;
+    font-style: italic;
+    display: block;
+    position: absolute;
+    bottom: -70px;
+    right: 0;
+    color: var(--accent);
+    opacity: 0.05;
+}
+
+.link--presence {
+    grid-area: presence;
+    text-align: right;
+}
+
+strong.online {
+    color: var(--success);
+}
+
+strong.online::after {
+    content: '';
+    display: inline-block;
+    width: 1ch;
+    height: 1ch;
+    background: currentColor;
+    border-radius: 100%;
+    margin-left: 0.25rem;
+}
+
+strong.offline {
+    color: var(--text);
+}
+
+.link--expires {
+    grid-area: expires;
+}
+
+.link--blacklist {
+    grid-area: blacklist;
+}
+
+.link--terms {
+    grid-area: terms;
+}

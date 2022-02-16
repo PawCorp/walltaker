@@ -1,20 +1,33 @@
-<div id="<%= dom_id link %>">
-  <p>
+<div class="link" id="<%= dom_id link %>" data-feed-number="<%= link.id %>">
+
+    <div class="link--presence">
+      <% if link.last_ping %>
+        <% if link.last_ping.after? (Time.now.utc - 1.minute) %>
+          <strong class="online">Online</strong>
+        <% else %>
+          <strong class="offline"><abbr title=">1 minute since last ping">Offline</abbr></strong>
+        <% end %>
+      <% else %>
+        <strong class="offline"><abbr title="New link with nothing currently connected">New</abbr></strong>
+      <% end %>
+    </div>
+
+  <div class="link--expires">
     <strong>Expires:</strong>
     <% if link.expires <= Time.now.utc %>
       <%= link.expires.strftime '%A %e %b at %I:%M%p' %> ⚠️ Expired
     <% else %>
       in <%= time_ago_in_words link.expires %>
     <% end %>
-  </p>
+  </div>
 
-  <p>
+  <div class="link--blacklist">
     <strong>Blacklist:</strong>
     <%= '⚠️ No Blacklisted Tags' if link.blacklist == '' %>
     <%= link.blacklist %>
-  </p>
+  </div>
 
-  <p>
+  <div class="link--terms">
     <strong>Terms:</strong>
     <% if link.terms == '' %>
       ⚠️ No Terms
@@ -23,16 +36,6 @@
       <%= link.terms %>
     </blockquote>
   <% end %>
-  </p>
-
-  <% if link.last_ping %>
-    <p>
-      <% if link.last_ping.after? (Time.now.utc - 1.minute) %>
-        <strong class="online">Online</strong>
-      <% else %>
-        <strong class="offline">Offline (>1min since last ping)</strong>
-      <% end %>
-    </p>
-  <% end %>
+  </div>
 
 </div>

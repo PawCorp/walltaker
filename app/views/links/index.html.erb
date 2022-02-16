@@ -11,10 +11,9 @@
 
 <div id="links">
   <% @links.each do |link| %>
-    <%= render link %>
-    <p>
-      <%= link_to "Show this link", link %>
-    </p>
+    <a href="<%= link_url(link) %>" class="clean">
+      <%= render link %>
+    </a>
   <% end %>
 
   <% if @links.count == 0 %>
