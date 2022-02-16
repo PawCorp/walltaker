@@ -118,7 +118,8 @@ class LinksController < ApplicationController
     blacklisted_in_general_tags = (blacklist & e621_post['post']['tags']['general']).any?
     blacklisted_in_species_tags = (blacklist & e621_post['post']['tags']['species']).any?
     blacklisted_in_artist_tags = (blacklist & e621_post['post']['tags']['artist']).any?
-    blacklisted_in_general_tags || blacklisted_in_species_tags || blacklisted_in_artist_tags
+    blacklisted_in_character_tags = (blacklist & e621_post['post']['tags']['character']).any?
+    blacklisted_in_general_tags || blacklisted_in_species_tags || blacklisted_in_artist_tags || blacklisted_in_character_tags
   end
 
   def update_request_unsafe?
