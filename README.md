@@ -39,5 +39,6 @@ Get the current post details for a given link.
     "post_url": "https://static1.e621.net/data/5d/87/5d87428c4839b0dc7d585b87a25af61a.png", // Full size post image
     "post_thumbnail_url": "https://static1.e621.net/data/preview/5d/87/5d87428c4839b0dc7d585b87a25af61a.jpg", // Thumnail size post image
     "post_description": "", // E621 post description
+    "set_by": "name" // the username of the user who set the wallpaper (or null if anon)
 }
 ```
