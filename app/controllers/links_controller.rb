@@ -6,9 +6,16 @@ class LinksController < ApplicationController
   before_action :set_link, only: %i[show edit update destroy]
   before_action :prevent_public_expired, only: %i[show update]
 
-  # GET /links or /links.json
+  # GET /links or /links.json (only your links)
   def index
     @links = User.find(current_user.id).link
+  end
+
+  # GET /browse (all online links)
+  def browse
+    @links = Link.all
+                 .where('expires > ?', Time.now)
+                 .where('last_ping > ?', Time.now - 1.minute)
   end
 
   # GET /links/1 or /links/1.json
