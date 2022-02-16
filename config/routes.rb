@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :session
   resources :links do
     member do
-      get :export
+      get :walltaker, to: 'links#export'
     end
   end
 end

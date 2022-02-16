@@ -19,14 +19,14 @@
     You'll need a client that watches for changes to this link and sets your background for you. You can see a list of available clients on the <%= link_to 'homepage.', root_path %> Once you have a client set up, you can drop this configuration file in the same folder to connect to this link.
   </p>
 
-  <a download href="<%= link_url(@link) %>.toml">feed.toml</a>
+  <a download href="<%= link_url(@link) %>/walltaker.toml">walltaker.toml</a>
 <% end %>
 
 <h2>Change <%= @link.user.username %>'s wallpaper</h2>
 
 <% if @link.post_thumbnail_url %>
   <figure>
-    <a href="<%= @link.post_url %>" target="_blank">
+    <a href="<%= @link.post_url %>.toml" target="_blank">
       <img src="<%= @link.post_thumbnail_url %>"/>
     </a>
     <figcaption>
