@@ -178,22 +178,7 @@ form.set-post-id input {
     padding: 0;
 }
 
-strong.online {
-    color: var(--success);
-    display: flex;
-    align-items: center;
-}
-
-strong.online::before {
-    content: '';
-    display: inline-block;
-    width: 1ch;
-    height: 1ch;
-    background: currentColor;
-    border-radius: 100%;
-    margin-right: 0.25rem;
-}
-
-strong.offline {
-    color: var(--text);
+a.clean {
+    text-decoration: none;
+    color: inherit;
 }
