@@ -15,13 +15,13 @@
 
 <%= render @link %>
 
-<% if current_user && current_user.id == @link.user.id %>
-  <h2>Set up your client</h2>
+<% if (current_user && (current_user.id == @link.user.id)) %>
+  <h2><ion-icon name="warning-outline" class="big"></ion-icon> Set up your client</h2>
 
   <p>
     You'll need a client that watches for changes to this link and sets your background for you. You can see a list of
     available clients on the <%= link_to 'homepage.', root_path %> Once you have a client set up, you can drop this
-    configuration file in the same folder to connect to this link.
+    configuration file in the same folder to connect to this link if it's required, or manually set your feed ID to <strong>"<%= @link.id %>"</strong>.
   </p>
 
   <a download href="<%= link_url(@link) %>/walltaker.toml">

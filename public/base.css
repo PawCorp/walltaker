@@ -88,6 +88,11 @@ h2 ion-icon {
     font-size: 0.8em;
 }
 
+h2 ion-icon.big {
+    transform: translateY(0.15em);
+    font-size: 1em;
+}
+
 h4 {
     text-align: center;
     margin-top: 5rem;
