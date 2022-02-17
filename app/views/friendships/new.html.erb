@@ -1,0 +1,12 @@
+<h2>New friendship</h2>
+
+<%= form_with url: friendships_path do |form| %>
+  <div>
+    <%= form.label :receiver_id, 'Username', style: "display: block" %>
+    <%= form.text_field :receiver_username, value: @receiver_username %>
+  </div>
+
+  <div>
+    <%= form.submit 'Send Request' %>
+  </div>
+<% end %>
