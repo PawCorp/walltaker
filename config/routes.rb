@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :friendships
   root 'dashboard#index'
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'session#new', as: 'login'
@@ -7,6 +6,11 @@ Rails.application.routes.draw do
   get 'browse', to: 'links#browse'
   resources :users
   resources :session
+  resources :friendships do
+    collection do
+      get :requests, to: 'friendships#requests'
+    end
+  end
   resources :links do
     member do
       get :walltaker, to: 'links#export'

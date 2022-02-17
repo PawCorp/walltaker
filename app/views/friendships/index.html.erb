@@ -1,14 +1,14 @@
-<p style="color: green"><%= notice %></p>
-
 <h2><ion-icon name="boat-outline" class="big"></ion-icon> Your Friendships</h2>
 
 <div id="friendships">
   <% @friendships.each do |friendship| %>
     <%= render friendship %>
+  <% end %>
+
+  <% if @friendships.count == 0 %>
+    <h4>No friends?</h4>
     <p>
-      <%= link_to "Show this friendship", friendship %>
+      When viewing anyone else's links, you can click the <strong><ion-icon name="person-add"></ion-icon> Send Friends Request</strong> button to start making some horny friends!
     </p>
   <% end %>
 </div>
-
-<%= link_to "New friendship", new_friendship_path %>

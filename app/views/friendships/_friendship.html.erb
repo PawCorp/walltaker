@@ -1,12 +1,13 @@
-<div id="<%= dom_id friendship %>">
-  <p>
-    <strong>Sender:</strong>
-    <%= friendship.sender_id %>
-  </p>
-
-  <p>
-    <strong>Receiver:</strong>
-    <%= friendship.receiver_id %>
-  </p>
-
+<div class="friendship" id="<%= dom_id friendship %>">
+  <div class="friendship__names">
+    <%= friendship.sender.username %>
+    <ion-icon name="heart"></ion-icon>
+    <%= friendship.receiver.username %>
+  </div>
+  <div class="friendship__actions">
+    <%= link_to @friendship, method: :delete, class: 'no-underline' do %>
+      <ion-icon name="heart-dislike"></ion-icon>
+      Unfriend
+    <% end %>
+  </div>
 </div>
