@@ -182,3 +182,18 @@ a.clean {
     text-decoration: none;
     color: inherit;
 }
+
+a > ion-icon {
+    font-size: 1.3em;
+    transform: translateY(0.175em);
+}
+
+a[download],
+a[download]:hover,
+a[download]:visited {
+    text-decoration: none;
+}
+
+a[download]:hover {
+    color: #fff;
+}
