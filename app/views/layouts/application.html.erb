@@ -20,11 +20,17 @@
     <div class="user-tools">
       <% if current_user %>
         <span><%= current_user.username %></span>
-        <%= link_to 'Browse', '/browse' %>
-        <strong><%= link_to 'Edit Links', links_path %></strong>
+        <a href="<%= url_for :action => :browse, :controller => :links %>">
+          <ion-icon name="sparkles"></ion-icon>
+          Browse
+        </a>
+        <%= link_to 'My Links', links_path %>
         <%= link_to 'Log Out', logout_path %>
       <% else %>
-        <%= link_to 'Browse', '/browse' %>
+        <a href="<%= url_for :action => :browse, :controller => :links %>">
+          <ion-icon name="sparkles"></ion-icon>
+          Browse
+        </a>
         <%= link_to 'Sign Up', signup_path %>
         <%= link_to 'Log In', login_path %>
       <% end %>

@@ -16,6 +16,10 @@ h1 > a:visited{
     color: var(--bg);
 }
 
+h1 > a:hover {
+    color: var(--bg) !important;
+}
+
 body {
     font-size: 0.9rem;
 }
@@ -50,6 +54,20 @@ header h1 {
     flex: 1 1 320px;
 }
 
+header a,
+header a:hover,
+header a:visited {
+    text-decoration: none;
+}
+
+header a:hover {
+    color: var(--text);
+}
+
+header a ion-icon {
+    font-size: 1em;
+}
+
 @media screen and (max-width: 687px) {
     header h1 {
         justify-content: center;
@@ -63,6 +81,11 @@ h2 {
     font-size: 2.2rem;
     font-weight: normal;
     margin-top: 3.25rem;
+}
+
+h2 ion-icon {
+    transform: translateY(0.05em);
+    font-size: 0.8em;
 }
 
 h4 {
@@ -98,7 +121,7 @@ body > .flashes {
 }
 
 body > .flashes > * {
-    background: #1c1c1c;
+    background: var(--accent-bg);
     padding: 0.5rem 1rem 0.6rem;
     border: 1px solid var(--border);
     border-top: 0;
@@ -190,10 +213,19 @@ a > ion-icon {
 
 a[download],
 a[download]:hover,
-a[download]:visited {
+a[download]:visited,
+a.no-underline,
+a.no-underline:hover,
+a.no-underline:visited {
     text-decoration: none;
 }
 
-a[download]:hover {
-    color: #fff;
+a[download] > ion-icon,
+a.no-underline > ion-icon {
+    margin-right: 2px;
+}
+
+a[download]:hover,
+a.no-underline:hover {
+    color: var(--text);
 }

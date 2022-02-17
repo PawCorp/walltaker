@@ -4,7 +4,10 @@
       <%= link_to "Back to links", links_path %>
     </div>
     <div class="right">
-      <%= link_to "Edit this link", edit_link_path(@link) %>
+      <a href="<%= edit_link_path(@link) %>" title="Edit this link" class="no-underline">
+        <ion-icon name="build"></ion-icon>
+        Edit
+      </a>
       <%= button_to "Delete this link", @link, method: :delete %>
     </div>
   </div>
@@ -16,10 +19,14 @@
   <h2>Set up your client</h2>
 
   <p>
-    You'll need a client that watches for changes to this link and sets your background for you. You can see a list of available clients on the <%= link_to 'homepage.', root_path %> Once you have a client set up, you can drop this configuration file in the same folder to connect to this link.
+    You'll need a client that watches for changes to this link and sets your background for you. You can see a list of
+    available clients on the <%= link_to 'homepage.', root_path %> Once you have a client set up, you can drop this
+    configuration file in the same folder to connect to this link.
   </p>
 
-  <a download href="<%= link_url(@link) %>/walltaker.toml"><ion-icon name="document-outline"></ion-icon> walltaker.toml</a>
+  <a download href="<%= link_url(@link) %>/walltaker.toml">
+    <ion-icon name="document-outline"></ion-icon>
+    walltaker.toml</a>
 <% end %>
 
 <h2>Change <%= @link.user.username %>'s wallpaper</h2>
@@ -48,5 +55,7 @@
 
 <figure class="half-page-break">
   <img src="/e621postid.gif"/>
-  <figcaption>The post ID is the main number shown in the post URL. You should only include this number, not anything after the question mark in the post URL, or anything before the number.</figcaption>
+  <figcaption>The post ID is the main number shown in the post URL. You should only include this number, not anything
+    after the question mark in the post URL, or anything before the number.
+  </figcaption>
 </figure>
