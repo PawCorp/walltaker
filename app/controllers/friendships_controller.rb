@@ -6,6 +6,14 @@ class FriendshipsController < ApplicationController
   def index
     @friendships = Friendship.all.where(sender: current_user)
                              .or(Friendship.all.where(receiver: current_user))
+                             .where(confirmed: true)
+  end
+
+  # GET /friendship/requests
+  def requests
+    @friendships = Friendship.all.where(receiver: current_user)
+                             .where(confirmed: [nil, false])
+    render :index
   end
 
   # GET /friendships/1 or /friendships/1.json
@@ -31,7 +39,8 @@ class FriendshipsController < ApplicationController
 
     @friendship = Friendship.new(HashWithIndifferentAccess.new({
                                                                  sender_id: current_user.id,
-                                                                 receiver_id: receiver.id
+                                                                 receiver_id: receiver.id,
+                                                                 confirmed: false
                                                                }))
 
     unless @friendship.valid?

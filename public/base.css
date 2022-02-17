@@ -238,3 +238,18 @@ a[download]:hover,
 a.no-underline:hover {
     color: var(--text);
 }
+
+.friendship {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.friendship__names {
+    flex: 1 1 320px;
+}
+
+.friendship__names > ion-icon {
+    transform: translateY(0.25em);
+    font-size: 1.2em;
+}
