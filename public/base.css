@@ -146,6 +146,10 @@ body > .flashes > .flash--danger::before {
     content: "🚫"
 }
 
+p {
+    line-height: 1.5rem;
+}
+
 .task-tools {
     display: flex;
     justify-content: space-between;
