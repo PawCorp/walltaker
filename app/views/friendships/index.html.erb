@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h2><ion-icon name="boat-outline" class="big"></ion-icon> Your Friendships</h2>
+
+<div id="friendships">
+  <% @friendships.each do |friendship| %>
+    <%= render friendship %>
+    <p>
+      <%= link_to "Show this friendship", friendship %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New friendship", new_friendship_path %>

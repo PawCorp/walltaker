@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @friendship %>
+
+<div>
+  <%= link_to "Edit this friendship", edit_friendship_path(@friendship) %> |
+  <%= link_to "Back to friendships", friendships_path %>
+
+  <%= button_to "Destroy this friendship", @friendship, method: :delete %>
+</div>

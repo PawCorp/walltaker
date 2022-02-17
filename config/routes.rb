@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :friendships
   root 'dashboard#index'
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'session#new', as: 'login'

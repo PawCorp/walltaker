@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_15_222427) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_17_054611) do
+  create_table "friendships", force: :cascade do |t|
+    t.integer "sender_id", null: false
+    t.integer "receiver_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "confirmed"
+    t.index ["receiver_id"], name: "index_friendships_on_receiver_id"
+    t.index ["sender_id", "receiver_id"], name: "index_friendships_on_sender_id_and_receiver_id", unique: true
+    t.index ["sender_id"], name: "index_friendships_on_sender_id"
+  end
+
   create_table "links", force: :cascade do |t|
     t.datetime "expires"
     t.integer "user_id", null: false
@@ -36,6 +47,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_15_222427) do
     t.index ["username"], name: "unique_usernames", unique: true
   end
 
+  add_foreign_key "friendships", "users", column: "receiver_id"
+  add_foreign_key "friendships", "users", column: "sender_id"
   add_foreign_key "links", "users"
   add_foreign_key "links", "users", column: "set_by_id"
 end
