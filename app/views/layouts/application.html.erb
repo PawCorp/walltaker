@@ -6,6 +6,9 @@
   <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
   <link rel="stylesheet" href="/base.css"/>
   <link rel="stylesheet" href="/link.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
@@ -57,5 +60,11 @@
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+    flatpickr('.flatpickr', {
+        enableTime: true,
+        dateFormat: 'Z'
+    });
+</script>
 </body>
 </html>
