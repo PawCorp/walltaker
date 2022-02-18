@@ -15,6 +15,7 @@ A client is required to set the wallpaper of a device. Here are some made by the
 | client                                                                          | platforms         |
 |---------------------------------------------------------------------------------|-------------------|
 | [walltaker-desktop-client](https://github.com/PawCorp/walltaker-desktop-client) | windows/mac/linux |
+| [walltaker-android-client](https://github.com/PawCorp/walltaker-android-client) | android |
 
 ## API Guide
 _Make your own client!_
