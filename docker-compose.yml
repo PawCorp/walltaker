@@ -14,7 +14,7 @@ services:
     volumes:
             - ./:/ror
     ports:
-            - "3000:3000"
+            - "3000:3100"
     depends_on:
             - database
     environment:
