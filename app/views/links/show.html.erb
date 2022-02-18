@@ -16,12 +16,14 @@
     <div class="left">
       <%= link_to "Back", :back %>
     </div>
-    <div class="right">
-      <a href="<%= url_for :action => :new, :controller => :friendships, :params => { :with => @link.user.username } %>" title="Become friends" class="no-underline">
-        <ion-icon name="person-add"></ion-icon>
-        Send Friend Request
-      </a>
-    </div>
+    <% if !@has_friendship %>
+      <div class="right">
+        <a href="<%= url_for :action => :new, :controller => :friendships, :params => { :with => @link.user.username } %>" title="Become friends" class="no-underline">
+          <ion-icon name="person-add"></ion-icon>
+          Send Friend Request
+        </a>
+      </div>
+    <% end %>
   </div>
 <% end %>
 
