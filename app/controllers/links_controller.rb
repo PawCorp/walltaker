@@ -15,6 +15,7 @@ class LinksController < ApplicationController
   # GET /browse (all online links)
   def browse
     @links = Link.all
+                 .where(friends_only: false)
                  .where('expires > ?', Time.now)
                  .where('last_ping > ?', Time.now - 1.minute)
   end
