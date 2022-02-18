@@ -280,3 +280,8 @@ form.button_to {
     transform: translateY(0.25em);
     font-size: 1.2em;
 }
+
+label ion-icon {
+    font-size: 1.1rem;
+    transform: translateY(0.1rem);
+}
