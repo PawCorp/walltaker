@@ -13,6 +13,9 @@
   </div>
 <% else %>
   <div class="task-tools">
+    <div class="left">
+      <%= link_to "Back", :back %>
+    </div>
     <div class="right">
       <a href="<%= url_for :action => :new, :controller => :friendships, :params => { :with => @link.user.username } %>" title="Become friends" class="no-underline">
         <ion-icon name="person-add"></ion-icon>
