@@ -161,12 +161,14 @@ class LinksController < ApplicationController
   end
 
   def protect_friends_only_links
-    authorize if @link.friends_only
+    unless request.format == :json
+      authorize if @link.friends_only
 
-    unless current_user.nil?
-      friendship_exists = Friendship.find_friendship(@link.user, current_user).exists?
-      if @link.friends_only && !friendship_exists && (current_user.id != @link.user.id)
-        redirect_to root_url, alert: 'Not Authorized'
+      unless current_user.nil?
+        friendship_exists = Friendship.find_friendship(@link.user, current_user).exists?
+        if @link.friends_only && !friendship_exists && (current_user.id != @link.user.id)
+          return redirect_to root_url, alert: 'Not Authorized'
+        end
       end
     end
   end
