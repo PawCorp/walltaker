@@ -5,6 +5,6 @@ class Friendship < ApplicationRecord
   validates :sender_id, uniqueness: { scope: [:receiver_id] }
 
   def self.find_friendship(person_a, person_b)
-    self.where(sender_id: [person_a.id, person_b.id], receiver_id: [person_b.id, person_a.id])
+    self.where(sender_id: [person_a.id, person_b.id], receiver_id: [person_b.id, person_a.id], confirmed: true)
   end
 end
