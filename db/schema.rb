@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_17_054611) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_18_011920) do
   create_table "friendships", force: :cascade do |t|
     t.integer "sender_id", null: false
     t.integer "receiver_id"
@@ -34,6 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_17_054611) do
     t.string "post_description"
     t.datetime "last_ping", precision: nil
     t.integer "set_by_id"
+    t.boolean "friends_only"
     t.index ["user_id"], name: "index_links_on_user_id"
   end
 

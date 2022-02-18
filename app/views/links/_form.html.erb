@@ -25,6 +25,13 @@
   </div>
 
   <div>
+    <%= form.label :friends_only, style: "display: block" do %>
+      <ion-icon name="document-lock"></ion-icon> Friends Only (No public access)
+    <% end %>
+    <%= form.check_box :friends_only %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

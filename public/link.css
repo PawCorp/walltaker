@@ -8,9 +8,10 @@
     border: 1px solid #66666639;
     margin-top: 1.5rem;
     border-radius: 8px;
-    grid-template-areas: 'expires   presence'
-                         'blacklist blacklist'
-                         'terms     terms';
+    grid-template-areas: 'expires      presence'
+                         'blacklist    blacklist'
+                         'terms        terms'
+                         'friends-only friends-only';
     overflow: hidden;
 }
 
@@ -64,4 +65,12 @@ strong.offline {
 
 .link--terms {
     grid-area: terms;
+}
+
+.link--friends-only {
+    grid-area: friends-only;
+    text-align: right;
+    font-size: 1.7rem;
+    height: 2rem;
+    padding-bottom: 0.3rem;
 }
