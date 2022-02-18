@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     collection do
       get :requests, to: 'friendships#requests'
     end
+
+    member do
+      put :accept, to: 'friendships#accept'
+    end
   end
   resources :links do
     member do
