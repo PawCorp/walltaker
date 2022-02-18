@@ -1,0 +1,27 @@
+<div class="friendship" id="<%= dom_id friendship %>">
+  <div class="friendship__names">
+    <%= friendship.sender.username %>
+    <ion-icon name="heart"></ion-icon>
+    <%= friendship.receiver.username %>
+    since
+    <%= friendship.updated_at.strftime('%d/%m/%Y') %>
+  </div>
+  <div class="friendship__actions">
+    <% if action_name == 'index' %>
+      <%= button_to friendship, method: :delete, class: 'no-underline secondary' do %>
+        <ion-icon name="heart-dislike"></ion-icon>
+        Unfriend
+      <% end %>
+    <% end %>
+    <% if action_name == 'requests' %>
+      <%= button_to "#{url_for(friendship)}/accept", method: :put, class: 'no-underline' do %>
+        <ion-icon name="heart"></ion-icon>
+        Accept
+      <% end %>
+      <%= button_to friendship, method: :delete, class: 'no-underline secondary' do %>
+        <ion-icon name="heart-dislike"></ion-icon>
+        Ignore
+      <% end %>
+    <% end %>
+  </div>
+</div>

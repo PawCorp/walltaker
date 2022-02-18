@@ -1,0 +1,44 @@
+<div class="task-tools">
+  <div class="left">
+    <% if action_name == 'requests' %>
+      <%= link_to "Back to friends", url_for(action: :index, controller: :friendships) %>
+    <% end %>
+    <% if action_name == 'index' %>
+      <%= link_to "Back to dashboard", root_path %>
+    <% end %>
+  </div>
+  <div class="right">
+    <% if action_name == 'index' %>
+      <%= button_to "Check Requests", url_for(action: :requests, controller: :friendships), method: :get %>
+    <% end %>
+  </div>
+</div>
+
+<h2>
+  <ion-icon name="boat-outline" class="big"></ion-icon>
+  <%= action_name == 'requests' ? 'Your Requests' : 'Your Friendships' %>
+</h2>
+
+<div id="friendships">
+  <% @friendships.each do |friendship| %>
+    <%= render friendship %>
+  <% end %>
+
+  <% if @friendships.count == 0 %>
+    <% if action_name == 'requests' %>
+      <h4>No requests?</h4>
+      <p>
+        Maybe everyone is already your friend! Send one of your links around and someone new may make a friend request.
+      </p>
+    <% end %>
+    <% if action_name == 'index' %>
+      <h4>No friends?</h4>
+      <p>
+        When viewing anyone else's links, you can click the <strong>
+        <ion-icon name="person-add"></ion-icon>
+        Send Friends Request</strong> button to start making some horny friends! If some one has already sent you a
+        request, you can see it by clicking <span class="mock-button">Check Requests</span>
+      </p>
+    <% end %>
+  <% end %>
+</div>

@@ -11,7 +11,7 @@
 
   <div>
     <%= form.label :expires, style: "display: block" %>
-    <%= form.datetime_field :expires %>
+    <%= form.datetime_field :expires, class: 'flatpickr' %>
   </div>
 
   <div>
@@ -22,6 +22,13 @@
   <div>
     <%= form.label :terms, style: "display: block" %>
     <%= form.text_area :terms, size: '70x5' %>
+  </div>
+
+  <div>
+    <%= form.label :friends_only, style: "display: block" do %>
+      <ion-icon name="document-lock"></ion-icon> Friends Only (No public access)
+    <% end %>
+    <%= form.check_box :friends_only %>
   </div>
 
   <div>

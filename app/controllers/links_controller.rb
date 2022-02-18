@@ -5,6 +5,7 @@ class LinksController < ApplicationController
   after_action :log_presence, only: %i[show]
   before_action :set_link, only: %i[show edit update destroy export]
   before_action :prevent_public_expired, only: %i[show update]
+  before_action :protect_friends_only_links, only: %i[show update]
 
   # GET /links or /links.json (only your links)
   def index
@@ -14,12 +15,14 @@ class LinksController < ApplicationController
   # GET /browse (all online links)
   def browse
     @links = Link.all
+                 .where(friends_only: false)
                  .where('expires > ?', Time.now)
                  .where('last_ping > ?', Time.now - 1.minute)
   end
 
   # GET /links/1 or /links/1.json
   def show
+    @has_friendship = Friendship.find_friendship(current_user, @link.user).exists? if current_user
     @set_by = User.find(@link.set_by_id) if @link.set_by_id && request.format == :json
   end
 
@@ -132,7 +135,7 @@ class LinksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def link_params
-    params.require(:link).permit(:expires, :terms, :blacklist)
+    params.require(:link).permit(:expires, :terms, :blacklist, :friends_only)
   end
 
   def post_blacklisted?(blacklist, e621_post)
@@ -156,6 +159,19 @@ class LinksController < ApplicationController
     return nil if response.status != 200
 
     JSON.parse(response.body)
+  end
+
+  def protect_friends_only_links
+    unless request.format == :json
+      authorize if @link.friends_only
+
+      unless current_user.nil?
+        friendship_exists = Friendship.find_friendship(@link.user, current_user).exists?
+        if @link.friends_only && !friendship_exists && (current_user.id != @link.user.id)
+          return redirect_to root_url, alert: 'Not Authorized'
+        end
+      end
+    end
   end
 
   def log_presence

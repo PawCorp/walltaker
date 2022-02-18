@@ -6,6 +6,15 @@ Rails.application.routes.draw do
   get 'browse', to: 'links#browse'
   resources :users
   resources :session
+  resources :friendships do
+    collection do
+      get :requests, to: 'friendships#requests'
+    end
+
+    member do
+      put :accept, to: 'friendships#accept'
+    end
+  end
   resources :links do
     member do
       get :walltaker, to: 'links#export'
