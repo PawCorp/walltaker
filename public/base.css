@@ -64,6 +64,17 @@ header a:visited {
     text-decoration: none;
 }
 
+header a.pinged::after {
+    content: '';
+    display: inline-block;
+    height: 0.5em;
+    width: 0.5em;
+    border-radius: 100%;
+    background: var(--accent);
+    margin-left: 0.25rem;
+    transform: translateY(-0.5rem);
+}
+
 header a:hover {
     color: var(--text);
 }
@@ -172,6 +183,10 @@ p {
     align-items: center;
     flex: 1 1 320px;
     gap: 1.5rem;
+}
+
+.task-tools span > ion-icon {
+    transform: translateY(0.2em);
 }
 
 .task-tools + h2 {

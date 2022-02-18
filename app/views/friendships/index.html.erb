@@ -9,6 +9,9 @@
   </div>
   <div class="right">
     <% if action_name == 'index' %>
+      <% if has_requests? %>
+        <span>You have pending requests <ion-icon name="arrow-forward-outline"></ion-icon></span>
+      <% end %>
       <%= button_to "Check Requests", url_for(action: :requests, controller: :friendships), method: :get %>
     <% end %>
   </div>

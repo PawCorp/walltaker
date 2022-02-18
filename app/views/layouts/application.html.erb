@@ -28,7 +28,7 @@
           Browse
         </a>
         <%= link_to 'Links', links_path %>
-        <%= link_to 'Friends', friendships_path %>
+        <%= link_to 'Friends', friendships_path, class: has_requests? ? 'pinged' : '' %>
         <%= link_to 'Log Out', logout_path %>
       <% else %>
         <a href="<%= url_for :action => :browse, :controller => :links %>">
