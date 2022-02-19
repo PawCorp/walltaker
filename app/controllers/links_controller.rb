@@ -66,6 +66,11 @@ class LinksController < ApplicationController
       return
     end
 
+    if !e621_post.nil? && e621_post['post']['file']['url'].nil?
+      redirect_to link_url(@link), alert: 'Post was blacklisted by E621. This is not a bug.'
+      return
+    end
+
     if !e621_post.nil? && !(%w[png jpg bmp webp].include? e621_post['post']['file']['ext'])
       redirect_to link_url(@link), alert: 'Post is not a non-animated image.'
       return
