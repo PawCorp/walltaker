@@ -27,6 +27,18 @@
   </div>
 <% end %>
 
+<% unless flash.alert.nil? %>
+  <h2>
+    <ion-icon name="warning-outline" class="big"></ion-icon>
+    A note about blacklists
+  </h2>
+  <p>
+    Blacklists are enforced, <em>they're not a suggestion.</em> If your post matches a tag on this link's blacklist or
+    the E621 not-logged-in blacklist, your post will not be saved. This is the intended purpose of the app, and not a
+    bug. Please stop submitting bug reports about this.
+  </p>
+<% end %>
+
 <%= render @link %>
 
 <% if (current_user && (current_user.id == @link.user.id)) %>
