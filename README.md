@@ -1,6 +1,4 @@
-# Walltaker
-
-> Oh rails, how I missed you.
+# Walltaker Web App
 
 ## What is it?
 
