@@ -54,10 +54,6 @@ header h1 {
     flex: 1 1 auto;
 }
 
-header h1 a {
-    margin-right: 1rem;
-}
-
 header a,
 header a:hover,
 header a:visited {
@@ -299,4 +295,12 @@ form.button_to {
 label ion-icon {
     font-size: 1.1rem;
     transform: translateY(0.1rem);
+}
+
+/* Breakpoints */
+
+@media screen and (min-width: 590px) {
+    header h1 a {
+        margin-right: 1rem;
+    }
 }
