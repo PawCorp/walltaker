@@ -14,7 +14,12 @@
   <% end %>
 </div>
 
-<h2><%= @user.username %></h2>
+<h2>
+  <ion-icon name="person" class="big"></ion-icon> <%= @user.username %>
+  <% if @any_links_online %>
+    <strong class="online" title="User is online"></strong>
+  <% end %>
+</h2>
 
 <%= render 'past_links', local: @past_links %>
 

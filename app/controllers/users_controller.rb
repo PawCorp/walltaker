@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @user = User.find_by(username: params[:username])
     @has_friendship = Friendship.find_friendship(current_user, @user).exists? if current_user
     @links = @user.link.where(friends_only: false).where('expires > ?', Time.now)
+    @any_links_online = @links.where('last_ping > ?', Time.now - 1.minute).count.positive?
     @past_links = PastLink.all.order(id: :desc).where(user: @user).take(5)
   end
 
