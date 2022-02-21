@@ -1,0 +1,11 @@
+.past-link-posts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.past-link-posts > a {
+    display: block;
+    flex: 0 1 auto;
+}

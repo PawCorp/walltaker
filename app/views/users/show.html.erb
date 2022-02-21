@@ -1,7 +1,24 @@
+<div class="task-tools">
+  <% if !@has_friendship && current_user.id != @user.id %>
+    <div class="right">
+      <a href="<%= url_for :action => :new, :controller => :friendships, :params => { :with => @user.username } %>" title="Become friends" class="no-underline">
+        <ion-icon name="person-add"></ion-icon>
+        Send Friend Request
+      </a>
+    </div>
+  <% end %>
+</div>
+
 <h2><%= @user.username %></h2>
 
-<% if @user.link.count.positive? %>
-  <%= render @user.link %>
+<%= render 'past_links', local: @past_links %>
+
+<% if @links.count.positive? %>
+  <% @links.each do |link| %>
+    <a href="<%= link_url(link) %>" class="clean">
+      <%= render link %>
+    </a>
+  <% end %>
 <% else %>
   <h4>This user has no links</h4>
   <p>
