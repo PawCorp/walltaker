@@ -1,6 +1,6 @@
 <h2><%= @user.username %></h2>
 
-<% if @user.link.nil? %>
+<% if @user.link.count.positive? %>
   <%= render @user.link %>
 <% else %>
   <h4>This user has no links</h4>
