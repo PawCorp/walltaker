@@ -67,7 +67,7 @@ class LinksController < ApplicationController
     end
 
     if !e621_post.nil? && e621_post['post']['file']['url'].nil?
-      redirect_to link_url(@link), alert: 'Post was blacklisted by E621. This is not a bug.'
+      redirect_to link_url(@link), alert: 'Post was blacklisted or removed by E621.'
       return
     end
 

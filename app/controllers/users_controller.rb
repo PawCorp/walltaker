@@ -5,6 +5,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(username: params[:username])
+    @has_friendship = Friendship.find_friendship(current_user, @user).exists? if current_user
+    @links = @user.link.where(friends_only: false).where('expires > ?', Time.now)
+    @past_links = PastLink.all.order(id: :desc).where(user: @user).take(5)
   end
 
   def create
