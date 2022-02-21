@@ -1,0 +1,15 @@
+<h2><%= @user.username %></h2>
+
+<% if @user.link.nil? %>
+  <%= render @user.link %>
+<% else %>
+  <h4>This user has no links</h4>
+  <p>
+    You should pester them into making some! Click the
+    <strong>
+      <ion-icon name="person-add"></ion-icon>
+      Send Friends Request
+    </strong> button in the tool bar to send them a friend request. Maybe that's the motivation they
+    need!
+  </p>
+<% end %>
