@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_21_015334) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_21_225054) do
   create_table "friendships", force: :cascade do |t|
     t.integer "sender_id", null: false
     t.integer "receiver_id"
@@ -39,12 +39,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_21_015334) do
   end
 
   create_table "past_links", force: :cascade do |t|
-    t.integer "link_id", null: false
-    t.integer "user_id", null: false
+    t.integer "user_id"
     t.string "post_url"
     t.string "post_thumbnail_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "link_id"
     t.index ["link_id"], name: "index_past_links_on_link_id"
     t.index ["user_id"], name: "index_past_links_on_user_id"
   end
@@ -63,6 +63,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_21_015334) do
   add_foreign_key "friendships", "users", column: "sender_id"
   add_foreign_key "links", "users"
   add_foreign_key "links", "users", column: "set_by_id"
-  add_foreign_key "past_links", "links"
+  add_foreign_key "past_links", "links", on_delete: :nullify
   add_foreign_key "past_links", "users"
 end
