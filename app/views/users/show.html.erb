@@ -7,6 +7,11 @@
       </a>
     </div>
   <% end %>
+  <% if current_user.id == @user.id %>
+    <div class="right">
+      <%= button_to "New link", new_link_path, method: :get %>
+    </div>
+  <% end %>
 </div>
 
 <h2><%= @user.username %></h2>

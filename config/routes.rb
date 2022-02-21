@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'login', to: 'session#new', as: 'login'
   get 'logout', to: 'session#destroy', as: 'logout'
   get 'browse', to: 'links#browse'
-  get 'u/:username', to: 'users#show'
+  get 'users/:username', to: 'users#show'
   resources :users
   resources :session
   resources :friendships do
