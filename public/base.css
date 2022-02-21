@@ -60,6 +60,15 @@ header a:visited {
     text-decoration: none;
 }
 
+header a.username,
+header a:visited.username {
+    color: var(--text);
+}
+
+header a:hover.username {
+    color: var(--accent);
+}
+
 header a.pinged::after {
     content: '';
     display: inline-block;
