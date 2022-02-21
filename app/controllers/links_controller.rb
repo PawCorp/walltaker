@@ -98,6 +98,7 @@ class LinksController < ApplicationController
 
     respond_to do |format|
       if result
+        PastLink.log_link(@link).save
         format.html { redirect_to link_url(@link), notice: 'Link was successfully updated.' }
         format.json { render :show, status: :ok, location: @link }
       else
