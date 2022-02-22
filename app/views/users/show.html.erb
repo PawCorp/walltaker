@@ -19,6 +19,11 @@
   <% if @any_links_online %>
     <strong class="online" title="User is online"></strong>
   <% end %>
+  <small>User since <%= @user.created_at.strftime('%B %e, %Y') %></small>
+  <small>
+    Last online
+    <%= @most_recent_pinged_link && @most_recent_pinged_link[0].last_ping ? @most_recent_pinged_link[0].last_ping.strftime('%A, %B %e, %Y, %I:%M %p') : 'never' %>
+  </small>
 </h2>
 
 <%= render 'past_links', local: @past_links %>
