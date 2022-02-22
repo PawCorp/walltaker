@@ -1,5 +1,5 @@
 <div class="task-tools">
-  <% if !@has_friendship && current_user.id != @user.id %>
+  <% if (!current_user || !@has_friendship) && ((current_user && current_user.id != @user.id) || !current_user)%>
     <div class="right">
       <a href="<%= url_for :action => :new, :controller => :friendships, :params => { :with => @user.username } %>" title="Become friends" class="no-underline">
         <ion-icon name="person-add"></ion-icon>
@@ -7,7 +7,7 @@
       </a>
     </div>
   <% end %>
-  <% if current_user.id == @user.id %>
+  <% if current_user && current_user.id == @user.id %>
     <div class="right">
       <%= button_to "New link", new_link_path, method: :get %>
     </div>
