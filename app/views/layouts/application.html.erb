@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Walltaker</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
   <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
   <link rel="stylesheet" href="/base.css"/>
   <link rel="stylesheet" href="/link.css"/>
@@ -20,7 +20,10 @@
 <body>
 <header>
   <div class="header__inner">
-    <h1><a href="/">Walltaker</a></h1>
+    <h1><a href="/">
+      <span class="show-desktop">Walltaker</span>
+      <span class="show-mobile">WT</span>
+    </a></h1>
     <div class="user-tools">
       <% if current_user %>
         <a class="username" href="<%= user_path current_user.username %>">
