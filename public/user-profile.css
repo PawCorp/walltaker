@@ -3,9 +3,21 @@
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+    margin-top: 1.5rem;
 }
 
 .past-link-posts > a {
     display: block;
     flex: 0 1 auto;
+}
+
+h2 > small {
+    color: var(--border);
+    display: block;
+    font-size: 0.35em;
+    margin: 1.15rem 0 0;
+}
+
+h2 > small + small {
+    margin-top: 0.5rem !important;
 }

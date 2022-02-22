@@ -1,7 +1,9 @@
 <div class="past-link-posts">
   <% @past_links.each do |past_link| %>
-    <a href="<%= past_link.post_url %>" target="_blank">
-      <%= image_tag past_link.post_thumbnail_url %>
-    </a>
+    <% unless past_link.post_thumbnail_url.nil? %>
+      <a href="<%= past_link.post_url %>" target="_blank">
+        <%= image_tag past_link.post_thumbnail_url %>
+      </a>
+    <% end %>
   <% end %>
 </div>
