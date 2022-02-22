@@ -1,5 +1,10 @@
 <div class="task-tools">
-  <% if (!current_user || !@has_friendship) && ((current_user && current_user.id != @user.id) || !current_user)%>
+  <% if _filtered_referrer %>
+    <div class="left">
+      <%= link_to "Back", :back %>
+    </div>
+  <% end %>
+  <% if (!current_user || !@has_friendship) && ((current_user && current_user.id != @user.id) || !current_user) %>
     <div class="right">
       <a href="<%= url_for :action => :new, :controller => :friendships, :params => { :with => @user.username } %>" title="Become friends" class="no-underline">
         <ion-icon name="person-add"></ion-icon>
