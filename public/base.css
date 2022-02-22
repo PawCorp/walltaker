@@ -340,10 +340,6 @@ label ion-icon {
 }
 
 @media screen and (max-width: 475px) {
-    header .user-tools > * + * {
-        margin-left: 12px;
-    }
-
     header h1 {
         font-size: 1.5rem;
         margin: 0.5rem auto !important;
@@ -353,8 +349,16 @@ label ion-icon {
         padding: 0 6px !important;
     }
 
+    header .user-tools {
+        font-size: 0.8rem;
+    }
+
     header .user-tools ion-icon {
         display: none;
+    }
+
+    header .user-tools > * + * {
+        margin-left: 11px !important;
     }
 
     header .header__inner {
