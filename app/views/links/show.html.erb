@@ -13,9 +13,11 @@
   </div>
 <% else %>
   <div class="task-tools">
-    <div class="left">
-      <%= link_to "Back", :back %>
-    </div>
+    <% if _filtered_referrer %>
+      <div class="left">
+        <%= link_to "Back", :back %>
+      </div>
+    <% end %>
     <% if !@has_friendship %>
       <div class="right">
         <a href="<%= url_for :action => :new, :controller => :friendships, :params => { :with => @link.user.username } %>" title="Become friends" class="no-underline">
@@ -60,7 +62,7 @@
   </a>
 <% end %>
 
-<h2>Change <%= @link.user.username %>'s wallpaper</h2>
+<h2>Change <%= link_to @link.user.username, user_path(@link.user.username) %>'s wallpaper</h2>
 
 <% if @link.post_thumbnail_url %>
   <figure>
