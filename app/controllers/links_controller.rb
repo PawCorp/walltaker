@@ -135,8 +135,9 @@ class LinksController < ApplicationController
 
   def prevent_public_expired
     @is_expired = @link.expires <= Time.now.utc
-
-    redirect_to root_url, alert: 'That link was expired!' if @is_expired && current_user.id != @link.user.id
+    current_user_is_not_owner = current_user && current_user.id != @link.user.id
+    not_logged_in = current_user.nil?
+    redirect_to root_url, alert: 'That link was expired!' if @is_expired && (current_user_is_not_owner || not_logged_in)
   end
 
   # Only allow a list of trusted parameters through.
@@ -183,6 +184,7 @@ class LinksController < ApplicationController
   def log_presence
     if request.format == :json
       @link.last_ping = Time.now.utc
+      @link.last_ping_user_agent = request.user_agent if request.user_agent
       @link.save
     end
   end
