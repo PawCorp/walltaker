@@ -32,16 +32,29 @@
     <% if link.terms == '' %>
       ⚠️ No Terms
     <% else %>
-    <blockquote>
-      <%= link.terms %>
-    </blockquote>
-  <% end %>
+      <blockquote>
+        <%= link.terms %>
+      </blockquote>
+    <% end %>
   </div>
 
-  <% if link.friends_only %>
-    <div class="link--friends-only">
-      <abbr title="This link is for friends only"><ion-icon name="document-lock"></ion-icon></abbr>
+  <div class="link--status-bar">
+    <% if link.friends_only %>
+      <abbr title="This link is for friends only" class="link--friends-only">
+        <ion-icon name="document-lock"></ion-icon>
+      </abbr>
+    <% end %>
+
+    <div class="link--device-in-use">
+      <% case link_agent_to_icon link.last_ping_user_agent %>
+      <% when :desktop %>
+        Desktop <ion-icon name="laptop-outline"></ion-icon>
+      <% when :android %>
+        Android<ion-icon name="phone-portrait-outline"></ion-icon>
+      <% when :unknown %>
+        <ion-icon name="help-circle-outline"></ion-icon>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 
 </div>
