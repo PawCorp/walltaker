@@ -14,6 +14,20 @@
     <%= form.datetime_field :expires, class: 'flatpickr' %>
   </div>
 
+  <div class="link--form--checkbox-row">
+    <%= form.label :never_expires do %>
+      <ion-icon name="infinite"></ion-icon> Never expires
+    <% end %>
+    <%= form.check_box :never_expires %>
+  </div>
+
+  <div class="link--form--checkbox-row">
+    <%= form.label :friends_only do %>
+      <ion-icon name="document-lock"></ion-icon> Friends Only (No public access)
+    <% end %>
+    <%= form.check_box :friends_only %>
+  </div>
+
   <div>
     <%= form.label :blacklist, 'Blacklist (same format as e621.net)', style: "display: block" %>
     <%= form.text_field :blacklist %>
@@ -22,13 +36,6 @@
   <div>
     <%= form.label :terms, style: "display: block" %>
     <%= form.text_area :terms, size: '70x5' %>
-  </div>
-
-  <div>
-    <%= form.label :friends_only, style: "display: block" do %>
-      <ion-icon name="document-lock"></ion-icon> Friends Only (No public access)
-    <% end %>
-    <%= form.check_box :friends_only %>
   </div>
 
   <div>

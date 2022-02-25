@@ -12,14 +12,18 @@
     <% end %>
   </div>
 
-  <div class="link--expires">
-    <strong>Expires:</strong>
-    <% if link.expires <= Time.now.utc %>
-      <%= link.expires.strftime '%A %e %b at %I:%M%p' %> ⚠️ Expired
-    <% else %>
-      in <%= time_ago_in_words link.expires %>
-    <% end %>
-  </div>
+    <div class="link--expires">
+      <% if link.never_expires %>
+        <em><ion-icon name="infinite"></ion-icon> Never expires</em>
+      <% else %>
+        <strong>Expires:</strong>
+        <% if link.expires <= Time.now.utc %>
+          <%= link.expires.strftime '%A %e %b at %I:%M%p' %> ⚠️ Expired
+        <% else %>
+          in <%= time_ago_in_words link.expires %>
+        <% end %>
+      <% end %>
+    </div>
 
   <div class="link--blacklist">
     <strong>Blacklist:</strong>
@@ -48,9 +52,11 @@
     <div class="link--device-in-use">
       <% case link_agent_to_icon link.last_ping_user_agent %>
       <% when :desktop %>
-        Pawcorp Desktop <ion-icon name="laptop-outline"></ion-icon>
+        Pawcorp Desktop
+        <ion-icon name="laptop-outline"></ion-icon>
       <% when :android %>
-        Pawcorp Android <ion-icon name="phone-portrait-outline"></ion-icon>
+        Pawcorp Android
+        <ion-icon name="phone-portrait-outline"></ion-icon>
       <% when :unknown %>
         <ion-icon name="help-circle-outline"></ion-icon>
       <% end %>

@@ -15,6 +15,15 @@
     overflow: hidden;
 }
 
+.link em {
+    color: var(--border);
+}
+
+.link em ion-icon {
+    font-size: 1.2em;
+    transform: translateY(0.2rem);
+}
+
 a:hover > .link {
     border-color: var(--accent);
 }
@@ -102,4 +111,29 @@ strong.offline {
 .link--friends-only ion-icon {
     margin-right: 0.5rem;
     font-size: 1.7rem;
+}
+
+/** Forms */
+
+.link--form--checkbox-row {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0 1rem;
+    cursor: pointer;
+}
+
+.link--form--checkbox-row input {
+    margin: 0;
+}
+
+.link--form--checkbox-row label {
+    display: flex;
+    align-items: center;
+    margin-right: 0.5em;
+}
+
+.link--form--checkbox-row label ion-icon {
+    font-size: 1.3em;
+    margin-right: 0.4rem;
+    transform: translateY(0em);
 }
