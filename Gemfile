@@ -73,3 +73,4 @@ end
 
 gem 'excon'
 gem 'pg'
+gem 'rack-cors'
