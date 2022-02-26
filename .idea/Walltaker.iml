@@ -77,6 +77,7 @@
     <orderEntry type="library" scope="PROVIDED" name="puma (v5.6.2, ruby-3.1.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="racc (v1.6.0, ruby-3.1.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack (v2.2.3, ruby-3.1.0-p0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rack-cors (v1.1.1, ruby-3.1.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-test (v1.1.0, ruby-3.1.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails (v7.0.2.2, ruby-3.1.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails-dom-testing (v2.0.3, ruby-3.1.0-p0) [gem]" level="application" />
@@ -109,76 +110,62 @@
   <component name="RailsGeneratorsCache">
     <option name="generators">
       <list>
-        <option value="active_record:migration" />
-        <option value="active_record:model" />
-        <option value="active_record:observer" />
-        <option value="active_record:session_migration" />
+        <option value="active_record:application_record" />
+        <option value="active_record:multi_db" />
+        <option value="application_record" />
+        <option value="benchmark" />
+        <option value="channel" />
         <option value="controller" />
-        <option value="erb:controller" />
-        <option value="erb:mailer" />
-        <option value="erb:scaffold" />
         <option value="generator" />
         <option value="helper" />
         <option value="integration_test" />
+        <option value="jbuilder" />
+        <option value="job" />
+        <option value="mailbox" />
         <option value="mailer" />
-        <option value="metal" />
         <option value="migration" />
         <option value="model" />
-        <option value="model_subclass" />
-        <option value="observer" />
-        <option value="performance_test" />
-        <option value="plugin" />
         <option value="resource" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
-        <option value="session_migration" />
-        <option value="stylesheets" />
-        <option value="test_unit:controller" />
-        <option value="test_unit:helper" />
-        <option value="test_unit:integration" />
-        <option value="test_unit:mailer" />
-        <option value="test_unit:model" />
-        <option value="test_unit:observer" />
-        <option value="test_unit:performance" />
+        <option value="stimulus" />
+        <option value="system_test" />
+        <option value="task" />
+        <option value="test_unit:channel" />
+        <option value="test_unit:generator" />
+        <option value="test_unit:install" />
+        <option value="test_unit:mailbox" />
         <option value="test_unit:plugin" />
-        <option value="test_unit:scaffold" />
       </list>
     </option>
     <option name="myGenerators">
       <list>
-        <option value="active_record:migration" />
-        <option value="active_record:model" />
-        <option value="active_record:observer" />
-        <option value="active_record:session_migration" />
+        <option value="active_record:application_record" />
+        <option value="active_record:multi_db" />
+        <option value="application_record" />
+        <option value="benchmark" />
+        <option value="channel" />
         <option value="controller" />
-        <option value="erb:controller" />
-        <option value="erb:mailer" />
-        <option value="erb:scaffold" />
         <option value="generator" />
         <option value="helper" />
         <option value="integration_test" />
+        <option value="jbuilder" />
+        <option value="job" />
+        <option value="mailbox" />
         <option value="mailer" />
-        <option value="metal" />
         <option value="migration" />
         <option value="model" />
-        <option value="model_subclass" />
-        <option value="observer" />
-        <option value="performance_test" />
-        <option value="plugin" />
         <option value="resource" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
-        <option value="session_migration" />
-        <option value="stylesheets" />
-        <option value="test_unit:controller" />
-        <option value="test_unit:helper" />
-        <option value="test_unit:integration" />
-        <option value="test_unit:mailer" />
-        <option value="test_unit:model" />
-        <option value="test_unit:observer" />
-        <option value="test_unit:performance" />
+        <option value="stimulus" />
+        <option value="system_test" />
+        <option value="task" />
+        <option value="test_unit:channel" />
+        <option value="test_unit:generator" />
+        <option value="test_unit:install" />
+        <option value="test_unit:mailbox" />
         <option value="test_unit:plugin" />
-        <option value="test_unit:scaffold" />
       </list>
     </option>
   </component>

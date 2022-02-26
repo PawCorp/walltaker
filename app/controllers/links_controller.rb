@@ -116,10 +116,7 @@ class LinksController < ApplicationController
     end
     @link.destroy
 
-    respond_to do |format|
-      format.html { redirect_to links_url, notice: 'Link was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to links_url, notice: 'Link was successfully destroyed.'
   end
 
   def export
