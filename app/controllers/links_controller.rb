@@ -16,8 +16,10 @@ class LinksController < ApplicationController
   def browse
     @links = Link.all
                  .where(friends_only: false)
-                 .where('expires > ?', Time.now)
                  .where('last_ping > ?', Time.now - 1.minute)
+                 .and(
+                   Link.all.where('expires > ?', Time.now).or(Link.all.where(never_expires: true))
+                 )
   end
 
   # GET /links/1 or /links/1.json
