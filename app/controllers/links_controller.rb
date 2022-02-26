@@ -182,6 +182,7 @@ class LinksController < ApplicationController
     if request.format == :json
       @link.last_ping = Time.now.utc
       @link.last_ping_user_agent = request.user_agent if request.user_agent
+      @link.last_ping_user_agent = @link.last_ping_user_agent + ' ' + request.headers['joihow'] if @link.last_ping_user_agent && request.headers['joihow']
       @link.save
     end
   end

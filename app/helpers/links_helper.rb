@@ -10,6 +10,7 @@ module LinksHelper
     return :unknown if link_agent.nil?
     return :desktop if link_agent.include? 'Walltaker Go Client/'
     return :android if link_agent.include? 'walltaker-android-client/'
+    return :joihow if link_agent.include? 'joihow'
 
     :unknown
   end
