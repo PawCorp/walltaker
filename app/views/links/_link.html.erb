@@ -3,7 +3,9 @@
 <div id="<%= dom_id link %>">
   <div class="link" data-feed-number="<%= link_id_for_decoration link.id %>">
 
-    <%= image_tag link.post_thumbnail_url, class: 'link--backdrop' %>
+    <% unless link.post_thumbnail_url.nil? %>
+      <%= image_tag link.post_thumbnail_url, class: 'link--backdrop' %>
+    <% end %>
 
     <div class="link--presence">
       <% if link.last_ping %>
