@@ -3,8 +3,9 @@
 <div id="<%= dom_id link %>">
   <div class="link" data-feed-number="<%= link_id_for_decoration link.id %>">
 
+    <%= image_tag link.post_thumbnail_url, class: 'link--backdrop' %>
+
     <div class="link--presence">
-      <%= turbo_stream_from "spies" %>
       <% if link.last_ping %>
         <% if link.last_ping.after? (Time.now.utc - 1.minute) %>
           <strong class="online">Online</strong>

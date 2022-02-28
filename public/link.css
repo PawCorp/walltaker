@@ -15,6 +15,16 @@
     overflow: hidden;
 }
 
+.link > .link--backdrop {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -10;
+    opacity: 0.1;
+    filter: blur(6px) brightness(0.6);
+}
+
 .link em {
     color: var(--border);
 }
