@@ -90,20 +90,29 @@ strong.offline {
     grid-area: friends-only;
     height: 2rem;
     padding: 0.3rem 0;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: flex-end;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 'lock name client';
 }
 
 .link--status-bar > * {
-    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+}
+
+
+.link--status-bar > em {
+    order: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: name;
 }
 
 .link--device-in-use {
     color: var(--border);
-    display: flex;
-    align-items: center;
+    justify-content: flex-end;
+    grid-area: client;
 }
 
 .link--device-in-use ion-icon {
@@ -116,6 +125,7 @@ strong.offline {
     display: flex;
     align-items: center;
     text-decoration: none;
+    grid-area: lock;
 }
 
 .link--friends-only ion-icon {
