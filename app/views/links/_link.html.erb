@@ -1,20 +1,27 @@
-<div class="link" id="<%= dom_id link %>" data-feed-number="<%= link_id_for_decoration link.id %>">
+<%= turbo_stream_from link %>
 
-  <div class="link--presence">
-    <% if link.last_ping %>
-      <% if link.last_ping.after? (Time.now.utc - 1.minute) %>
-        <strong class="online">Online</strong>
+<div id="<%= dom_id link %>">
+  <div class="link" data-feed-number="<%= link_id_for_decoration link.id %>">
+
+    <div class="link--presence">
+      <%= turbo_stream_from "spies" %>
+      <% if link.last_ping %>
+        <% if link.last_ping.after? (Time.now.utc - 1.minute) %>
+          <strong class="online">Online</strong>
+        <% else %>
+          <strong class="offline"><abbr title=">1 minute since last ping">Offline</abbr></strong>
+        <% end %>
       <% else %>
-        <strong class="offline"><abbr title=">1 minute since last ping">Offline</abbr></strong>
+        <strong class="offline"><abbr title="New link with nothing currently connected">New</abbr></strong>
       <% end %>
-    <% else %>
-      <strong class="offline"><abbr title="New link with nothing currently connected">New</abbr></strong>
-    <% end %>
-  </div>
+    </div>
 
     <div class="link--expires">
       <% if link.never_expires %>
-        <em><ion-icon name="infinite"></ion-icon> Never expires</em>
+        <em>
+          <ion-icon name="infinite"></ion-icon>
+          Never expires
+        </em>
       <% else %>
         <strong>Expires:</strong>
         <% if link.expires <= Time.now.utc %>
@@ -25,45 +32,46 @@
       <% end %>
     </div>
 
-  <div class="link--blacklist">
-    <strong>Blacklist:</strong>
-    <%= '⚠️ No Blacklisted Tags' if link.blacklist == '' %>
-    <%= link.blacklist %>
-  </div>
+    <div class="link--blacklist">
+      <strong>Blacklist:</strong>
+      <%= '⚠️ No Blacklisted Tags' if link.blacklist == '' %>
+      <%= link.blacklist %>
+    </div>
 
-  <div class="link--terms">
-    <strong>Terms:</strong>
-    <% if link.terms == '' %>
-      ⚠️ No Terms
-    <% else %>
-      <blockquote>
-        <%= link.terms %>
-      </blockquote>
-    <% end %>
-  </div>
-
-  <div class="link--status-bar">
-    <% if link.friends_only %>
-      <abbr title="This link is for friends only" class="link--friends-only">
-        <ion-icon name="document-lock"></ion-icon>
-      </abbr>
-    <% end %>
-
-    <div class="link--device-in-use">
-      <% case link_agent_to_icon link.last_ping_user_agent %>
-      <% when :desktop %>
-        Pawcorp Desktop
-        <ion-icon name="laptop-outline"></ion-icon>
-      <% when :android %>
-        Pawcorp Android
-        <ion-icon name="phone-portrait-outline"></ion-icon>
-      <% when :joihow %>
-        JOI.how
-        <ion-icon name="earth-outline"></ion-icon>
-      <% when :unknown %>
-        <ion-icon name="help-circle-outline"></ion-icon>
+    <div class="link--terms">
+      <strong>Terms:</strong>
+      <% if link.terms == '' %>
+        ⚠️ No Terms
+      <% else %>
+        <blockquote>
+          <%= link.terms %>
+        </blockquote>
       <% end %>
     </div>
-  </div>
 
+    <div class="link--status-bar">
+      <% if link.friends_only %>
+        <abbr title="This link is for friends only" class="link--friends-only">
+          <ion-icon name="document-lock"></ion-icon>
+        </abbr>
+      <% end %>
+
+      <div class="link--device-in-use">
+        <% case link_agent_to_icon link.last_ping_user_agent %>
+        <% when :desktop %>
+          Pawcorp Desktop
+          <ion-icon name="laptop-outline"></ion-icon>
+        <% when :android %>
+          Pawcorp Android
+          <ion-icon name="phone-portrait-outline"></ion-icon>
+        <% when :joihow %>
+          JOI.how
+          <ion-icon name="earth-outline"></ion-icon>
+        <% when :unknown %>
+          <ion-icon name="help-circle-outline"></ion-icon>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
 </div>
