@@ -1,0 +1,35 @@
+<% target = "submit_link_#{link.id}" %>
+
+<%= turbo_stream_from target %>
+
+<%= turbo_frame_tag target do %>
+  <% if link.post_thumbnail_url %>
+    <figure>
+      <a href="<%= link.post_url %>" target="_blank">
+        <img src="<%= link.post_thumbnail_url %>"/>
+      </a>
+      <figcaption>
+        <%= link.post_description %>
+      </figcaption>
+    </figure>
+  <% end %>
+
+  <div class="link--flashes">
+    <% flash.each do |type, msg| %>
+      <div class="flash--<%= type == 'notice' ? 'success' : 'danger' %>">
+        <%= msg %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= form_with model: link, method: 'PATCH', class: 'set-post-id' do |form| %>
+    <div>
+      <%= form.label :post_id, 'E621 Post ID', style: "display: block" %>
+      <%= form.text_field :post_id %>
+    </div>
+
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
+<% end %>
