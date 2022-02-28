@@ -5,5 +5,6 @@ class Link < ApplicationRecord
 
   after_update_commit do
     broadcast_update
+    broadcast_replace_to "submit_link_#{id}", target: "submit_link_#{id}", partial: 'links/submit', locals: { link: self }
   end
 end

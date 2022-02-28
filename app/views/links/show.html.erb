@@ -29,18 +29,6 @@
   </div>
 <% end %>
 
-<% unless flash.alert.nil? %>
-  <h2>
-    <ion-icon name="warning-outline" class="big"></ion-icon>
-    A note about blacklists
-  </h2>
-  <p>
-    Blacklists are enforced, <em>they're not a suggestion.</em> If your post matches a tag on this link's blacklist or
-    the E621 not-logged-in blacklist, your post will not be saved. This is the intended purpose of the app, and not a
-    bug. Please stop submitting bug reports about this.
-  </p>
-<% end %>
-
 <%= render @link %>
 
 <% if (current_user && (current_user.id == @link.user.id)) %>
@@ -64,27 +52,7 @@
 
 <h2>Change <%= link_to @link.user.username, user_path(@link.user.username) %>'s wallpaper</h2>
 
-<% if @link.post_thumbnail_url %>
-  <figure>
-    <a href="<%= @link.post_url %>" target="_blank">
-      <img src="<%= @link.post_thumbnail_url %>"/>
-    </a>
-    <figcaption>
-      <%= @link.post_description %>
-    </figcaption>
-  </figure>
-<% end %>
-
-<%= form_with model: @link, method: 'PATCH', class: 'set-post-id' do |form| %>
-  <div>
-    <%= form.label :post_id, 'E621 Post ID', style: "display: block" %>
-    <%= form.text_field :post_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+<%= render 'submit', link: @link %>
 
 <figure class="half-page-break">
   <img src="/e621postid.gif"/>
