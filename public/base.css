@@ -247,8 +247,6 @@ form.set-post-id input {
 .masthead {
     width: 100%;
     height: 215px;
-    background: url('/dog.png') center center;
-    background-size: cover;
     display: flex;
     align-items: flex-end;
 }
