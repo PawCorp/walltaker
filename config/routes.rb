@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'porn_search/index'
+  get 'porn_search/search'
   root 'dashboard#index'
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'session#new', as: 'login'

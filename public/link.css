@@ -177,3 +177,28 @@ strong.offline {
     margin-right: 0.4rem;
     transform: translateY(0em);
 }
+
+turbo-frame#pornsearch form {
+    display: flex;
+    gap: 1rem;
+}
+turbo-frame#pornsearch form input#tags {
+    flex: 1 1 400px;
+    margin: 0;
+}
+turbo-frame#pornsearch form button {
+    flex: 0 0 auto;
+    margin: 0;
+}
+turbo-frame#pornsearch form button ion-icon {
+    transform: translateY(0.1rem);
+}
+
+turbo-frame#pornsearch_results .results {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(100px, 1fr) );
+    gap: 1rem;
+    justify-items: center;
+    align-items: center;
+    margin: 2rem 0;
+}

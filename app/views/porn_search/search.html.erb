@@ -1,0 +1,14 @@
+<%= turbo_frame_tag "pornsearch_results" do %>
+  <div class="results">
+    <% unless @posts.nil? %>
+      <% @posts.each do |post| %>
+        <% if post['preview']['url'] %>
+          <img src="<%= post['preview']['url'] %>"/>
+        <% else %>
+          <strong>Blacklisted</strong>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+  <%= link_to 'next', url_for({ tags: @last_tags, after: @posts.last['id'] }) %>
+<% end %>

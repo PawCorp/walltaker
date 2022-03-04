@@ -54,6 +54,12 @@
 
 <%= render 'submit', link: @link %>
 
+<%= turbo_frame_tag "pornsearch", src: porn_search_index_path do %>
+  <div>
+    Loading
+  </div>
+<% end %>
+
 <figure class="half-page-break">
   <img src="/e621postid.gif"/>
   <figcaption>The post ID is the main number shown in the post URL. You should only include this number, not anything
