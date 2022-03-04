@@ -1,10 +1,11 @@
 <%= turbo_frame_tag "pornsearch" do %>
 
   <%= form_with url: porn_search_search_url, method: :get, data: { turbo_frame: 'pornsearch_results' } do |form| %>
-    <%= form.text_field :tags %>
+    <%= form.text_field :tags, placeholder: 'E621 Tags' %>
+    <%= form.hidden_field :link, value: params['link'] %>
     <%= form.button type: :submit do %>
       <ion-icon name="search-outline"></ion-icon>
-      Search
+      Search E621
     <% end %>
   <% end %>
 

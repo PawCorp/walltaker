@@ -186,11 +186,11 @@ turbo-frame#pornsearch form input#tags {
     flex: 1 1 400px;
     margin: 0;
 }
-turbo-frame#pornsearch form button {
+turbo-frame#pornsearch form > button {
     flex: 0 0 auto;
     margin: 0;
 }
-turbo-frame#pornsearch form button ion-icon {
+turbo-frame#pornsearch form > button ion-icon {
     transform: translateY(0.1rem);
 }
 
@@ -201,4 +201,15 @@ turbo-frame#pornsearch_results .results {
     justify-items: center;
     align-items: center;
     margin: 2rem 0;
+}
+turbo-frame#pornsearch_results .results form {
+    display: block;
+    position: relative;
+}
+
+turbo-frame#pornsearch_results .results form button {
+    display: block;
+    background: none;
+    padding: 0;
+    width: 100%;
 }

@@ -1,14 +1,17 @@
 <%= turbo_frame_tag "pornsearch_results" do %>
   <div class="results">
-    <% unless @posts.nil? %>
+    <% unless @posts.nil? || @link_id.nil? %>
       <% @posts.each do |post| %>
         <% if post['preview']['url'] %>
-          <img src="<%= post['preview']['url'] %>"/>
+          <% new_link = { id: @link_id, post_id: post['id'] } %>
+          <%= button_to url_for(controller: :links, action: :update, id: @link_id, link: new_link), method: :patch, data: { turbo_frame: '_top' } do %>
+            <img src="<%= post['preview']['url'] %>"/>
+          <% end %>
         <% else %>
           <strong>Blacklisted</strong>
         <% end %>
       <% end %>
     <% end %>
   </div>
-  <%= link_to 'next', url_for({ tags: @last_tags, after: @posts.last['id'] }) %>
+  <%= link_to 'next', url_for({ tags: @last_tags, after: @posts.last['id'], link: @link_id }) %>
 <% end %>

@@ -54,15 +54,19 @@
 
 <%= render 'submit', link: @link %>
 
-<%= turbo_frame_tag "pornsearch", src: porn_search_index_path do %>
-  <div>
-    Loading
-  </div>
-<% end %>
-
 <figure class="half-page-break">
   <img src="/e621postid.gif"/>
   <figcaption>The post ID is the main number shown in the post URL. You should only include this number, not anything
     after the question mark in the post URL, or anything before the number.
   </figcaption>
 </figure>
+
+<h2>Search E621 <span class="beta-tag">beta</span></h2>
+<p>Just enter some e621 tags, click search, then you click a post to
+  set <%= @link.user.username %>'s wallpaper all inside walltaker!</p>
+
+<%= turbo_frame_tag "pornsearch", src: porn_search_index_path({link: @link.id}) do %>
+  <div>
+    Loading
+  </div>
+<% end %>

@@ -6,6 +6,7 @@ class PornSearchController < ApplicationController
   def search
     @posts = get_tag_results porn_search_params[:tags], porn_search_params[:after]
     @last_tags = porn_search_params[:tags]
+    @link_id = porn_search_params[:link] if porn_search_params[:link]
 
     redirect_to :index if @posts.nil?
   end
@@ -26,6 +27,6 @@ class PornSearchController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def porn_search_params
-    params.permit(:tags, :after)
+    params.permit(:tags, :after, :link)
   end
 end
