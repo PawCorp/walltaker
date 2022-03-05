@@ -81,7 +81,7 @@
 
 .dashboard__updates {
     grid-column: 2 / -1;
-    grid-row: 2 / span 2;
+    grid-row: 2 / span 6;
 }
 
 @media screen and (max-width: 590px) {
