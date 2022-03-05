@@ -10,6 +10,7 @@ class DashboardController < ApplicationController
                                                         .order(total: :desc)
       @total_wallpapers_changed_today = wallpapers_changed_today.count
       @total_wallpapers_changed_all = PastLink.count
+      @newest_user = User.last
       @online_links_count = Link.all
                                 .where(friends_only: false)
                                 .where('last_ping > ?', Time.now - 1.minute)

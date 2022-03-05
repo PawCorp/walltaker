@@ -42,25 +42,37 @@
       <h2>All-time</h2>
       <div class="dashboard__total-updates__content"><em><%= @total_wallpapers_changed_all %></em>wallpapers</div>
     </div>
+    <div class="dashboard__newest-user">
+      <h2>Newest User</h2>
+      <div class="dashboard__newest-user__content">
+        <%= link_to @newest_user.username, user_path(@newest_user.username) %>
+      </div>
+    </div>
   </div>
 <% end %>
 
 <h2>What is it?</h2>
 <p>
-  First off: <strong>Walltaker is an app built by adults, for adults. You must be over the age of 18 to use it.</strong>
+  First off:
+  <strong>Walltaker is an app built by adults, for adults. You must be over the age of 18 to use it.</strong>
   Walltaker is
   inspired by the <a href="https://www.wallclaimer.com/">WallClaimer</a> app, which allows you to set the
-  wallpaper of your friends phones. This however leads to some weird cases where people post stuff that'd be on your
-  metaphorical blacklist. With that in mind, I wanted it to be restricted to <a href="https://e621.net">e621.net</a>
+  wallpaper of your friends phones. This however leads to some weird cases where people post stuff that'd be on
+  your
+  metaphorical blacklist. With that in mind, I wanted it to be restricted to
+  <a href="https://e621.net">e621.net</a>
   results, with an enforced blacklist. This keeps you in control, but not <em>too much</em> control.
 </p>
 
 <h2>What do I need?</h2>
 <p>
-  Walltaker requires you to <strong>make an account on the website (here!) first.</strong> Once you have an account, you
+  Walltaker requires you to <strong>make an account on the website (here!) first.</strong> Once you have an
+  account, you
   can generate
-  links to send to friends/enemies, which will enqueue new wallpapers for your account. When you want to start seeing
-  these new wallpapers, <strong>then you can download the companion apps listed below</strong> which is able to listen
+  links to send to friends/enemies, which will enqueue new wallpapers for your account. When you want to start
+  seeing
+  these new wallpapers, <strong>then you can download the companion apps listed below</strong> which is able to
+  listen
   to wallpaper changes to any
   account. Enter your username, and then go about your day!
 </p>
@@ -68,11 +80,13 @@
 <h2 id="companion-apps">Companion Apps</h2>
 <ul>
   <li>
-    <a href="https://github.com/PawCorp/walltaker-desktop-client/releases/latest" target="_blank">Desktop Client</a>
+    <a href="https://github.com/PawCorp/walltaker-desktop-client/releases/latest" target="_blank">Desktop
+      Client</a>
     (Windows/Mac/Linux)
   </li>
   <li>
-    <a href="https://github.com/PawCorp/walltaker-android-client/releases/latest" target="_blank">Android Client</a>
+    <a href="https://github.com/PawCorp/walltaker-android-client/releases/latest" target="_blank">Android
+      Client</a>
     (Android 12+)
   </li>
   <li>
@@ -88,7 +102,8 @@
 
 <p>
   Yes, I know this isn't the best app imaginable. I wanted to make something with
-  <a href="https://rubyonrails.org/" target="_blank">Ruby on Rails</a> for nostalgia. I'm still faster at cranking out
+  <a href="https://rubyonrails.org/" target="_blank">Ruby on Rails</a> for nostalgia. I'm still faster at
+  cranking out
   an
   app in Rails than I am on anything else I actually work with on a day-to-day basis, tells you something, huh?
 </p>
