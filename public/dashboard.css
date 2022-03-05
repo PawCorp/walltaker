@@ -51,6 +51,22 @@
     top: 0.3rem;
 }
 
+.dashboard__total-updates {
+    grid-column: 1 / span 1;
+}
+.dashboard__total-updates__content {
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 2.6rem;
+    margin: 2rem 0 1rem;
+}
+.dashboard__total-updates__content em {
+    display: block;
+    font-size: 3rem;
+    font-weight: bold;
+    font-style: normal;
+}
+
 .dashboard__updates {
     grid-column: 2 / -1;
 }

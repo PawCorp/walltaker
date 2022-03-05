@@ -1,12 +1,15 @@
 class DashboardController < ApplicationController
   def index
-    unless (current_user.nil?)
+    unless current_user.nil?
       @recent_posts = PastLink.order(id: :desc).take 6
-      @wallpapers_changed_today = PastLink.where(created_at: Time.now.beginning_of_day..Time.now.end_of_day)
-                                          .joins(:user)
-                                          .select('COUNT(DISTINCT past_links.id) as total, users.username')
-                                          .group('users.username')
-                                          .order(total: :desc)
+      wallpapers_changed_today = PastLink.where(created_at: Time.now.beginning_of_day..Time.now.end_of_day)
+      @total_wallpapers_changed_today_by_user = wallpapers_changed_today
+                                                        .joins(:user)
+                                                        .select('COUNT(DISTINCT past_links.id) as total, users.username')
+                                                        .group('users.username')
+                                                        .order(total: :desc)
+      @total_wallpapers_changed_today = wallpapers_changed_today.count
+      @total_wallpapers_changed_all = PastLink.count
       @online_links_count = Link.all
                                 .where(friends_only: false)
                                 .where('last_ping > ?', Time.now - 1.minute)

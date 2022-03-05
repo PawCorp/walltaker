@@ -19,12 +19,13 @@
     <div class="dashboard__updates">
       <h2>Changes Today</h2>
       <div class="dashboard__updates__content">
+        <p>There has been a total of <%= pluralize @total_wallpapers_changed_today, 'change' %> today.</p>
         <table>
           <tr>
             <th>User</th>
             <th>Different Wallpapers Today</th>
           </tr>
-          <% @wallpapers_changed_today.each do |past_link| %>
+          <% @total_wallpapers_changed_today_by_user.each do |past_link| %>
             <tr>
               <td>
                 <%= link_to past_link.username, user_path(past_link.username) %>
@@ -36,6 +37,10 @@
           <% end %>
         </table>
       </div>
+    </div>
+    <div class="dashboard__total-updates">
+      <h2>All-time</h2>
+      <div class="dashboard__total-updates__content"><em><%= @total_wallpapers_changed_all %></em>wallpapers</div>
     </div>
   </div>
 <% end %>
