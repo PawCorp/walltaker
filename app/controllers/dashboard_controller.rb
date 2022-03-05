@@ -4,8 +4,8 @@ class DashboardController < ApplicationController
       @recent_posts = PastLink.order(id: :desc).take 6
       @wallpapers_changed_today = PastLink.where(created_at: Time.now.beginning_of_day..Time.now.end_of_day)
                                           .joins(:user)
-                                          .select('COUNT(DISTINCT past_links.user_id) as total, users.username')
-                                          .group(:user_id)
+                                          .select('COUNT(DISTINCT past_links.id) as total, users.username')
+                                          .group('users.username')
                                           .order(total: :desc)
       @online_links_count = Link.all
                                 .where(friends_only: false)
