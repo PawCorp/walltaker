@@ -74,3 +74,5 @@ end
 gem 'excon'
 gem 'pg'
 gem 'rack-cors'
+
+gem 'rbs_rails', require: false

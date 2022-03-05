@@ -1,0 +1,149 @@
+class PastLink < ApplicationRecord
+  extend _ActiveRecord_Relation_ClassMethods[PastLink, ActiveRecord_Relation, Integer]
+
+  attr_accessor id(): Integer
+  def id_changed?: () -> bool
+  def id_change: () -> [ Integer?, Integer? ]
+  def id_will_change!: () -> void
+  def id_was: () -> Integer?
+  def id_previously_changed?: () -> bool
+  def id_previous_change: () -> Array[Integer?]?
+  def id_previously_was: () -> Integer?
+  def id_before_last_save: () -> Integer?
+  def id_change_to_be_saved: () -> Array[Integer?]?
+  def id_in_database: () -> Integer?
+  def saved_change_to_id: () -> Array[Integer?]?
+  def saved_change_to_id?: () -> bool
+  def will_save_change_to_id?: () -> bool
+  def restore_id!: () -> void
+  def clear_id_change: () -> void
+
+  attr_accessor user_id(): Integer?
+  def user_id_changed?: () -> bool
+  def user_id_change: () -> [ Integer?, Integer? ]
+  def user_id_will_change!: () -> void
+  def user_id_was: () -> Integer?
+  def user_id_previously_changed?: () -> bool
+  def user_id_previous_change: () -> Array[Integer?]?
+  def user_id_previously_was: () -> Integer?
+  def user_id_before_last_save: () -> Integer?
+  def user_id_change_to_be_saved: () -> Array[Integer?]?
+  def user_id_in_database: () -> Integer?
+  def saved_change_to_user_id: () -> Array[Integer?]?
+  def saved_change_to_user_id?: () -> bool
+  def will_save_change_to_user_id?: () -> bool
+  def restore_user_id!: () -> void
+  def clear_user_id_change: () -> void
+
+  attr_accessor post_url(): String?
+  def post_url_changed?: () -> bool
+  def post_url_change: () -> [ String?, String? ]
+  def post_url_will_change!: () -> void
+  def post_url_was: () -> String?
+  def post_url_previously_changed?: () -> bool
+  def post_url_previous_change: () -> Array[String?]?
+  def post_url_previously_was: () -> String?
+  def post_url_before_last_save: () -> String?
+  def post_url_change_to_be_saved: () -> Array[String?]?
+  def post_url_in_database: () -> String?
+  def saved_change_to_post_url: () -> Array[String?]?
+  def saved_change_to_post_url?: () -> bool
+  def will_save_change_to_post_url?: () -> bool
+  def restore_post_url!: () -> void
+  def clear_post_url_change: () -> void
+
+  attr_accessor post_thumbnail_url(): String?
+  def post_thumbnail_url_changed?: () -> bool
+  def post_thumbnail_url_change: () -> [ String?, String? ]
+  def post_thumbnail_url_will_change!: () -> void
+  def post_thumbnail_url_was: () -> String?
+  def post_thumbnail_url_previously_changed?: () -> bool
+  def post_thumbnail_url_previous_change: () -> Array[String?]?
+  def post_thumbnail_url_previously_was: () -> String?
+  def post_thumbnail_url_before_last_save: () -> String?
+  def post_thumbnail_url_change_to_be_saved: () -> Array[String?]?
+  def post_thumbnail_url_in_database: () -> String?
+  def saved_change_to_post_thumbnail_url: () -> Array[String?]?
+  def saved_change_to_post_thumbnail_url?: () -> bool
+  def will_save_change_to_post_thumbnail_url?: () -> bool
+  def restore_post_thumbnail_url!: () -> void
+  def clear_post_thumbnail_url_change: () -> void
+
+  attr_accessor created_at(): ActiveSupport::TimeWithZone
+  def created_at_changed?: () -> bool
+  def created_at_change: () -> [ ActiveSupport::TimeWithZone?, ActiveSupport::TimeWithZone? ]
+  def created_at_will_change!: () -> void
+  def created_at_was: () -> ActiveSupport::TimeWithZone?
+  def created_at_previously_changed?: () -> bool
+  def created_at_previous_change: () -> Array[ActiveSupport::TimeWithZone?]?
+  def created_at_previously_was: () -> ActiveSupport::TimeWithZone?
+  def created_at_before_last_save: () -> ActiveSupport::TimeWithZone?
+  def created_at_change_to_be_saved: () -> Array[ActiveSupport::TimeWithZone?]?
+  def created_at_in_database: () -> ActiveSupport::TimeWithZone?
+  def saved_change_to_created_at: () -> Array[ActiveSupport::TimeWithZone?]?
+  def saved_change_to_created_at?: () -> bool
+  def will_save_change_to_created_at?: () -> bool
+  def restore_created_at!: () -> void
+  def clear_created_at_change: () -> void
+
+  attr_accessor updated_at(): ActiveSupport::TimeWithZone
+  def updated_at_changed?: () -> bool
+  def updated_at_change: () -> [ ActiveSupport::TimeWithZone?, ActiveSupport::TimeWithZone? ]
+  def updated_at_will_change!: () -> void
+  def updated_at_was: () -> ActiveSupport::TimeWithZone?
+  def updated_at_previously_changed?: () -> bool
+  def updated_at_previous_change: () -> Array[ActiveSupport::TimeWithZone?]?
+  def updated_at_previously_was: () -> ActiveSupport::TimeWithZone?
+  def updated_at_before_last_save: () -> ActiveSupport::TimeWithZone?
+  def updated_at_change_to_be_saved: () -> Array[ActiveSupport::TimeWithZone?]?
+  def updated_at_in_database: () -> ActiveSupport::TimeWithZone?
+  def saved_change_to_updated_at: () -> Array[ActiveSupport::TimeWithZone?]?
+  def saved_change_to_updated_at?: () -> bool
+  def will_save_change_to_updated_at?: () -> bool
+  def restore_updated_at!: () -> void
+  def clear_updated_at_change: () -> void
+
+  attr_accessor link_id(): Integer?
+  def link_id_changed?: () -> bool
+  def link_id_change: () -> [ Integer?, Integer? ]
+  def link_id_will_change!: () -> void
+  def link_id_was: () -> Integer?
+  def link_id_previously_changed?: () -> bool
+  def link_id_previous_change: () -> Array[Integer?]?
+  def link_id_previously_was: () -> Integer?
+  def link_id_before_last_save: () -> Integer?
+  def link_id_change_to_be_saved: () -> Array[Integer?]?
+  def link_id_in_database: () -> Integer?
+  def saved_change_to_link_id: () -> Array[Integer?]?
+  def saved_change_to_link_id?: () -> bool
+  def will_save_change_to_link_id?: () -> bool
+  def restore_link_id!: () -> void
+  def clear_link_id_change: () -> void
+
+  def link: () -> Link
+  def link=: (Link?) -> Link?
+  def reload_link: () -> Link?
+  def build_link: (untyped) -> Link
+  def create_link: (untyped) -> Link
+  def create_link!: (untyped) -> Link
+  def user: () -> User
+  def user=: (User?) -> User?
+  def reload_user: () -> User?
+  def build_user: (untyped) -> User
+  def create_user: (untyped) -> User
+  def create_user!: (untyped) -> User
+
+  module GeneratedRelationMethods
+  end
+
+  class ActiveRecord_Relation < ActiveRecord::Relation
+    include GeneratedRelationMethods
+    include _ActiveRecord_Relation[PastLink, Integer]
+    include Enumerable[PastLink]
+  end
+
+  class ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associations::CollectionProxy
+    include GeneratedRelationMethods
+    include _ActiveRecord_Relation[PastLink, Integer]
+  end
+end
