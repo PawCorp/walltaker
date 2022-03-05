@@ -14,4 +14,10 @@
     </div>
     <%= link_to 'next', url_for({ tags: @last_tags, after: @posts.last['id'], link: @link_id }) %>
   <% end %>
+  <% if @posts.empty? %>
+    <p>
+      <strong>Sorry</strong> that search returned nothing. This search obeys the e621 global blacklist, and also has
+      some light filtering to prevent easy abuse.
+    </p>
+  <% end %>
 <% end %>
