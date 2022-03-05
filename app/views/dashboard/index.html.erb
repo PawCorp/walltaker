@@ -1,10 +1,49 @@
-<div class="masthead">
-  <h3><%= @online_links_count %> online links</h3>
-</div>
+<% unless current_user.nil? %>
+  <div class="dashboard">
+    <div class="dashboard__recent">
+      <h2>Recent Backgrounds</h2>
+      <div class="dashboard__recent__content">
+        <% @recent_posts.each do |past_link| %>
+          <%= link_to user_url(past_link.user.username) do %>
+            <%= image_tag past_link.post_thumbnail_url %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="dashboard__online">
+      <h2>Online Now</h2>
+      <%= link_to browse_path do %>
+        <div class="dashboard__online__content"><%= @online_links_count %></div>
+      <% end %>
+    </div>
+    <div class="dashboard__updates">
+      <h2>Changes Today</h2>
+      <div class="dashboard__updates__content">
+        <table>
+          <tr>
+            <th>User</th>
+            <th>Different Wallpapers Today</th>
+          </tr>
+          <% @wallpapers_changed_today.each do |past_link| %>
+            <tr>
+              <td>
+                <%= link_to past_link.username, user_path(past_link.username) %>
+              </td>
+              <td>
+                <%= pluralize past_link.total, 'wallpaper' %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+<% end %>
 
 <h2>What is it?</h2>
 <p>
-  First off: <strong>Walltaker is an app built by adults, for adults. You must be over the age of 18 to use it.</strong> Walltaker is
+  First off: <strong>Walltaker is an app built by adults, for adults. You must be over the age of 18 to use it.</strong>
+  Walltaker is
   inspired by the <a href="https://www.wallclaimer.com/">WallClaimer</a> app, which allows you to set the
   wallpaper of your friends phones. This however leads to some weird cases where people post stuff that'd be on your
   metaphorical blacklist. With that in mind, I wanted it to be restricted to <a href="https://e621.net">e621.net</a>
@@ -24,10 +63,12 @@
 <h2 id="companion-apps">Companion Apps</h2>
 <ul>
   <li>
-    <a href="https://github.com/PawCorp/walltaker-desktop-client/releases/latest" target="_blank">Desktop Client</a> (Windows/Mac/Linux)
+    <a href="https://github.com/PawCorp/walltaker-desktop-client/releases/latest" target="_blank">Desktop Client</a>
+    (Windows/Mac/Linux)
   </li>
   <li>
-    <a href="https://github.com/PawCorp/walltaker-android-client/releases/latest" target="_blank">Android Client</a> (Android 12+)
+    <a href="https://github.com/PawCorp/walltaker-android-client/releases/latest" target="_blank">Android Client</a>
+    (Android 12+)
   </li>
   <li>
     <a href="http://joi.how/" target="_blank">JOI.how</a> (Web-based)

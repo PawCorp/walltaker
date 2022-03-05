@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="walltaker.joi.how" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="walltaker.joi.how">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath path="/docker-compose.yml" />
+            <excludedPath path="/.git" />
+            <excludedPath path="/config/master.key" />
+            <excludedPath path="/.docker" />
+            <excludedPath path="/db/development.sqlite3" />
+            <excludedPath path="/db/test.sqlite3" />
+            <excludedPath path="/db/schema.rb" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

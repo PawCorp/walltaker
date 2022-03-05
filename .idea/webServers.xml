@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b9934f56-8cb7-479a-a9c2-cf1bba1b54f8" name="walltaker.joi.how" url="https://walltaker.joi.how">
+        <fileTransfer rootFolder="/var/Walltaker" accessType="SFTP" host="joi.how" port="22" sshConfigId="7209149b-3200-43f3-a737-e18f009a40a3" sshConfig="root@joi.how:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

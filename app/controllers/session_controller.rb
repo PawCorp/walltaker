@@ -5,7 +5,7 @@ class SessionController < ApplicationController
     user = User.find_by_email(login_params[:email])
     if !user.nil? && user.authenticate(login_params[:password])
       session[:user_id] = user.id
-      redirect_to url_for(controller: :links, action: :index), notice: 'Logged in!'
+      redirect_to url_for(controller: :dashboard, action: :index), notice: 'Logged in!'
     else
       @error = 'Wrong email or password.'
       render 'new', status: :unprocessable_entity
