@@ -61,7 +61,7 @@ class LinksController < ApplicationController
     end
 
     e621_post = request_post(params['link'][:post_id]) unless params['link'][:post_id].nil?
-    blacklist = @link.blacklist.split(' ') unless @link.blacklist.nil?
+    blacklist = @link.blacklist.gsub(/[^\w\s_()]/, '').split(' ') unless @link.blacklist.nil?
 
     if e621_post.nil? && params['link'][:post_id]
       redirect_to link_url(@link), alert: 'Post could not be found.'
