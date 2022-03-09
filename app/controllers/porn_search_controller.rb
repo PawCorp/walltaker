@@ -4,17 +4,20 @@ class PornSearchController < ApplicationController
   end
 
   def search
-    @posts = get_tag_results porn_search_params[:tags], porn_search_params[:after]
+    @link = Link.find(porn_search_params[:link]) if porn_search_params[:link]
+    @posts = get_tag_results porn_search_params[:tags], porn_search_params[:after], @link.theme
     @last_tags = porn_search_params[:tags]
-    @link_id = porn_search_params[:link] if porn_search_params[:link]
 
     redirect_to :index if @posts.nil?
   end
 
   private
 
-  def get_tag_results(tag_string, after)
+  def get_tag_results(tag_string, after, append_to_tags)
     padded_tag_string = tag_string + ' score:>5 type:jpg type:png'
+    unless append_to_tags.nil? || append_to_tags.empty?
+      padded_tag_string = "#{padded_tag_string} #{append_to_tags.to_s}"
+    end
     tags = CGI.escape padded_tag_string
     url = "https://e621.net/posts.json?tags=#{tags}&limit=12"
     after_id = after.gsub(/\D/, '') if after
