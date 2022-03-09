@@ -78,7 +78,7 @@ class LinksController < ApplicationController
       return
     end
 
-    if !blacklist.nil? && !e621_post.nil? && post_blacklisted?(blacklist, e621_post)
+    if !blacklist.nil? && !e621_post.nil? && post_blacklisted?(blacklist, @link.theme, e621_post)
       redirect_to link_url(@link), alert: 'Post was blacklisted.'
       return
     end
@@ -144,12 +144,20 @@ class LinksController < ApplicationController
     params.require(:link).permit(:expires, :terms, :blacklist, :friends_only, :never_expires, :theme)
   end
 
-  def post_blacklisted?(blacklist, e621_post)
+  def post_blacklisted?(blacklist, theme, e621_post)
+    incorrect_theme = if theme.nil? || theme.empty?
+                        false
+                      else
+                        ([theme] & e621_post['post']['tags']['general']).empty? &&
+                          ([theme] & e621_post['post']['tags']['species']).empty? &&
+                          ([theme] & e621_post['post']['tags']['artist']).empty? &&
+                          ([theme] & e621_post['post']['tags']['character']).empty?
+                      end
     blacklisted_in_general_tags = (blacklist & e621_post['post']['tags']['general']).any?
     blacklisted_in_species_tags = (blacklist & e621_post['post']['tags']['species']).any?
     blacklisted_in_artist_tags = (blacklist & e621_post['post']['tags']['artist']).any?
     blacklisted_in_character_tags = (blacklist & e621_post['post']['tags']['character']).any?
-    blacklisted_in_general_tags || blacklisted_in_species_tags || blacklisted_in_artist_tags || blacklisted_in_character_tags
+    blacklisted_in_general_tags || blacklisted_in_species_tags || blacklisted_in_artist_tags || blacklisted_in_character_tags || incorrect_theme
   end
 
   def update_request_unsafe?
