@@ -16,8 +16,14 @@
   <% end %>
   <% if @posts.empty? %>
     <p>
-      <strong>Sorry</strong> that search returned nothing. This search obeys the e621 global blacklist, and also has
-      some light filtering to prevent easy abuse.
+      <strong>Sorry</strong>
+      <% if @link.theme.nil? || @link.theme.empty? %>
+        that search returned nothing. This search obeys the e621 global blacklist, and also has
+        some light filtering to prevent easy abuse.
+      <% else %>
+        that search may not have returned any results that match the theme tag (<%= @link.theme %>) that the link owner
+        chose. Search with an empty tag list to see all theme-matching posts.
+      <% end %>
     </p>
   <% end %>
 <% end %>
