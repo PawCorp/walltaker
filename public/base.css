@@ -3,6 +3,17 @@
     --success: #30AA65;
 }
 
+@media (prefers-color-scheme:light) {
+    :root {
+        --border: #5b658a;
+    }
+
+    .link > .link--backdrop {
+        opacity: 0.2 !important;
+        filter: blur(6px) brightness(2) !important;
+    }
+}
+
 h1 > a {
     text-decoration: none;
     background: var(--accent);

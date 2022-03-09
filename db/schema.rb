@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_25_031939) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_09_001724) do
   create_table "friendships", force: :cascade do |t|
     t.integer "sender_id", null: false
     t.integer "receiver_id"
@@ -37,6 +37,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_25_031939) do
     t.boolean "friends_only"
     t.string "last_ping_user_agent"
     t.boolean "never_expires", default: false
+    t.string "theme"
     t.index ["user_id"], name: "index_links_on_user_id"
   end
 

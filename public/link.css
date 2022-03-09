@@ -9,7 +9,7 @@
     margin-top: 1.5rem;
     border-radius: 8px;
     grid-template-areas: 'expires      presence'
-                         'blacklist    blacklist'
+                         'blacklist    theme'
                          'terms        terms'
                          'friends-only friends-only';
     overflow: hidden;
@@ -72,6 +72,16 @@ strong.online::after {
 
 strong.offline {
     color: var(--text);
+}
+
+.link--theme {
+    grid-area: theme;
+    color: var(--border);
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+    align-items: center;
 }
 
 .link--expires {
@@ -154,6 +164,31 @@ strong.offline {
 }
 
 /** Forms */
+
+input[type=checkbox] {
+    transform: translateY(-0.3em);
+}
+
+input[type=checkbox].toggle-next + * {
+    display: none;
+}
+input[type=checkbox].toggle-next:checked + * {
+    display: block;
+}
+
+input[type=text],
+textarea {
+    margin-bottom: 1rem;
+}
+
+label {
+    margin-bottom: 0.5rem;
+}
+
+#link_theme {
+    margin-top: 0.5rem;
+    width: 180px;
+}
 
 .link--form--checkbox-row {
     display: flex;

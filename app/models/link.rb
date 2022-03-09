@@ -2,6 +2,7 @@ class Link < ApplicationRecord
   belongs_to :user
   has_many :past_links
   validates :expires, presence: true, unless: :never_expires?
+  validates :theme, format: { without: /\s+/i, message: 'must be only 1 tag.' }
 
   after_update_commit do
     broadcast_update

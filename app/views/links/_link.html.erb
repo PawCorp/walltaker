@@ -35,6 +35,13 @@
       <% end %>
     </div>
 
+    <% unless link.theme.nil? || link.theme.empty? %>
+      <div class="link--theme">
+        <ion-icon name="pricetag-outline"></ion-icon>
+        <%= link.theme %>
+      </div>
+    <% end %>
+
     <div class="link--blacklist">
       <strong>Blacklist:</strong>
       <%= '⚠️ No Blacklisted Tags' if link.blacklist == '' %>
