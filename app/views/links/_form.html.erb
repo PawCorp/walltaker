@@ -40,15 +40,16 @@
     <%= form.text_area :terms, size: '70x5' %>
   </div>
 
-  <div>
-    <%= form.label :theme, style: "display: block" do %>
+  <div data-controller="theme-form" class="link--form--theme">
+    <%= form.label :theme do %>
       <ion-icon name="pricetag-outline"></ion-icon>
       Theme tag
+      <input type="checkbox" data-target="theme-form.switch" data-action="click->theme-form#toggle"/>
     <% end %>
-    <div>
+    <div data-target="theme-form.container">
       <em>All wallpapers selected for this link must contain this tag. You can only use 1 theme tag. Leave it blank to
         allow all posts that are not otherwise blacklisted.</em><br/>
-      <%= form.text_field :theme, placeholder: 'loimu_(character)' %>
+      <%= form.text_field :theme, placeholder: 'loimu_(character)', 'data-target': 'theme-form.input' %>
     </div>
   </div>
 

@@ -1,7 +1,7 @@
 .link {
     display: grid;
     position: relative;
-    grid-template-columns: 1fr 70px;
+    grid-template-columns: 1fr 130px;
     grid-template-rows: auto;
     gap: 10px;
     padding: 10px 15px;
@@ -78,10 +78,13 @@ strong.offline {
     grid-area: theme;
     color: var(--border);
     text-align: right;
-    display: flex;
-    justify-content: flex-end;
-    gap: 4px;
-    align-items: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.link--theme ion-icon {
+    transform: translateY(0.1em);
 }
 
 .link--expires {
@@ -166,6 +169,7 @@ strong.offline {
 /** Forms */
 
 input[type=checkbox] {
+    cursor: pointer;
     transform: translateY(-0.3em);
 }
 
@@ -188,6 +192,15 @@ label {
 #link_theme {
     margin-top: 0.5rem;
     width: 180px;
+}
+
+.link--form--theme label {
+    display: flex;
+    align-content: center;
+    gap: 0.4rem;
+}
+.link--form--theme label input[type=checkbox] {
+    transform: translateY(-0.1em);
 }
 
 .link--form--checkbox-row {
