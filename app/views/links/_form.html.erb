@@ -12,7 +12,7 @@
   <div data-controller="expiry-form">
     <div>
       <%= form.label :expires, style: "display: block" %>
-      <%= form.datetime_field :expires, class: 'flatpickr', "data-target": "expiry-form.input"  %>
+      <%= form.datetime_field :expires, class: 'flatpickr', "data-expiry-form-target": "input"  %>
     </div>
 
     <div class="link--form--checkbox-row">
@@ -20,7 +20,7 @@
         <ion-icon name="infinite"></ion-icon>
         Never expires
       <% end %>
-      <%= form.check_box :never_expires, "data-target": "expiry-form.switch", "data-action": "click->expiry-form#toggle" %>
+      <%= form.check_box :never_expires, "data-expiry-form-target": "switch", "data-action": "click->expiry-form#toggle" %>
     </div>
   </div>
 
@@ -46,12 +46,12 @@
     <%= form.label :theme do %>
       <ion-icon name="pricetag-outline"></ion-icon>
       Theme tag
-      <input type="checkbox" data-target="theme-form.switch" data-action="click->theme-form#toggle"/>
+      <input type="checkbox" data-theme-form-target="switch" data-action="click->theme-form#toggle"/>
     <% end %>
-    <div data-target="theme-form.container">
+    <div data-theme-form-target="container">
       <em>All wallpapers selected for this link must contain this tag. You can only use 1 theme tag. Leave it blank to
         allow all posts that are not otherwise blacklisted.</em><br/>
-      <%= form.text_field :theme, placeholder: 'loimu_(character)', 'data-target': 'theme-form.input' %>
+      <%= form.text_field :theme, placeholder: 'loimu_(character)', 'data-theme-form-target': 'input' %>
     </div>
   </div>
 
