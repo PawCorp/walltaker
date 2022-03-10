@@ -7,15 +7,6 @@
           <mappings>
             <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
           </mappings>
-          <excludedPaths>
-            <excludedPath path="/docker-compose.yml" />
-            <excludedPath path="/.git" />
-            <excludedPath path="/config/master.key" />
-            <excludedPath path="/.docker" />
-            <excludedPath path="/db/development.sqlite3" />
-            <excludedPath path="/db/test.sqlite3" />
-            <excludedPath path="/db/schema.rb" />
-          </excludedPaths>
         </serverdata>
       </paths>
     </serverData>

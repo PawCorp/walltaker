@@ -9,17 +9,19 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :expires, style: "display: block" %>
-    <%= form.datetime_field :expires, class: 'flatpickr' %>
-  </div>
+  <div data-controller="expiry-form">
+    <div>
+      <%= form.label :expires, style: "display: block" %>
+      <%= form.datetime_field :expires, class: 'flatpickr', "data-target": "expiry-form.input"  %>
+    </div>
 
-  <div class="link--form--checkbox-row">
-    <%= form.label :never_expires do %>
-      <ion-icon name="infinite"></ion-icon>
-      Never expires
-    <% end %>
-    <%= form.check_box :never_expires %>
+    <div class="link--form--checkbox-row">
+      <%= form.label :never_expires do %>
+        <ion-icon name="infinite"></ion-icon>
+        Never expires
+      <% end %>
+      <%= form.check_box :never_expires, "data-target": "expiry-form.switch", "data-action": "click->expiry-form#toggle" %>
+    </div>
   </div>
 
   <div class="link--form--checkbox-row">
