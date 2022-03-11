@@ -61,7 +61,7 @@ class LinksController < ApplicationController
     end
 
     e621_post = request_post(params['link'][:post_id]) unless params['link'][:post_id].nil?
-    blacklist = @link.blacklist.gsub(/[^\w\s_()]/, '').split(' ') unless @link.blacklist.nil?
+    blacklist = @link.blacklist.downcase.gsub(/[^\w\s_()]/, '').split(' ') unless @link.blacklist.nil?
 
     if e621_post.nil? && params['link'][:post_id]
       redirect_to link_url(@link), alert: 'Post could not be found.'
@@ -148,10 +148,11 @@ class LinksController < ApplicationController
     incorrect_theme = if theme.nil? || theme.empty?
                         false
                       else
-                        ([theme] & e621_post['post']['tags']['general']).empty? &&
-                          ([theme] & e621_post['post']['tags']['species']).empty? &&
-                          ([theme] & e621_post['post']['tags']['artist']).empty? &&
-                          ([theme] & e621_post['post']['tags']['character']).empty?
+                        lowercase_theme = theme.downcase
+                        ([lowercase_theme] & e621_post['post']['tags']['general']).empty? &&
+                          ([lowercase_theme] & e621_post['post']['tags']['species']).empty? &&
+                          ([lowercase_theme] & e621_post['post']['tags']['artist']).empty? &&
+                          ([lowercase_theme] & e621_post['post']['tags']['character']).empty?
                       end
     blacklisted_in_general_tags = (blacklist & e621_post['post']['tags']['general']).any?
     blacklisted_in_species_tags = (blacklist & e621_post['post']['tags']['species']).any?
