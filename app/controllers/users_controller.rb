@@ -12,6 +12,23 @@ class UsersController < ApplicationController
     @past_links = PastLink.all.order(id: :desc).where(user: @user).take(5)
   end
 
+  def edit
+    @user = User.find_by(username: params[:username])
+    return redirect_to user_path(@user.username) if current_user.id != @user.id
+  end
+
+  def update
+    @user = User.find(params[:id])
+    return redirect_to user_path(@user.username), { alert: 'Not Authorized.' } if current_user.id != @user.id
+
+    @user.details = user_params[:details]
+    if @user.save
+      redirect_to user_path(@user.username), { notice: 'Successfully update user.' }
+    else
+      redirect_to user_path(@user.username), { alert: 'Something went wrong' }
+    end
+  end
+
   def create
     @user = User.new(user_params)
     if @user.save
@@ -25,6 +42,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :username, :password, :password_confirmation)
+    params.require(:user).permit(:email, :username, :password, :password_confirmation, :details)
   end
 end

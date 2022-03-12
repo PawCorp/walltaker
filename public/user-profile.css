@@ -21,3 +21,12 @@ h2 > small {
 h2 > small + small {
     margin-top: 0.5rem !important;
 }
+
+.details__container {
+    display: grid;
+}
+
+.details__container textarea {
+    width: 100%;
+    margin-top: 1rem;
+}

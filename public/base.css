@@ -234,8 +234,10 @@ p {
     margin-top: calc(3.25rem - 2.5rem);
 }
 
-.task-tools button {
+.task-tools button,
+.task-tools, input[type=submit]{
     padding: 4px 13px;
+    width: auto;
 }
 
 .task-tools .notice-right {

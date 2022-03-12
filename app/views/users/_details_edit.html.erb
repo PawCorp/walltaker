@@ -1,0 +1,17 @@
+<%= turbo_frame_tag 'profile-details' do %>
+  <div class="details__container">
+    <%= form_with model: user do |f| %>
+      <div class="task-tools">
+        <div class="left">
+          <a href="<%= user_path(user.username) %>" title="Cancel editing" class="no-underline">
+            Cancel
+          </a>
+        </div>
+        <div class="right">
+          <%= f.submit 'Save' %>
+        </div>
+      </div>
+      <%= f.text_area :details %>
+    <% end %>
+  </div>
+<% end %>
