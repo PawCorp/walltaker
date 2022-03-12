@@ -1,4 +1,5 @@
 <% unless current_user.nil? %>
+  <% content_for(:html_title) { 'Walltaker Dashboard' } %>
   <div class="dashboard">
     <div class="dashboard__recent">
       <h2>Recent Backgrounds</h2>

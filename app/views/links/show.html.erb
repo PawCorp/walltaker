@@ -1,3 +1,5 @@
+<% content_for(:html_title) { "Walltaker ##{@link.id} for #{@link.user.username}" } %>
+
 <% if current_user && current_user.id == @link.user.id %>
   <div class="task-tools">
     <div class="left">
