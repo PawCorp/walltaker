@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_09_001724) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_12_221418) do
   create_table "friendships", force: :cascade do |t|
     t.integer "sender_id", null: false
     t.integer "receiver_id"
@@ -58,6 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_09_001724) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "details"
     t.index ["email"], name: "unique_emails", unique: true
     t.index ["username"], name: "unique_usernames", unique: true
   end
