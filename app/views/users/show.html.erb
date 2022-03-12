@@ -31,7 +31,11 @@
   </small>
 </h2>
 
-<%= render 'details', user: @user %>
+<% unless @is_editing %>
+  <%= render 'details', user: @user %>
+<% else %>
+  <%= render 'details_edit', user: @user %>
+<% end %>
 
 <%= render 'past_links', local: @past_links %>
 

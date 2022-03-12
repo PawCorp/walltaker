@@ -1,14 +1,14 @@
 <%= turbo_frame_tag 'profile-details' do %>
   <div class="details__container">
-    <%= form_with model: user do |f| %>
+    <%= form_with model: user, data: { 'turbo-frame': "_top" } do |f| %>
       <div class="task-tools">
         <div class="left">
-          <a href="<%= user_path(user.username) %>" title="Cancel editing" class="no-underline">
+          <a href="<%= user_path(user.username) %>" title="Cancel editing" class="no-underline" data-turbo-frame="_self">
             Cancel
           </a>
         </div>
         <div class="right">
-          <%= f.submit 'Save' %>
+          <%= f.submit 'Save', 'data-turbo-frame': "_self" %>
         </div>
       </div>
       <%= f.text_area :details %>

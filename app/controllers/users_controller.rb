@@ -4,17 +4,15 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(username: params[:username])
-    @has_friendship = Friendship.find_friendship(current_user, @user).exists? if current_user
-    @links = @user.link.where(friends_only: false).and(@user.link.where('expires > ?', Time.now).or(@user.link.where(never_expires: true)))
-    @any_links_online = @links.where('last_ping > ?', Time.now - 1.minute).count.positive?
-    @most_recent_pinged_link = @links.order(last_ping: :desc).take(1) if @links.count.positive?
-    @past_links = PastLink.all.order(id: :desc).where(user: @user).take(5)
+    set_user_vars
   end
 
   def edit
-    @user = User.find_by(username: params[:username])
+    set_user_vars
+    @is_editing = true
     return redirect_to user_path(@user.username) if current_user.id != @user.id
+
+    render 'users/show'
   end
 
   def update
@@ -23,7 +21,7 @@ class UsersController < ApplicationController
 
     @user.details = user_params[:details]
     if @user.save
-      redirect_to user_path(@user.username), { notice: 'Successfully update user.' }
+      redirect_to user_path(@user.username), { notice: 'Successfully updated user.' }
     else
       redirect_to user_path(@user.username), { alert: 'Something went wrong' }
     end
@@ -40,6 +38,15 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def set_user_vars
+    @user = User.find_by(username: params[:username])
+    @has_friendship = Friendship.find_friendship(current_user, @user).exists? if current_user
+    @links = @user.link.where(friends_only: false).and(@user.link.where('expires > ?', Time.now).or(@user.link.where(never_expires: true)))
+    @any_links_online = @links.where('last_ping > ?', Time.now - 1.minute).count.positive?
+    @most_recent_pinged_link = @links.order(last_ping: :desc).take(1) if @links.count.positive?
+    @past_links = PastLink.all.order(id: :desc).where(user: @user).take(5)
+  end
 
   def user_params
     params.require(:user).permit(:email, :username, :password, :password_confirmation, :details)

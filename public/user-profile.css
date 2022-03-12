@@ -28,5 +28,10 @@ h2 > small + small {
 
 .details__container textarea {
     width: 100%;
+    min-height: 10em;
     margin-top: 1rem;
+}
+
+.details__container blockquote {
+    margin-top: 0;
 }
