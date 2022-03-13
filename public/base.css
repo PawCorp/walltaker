@@ -148,6 +148,12 @@ h2 ion-icon.big {
     font-size: 1em;
 }
 
+h3 {
+    font-size: 1.6rem;
+    margin: 1.75rem 0 0;
+    font-weight: normal;
+}
+
 h4 {
     text-align: center;
     margin-top: 5rem;
@@ -429,4 +435,28 @@ label ion-icon {
 
 .small {
     font-size: 0.85em;
+}
+
+.accent-block {
+    background: var(--accent-bg);
+    padding: 40px 1.5rem 1.5rem;
+    border-radius: 8px;
+    margin-top: 2.25rem;
+}
+
+.accent-block__charm {
+    color: var(--border);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0 0 0.75rem;
+    height: 0;
+    transform: translateY(-100%);
+}
+.accent-block__charm ion-icon {
+    font-size: 1.2em;
+}
+
+.accent-block h2:first-of-type {
+    margin-top: 0;
 }

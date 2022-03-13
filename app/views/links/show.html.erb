@@ -1,6 +1,6 @@
 <% content_for(:html_title) { "Walltaker ##{@link.id} for #{@link.user.username}" } %>
 
-<% if current_user && current_user.id == @link.user.id %>
+<% if @is_current_user %>
   <div class="task-tools">
     <div class="left">
       <%= link_to "Back to links", links_path %>
@@ -33,23 +33,31 @@
 
 <%= render @link %>
 
-<% if (current_user && (current_user.id == @link.user.id)) %>
-  <h2>
-    <ion-icon name="warning-outline" class="big"></ion-icon>
-    Set up your client
-  </h2>
+<% if @is_current_user %>
+  <div class="accent-block">
+    <div class="accent-block__charm">
+      <ion-icon name="eye-off"></ion-icon>
+      Only you see this
+    </div>
+    <h2>
+      <ion-icon name="person" class="big"></ion-icon>
+      Your Link
+    </h2>
 
-  <p>
-    You'll need a client that watches for changes to this link and sets your background for you. You can see a list of
-    available clients on the <%= link_to 'homepage.', root_path %> Once you have a client set up, you can drop this
-    configuration file in the same folder to connect to this link if it's required, or manually set your feed ID to
-    <strong>"<%= @link.id %>"</strong>.
-  </p>
+    <h3>Set up your link</h3>
 
-  <a download href="<%= link_url(@link) %>/walltaker.toml">
-    <ion-icon name="document-outline"></ion-icon>
-    walltaker.toml
-  </a>
+    <p>
+      You'll need a client that watches for changes to this link and sets your background for you. You can see a list of
+      available clients on the <%= link_to 'homepage.', root_path %> Once you have a client set up, you can drop this
+      configuration file in the same folder to connect to this link if it's required, or manually set your feed ID to
+      <strong>"<%= @link.id %>"</strong>.
+    </p>
+
+    <a download href="<%= link_url(@link) %>/walltaker.toml">
+      <ion-icon name="document-outline"></ion-icon>
+      walltaker.toml
+    </a>
+  </div>
 <% end %>
 
 <h2>Change <%= link_to @link.user.username, user_path(@link.user.username) %>'s wallpaper</h2>
@@ -67,7 +75,7 @@
 <p>Just enter some e621 tags, click search, then you click a post to
   set <%= @link.user.username %>'s wallpaper all inside walltaker!</p>
 
-<%= turbo_frame_tag "pornsearch", src: porn_search_index_path({link: @link.id}) do %>
+<%= turbo_frame_tag "pornsearch", src: porn_search_index_path({ link: @link.id }) do %>
   <div>
     Loading
   </div>
