@@ -5,6 +5,19 @@
     gap: 2rem;
 }
 
+.dashboard .chart {
+    margin-top: 1rem;
+    margin-bottom: -6px;
+}
+
+.dashboard .chart canvas {
+    width: 100% !important;
+}
+
+.dashboard table {
+    margin-top: 0;
+}
+
 .dashboard h2 {
     margin-top: 0rem;
     text-align: left;

@@ -18,9 +18,22 @@
       <% end %>
     </div>
     <div class="dashboard__updates">
-      <h2>Changes Today</h2>
+      <h2>Changes</h2>
+      <p>There has been a total of <%= pluralize @total_wallpapers_changed_today, 'wallpaper change' %> today.</p>
+
+      <div class="chart">
+        <%= area_chart @total_wallpapers_changed_grouped_by_day, colors: ["#606575"], legend: false, height: "60px", library: {
+          scales: {
+            x: {
+              display: false,
+            },
+            y: {
+              display: false,
+            },
+          }
+        } %>
+      </div>
       <div class="dashboard__updates__content">
-        <p>There has been a total of <%= pluralize @total_wallpapers_changed_today, 'change' %> today.</p>
         <table>
           <tr>
             <th>User</th>

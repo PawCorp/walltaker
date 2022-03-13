@@ -10,6 +10,7 @@ class DashboardController < ApplicationController
                                                         .order(total: :desc)
       @total_wallpapers_changed_today = wallpapers_changed_today.count
       @total_wallpapers_changed_all = PastLink.count
+      @total_wallpapers_changed_grouped_by_day = PastLink.group_by_day(:created_at, range: 1.weeks.ago.midnight..Time.now).count
       @newest_user = User.last
       @online_links_count = Link.all
                                 .where(friends_only: false)

@@ -75,4 +75,7 @@ gem 'excon'
 gem 'pg'
 gem 'rack-cors'
 
+gem "chartkick"
+gem "groupdate"
+
 gem 'rbs_rails', require: false
