@@ -1,13 +1,13 @@
-<%= turbo_frame_tag 'profile-details' do %>
-  <div class="details__container">
-    <div class="task-tools">
+<div class="details__container">
+  <% if is_current_user %>
+    <div class="task-tools small">
       <div class="right">
-        <a href="<%= user_path(user.username) %>/edit" title="Edit my details" class="no-underline" data-turbo-frame="_self">
+        <a href="<%= user_path(user.username) %>/edit" title="Edit my details" class="no-underline">
           <ion-icon name="build"></ion-icon>
           Edit
         </a>
       </div>
     </div>
-    <blockquote><%= simple_format user.details %></blockquote>
-  </div>
-<% end %>
+  <% end %>
+  <blockquote><%= simple_format user.details %></blockquote>
+</div>

@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def edit
     set_user_vars
     @is_editing = true
-    return redirect_to user_path(@user.username) if current_user.id != @user.id
+    return redirect_to user_path(@user.username) unless @is_current_user
 
     render 'users/show'
   end
@@ -46,6 +46,7 @@ class UsersController < ApplicationController
     @any_links_online = @links.where('last_ping > ?', Time.now - 1.minute).count.positive?
     @most_recent_pinged_link = @links.order(last_ping: :desc).take(1) if @links.count.positive?
     @past_links = PastLink.all.order(id: :desc).where(user: @user).take(5)
+    @is_current_user = current_user && current_user.id == @user.id
   end
 
   def user_params

@@ -33,5 +33,5 @@ h2 > small + small {
 }
 
 .details__container blockquote {
-    margin-top: 0;
+    margin: 1rem 1rem;
 }

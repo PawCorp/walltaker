@@ -426,3 +426,7 @@ label ion-icon {
         padding: 4px 8px;
     }
 }
+
+.small {
+    font-size: 0.85em;
+}

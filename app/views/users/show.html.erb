@@ -4,7 +4,7 @@
       <%= link_to "Back", :back %>
     </div>
   <% end %>
-  <% if (!current_user || !@has_friendship) && ((current_user && current_user.id != @user.id) || !current_user) %>
+  <% if (!current_user || !@has_friendship) && (!@is_current_user || !current_user) %>
     <div class="right">
       <a href="<%= url_for :action => :new, :controller => :friendships, :params => { :with => @user.username } %>" title="Become friends" class="no-underline">
         <ion-icon name="person-add"></ion-icon>
@@ -32,7 +32,7 @@
 </h2>
 
 <% unless @is_editing %>
-  <%= render 'details', user: @user %>
+  <%= render 'details', { user: @user, is_current_user: @is_current_user } %>
 <% else %>
   <%= render 'details_edit', user: @user %>
 <% end %>
