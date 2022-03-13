@@ -261,3 +261,32 @@ turbo-frame#pornsearch_results .results form button {
     padding: 0;
     width: 100%;
 }
+
+.link--response {
+    padding: 0.9rem 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    transform: translateY(-100%);
+    max-height: 0;
+    opacity: 0;
+
+    animation: linkResponseAppear 0.5s 1s normal forwards ease-in-out;
+}
+.link--response small {
+    display: block;
+}
+
+@keyframes linkResponseAppear {
+    0% {
+        transform: translateY(-100%);
+        max-height: 0;
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        max-height: 60px;
+        opacity: 1;
+    }
+}

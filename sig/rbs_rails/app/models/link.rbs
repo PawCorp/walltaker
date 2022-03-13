@@ -258,6 +258,57 @@ class Link < ApplicationRecord
   def clear_never_expires_change: () -> void
   attr_accessor never_expires?(): bool
 
+  attr_accessor theme(): String?
+  def theme_changed?: () -> bool
+  def theme_change: () -> [ String?, String? ]
+  def theme_will_change!: () -> void
+  def theme_was: () -> String?
+  def theme_previously_changed?: () -> bool
+  def theme_previous_change: () -> Array[String?]?
+  def theme_previously_was: () -> String?
+  def theme_before_last_save: () -> String?
+  def theme_change_to_be_saved: () -> Array[String?]?
+  def theme_in_database: () -> String?
+  def saved_change_to_theme: () -> Array[String?]?
+  def saved_change_to_theme?: () -> bool
+  def will_save_change_to_theme?: () -> bool
+  def restore_theme!: () -> void
+  def clear_theme_change: () -> void
+
+  attr_accessor response_text(): String?
+  def response_text_changed?: () -> bool
+  def response_text_change: () -> [ String?, String? ]
+  def response_text_will_change!: () -> void
+  def response_text_was: () -> String?
+  def response_text_previously_changed?: () -> bool
+  def response_text_previous_change: () -> Array[String?]?
+  def response_text_previously_was: () -> String?
+  def response_text_before_last_save: () -> String?
+  def response_text_change_to_be_saved: () -> Array[String?]?
+  def response_text_in_database: () -> String?
+  def saved_change_to_response_text: () -> Array[String?]?
+  def saved_change_to_response_text?: () -> bool
+  def will_save_change_to_response_text?: () -> bool
+  def restore_response_text!: () -> void
+  def clear_response_text_change: () -> void
+
+  attr_accessor response_type(): Integer?
+  def response_type_changed?: () -> bool
+  def response_type_change: () -> [ Integer?, Integer? ]
+  def response_type_will_change!: () -> void
+  def response_type_was: () -> Integer?
+  def response_type_previously_changed?: () -> bool
+  def response_type_previous_change: () -> Array[Integer?]?
+  def response_type_previously_was: () -> Integer?
+  def response_type_before_last_save: () -> Integer?
+  def response_type_change_to_be_saved: () -> Array[Integer?]?
+  def response_type_in_database: () -> Integer?
+  def saved_change_to_response_type: () -> Array[Integer?]?
+  def saved_change_to_response_type?: () -> bool
+  def will_save_change_to_response_type?: () -> bool
+  def restore_response_type!: () -> void
+  def clear_response_type_change: () -> void
+
   def past_links: () -> PastLink::ActiveRecord_Associations_CollectionProxy
   def past_links=: (PastLink::ActiveRecord_Associations_CollectionProxy | Array[PastLink]) -> (PastLink::ActiveRecord_Associations_CollectionProxy | Array[PastLink])
   def past_link_ids: () -> Array[Integer]

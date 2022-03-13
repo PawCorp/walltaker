@@ -133,8 +133,6 @@ class PastLink < ApplicationRecord
   def create_user: (untyped) -> User
   def create_user!: (untyped) -> User
 
-  def log_link: (Link) -> PastLink
-
   module GeneratedRelationMethods
   end
 

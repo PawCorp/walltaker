@@ -92,7 +92,9 @@ class LinksController < ApplicationController
                      post_url: e621_post['post']['file']['url'],
                      post_thumbnail_url: e621_post['post']['preview']['url'],
                      post_description: e621_post['post']['description'],
-                     set_by_id: current_user.nil? ? nil : current_user.id
+                     set_by_id: current_user.nil? ? nil : current_user.id,
+                     response_type: nil,
+                     response_text: nil
                    }
                  )
                )

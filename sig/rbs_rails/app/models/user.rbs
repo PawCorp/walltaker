@@ -103,6 +103,23 @@ class User < ApplicationRecord
   def restore_updated_at!: () -> void
   def clear_updated_at_change: () -> void
 
+  attr_accessor details(): String?
+  def details_changed?: () -> bool
+  def details_change: () -> [ String?, String? ]
+  def details_will_change!: () -> void
+  def details_was: () -> String?
+  def details_previously_changed?: () -> bool
+  def details_previous_change: () -> Array[String?]?
+  def details_previously_was: () -> String?
+  def details_before_last_save: () -> String?
+  def details_change_to_be_saved: () -> Array[String?]?
+  def details_in_database: () -> String?
+  def saved_change_to_details: () -> Array[String?]?
+  def saved_change_to_details?: () -> bool
+  def will_save_change_to_details?: () -> bool
+  def restore_details!: () -> void
+  def clear_details_change: () -> void
+
   def link: () -> Link::ActiveRecord_Associations_CollectionProxy
   def link=: (Link::ActiveRecord_Associations_CollectionProxy | Array[Link]) -> (Link::ActiveRecord_Associations_CollectionProxy | Array[Link])
   def link_ids: () -> Array[Integer]

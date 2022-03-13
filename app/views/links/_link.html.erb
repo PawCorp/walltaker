@@ -86,4 +86,19 @@
     </div>
 
   </div>
+
+  <% if link.response_text %>
+    <div class="link--response">
+      <strong><%= link.user.username %>:</strong> <%= link.response_text %>
+      <small>
+        <% if link.horny? %>
+          😍
+        <% elsif link.came? %>
+          💦 this post made them cum!
+        <% elsif link.disgust? %>
+          ☹️
+        <% end %>
+      </small>
+    </div>
+  <% end %>
 </div>
