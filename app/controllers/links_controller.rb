@@ -84,6 +84,16 @@ class LinksController < ApplicationController
       return
     end
 
+    if link_params['response_type'] == 'disgust'
+      past_links = PastLink.where(link_id: @link.id, post_url: @link.post_url)
+      past_links.destroy_all unless past_links.empty?
+
+      last_past_link = PastLink.where(link_id: @link.id).where.not(post_url: @link.post_url).order('created_at').last
+
+      @link.post_url = last_past_link ? last_past_link.post_url : nil
+      @link.post_thumbnail_url = last_past_link ? last_past_link.post_thumbnail_url : nil
+    end
+
     result = if e621_post.nil?
                @link.update(link_params)
              else
@@ -144,7 +154,7 @@ class LinksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def link_params
-    params.require(:link).permit(:expires, :terms, :blacklist, :friends_only, :never_expires, :theme)
+    params.require(:link).permit(:expires, :terms, :blacklist, :friends_only, :never_expires, :theme, :response_text, :response_type)
   end
 
   def post_blacklisted?(blacklist, theme, e621_post)

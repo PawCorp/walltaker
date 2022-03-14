@@ -3,7 +3,7 @@
     --success: #30AA65;
 }
 
-@media (prefers-color-scheme:light) {
+@media (prefers-color-scheme: light) {
     :root {
         --border: #5b658a;
     }
@@ -22,7 +22,7 @@ h1 > a {
 }
 
 h1 > a:hover,
-h1 > a:visited{
+h1 > a:visited {
     text-decoration: none;
     color: var(--bg);
 }
@@ -172,6 +172,7 @@ strong {
 .page-break {
     margin-top: 12rem;
 }
+
 .half-page-break {
     margin-top: 5rem;
 }
@@ -196,6 +197,7 @@ body > .flashes > * {
 body > .flashes > .flash--success {
     color: var(--success);
 }
+
 body > .flashes > .flash--success::before {
     content: "✅"
 }
@@ -203,6 +205,7 @@ body > .flashes > .flash--success::before {
 body > .flashes > .flash--danger {
     color: var(--danger);
 }
+
 body > .flashes > .flash--danger::before {
     content: "🚫"
 }
@@ -241,7 +244,7 @@ p {
 }
 
 .task-tools button,
-.task-tools, input[type=submit]{
+.task-tools, input[type=submit] {
     padding: 4px 13px;
     width: auto;
 }
@@ -251,9 +254,15 @@ p {
 }
 
 @keyframes bounce-right {
-    0%, 20%, 50%, 80%, 100% {transform: translateX(0);}
-    40% {transform: translateX(8%);}
-    60% {transform: translateX(4%);}
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(0);
+    }
+    40% {
+        transform: translateX(8%);
+    }
+    60% {
+        transform: translateX(4%);
+    }
 }
 
 .mock-button {
@@ -262,6 +271,26 @@ p {
     color: var(--bg);
     display: inline-block;
     border-radius: 4px;
+}
+
+form.set-post-response div {
+    display: flex;
+    gap: 1rem;
+}
+
+form.set-post-response input,
+form.set-post-response select {
+    height: 2.5rem;
+}
+
+form.set-post-response input {
+    flex: 1 1 90%;
+}
+
+form.set-post-response select {
+    flex: 0 1 auto;
+    width: auto;
+    padding-right: 45px;
 }
 
 form.set-post-id {
@@ -453,6 +482,7 @@ label ion-icon {
     height: 0;
     transform: translateY(-100%);
 }
+
 .accent-block__charm ion-icon {
     font-size: 1.2em;
 }

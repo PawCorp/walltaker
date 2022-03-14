@@ -39,10 +39,21 @@
       <ion-icon name="eye-off"></ion-icon>
       Only you see this
     </div>
+
     <h2>
       <ion-icon name="person" class="big"></ion-icon>
       Your Link
     </h2>
+
+    <p>Give live feedback to people who are setting your wallpaper! Type any message in below, and choose a mood. "Hate it!" will remove the current wallpaper entirely.</p>
+    <%= form_with model: @link, method: 'PATCH', class: 'set-post-response' do |form| %>
+      <div>
+        <%= form.text_field :response_text, placeholder: 'How do you feel about this wallpaper?' %>
+        <%= form.select :response_type, [['Love it!', :horny], ['Hate it!', :disgust], ['I came', :came]] %>
+      </div>
+
+      <%= form.submit 'Send Feedback' %>
+    <% end %>
 
     <h3>Set up your link</h3>
 
