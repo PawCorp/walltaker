@@ -89,11 +89,16 @@
 
 .dashboard__newest-user {
     grid-column: 1 / span 1;
-    grid-row: 4 / span 1;
+    grid-row: 5 / span 1;
 }
 .dashboard__newest-user__content {
     text-align: center;
     font-size: 1.75rem;
+}
+
+.dashboard__your-total-changes {
+    grid-column: 1 / span 1;
+    grid-row: 4 / span 1;
 }
 
 .dashboard__updates {

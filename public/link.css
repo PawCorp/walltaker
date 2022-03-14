@@ -290,3 +290,11 @@ turbo-frame#pornsearch_results .results form button {
         opacity: 1;
     }
 }
+
+.accent-block--link {
+    padding: 40px 1.5rem 0.5rem;
+}
+
+.accent-block > .link {
+    margin-top: 0;
+}

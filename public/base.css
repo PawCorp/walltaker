@@ -466,6 +466,10 @@ label ion-icon {
     font-size: 0.85em;
 }
 
+.tight-top {
+    margin-top: 0 !important;
+}
+
 .accent-block {
     background: var(--accent-bg);
     padding: 40px 1.5rem 1.5rem;

@@ -56,6 +56,16 @@
       <h2>All-time</h2>
       <div class="dashboard__total-updates__content"><em><%= @total_wallpapers_changed_all %></em>wallpapers</div>
     </div>
+    <div class="dashboard__your-total-changes">
+      <h2>Your Total</h2>
+      <div class="accent-block tight-top">
+        <div class="accent-block__charm">
+          <ion-icon name="eye-off"></ion-icon>
+          Only you see this
+        </div>
+        <div class="dashboard__total-updates__content"><em><%= @your_total_wallpapers_changed_all %></em>wallpapers</div>
+      </div>
+    </div>
     <div class="dashboard__newest-user">
       <h2>Newest User</h2>
       <div class="dashboard__newest-user__content">

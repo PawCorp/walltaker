@@ -1,6 +1,13 @@
 <%= turbo_stream_from link %>
 
 <div id="<%= dom_id link %>">
+  <% if !link.never_expires && link.expires <= Time.now.utc %>
+    <div class="accent-block accent-block--link">
+      <div class="accent-block__charm">
+        <ion-icon name="eye-off"></ion-icon>
+        Only you see this because it's expired
+      </div>
+  <% end %>
   <div class="link" data-feed-number="<%= link_id_for_decoration link.id %>">
 
     <% unless link.post_thumbnail_url.nil? %>
@@ -99,6 +106,10 @@
           🤢 this wallpaper was removed
         <% end %>
       </small>
+    </div>
+  <% end %>
+
+  <% if !link.never_expires && link.expires <= Time.now.utc %>
     </div>
   <% end %>
 </div>
