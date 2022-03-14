@@ -125,6 +125,10 @@
     }
 
     .dashboard__newest-user {
+        grid-row: 6 / span 1;
+    }
+
+    .dashboard__your-total-changes {
         grid-row: 5 / span 1;
     }
 }
