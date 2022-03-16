@@ -7,7 +7,8 @@ class PastLink < ApplicationRecord
           link:,
           user: link.user,
           post_url: link.post_url,
-          post_thumbnail_url: link.post_thumbnail_url
+          post_thumbnail_url: link.post_thumbnail_url,
+          set_by_id: link.set_by_id
         })
   end
 end
