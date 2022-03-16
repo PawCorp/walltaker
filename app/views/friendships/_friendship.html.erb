@@ -1,8 +1,12 @@
+<%
+  other_user = friendship.sender if friendship.sender.id != current_user.id
+  other_user = friendship.receiver if friendship.receiver.id != current_user.id
+%>
+
 <div class="friendship" id="<%= dom_id friendship %>">
   <div class="friendship__names">
-    <%= friendship.sender.username %>
     <ion-icon name="heart"></ion-icon>
-    <%= friendship.receiver.username %>
+    <%= link_to other_user.username, user_path(other_user.username) %>
     since
     <%= friendship.updated_at.strftime('%d/%m/%Y') %>
   </div>
