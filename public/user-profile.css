@@ -6,6 +6,13 @@
     margin-top: 1.5rem;
 }
 
+.past-link-posts.past-link-posts--grid {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(100px, 1fr) );
+    justify-items: center;
+    justify-content: flex-start;
+}
+
 .past-link-posts > a {
     display: block;
     flex: 0 1 auto;

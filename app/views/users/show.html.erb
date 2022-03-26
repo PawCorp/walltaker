@@ -1,3 +1,5 @@
+<% content_for(:html_title) { "Walltaker #{@user.username}" } %>
+
 <div class="task-tools">
   <% if _filtered_referrer %>
     <div class="left">
@@ -37,7 +39,7 @@
   <%= render 'details_edit', user: @user %>
 <% end %>
 
-<%= render 'past_links', local: @past_links %>
+<%= render partial: 'past_links', locals: { past_links: @past_links } %>
 
 <% if @links.count.positive? %>
   <% @links.each do |link| %>

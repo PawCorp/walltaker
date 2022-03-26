@@ -3,7 +3,13 @@ class PastLinksController < ApplicationController
   before_action :set_user, only: %i[index]
 
   def index
-    @past_links = PastLink.where(user: @user)
+    # I'm so sorry, this is going to be HORRIBLE for performance. Capping at 50 to avoid loading up Enumerable#group_by too much
+    @past_links_by_user = PastLink.where(user: @user).take(50).group_by(&:set_by_id).map do |set_by_id, past_links|
+      {
+        past_links:,
+        set_by: User.find(set_by_id)
+      }
+    end
   end
 
   private

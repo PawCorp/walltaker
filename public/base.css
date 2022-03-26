@@ -223,6 +223,28 @@ p {
     gap: 1.5rem;
 }
 
+.task-tools.small {
+    background: var(--border);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-top: -16px;
+    padding: 0 1rem;
+
+    --accent-small-tools: var(--bg);
+    --bg-small-tools: var(--accent);
+    --text-small-tools: var(--bg);
+}
+
+.task-tools.small * {
+    --accent: var(--accent-small-tools);
+    --bg: var(--bg-small-tools);
+    --text: var(--text-small-tools);
+}
+.task-tools.small button,
+.task-tools.small input[type=submit] {
+    font-size: 1em !important;
+}
+
 .task-tools .left {
     flex: 1 0 auto;
 }
@@ -244,7 +266,7 @@ p {
 }
 
 .task-tools button,
-.task-tools, input[type=submit] {
+.task-tools input[type=submit] {
     padding: 4px 13px;
     width: auto;
 }

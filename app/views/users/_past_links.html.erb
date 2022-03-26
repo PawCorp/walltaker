@@ -1,5 +1,5 @@
-<div class="past-link-posts">
-  <% @past_links.each do |past_link| %>
+<div class="<%= past_links.length > 5 ? 'past-link-posts past-link-posts--grid' : 'past-link-posts' %>">
+  <% past_links.each do |past_link| %>
     <% unless past_link.post_thumbnail_url.nil? %>
       <a href="<%= past_link.post_url %>" target="_blank">
         <%= image_tag past_link.post_thumbnail_url %>
