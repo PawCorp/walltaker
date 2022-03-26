@@ -41,6 +41,13 @@
 
 <%= render partial: 'past_links', locals: { past_links: @past_links } %>
 
+<% unless @past_links.empty? %>
+  <%= link_to past_links_path, class: 'small see-all-past-wallpapers' do %>
+    See all past wallpapers
+    <ion-icon name="arrow-forward"></ion-icon>
+  <% end %>
+<% end %>
+
 <% if @links.count.positive? %>
   <% @links.each do |link| %>
     <a href="<%= link_url(link) %>" class="clean">

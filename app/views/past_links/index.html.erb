@@ -1,5 +1,13 @@
 <% content_for(:html_title) { "Walltaker #{@user.username} - Past Wallpapers" } %>
 
+<div class="task-tools">
+  <% if _filtered_referrer %>
+    <div class="left">
+      <%= link_to "Back", :back %>
+    </div>
+  <% end %>
+</div>
+
 <p>Below is a list of the last 50 wallpapers set by others for <%= @user.username %>. Click any wallpaper to go to see the full size image, or click the username on each row to go to the setter's profile.</p>
 
 <% @past_links_by_user.each do |past_links_and_setter| %>

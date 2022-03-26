@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'browse', to: 'links#browse'
   get 'users/:username', to: 'users#show'
   get 'users/:username/edit', to: 'users#edit'
-  get 'users/:username/history', to: 'past_links#index'
+  get 'users/:username/history', to: 'past_links#index', as: 'past_links'
   resources :users
   resources :session
   resources :friendships do

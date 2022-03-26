@@ -42,3 +42,10 @@ h2 > small + small {
 .details__container blockquote {
     margin: 1rem 1rem;
 }
+
+.see-all-past-wallpapers {
+    display: block;
+    text-align: right;
+    margin: 1rem 0 2rem;
+    text-decoration: none;
+}
