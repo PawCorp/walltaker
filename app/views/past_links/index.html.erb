@@ -20,7 +20,7 @@
       <ion-icon name="person" class="big"></ion-icon>
       <%= link_to past_links_and_setter[:set_by].username, user_path(past_links_and_setter[:set_by].username) %>
     <% end %>
-    <small>Set <%= past_links_and_setter[:past_links].length %> wallpapers</small>
+    <small>Set <%= pluralize past_links_and_setter[:past_links].length, 'wallpaper' %></small>
   </h2>
   <%= render partial: 'users/past_links', locals: { past_links: past_links_and_setter[:past_links] } %>
 <% end %>
