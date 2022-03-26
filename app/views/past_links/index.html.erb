@@ -8,12 +8,18 @@
   <% end %>
 </div>
 
-<p>Below is a list of the last 50 wallpapers set by others for <%= @user.username %>. Click any wallpaper to go to see the full size image, or click the username on each row to go to the setter's profile.</p>
+<p>Below is a list of the last 50 wallpapers set by others for <%= @user.username %>. Click any wallpaper to go to see
+  the full size image, or click the username on each row to go to the setter's profile.</p>
 
 <% @past_links_by_user.each do |past_links_and_setter| %>
   <h2>
-    <ion-icon name="person" class="big"></ion-icon>
-    <%= link_to past_links_and_setter[:set_by].username, user_path(past_links_and_setter[:set_by].username) %>
+    <% if past_links_and_setter[:set_by].nil? %>
+      <ion-icon name="glasses" class="big"></ion-icon>
+      Anon Users
+    <% elsif %>
+      <ion-icon name="person" class="big"></ion-icon>
+      <%= link_to past_links_and_setter[:set_by].username, user_path(past_links_and_setter[:set_by].username) %>
+    <% end %>
     <small>Set <%= past_links_and_setter[:past_links].length %> wallpapers</small>
   </h2>
   <%= render partial: 'users/past_links', locals: { past_links: past_links_and_setter[:past_links] } %>

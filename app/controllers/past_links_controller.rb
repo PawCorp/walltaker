@@ -7,7 +7,7 @@ class PastLinksController < ApplicationController
     @past_links_by_user = PastLink.where(user: @user).take(50).group_by(&:set_by_id).map do |set_by_id, past_links|
       {
         past_links:,
-        set_by: User.find(set_by_id)
+        set_by: set_by_id.nil? ? nil : User.find(set_by_id)
       }
     end
   end
