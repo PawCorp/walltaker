@@ -10,4 +10,15 @@
     </div>
   <% end %>
   <blockquote><%= simple_format user.details %></blockquote>
+  <% if is_current_user %>
+    <div class="accent-block">
+      <div class="accent-block__charm">
+        <ion-icon name="eye-off"></ion-icon>
+        Only you see this
+      </div>
+      <div>
+        Your API Secret: <strong><%= user.secret %></strong>
+      </div>
+    </div>
+  <% end %>
 </div>
