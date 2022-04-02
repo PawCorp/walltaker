@@ -1,4 +1,6 @@
 class DashboardController < ApplicationController
+  after_action :track_visit, only: %i[index]
+
   def index
     unless current_user.nil?
       @recent_posts = PastLink.order(id: :desc).take 6

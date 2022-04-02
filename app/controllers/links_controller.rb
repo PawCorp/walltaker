@@ -3,6 +3,7 @@
 class LinksController < ApplicationController
   before_action :authorize, only: %i[index new edit create destroy]
   after_action :log_presence, only: %i[show]
+  after_action :track_visit, only: %i[index browse new show edit]
   before_action :set_link, only: %i[show edit update destroy export]
   before_action :prevent_public_expired, only: %i[show update]
   before_action :protect_friends_only_links, only: %i[show update]
@@ -45,9 +46,11 @@ class LinksController < ApplicationController
 
     respond_to do |format|
       if @link.save
+        track :regular, :new_link
         format.html { redirect_to link_url(@link), notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @link }
       else
+        track :error, :failed_to_create_new_link, errors: @link.errors
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @link.errors, status: :unprocessable_entity }
       end
@@ -58,6 +61,7 @@ class LinksController < ApplicationController
   def update
     if update_request_unsafe?
       redirect_to link_url(@link), alert: 'Not authorized.'
+      track :nefarious, :edit_others_link
       return
     end
 
@@ -71,6 +75,7 @@ class LinksController < ApplicationController
 
     if !e621_post.nil? && e621_post['post']['file']['url'].nil?
       redirect_to link_url(@link), alert: 'Post was blacklisted or removed by E621.'
+      track :nefarious, :e621_blacklisted, attempted_post_id: params['link'][:post_id]
       return
     end
 
@@ -81,6 +86,7 @@ class LinksController < ApplicationController
 
     if !blacklist.nil? && !e621_post.nil? && post_blacklisted?(blacklist, @link.theme, e621_post)
       redirect_to link_url(@link), alert: 'Post was blacklisted.'
+      track :nefarious, :user_blacklisted, attempted_post_id: params['link'][:post_id]
       return
     end
 
@@ -95,7 +101,9 @@ class LinksController < ApplicationController
     end
 
     result = if e621_post.nil?
-               @link.update(link_params)
+               new_link = @link.update(link_params)
+               track :regular, :update_link_details
+               new_link
              else
                @link.update(
                  HashWithIndifferentAccess.new(
@@ -109,6 +117,7 @@ class LinksController < ApplicationController
                    }
                  )
                )
+               track :regular, :update_link_post, attempted_post_id: params['link'][:post_id]
                PastLink.log_link(@link).save
              end
 
@@ -127,14 +136,17 @@ class LinksController < ApplicationController
   def destroy
     if current_user.id != @link.user.id
       redirect_to link_url(@link), alert: 'Not authorized.'
+      track :nefarious, :delete_others_link
       return
     end
     @link.destroy
+    track :regular, :delete_link
 
     redirect_to links_url, notice: 'Link was successfully destroyed.'
   end
 
   def export
+    track :regular, :export_link
     render layout: nil, content_type: 'application/toml'
   end
 

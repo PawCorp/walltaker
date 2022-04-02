@@ -1,6 +1,7 @@
 class FriendshipsController < ApplicationController
   before_action :authorize, only: %i[index show new edit create update accept destroy]
   before_action :set_friendship, only: %i[show edit update accept destroy]
+  after_action :track_visit, only: %i[index requests show new]
 
   # GET /friendships or /friendships.json
   def index
@@ -30,9 +31,13 @@ class FriendshipsController < ApplicationController
       @friendship.confirmed = true
       @friendship.save
 
+      track :regular, :accepted_friend_request, sender_id: @friendship.sender_id, receiver_id: @friendship.receiver_id, friendship_id: @friendship.id
+
       redirect_to url_for(controller: :friendships, action: :index), notice: 'Friendship Accepted!'
       return
     end
+
+    track :nefarious, :tried_to_accept_others_friend_request, sender_id: @friendship.sender_id, receiver_id: @friendship.receiver_id, friendship_id: @friendship.id
 
     redirect_to root_url, alert: 'Not Authorized'
   end
@@ -57,8 +62,10 @@ class FriendshipsController < ApplicationController
     end
 
     if @friendship.save
+      track :regular, :sent_friend_request, sender_id: @friendship.sender_id, receiver_id: @friendship.receiver_id, friendship_id: @friendship.id
       redirect_back_or_to root_path, notice: 'Friend request sent!'
     else
+      track :error, :failed_to_send_friend_request, errors: @friendship.errors, receiver_username: params['receiver_username']
       render :new, status: :unprocessable_entity
     end
   end
@@ -66,9 +73,12 @@ class FriendshipsController < ApplicationController
   # DELETE /friendships/1 or /friendships/1.json
   def destroy
     unless @friendship.receiver_id != current_user.id || @friendship.sender_id != current_user.id
+      track :nefarious, :tried_to_delete_others_friend_request, sender_id: @friendship.sender_id, receiver_id: @friendship.receiver_id, friendship_id: @friendship.id
       redirect_to root_url, alert: 'Not Authorized'
       return
     end
+
+    track :regular, :deleted_friend_request, sender_id: @friendship.sender_id, receiver_id: @friendship.receiver_id, friendship_id: @friendship.id
 
     @friendship.destroy
 

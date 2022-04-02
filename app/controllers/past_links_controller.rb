@@ -1,6 +1,7 @@
 class PastLinksController < ApplicationController
   before_action :past_links_params
   before_action :set_user, only: %i[index]
+  after_action :track_visit, only: %i[index]
 
   def index
     # I'm so sorry, this is going to be HORRIBLE for performance. Capping at 50 to avoid loading up Enumerable#group_by too much

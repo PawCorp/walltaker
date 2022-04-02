@@ -8,6 +8,8 @@ class PornSearchController < ApplicationController
     @posts = get_tag_results porn_search_params[:tags], porn_search_params[:after], @link.theme
     @last_tags = porn_search_params[:tags]
 
+    track :regular, :search_e621_on_link, search: porn_search_params[:tags]
+
     redirect_to :index if @posts.nil?
   end
 

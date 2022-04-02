@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  after_action :track_visit, only: %i[new show edit]
+
   def new
     @user = User.new
   end
@@ -21,8 +23,10 @@ class UsersController < ApplicationController
 
     @user.details = user_params[:details]
     if @user.save
+      track :regular, :updated_details
       redirect_to user_path(@user.username), { notice: 'Successfully updated user.' }
     else
+      track :error, :updating_details_went_wrong
       redirect_to user_path(@user.username), { alert: 'Something went wrong' }
     end
   end
@@ -31,8 +35,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
+      track :regular, :signed_up_and_first_log_in
       redirect_to url_for(controller: :links, action: :index), notice: 'Thank you for signing up!'
     else
+      track :error, :failed_to_sign_up, errors: @user.errors
       render 'new', status: :unprocessable_entity
     end
   end

@@ -10,7 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_16_142123) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_02_145619) do
+  create_table "ahoy_events", force: :cascade do |t|
+    t.integer "visit_id"
+    t.integer "user_id"
+    t.string "name"
+    t.text "properties"
+    t.datetime "time"
+    t.index ["name", "time"], name: "index_ahoy_events_on_name_and_time"
+    t.index ["user_id"], name: "index_ahoy_events_on_user_id"
+    t.index ["visit_id"], name: "index_ahoy_events_on_visit_id"
+  end
+
+  create_table "ahoy_visits", force: :cascade do |t|
+    t.string "visit_token"
+    t.string "visitor_token"
+    t.integer "user_id"
+    t.string "ip"
+    t.text "user_agent"
+    t.text "referrer"
+    t.string "referring_domain"
+    t.text "landing_page"
+    t.string "browser"
+    t.string "os"
+    t.string "device_type"
+    t.string "country"
+    t.string "region"
+    t.string "city"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "utm_source"
+    t.string "utm_medium"
+    t.string "utm_term"
+    t.string "utm_content"
+    t.string "utm_campaign"
+    t.string "app_version"
+    t.string "os_version"
+    t.string "platform"
+    t.datetime "started_at"
+    t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
+    t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
+  end
+
   create_table "friendships", force: :cascade do |t|
     t.integer "sender_id", null: false
     t.integer "receiver_id"
@@ -40,6 +81,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_16_142123) do
     t.string "theme"
     t.string "response_text"
     t.integer "response_type"
+    t.bigint "ahoy_visit_id"
     t.index ["user_id"], name: "index_links_on_user_id"
   end
 
@@ -51,6 +93,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_16_142123) do
     t.datetime "updated_at", null: false
     t.integer "link_id"
     t.integer "set_by_id"
+    t.bigint "ahoy_visit_id"
     t.index ["link_id"], name: "index_past_links_on_link_id"
     t.index ["set_by_id"], name: "index_past_links_on_set_by_id"
     t.index ["user_id"], name: "index_past_links_on_user_id"
