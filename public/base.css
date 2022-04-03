@@ -516,3 +516,7 @@ label ion-icon {
 .accent-block h2:first-of-type {
     margin-top: 0;
 }
+
+footer small a {
+    text-decoration: none;
+}

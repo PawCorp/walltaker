@@ -31,4 +31,8 @@ class ApplicationController < ActionController::Base
   def authorize
     redirect_to new_session_url, alert: 'Not authorized' if session[:user_id].nil?
   end
+
+  def authorize_with_admin
+    redirect_to '/', alert: 'Not authorized' unless current_user && current_user.admin
+  end
 end

@@ -25,4 +25,5 @@ Rails.application.routes.draw do
       get :walltaker, to: 'links#export'
     end
   end
+  mount Blazer::Engine, at: "blazer"
 end
