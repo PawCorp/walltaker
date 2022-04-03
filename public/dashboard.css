@@ -132,3 +132,8 @@
         grid-row: 5 / span 1;
     }
 }
+
+.kofi-button ion-icon {
+    font-size: 1.4em;
+    margin: 0px 0 -6px 0;
+}
