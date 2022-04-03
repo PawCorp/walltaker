@@ -12,10 +12,11 @@ you in control, but not _too much_ control.
 ## Clients
 A client is required to set the wallpaper of a device. Here are some made by the awesome community!
 
-| client                                                                          | platforms         |
-|---------------------------------------------------------------------------------|-------------------|
-| [walltaker-desktop-client](https://github.com/PawCorp/walltaker-desktop-client) | windows/mac/linux |
-| [walltaker-android-client](https://github.com/PawCorp/walltaker-android-client) | android |
+| client                                                                                        | platforms                  |
+|-----------------------------------------------------------------------------------------------|----------------------------|
+| [walltaker-desktop-client](https://github.com/PawCorp/walltaker-desktop-client)               | windows/mac/linux          |
+| [walltaker-android-client](https://github.com/PawCorp/walltaker-android-client)               | android                    |
+| [Lycraon's Wallpaper Engine Client](https://github.com/Lycraon/Walltaker-for-WallpaperEngine) | Wallpaper Engine (Windows) |
 
 ## API Guide
 _Make your own client!_
