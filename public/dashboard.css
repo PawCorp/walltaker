@@ -18,6 +18,14 @@
     margin-top: 0;
 }
 
+.dashboard table td a {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 210px;
+    display: block;
+}
+
 .dashboard h2 {
     margin-top: 0rem;
     text-align: left;
