@@ -12,4 +12,8 @@ class PastLink < ApplicationRecord
           set_by_id: link.set_by_id
         })
   end
+
+  after_commit do
+    broadcast_replace_to "submit_link_#{link_id}", target: "submit_link_#{link_id}", partial: 'links/submit', locals: { link: self.link }
+  end
 end

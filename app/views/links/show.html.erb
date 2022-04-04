@@ -71,8 +71,7 @@
   </div>
 <% end %>
 
-<h2>Change <%= link_to @link.user.username, user_path(@link.user.username) %>'s wallpaper</h2>
-
+<%= turbo_stream_from "submit_link_#{@link.id}" %>
 <%= render 'submit', link: @link %>
 
 <figure class="half-page-break">

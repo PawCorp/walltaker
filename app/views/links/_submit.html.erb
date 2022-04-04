@@ -1,8 +1,11 @@
 <% target = "submit_link_#{link.id}" %>
 
-<%= turbo_stream_from target %>
-
 <%= turbo_frame_tag target do %>
+  <h2>
+    Change <%= link_to link.user.username, user_path(link.user.username) %>'s wallpaper
+    <small>Last changed <%= link.past_links.empty? ? 'never' : (time_ago_in_words link.past_links.last.created_at) + ' ago' %></small>
+  </h2>
+
   <% if link.post_thumbnail_url %>
     <figure>
       <a href="<%= link.post_url %>" target="_blank">
