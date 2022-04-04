@@ -2,7 +2,7 @@
 
 <%= turbo_frame_tag target do %>
   <h2>
-    Change <%= link_to link.user.username, user_path(link.user.username) %>'s wallpaper
+    Change <%= link_to link.user.username, user_path(link.user.username), target: '_top' %>'s wallpaper
     <small>Last changed <%= link.past_links.empty? ? 'never' : (time_ago_in_words link.past_links.last.created_at) + ' ago' %></small>
   </h2>
 
