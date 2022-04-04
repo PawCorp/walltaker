@@ -10,6 +10,7 @@
 
 <div id="links">
   <% @links.each do |link| %>
+    <%= turbo_stream_from link %>
     <a href="<%= link_url(link) %>" class="clean">
       <%= render link %>
     </a>
