@@ -79,6 +79,13 @@ header a:visited {
     text-decoration: none;
 }
 
+header a.username {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 110px;
+}
+
 header a.username,
 header a:visited.username {
     color: var(--text);
@@ -120,6 +127,12 @@ h2 {
     font-size: 2.2rem;
     font-weight: normal;
     margin-top: 3.25rem;
+}
+
+h2.one-line {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 h2 span.beta-tag {

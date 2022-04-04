@@ -91,9 +91,19 @@
     grid-column: 1 / span 1;
     grid-row: 5 / span 1;
 }
+
 .dashboard__newest-user__content {
     text-align: center;
     font-size: 1.75rem;
+    position: relative;
+}
+
+.dashboard__newest-user__content a {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    display: block;
 }
 
 .dashboard__your-total-changes {
