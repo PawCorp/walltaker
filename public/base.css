@@ -57,6 +57,12 @@ header .header__inner {
     padding: 0 1rem;
 }
 
+header .header__age-warning {
+    background: var(--bg);
+    margin: -3px -8px 0 -8px;
+    padding: 7px;
+}
+
 header .user-tools {
     display: flex;
     flex: 1 1 320px;
