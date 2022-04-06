@@ -128,6 +128,10 @@ strong.offline {
     grid-area: client;
 }
 
+.link--device-in-use > svg {
+    margin-left: 0.8rem;
+}
+
 .link--device-in-use ion-icon {
     font-size: 1.3rem;
     margin-left: 0.5rem;

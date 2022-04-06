@@ -11,6 +11,7 @@ module LinksHelper
     return :desktop if link_agent.include? 'Walltaker Go Client/'
     return :android if link_agent.include? 'walltaker-android-client/'
     return :joihow if link_agent.include? 'joihow'
+    return :automate if link_agent.include? 'walltaker-android-automate'
 
     :unknown
   end
