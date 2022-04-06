@@ -219,6 +219,7 @@ class LinksController < ApplicationController
       @link.last_ping = Time.now.utc
       @link.last_ping_user_agent = request.user_agent if request.user_agent
       @link.last_ping_user_agent = @link.last_ping_user_agent + ' ' + request.headers['joihow'] if @link.last_ping_user_agent && request.headers['joihow']
+      @link.last_ping_user_agent = @link.last_ping_user_agent + ' ' + request.headers['User_Agent'] if @link.last_ping_user_agent && request.headers['User_Agent']
       @link.save
     end
   end
