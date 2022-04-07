@@ -81,3 +81,4 @@ gem "groupdate"
 gem 'rbs_rails', require: false
 gem 'ahoy_matey'
 gem "blazer"
+gem "lograge"
