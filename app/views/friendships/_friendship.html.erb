@@ -10,9 +10,23 @@
     since
     <%= friendship.updated_at.strftime('%d/%m/%Y') %>
   </div>
-  <div class="friendship__actions">
+  <div class="friendship__actions" data-controller="friendship">
+    <dialog class="modal" data-friendship-target="modal">
+      <h4>Confirm Unfriend-ing</h4>
+      <p>Are you sure you want to unfriend <strong><%= other_user.username %></strong>?</p>
+      <div class="modal__buttons">
+        <%= button_tag class: 'no-underline primary', data: { 'friendship-target': 'cancel', action: 'click->friendship#cancel' } do %>
+          <ion-icon name="close"></ion-icon>
+          Cancel
+        <% end %>
+        <%= button_to friendship, method: :delete, class: 'no-underline secondary', data: { action: 'click->friendship#confirm' } do %>
+          <ion-icon name="heart-dislike"></ion-icon>
+          Confirm
+        <% end %>
+      </div>
+    </dialog>
     <% if action_name == 'index' %>
-      <%= button_to friendship, method: :delete, class: 'no-underline secondary' do %>
+      <%= button_tag class: 'no-underline secondary', data: { action: 'click->friendship#confirm' } do %>
         <ion-icon name="heart-dislike"></ion-icon>
         Unfriend
       <% end %>

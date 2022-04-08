@@ -461,6 +461,14 @@ label ion-icon {
     header .header__inner {
         padding: 0 0.5rem;
     }
+
+    .friendship {
+        padding: 0.1rem 0;
+    }
+
+    .friendship__names {
+        flex: 1 1 100px;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -538,4 +546,104 @@ label ion-icon {
 
 footer small a {
     text-decoration: none;
+}
+
+.modal {
+    opacity: 0;
+    display: grid;
+    color: var(--text);
+    border-radius: 0.3rem;
+    box-shadow: 0px 10px 30px 20px rgb(15, 15, 15);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--border);
+    min-width: 320px;
+    padding: 1rem;
+    border: none;
+    z-index: 9999;
+    margin: 0;
+    grid-template-rows: 24px 1fr;
+    grid-template-areas: 'header'
+                         'content';
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.modal::after {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background: var(--bg);
+    z-index: -1;
+    display: block;
+    height: 100vh;
+    width: 100vw;
+    transform: translate(-50%, -50%);
+    opacity: 0.8;
+}
+
+.modal__header {
+    text-align: right;
+    grid-area: header;
+}
+
+.modal__close-button {
+    display: inline-block;
+    margin: 0;
+    background: none;
+    color: var(--text);
+    font-size: 1.5rem;
+    padding: 0;
+    line-height: 1rem;
+}
+
+.modal[data-open=true] {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal > h4 {
+    margin-top: 0;
+}
+
+.modal > p {
+    padding: 0px 0.5rem;
+}
+
+.modal__buttons {
+    display: flex;
+    justify-content: flex-end;
+    background: var(--accent);
+    margin: 0 -1rem -1rem;
+    border-bottom-left-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+    padding: 0.5rem 1rem;
+}
+
+@media screen and (max-width: 475px) {
+    .modal {
+        background: var(--accent-bg);
+        bottom: 0;
+        top: initial;
+        left: 0;
+        box-sizing: border-box;
+        width: 100%;
+        transform: translate(0, 100%);
+        transition: all 0.2s;
+    }
+
+    .modal[data-open=true] {
+        opacity: 1;
+        pointer-events: all;
+        transform: translate(0, 0);
+    }
+
+    .modal::after {
+        top: 0;
+        left: 0;
+        transform: translate(0, -100%);
+    }
 }
