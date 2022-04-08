@@ -5,7 +5,11 @@ class PornSearchController < ApplicationController
 
   def search
     @link = Link.find(porn_search_params[:link]) if porn_search_params[:link]
-    @posts = get_tag_results porn_search_params[:tags], porn_search_params[:after], @link.theme
+    sanitized_blacklist = @link.blacklist.downcase.gsub(/[^a-z_\(\)\d ]/, '')
+    append_to_tags = ''
+    append_to_tags += @link.theme if (@link.theme)
+    append_to_tags += ' ' + ((sanitized_blacklist.split.map { |tag| "-#{tag}"}).join ' ') unless (sanitized_blacklist.empty?)
+    @posts = get_tag_results porn_search_params[:tags], porn_search_params[:after], append_to_tags
     @last_tags = porn_search_params[:tags]
 
     track :regular, :search_e621_on_link, search: porn_search_params[:tags]
@@ -16,7 +20,7 @@ class PornSearchController < ApplicationController
   private
 
   def get_tag_results(tag_string, after, append_to_tags)
-    padded_tag_string = tag_string + ' score:>5 type:jpg type:png'
+    padded_tag_string = tag_string + ' type:jpg type:png'
     unless append_to_tags.nil? || append_to_tags.empty?
       padded_tag_string = "#{padded_tag_string} #{append_to_tags.to_s}"
     end
