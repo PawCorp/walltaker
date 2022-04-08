@@ -98,7 +98,7 @@
       Enter some e621 tags, click search, then click any post to
       set <%= @link.user.username %>'s wallpaper.
     </p>
-    <% if @link.theme %>
+    <% unless (@link.theme.nil? || @link.theme.empty?) %>
       <p class="subdued">
         The theme tag <strong><ion-icon name="pricetag-outline"></ion-icon> <%= @link.theme %></strong> is being automatically applied.
       </p>
