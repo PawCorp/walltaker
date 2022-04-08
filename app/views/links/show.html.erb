@@ -1,7 +1,18 @@
 <% content_for(:html_title) { "Walltaker ##{@link.id} for #{@link.user.username}" } %>
 
 <% if @is_current_user %>
-  <div class="task-tools">
+  <div class="task-tools" data-controller="link">
+    <dialog class="modal" data-link-target="modal">
+      <h4>Confirm Delete</h4>
+      <p>Are you sure you want to delete this link?</p>
+      <div class="modal__buttons">
+        <%= button_tag class: 'no-underline primary', data: { 'link-target': 'cancel', action: 'click->link#cancel' } do %>
+          <ion-icon name="close"></ion-icon>
+          Cancel
+        <% end %>
+        <%= button_to "Delete this link", @link, method: :delete, class: 'no-underline secondary' %>
+      </div>
+    </dialog>
     <div class="left">
       <%= link_to "Back to links", links_path %>
     </div>
@@ -10,7 +21,7 @@
         <ion-icon name="build"></ion-icon>
         Edit
       </a>
-      <%= button_to "Delete this link", @link, method: :delete %>
+      <%= button_tag "Delete this link", data: { action: 'click->link#confirm' } %>
     </div>
   </div>
 <% else %>
