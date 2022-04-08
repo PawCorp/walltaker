@@ -302,3 +302,9 @@ turbo-frame#pornsearch_results .results form button {
 .accent-block > .link {
     margin-top: 0;
 }
+
+@media screen and (max-width: 475px) {
+    .link--device-in-use span {
+        display: none;
+    }
+}

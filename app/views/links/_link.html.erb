@@ -76,16 +76,16 @@
       <div class="link--device-in-use">
         <% case link_agent_to_icon link.last_ping_user_agent %>
         <% when :desktop %>
-          Pawcorp Desktop
+          <span>Pawcorp Desktop</span>
           <ion-icon name="laptop-outline"></ion-icon>
         <% when :android %>
-          Pawcorp Android
+          <span>Pawcorp Android</span>
           <ion-icon name="phone-portrait-outline"></ion-icon>
         <% when :joihow %>
-          JOI.how
+          <span>JOI.how</span>
           <ion-icon name="earth-outline"></ion-icon>
         <% when :automate %>
-          Deans' Client
+          <span>Deans' Client</span>
           <svg height="28" width="28"><use xlink:href="/icon-automate.svg#Calque_1"></use></svg>
         <% when :unknown %>
           <ion-icon name="help-circle-outline"></ion-icon>

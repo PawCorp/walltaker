@@ -469,6 +469,10 @@ label ion-icon {
     .friendship__names {
         flex: 1 1 100px;
     }
+
+    .link {
+        grid-template-columns: 1fr auto !important;
+    }
 }
 
 @media screen and (max-width: 600px) {
