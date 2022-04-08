@@ -57,7 +57,8 @@
       Your Link
     </h2>
 
-    <p>Give live feedback to people who are setting your wallpaper! Type any message in below, and choose a mood. "Hate it!" will remove the current wallpaper entirely.</p>
+    <p>Give live feedback to people who are setting your wallpaper! Type any message in below, and choose a mood. "Hate
+      it!" will remove the current wallpaper entirely.</p>
     <%= form_with model: @link, method: 'PATCH', class: 'set-post-response' do |form| %>
       <div>
         <%= form.text_field :response_text, placeholder: 'How do you feel about this wallpaper?' %>
@@ -83,22 +84,34 @@
   </div>
 <% end %>
 
-<%= turbo_stream_from "submit_link_#{@link.id}" %>
-<%= render 'submit', link: @link %>
+<%= turbo_stream_from "link_details_#{@link.id}" %>
+<%= render 'details', link: @link %>
 
-<figure class="half-page-break">
-  <img src="/e621postid.gif"/>
-  <figcaption>The post ID is the main number shown in the post URL. You should only include this number, not anything
-    after the question mark in the post URL, or anything before the number.
-  </figcaption>
-</figure>
-
-<h2>Search E621 <span class="beta-tag">beta</span></h2>
-<p>Just enter some e621 tags, click search, then you click a post to
-  set <%= @link.user.username %>'s wallpaper all inside walltaker!</p>
-
-<%= turbo_frame_tag "pornsearch", src: porn_search_index_path({ link: @link.id }) do %>
-  <div>
-    Loading
+<div class="tabs" data-controller="tabs">
+  <div class="tabs__charm">
+    <ion-icon name="magnet"></ion-icon>
+    Select wallpaper via...
   </div>
-<% end %>
+
+  <div class="tab" data-tabs-target="tab" data-title="Search">
+    <p>
+      Enter some e621 tags, click search, then click any post to
+      set <%= @link.user.username %>'s wallpaper.
+    </p>
+    <% if @link.theme %>
+      <p class="subdued">
+        The theme tag <strong><ion-icon name="pricetag-outline"></ion-icon> <%= @link.theme %></strong> is being automatically applied.
+      </p>
+    <% end %>
+    <%= turbo_frame_tag "pornsearch", src: porn_search_index_path({ link: @link.id }) do %>
+      <div>
+        Loading
+      </div>
+    <% end %>
+  </div>
+
+  <div class="tab" data-tabs-target="tab" data-title="Post ID">
+    <%= render 'submit', link: @link %>
+  </div>
+
+</div>

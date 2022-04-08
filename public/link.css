@@ -308,3 +308,56 @@ turbo-frame#pornsearch_results .results form button {
         display: none;
     }
 }
+
+.tabs {
+    display: grid;
+    grid-template-rows: 30px auto auto;
+    grid-template-areas: 'charm'
+                         'labels'
+                         'content';
+}
+
+.tabs__charm {
+    color: var(--border);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0 0 0.75rem;
+}
+
+.tabs__labels {
+    grid-area: labels;
+}
+
+.tabs__labels button {
+    background: var(--bg);
+    font-weight: bold;
+    border-radius: 0;
+    margin: 0;
+    color: var(--text);
+}
+
+.tabs__labels button[data-open=true] {
+    background: var(--accent-bg);
+}
+
+.tabs__labels button + button {
+    margin-left: 1rem;
+}
+
+.tab {
+    grid-area: content;
+    padding: 1rem 1.5rem 1.5rem;
+    background: var(--accent-bg);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.tab[data-open=false] {
+    display: none;
+}
+
+figcaption {
+    max-height: 110px;
+    overflow: scroll;
+}

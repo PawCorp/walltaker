@@ -14,6 +14,6 @@ class PastLink < ApplicationRecord
   end
 
   after_commit do
-    broadcast_replace_to "submit_link_#{link_id}", target: "submit_link_#{link_id}", partial: 'links/submit', locals: { link: self.link }
+    broadcast_replace_to "link_details_#{link_id}", target: "link_details_#{link_id}", partial: 'links/details', locals: { link: self.link }
   end
 end

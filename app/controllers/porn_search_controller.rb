@@ -21,7 +21,7 @@ class PornSearchController < ApplicationController
       padded_tag_string = "#{padded_tag_string} #{append_to_tags.to_s}"
     end
     tags = CGI.escape padded_tag_string
-    url = "https://e621.net/posts.json?tags=#{tags}&limit=12"
+    url = "https://e621.net/posts.json?tags=#{tags}&limit=15"
     after_id = after.gsub(/\D/, '') if after
     url = "#{url}&page=b#{after_id}" if after_id
     response = Excon.get(url)

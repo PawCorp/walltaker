@@ -336,7 +336,7 @@ form.set-post-response select {
 
 form.set-post-id {
     max-width: 329px;
-    margin: 3rem auto 0;
+    margin: 1rem auto 0;
 }
 
 form.set-post-id input {
@@ -650,4 +650,12 @@ footer small a {
         left: 0;
         transform: translate(0, -100%);
     }
+}
+
+.subdued {
+    color: var(--border);
+}
+
+.center {
+    text-align: center;
 }
