@@ -357,7 +357,7 @@ turbo-frame#pornsearch_results .results form button {
     display: none;
 }
 
-figcaption {
+figcaption.link--description {
     max-height: 110px;
     overflow: scroll;
 }
