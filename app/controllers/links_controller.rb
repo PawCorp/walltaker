@@ -15,12 +15,16 @@ class LinksController < ApplicationController
 
   # GET /browse (all online links)
   def browse
+    # FUCK YOU, I join what I want, get ready for the query from hell
     @links = Link.all
                  .where(friends_only: false)
                  .where('last_ping > ?', Time.now - 1.minute)
                  .and(
                    Link.all.where('expires > ?', Time.now).or(Link.all.where(never_expires: true))
                  )
+                 .joins(:past_links)
+                 .where('past_links.created_at = (SELECT MAX(created_at) FROM past_links WHERE past_links.link_id = links.id)')
+                 .order('past_links.created_at': :asc)
   end
 
   # GET /links/1 or /links/1.json
