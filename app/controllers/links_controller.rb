@@ -181,13 +181,17 @@ class LinksController < ApplicationController
                         ([lowercase_theme] & e621_post['post']['tags']['general']).empty? &&
                           ([lowercase_theme] & e621_post['post']['tags']['species']).empty? &&
                           ([lowercase_theme] & e621_post['post']['tags']['artist']).empty? &&
-                          ([lowercase_theme] & e621_post['post']['tags']['character']).empty?
+                          ([lowercase_theme] & e621_post['post']['tags']['character']).empty? &&
+                          ([lowercase_theme] & e621_post['post']['tags']['copyright']).empty? &&
+                          ([lowercase_theme] & e621_post['post']['tags']['lore']).empty?
                       end
     blacklisted_in_general_tags = (blacklist & e621_post['post']['tags']['general']).any?
     blacklisted_in_species_tags = (blacklist & e621_post['post']['tags']['species']).any?
     blacklisted_in_artist_tags = (blacklist & e621_post['post']['tags']['artist']).any?
     blacklisted_in_character_tags = (blacklist & e621_post['post']['tags']['character']).any?
-    blacklisted_in_general_tags || blacklisted_in_species_tags || blacklisted_in_artist_tags || blacklisted_in_character_tags || incorrect_theme
+    blacklisted_in_copyright_tags = (blacklist & e621_post['post']['tags']['copyright']).any?
+    blacklisted_in_lore_tags = (blacklist & e621_post['post']['tags']['lore']).any?
+    blacklisted_in_general_tags || blacklisted_in_species_tags || blacklisted_in_artist_tags || blacklisted_in_character_tags || blacklisted_in_copyright_tags || blacklisted_in_lore_tags || incorrect_theme
   end
 
   def update_request_unsafe?
