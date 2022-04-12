@@ -4,8 +4,13 @@
   <% end %>
 
   <div class="notifications__popover" data-notifications-target="popover">
+    <% if notifications.count == 0 %>
+      <div class="notifications__empty">
+        No notifications yet.
+      </div>
+    <% end %>
     <% notifications.each do |notification| %>
-      <%= link_to notification.link, class: 'notification' do %>
+      <%= link_to notification_path(notification.id), class: 'notification' do %>
         <% case notification.notification_type %>
           <% when 'friend_request_sent' %>
             <ion-icon name="send"></ion-icon>

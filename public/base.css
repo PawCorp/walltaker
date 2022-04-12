@@ -121,10 +121,14 @@ header a ion-icon {
 }
 
 header .notification-bell {
+    color: var(--text);
     background: none;
     padding: 0;
-    color: var(--accent);
     margin: 0 0 0 1rem;
+}
+
+header .notification-bell[data-has-notifs=true] {
+    color: var(--accent);
 }
 
 @media screen and (max-width: 687px) {
@@ -732,4 +736,26 @@ footer small a {
 
 .notifications ion-icon {
     display: block !important;
+}
+
+.notifications__empty {
+    padding: 1rem;
+    text-align: center;
+    color: var(--bg);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+@media screen and (max-width: 475px) {
+    .notifications__popover {
+        width: 100vw;
+        transform: none;
+        left: 0;
+        position: fixed;
+        top: 0;
+    }
+
+    .notification-bell {
+        margin: 0 0 0 0.2rem !important;
+    }
 }

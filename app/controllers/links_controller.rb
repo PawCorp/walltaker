@@ -111,7 +111,7 @@ class LinksController < ApplicationController
 
       notification_text = "#{notification_text} \"#{link_params['response_text']}\"" unless link_params['response_type'].nil?
 
-      Notification.create user_id: @link.set_by_id, notification_type: :post_response, text: notification_text, link: "https://walltaker.joi.how/links/#{@link.id}"
+      Notification.create user_id: @link.set_by_id, notification_type: :post_response, text: notification_text, link: "/links/#{@link.id}"
     end
 
     result = if e621_post.nil?

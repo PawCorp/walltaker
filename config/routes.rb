@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'notification/show'
   get 'porn_search/index'
   get 'porn_search/search'
   root 'dashboard#index'
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
   get 'users/:username', to: 'users#show'
   get 'users/:username/edit', to: 'users#edit'
   get 'users/:username/history', to: 'past_links#index', as: 'past_links'
+  get 'notifications/:id', to: 'notification#show', as: 'notification'
   resources :users
   resources :session
   resources :friendships do

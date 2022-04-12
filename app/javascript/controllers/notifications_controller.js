@@ -4,9 +4,6 @@ class NotificationsController extends Controller {
     static targets = ['trigger', 'popover']
 
     connect () {
-        this.shown = false
-        this.set()
-
         document.body.addEventListener('click', (e) => {
             if (!this.popoverTarget.contains(e.target) && !this.triggerTarget.contains(e.target)) {
                 this.close()
@@ -18,6 +15,10 @@ class NotificationsController extends Controller {
                 this.close()
             }
         })
+
+        this.shown = false
+        this.hasNotifs = this.popoverTarget.querySelectorAll('.notification').length > 0
+        this.set()
     }
 
     close () {
@@ -32,6 +33,7 @@ class NotificationsController extends Controller {
 
     set () {
         this.popoverTarget.dataset.open = this.shown
+        this.triggerTarget.dataset.hasNotifs = this.hasNotifs
     }
 }
 
