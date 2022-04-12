@@ -23,14 +23,14 @@
 <body>
 <header>
   <div class="header__age-warning">
-    🔞 This is an application for adults over the age of 18 only.
+    🔞 This is an app for adults over the age of 18 only.
   </div>
   <div class="header__inner">
     <h1><a href="/">
       <span class="show-desktop">Walltaker</span>
       <span class="show-mobile">WT</span>
     </a></h1>
-    <div class="user-tools">
+    <div class="user-tools" data-controller="notifications">
       <% if current_user %>
         <a class="username" href="<%= user_path current_user.username %>">
           <%= current_user.username %>
@@ -42,6 +42,7 @@
         <%= link_to 'Links', links_path %>
         <%= link_to 'Friends', friendships_path, class: has_requests? ? 'pinged' : '' %>
         <%= link_to 'Logout', logout_path %>
+        <%= render partial: 'notifications' %>
       <% else %>
         <a href="<%= url_for :action => :browse, :controller => :links %>">
           <ion-icon name="sparkles"></ion-icon>

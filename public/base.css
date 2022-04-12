@@ -120,6 +120,13 @@ header a ion-icon {
     font-size: 1em;
 }
 
+header .notification-bell {
+    background: none;
+    padding: 0;
+    color: var(--accent);
+    margin: 0 0 0 1rem;
+}
+
 @media screen and (max-width: 687px) {
     header h1 {
         justify-content: center;

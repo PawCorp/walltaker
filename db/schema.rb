@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_03_160759) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_12_025738) do
   create_table "ahoy_events", force: :cascade do |t|
     t.integer "visit_id"
     t.integer "user_id"
@@ -141,6 +141,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_03_160759) do
     t.index ["user_id"], name: "index_links_on_user_id"
   end
 
+  create_table "new_notifications_tables", force: :cascade do |t|
+    t.integer "user_id_id", null: false
+    t.integer "type"
+    t.string "text"
+    t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id_id"], name: "index_new_notifications_tables_on_user_id_id"
+  end
+
   create_table "past_links", force: :cascade do |t|
     t.integer "user_id"
     t.string "post_url"
@@ -171,6 +181,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_03_160759) do
   add_foreign_key "friendships", "users", column: "sender_id"
   add_foreign_key "links", "users"
   add_foreign_key "links", "users", column: "set_by_id"
+  add_foreign_key "new_notifications_tables", "user_ids"
   add_foreign_key "past_links", "links", on_delete: :nullify
   add_foreign_key "past_links", "users"
   add_foreign_key "past_links", "users", column: "set_by_id"

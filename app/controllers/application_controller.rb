@@ -1,5 +1,11 @@
 class ApplicationController < ActionController::Base
 
+  def getNotifications
+    if (current_user)
+
+    end
+  end
+
   private
 
   # @param [Symbol<:regular, :nefarious, :visit>] level
