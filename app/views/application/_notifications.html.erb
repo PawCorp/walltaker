@@ -1,5 +1,28 @@
-<%= button_tag class: 'notification-bell' do %>
-  <ion-icon name="notifications"></ion-icon>
-<% end %>
+<div class="notifications" data-controller="notifications">
+  <%= button_tag class: 'notification-bell', data: { 'notifications-target': 'trigger', 'action': 'click->notifications#toggle' } do %>
+    <ion-icon name="notifications"></ion-icon>
+  <% end %>
 
-<
+  <div class="notifications__popover" data-notifications-target="popover">
+    <% notifications.each do |notification| %>
+      <%= link_to notification.link, class: 'notification' do %>
+        <% case notification.notification_type %>
+          <% when 'friend_request_sent' %>
+            <ion-icon name="send"></ion-icon>
+          <% when 'friend_request_received' %>
+            <ion-icon name="boat"></ion-icon>
+          <% when 'friend_request_they_accepted' %>
+            <ion-icon name="heart"></ion-icon>
+          <% when 'post_response' %>
+          <ion-icon name="chatbubble-ellipses"></ion-icon>
+        <% end %>
+        <div>
+          <p><%= notification.text %></p>
+          <%= time_tag notification.created_at do %>
+            <%= time_ago_in_words notification.created_at %> ago
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

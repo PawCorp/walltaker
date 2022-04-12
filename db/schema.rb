@@ -141,14 +141,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_12_025738) do
     t.index ["user_id"], name: "index_links_on_user_id"
   end
 
-  create_table "new_notifications_tables", force: :cascade do |t|
-    t.integer "user_id_id", null: false
-    t.integer "type"
+  create_table "notifications", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "notification_type"
     t.string "text"
     t.string "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id_id"], name: "index_new_notifications_tables_on_user_id_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "past_links", force: :cascade do |t|
@@ -181,7 +181,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_12_025738) do
   add_foreign_key "friendships", "users", column: "sender_id"
   add_foreign_key "links", "users"
   add_foreign_key "links", "users", column: "set_by_id"
-  add_foreign_key "new_notifications_tables", "user_ids"
+  add_foreign_key "notifications", "users"
   add_foreign_key "past_links", "links", on_delete: :nullify
   add_foreign_key "past_links", "users"
   add_foreign_key "past_links", "users", column: "set_by_id"

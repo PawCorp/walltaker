@@ -104,6 +104,16 @@ class LinksController < ApplicationController
       @link.post_thumbnail_url = last_past_link ? last_past_link.post_thumbnail_url : nil
     end
 
+    unless link_params['response_type'].nil?
+      notification_text = "#{current_user.username} loved your post!" if link_params['response_type'] == 'horny'
+      notification_text = "#{current_user.username} did not like your post." if link_params['response_type'] == 'disgust'
+      notification_text = "#{current_user.username} came to your post!" if link_params['response_type'] == 'came'
+
+      notification_text = "#{notification_text} \"#{link_params['response_text']}\"" unless link_params['response_type'].nil?
+
+      Notification.create user_id: @link.set_by_id, notification_type: :post_response, text: notification_text, link: "https://walltaker.joi.how/links/#{@link.id}"
+    end
+
     result = if e621_post.nil?
                new_link = @link.update(link_params)
                track :regular, :update_link_details

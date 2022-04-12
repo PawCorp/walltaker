@@ -1,11 +1,5 @@
 class ApplicationController < ActionController::Base
 
-  def getNotifications
-    if (current_user)
-
-    end
-  end
-
   private
 
   # @param [Symbol<:regular, :nefarious, :visit>] level
@@ -33,6 +27,16 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :current_user
+
+  def notifications
+    if current_user
+      Notification.all.where(user: current_user).order(id: :desc).limit(5)
+    else
+      []
+    end
+  end
+
+  helper_method :notifications
 
   def authorize
     redirect_to new_session_url, alert: 'Not authorized' if session[:user_id].nil?

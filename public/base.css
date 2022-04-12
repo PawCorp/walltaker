@@ -666,3 +666,70 @@ footer small a {
 .center {
     text-align: center;
 }
+
+.notifications {
+    position: relative;
+    font-size: 1.1rem;
+    margin: 0 !important;
+}
+
+.notifications__popover {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 320px;
+    background: var(--accent);
+    font-size: 0.9rem;
+    text-align: left;
+    z-index: 9999;
+    transform: translate(-0.5rem, 0.75rem);
+}
+
+.notifications__popover[data-open=true] {
+    display: block;
+}
+
+.notifications__popover::before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 0.7rem solid transparent;
+    border-bottom: 0.7rem solid var(--accent);
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(0, -0.7rem);
+}
+
+.notifications__popover .notification {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    color: var(--bg);
+}
+
+.notifications__popover .notification:hover {
+    opacity: 0.6;
+}
+
+.notifications__popover .notification p {
+    margin: 0;
+}
+
+.notifications__popover .notification time {
+    display: block;
+    color: var(--accent-bg);
+    font-size: 0.8em;
+    line-height: 1em;
+    margin-bottom: 0.4em;
+}
+
+.notifications__popover .notification > ion-icon {
+    font-size: 1.1rem;
+}
+
+.notifications ion-icon {
+    display: block !important;
+}

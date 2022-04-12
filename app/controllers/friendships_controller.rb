@@ -32,6 +32,7 @@ class FriendshipsController < ApplicationController
       @friendship.save
 
       track :regular, :accepted_friend_request, sender_id: @friendship.sender_id, receiver_id: @friendship.receiver_id, friendship_id: @friendship.id
+      Notification.create user: current_user, notification_type: :friend_request_they_accepted, text: "#{receiver.username} accepted your friend request.", link: "https://walltaker.joi.how/users/#{receiver.username}"
 
       redirect_to url_for(controller: :friendships, action: :index), notice: 'Friendship Accepted!'
       return
@@ -63,6 +64,8 @@ class FriendshipsController < ApplicationController
 
     if @friendship.save
       track :regular, :sent_friend_request, sender_id: @friendship.sender_id, receiver_id: @friendship.receiver_id, friendship_id: @friendship.id
+      Notification.create user: @friendship.sender, notification_type: :friend_request_sent, text: "You sent a friend request to #{@friendship.receiver.username}.", link: "https://walltaker.joi.how/users/#{@friendship.receiver.username}"
+      Notification.create user: @friendship.receiver, notification_type: :friend_request_received, text: "#{@friendship.sender.username} sent you a friend request.", link: "https://walltaker.joi.how/friendships/requests"
       redirect_back_or_to root_path, notice: 'Friend request sent!'
     else
       track :error, :failed_to_send_friend_request, errors: @friendship.errors, receiver_username: params['receiver_username']
