@@ -26,6 +26,8 @@ You can make your own Walltaker client! A user should be able to supply any link
 the latest wallpaper for that instance. I suggest you poll the endpoint ~10 seconds and cache the last post url, so you
 can skip downloading if it hasn't changed since the last one.
 
+---
+
 ### GET `http://walltaker.joi.how/links/[id].json`
 
 🔓 No auth token required
@@ -46,5 +48,24 @@ Get the current post details for a given link.
     "updated_at": "2022-03-13T21:39:01.828Z", // Timestamp of last update from the server (should be close to current time UTC, unless something went wrong)
     "set_by": "name", // the username of the user who set the wallpaper (or null if anon)
     "url": "https://walltaker.joi.how/links/1.json" // The url you used to get this response
+}
+```
+
+---
+
+### GET `http://walltaker.joi.how/users/[username]/status.json`
+
+🔓 No auth token required, additional information if authenticated.
+
+Get details about this user's status such as if they're online, a friend, or the currently authenticated user for a given session.
+
+```json
+
+{
+  "username": "apple", // The user's name
+  "id": 24, // The user's internal ID
+  "online": true, // If the user is online, meaning they have pinged a link recently
+  "friend": true, // 🔐 If they are a friend of this session's user
+  "self": false // 🔐 If they are logged in as this session's user
 }
 ```
