@@ -671,13 +671,6 @@ footer small a {
     text-align: center;
 }
 
-.notifications {
-    position: relative;
-    font-size: 1.1rem;
-    height: 1.3rem;
-    margin: 0 !important;
-}
-
 .notifications__popover {
     display: none;
     position: absolute;
@@ -744,6 +737,15 @@ footer small a {
     display: block !important;
 }
 
+header turbo-frame {
+    display: block;
+    position: relative;
+    font-size: 1.1rem;
+    height: 1.3rem;
+    margin: 0 !important;
+    width: 32px;
+}
+
 .notifications__empty {
     padding: 1rem;
     text-align: center;
@@ -765,3 +767,8 @@ footer small a {
         margin: 0 0 0 0.2rem !important;
     }
 }
+
+turbo-cable-stream-source {
+    display: none;
+}
+
