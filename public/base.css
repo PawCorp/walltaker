@@ -674,6 +674,7 @@ footer small a {
 .notifications {
     position: relative;
     font-size: 1.1rem;
+    height: 1.3rem;
     margin: 0 !important;
 }
 
@@ -732,6 +733,11 @@ footer small a {
 
 .notifications__popover .notification > ion-icon {
     font-size: 1.1rem;
+    min-width: 18px;
+}
+
+.notifications__popover .notification > p {
+    line-height: 1.2rem;
 }
 
 .notifications ion-icon {
