@@ -425,6 +425,16 @@ form.button_to {
     padding: 0.1rem 1.7rem;
 }
 
+.friendship__names > a[data-online=true]::after {
+    content: '';
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--success);
+    border-radius: 100%;
+    margin-left: 0.25rem;
+}
+
 .friendship__names {
     flex: 1 1 320px;
 }
