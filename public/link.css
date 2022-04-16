@@ -101,7 +101,10 @@ strong.offline {
 
 .link--terms blockquote p {
     margin: 0;
-    max-height: 19ch;
+}
+
+.link--terms blockquote {
+    max-height: 18ch;
     overflow-y: scroll;
 }
 
