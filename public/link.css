@@ -99,6 +99,12 @@ strong.offline {
     grid-area: terms;
 }
 
+.link--terms blockquote p {
+    margin: 0;
+    max-height: 19ch;
+    overflow-y: scroll;
+}
+
 .link--status-bar {
     grid-area: friends-only;
     height: 2rem;
