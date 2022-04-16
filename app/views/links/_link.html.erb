@@ -98,7 +98,7 @@
 
   </div>
 
-  <% if link.response_text %>
+  <% if link.response_text && !link.disgust? %>
     <div class="link--response">
       <strong><%= link.user.username %>:</strong> <%= link.response_text %>
       <small>
@@ -106,8 +106,6 @@
           😍
         <% elsif link.came? %>
           💦 this post made them cum!
-        <% elsif link.disgust? %>
-          🤢 this wallpaper was removed
         <% end %>
       </small>
     </div>
