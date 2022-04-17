@@ -540,6 +540,14 @@ label ion-icon {
     font-size: 0.85em;
 }
 
+a.small {
+    text-decoration: none;
+}
+
+a.small:hover {
+    filter: brightness(1.1);
+}
+
 .tight-top {
     margin-top: 0 !important;
 }

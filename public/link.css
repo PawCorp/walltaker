@@ -369,4 +369,5 @@ turbo-frame#pornsearch_results .results form button {
 figcaption.link--description {
     max-height: 110px;
     overflow: scroll;
+    padding: 1rem 0.5rem;
 }

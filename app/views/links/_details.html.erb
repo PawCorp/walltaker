@@ -1,4 +1,5 @@
 <% target = "link_details_#{link.id}" %>
+<% e621_url = "https://e621.net/posts?tags=#{ CGI.escape("md5:#{ link.post_url[/\w*(?=\.(png|jpg|bmp)$)/] }") }" if link.post_url %>
 
 <%= turbo_frame_tag target do %>
 
@@ -8,13 +9,17 @@
       changed <%= link.past_links.empty? ? 'never' : (time_ago_in_words link.past_links.last.created_at) + ' ago' %></small>
   </h2>
 
-  <% if link.post_thumbnail_url %>
+  <% if link.post_thumbnail_url && link.post_url %>
     <figure>
       <a href="<%= link.post_url %>" target="_blank">
         <img src="<%= link.post_thumbnail_url %>"/>
       </a>
       <figcaption class="link--description">
-        <%= link.post_description %>
+        <%= link_to e621_url, class: 'small' do %>
+          Show on E621
+          <ion-icon name="arrow-forward"></ion-icon>
+        <% end %>
+        <%= simple_format link.post_description %>
       </figcaption>
     </figure>
   <% end %>
