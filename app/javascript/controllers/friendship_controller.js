@@ -9,7 +9,7 @@ class FriendshipController extends Controller {
         this.refresh()
         const username = this.usernameTarget.innerText
         if (username) {
-            fetch(`/users/${username}/status.json`)
+            fetch(`/api/users/${username}.json`)
                 .then(stream => stream.json())
                 .then(result => {
                     this.online = !!result.online;

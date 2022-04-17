@@ -1,0 +1,2 @@
+json.extract! link, :id, :expires, :user_id, :terms, :blacklist, :post_url, :post_thumbnail_url, :post_description, :created_at, :updated_at, :response_type, :response_text
+json.online link.updated_at > Time.now - 1.minute

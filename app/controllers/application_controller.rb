@@ -38,6 +38,19 @@ class ApplicationController < ActionController::Base
 
   helper_method :notifications
 
+  def log_link_presence (link)
+    if request.format == :json
+      link.last_ping = Time.now.utc
+      link.last_ping_user_agent = request.user_agent if request.user_agent
+      link.last_ping_user_agent = @link.last_ping_user_agent + ' ' + request.headers['joihow'] if @link.last_ping_user_agent && request.headers['joihow']
+      link.last_ping_user_agent = @link.last_ping_user_agent + ' ' + request.headers['User_Agent'] if @link.last_ping_user_agent && request.headers['User_Agent']
+      link.last_ping_user_agent = @link.last_ping_user_agent + ' Wallpaper-Engine-Client/' + request.headers['Wallpaper-Engine-Client'] if @link.last_ping_user_agent && request.headers['Wallpaper-Engine-Client']
+      link.save
+    end
+  end
+
+  helper_method :log_link_presence
+
   def authorize
     redirect_to new_session_url, alert: 'Not authorized' if session[:user_id].nil?
   end

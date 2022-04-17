@@ -204,6 +204,10 @@ class LinksController < ApplicationController
     blacklisted_in_general_tags || blacklisted_in_species_tags || blacklisted_in_artist_tags || blacklisted_in_character_tags || blacklisted_in_copyright_tags || blacklisted_in_lore_tags || incorrect_theme
   end
 
+  def log_presence
+    log_link_presence(@link)
+  end
+
   def update_request_unsafe?
     user_trying_to_update_others_link_restricted_values = (current_user && ((current_user.id != @link.user.id) && !link_params.empty?))
     unauthed_user_trying_to_update_others_link_restricted_values = (current_user.nil? && !link_params.empty?)
@@ -229,17 +233,6 @@ class LinksController < ApplicationController
           return redirect_to root_url, alert: 'Not Authorized'
         end
       end
-    end
-  end
-
-  def log_presence
-    if request.format == :json
-      @link.last_ping = Time.now.utc
-      @link.last_ping_user_agent = request.user_agent if request.user_agent
-      @link.last_ping_user_agent = @link.last_ping_user_agent + ' ' + request.headers['joihow'] if @link.last_ping_user_agent && request.headers['joihow']
-      @link.last_ping_user_agent = @link.last_ping_user_agent + ' ' + request.headers['User_Agent'] if @link.last_ping_user_agent && request.headers['User_Agent']
-      @link.last_ping_user_agent = @link.last_ping_user_agent + ' Wallpaper-Engine-Client/' + request.headers['Wallpaper-Engine-Client'] if @link.last_ping_user_agent && request.headers['Wallpaper-Engine-Client']
-      @link.save
     end
   end
 end
