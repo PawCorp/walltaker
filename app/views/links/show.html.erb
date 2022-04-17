@@ -72,8 +72,9 @@
 
     <p>
       You'll need a client that watches for changes to this link and sets your background for you. You can see a list of
-      available clients on the <%= link_to 'homepage.', root_path %> Once you have a client set up, you can drop this
-      configuration file in the same folder to connect to this link if it's required, or manually set your feed ID to
+      available clients on the <%= link_to 'homepage.', root_path(anchor: "what-do-i-need") %> Once you have a client
+      set up, you can drop this configuration file in the same folder to connect to this link if it's required, or
+      manually set your feed ID to
       <strong>"<%= @link.id %>"</strong>.
     </p>
 
@@ -100,7 +101,8 @@
     </p>
     <% unless (@link.theme.nil? || @link.theme.empty?) %>
       <p class="subdued">
-        The theme tag <strong><ion-icon name="pricetag-outline"></ion-icon> <%= @link.theme %></strong> is being automatically applied.
+        The theme tag <strong>
+        <ion-icon name="pricetag-outline"></ion-icon> <%= @link.theme %></strong> is being automatically applied.
       </p>
     <% end %>
     <%= turbo_frame_tag "pornsearch", src: porn_search_index_path({ link: @link.id }) do %>
