@@ -1,5 +1,15 @@
 <% target = "link_details_#{link.id}" %>
 <% e621_url = "https://e621.net/posts?tags=#{ CGI.escape("md5:#{ link.post_url[/\w*(?=\.(png|jpg|bmp)$)/] }") }" if link.post_url %>
+<% client = link_agent_to_icon link.last_ping_user_agent %>
+<% devices = {
+  desktop: :desktop,
+  android: :mobile,
+  joihow: :desktop,
+  automate: :mobile,
+  wallpaper_engine: :desktop,
+  unknown: :desktop
+} %>
+<% device = devices[client] %>
 
 <%= turbo_frame_tag target do %>
 
@@ -11,8 +21,15 @@
 
   <% if link.post_thumbnail_url && link.post_url %>
     <figure>
-      <a href="<%= link.post_url %>" target="_blank">
-        <img src="<%= link.post_thumbnail_url %>"/>
+      <a href="<%= link.post_url %>" target="_blank" class="background-sample">
+        <% case device %>
+        <% when :desktop %>
+          <ion-icon name="laptop-outline" class="background-sample__icon--desktop"></ion-icon>
+        <% when :mobile %>
+          <ion-icon name="phone-portrait-outline" class="background-sample__icon--mobile"></ion-icon>
+        <% end %>
+
+        <img src="<%= link.post_thumbnail_url %>" class="background-sample__image--<%= device %>"/>
       </a>
       <figcaption class="link--description">
         <%= link_to e621_url, class: 'small' do %>

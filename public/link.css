@@ -366,6 +366,46 @@ turbo-frame#pornsearch_results .results form button {
     display: none;
 }
 
+figure > a.background-sample {
+    text-decoration: none;
+    position: relative;
+    display: block;
+}
+
+figure > a.background-sample img {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    opacity: 1;
+    object-fit: cover;
+}
+
+figure > a.background-sample img.background-sample__image--desktop {
+    top: calc(50% + 6px);
+    height: 96px;
+    width: 136px;
+}
+figure > a.background-sample img.background-sample__image--mobile {
+    top: calc(50% + 8px);
+    height: 160px;
+    width: 81px;
+}
+
+figure > a.background-sample > ion-icon {
+    font-size: 180px;
+    color: var(--disabled);
+}
+
+figure > a.background-sample > ion-icon.background-sample__icon--desktop {
+    margin-top: -40px;
+}
+
+figure > a.background-sample > ion-icon.background-sample__icon--mobile {
+    mobile-top: -10px;
+    margin-bottom: 40px;
+}
+
 figcaption.link--description {
     max-height: 110px;
     overflow: scroll;
