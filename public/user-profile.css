@@ -49,3 +49,34 @@ h2 > small + small {
     margin: 1rem 0 2rem;
     text-decoration: none;
 }
+
+.api-key {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.api-key__key {
+    font-size: 2.75rem;
+    font-weight: bold;
+    background: var(--disabled);
+    font-family: monospace;
+    padding: 0.4rem 1rem;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--text);
+    margin: 0.5rem 0 1rem;
+}
+
+.api-key .danger-button {
+    background: var(--danger);
+    color: #FFF;
+}
+
+@media screen and (max-width: 475px) {
+    .api-key__key {
+        font-size: 2rem;
+    }
+}

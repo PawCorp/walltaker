@@ -9,4 +9,9 @@ class User < ApplicationRecord
                               message: 'must be a valid email address' }
   validates :password, confirmation: true
   validates :username, presence: true, format: { with: /\A[a-zA-Z0-9]+\Z/ }
+
+  def assign_new_api_key
+    self.api_key = SecureRandom.base64(6).slice 0..7
+    save
+  end
 end

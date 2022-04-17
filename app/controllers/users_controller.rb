@@ -43,6 +43,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def new_api_key
+    @user = User.find_by(username: params[:username])
+    if (@user.id == current_user.id)
+      @user.assign_new_api_key
+    end
+    redirect_to user_path(@user.username)
+  end
+
   def status
     @user = User.find_by(username: params[:username])
     @has_friendship = Friendship.find_friendship(current_user, @user).exists? if current_user

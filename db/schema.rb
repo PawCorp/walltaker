@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_12_025738) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_17_173355) do
   create_table "ahoy_events", force: :cascade do |t|
     t.integer "visit_id"
     t.integer "user_id"
@@ -173,6 +173,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_12_025738) do
     t.datetime "updated_at", null: false
     t.string "details"
     t.boolean "admin", default: false
+    t.string "api_key", limit: 8
     t.index ["email"], name: "unique_emails", unique: true
     t.index ["username"], name: "unique_usernames", unique: true
   end

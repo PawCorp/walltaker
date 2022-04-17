@@ -48,6 +48,40 @@
   <% end %>
 <% end %>
 
+<% if @is_current_user %>
+  <%= turbo_frame_tag 'api_key_form', class: "accent-block" do %>
+    <div class="accent-block__charm">
+      <ion-icon name="eye-off"></ion-icon>
+      Only you see this
+    </div>
+
+    <h2>
+      <ion-icon name="key" class="big"></ion-icon>
+      Your API key
+    </h2>
+
+    <p>
+      Use this key to grant special powers to a client you're using. It does not grant full access to your account,
+      but does allow clients to set a response on links on your behalf.
+      <strong>You can only have 1 API key at once.</strong> When you randomize a new one, the old one will stop
+      working.
+    </p>
+
+    <div class="api-key" data-controller="api-key-form">
+      <% if @user.api_key.present? %>
+        <div class="api-key__key" data-api-key-form-target="key"><ion-icon name="key" class="big"></ion-icon><%= @user.api_key %></div>
+        <%= button_to user_new_api_key_path(current_user.username), class: 'danger-button' do %>
+          Give me a new one
+        <% end %>
+      <% else %>
+        <%= button_to user_new_api_key_path(current_user.username) do %>
+          Generate my API key
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
 <% if @links.count.positive? %>
   <% @links.each do |link| %>
     <a href="<%= link_url(link) %>" class="clean">

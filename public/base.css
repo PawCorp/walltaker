@@ -557,6 +557,7 @@ a.small:hover {
     padding: 40px 1.5rem 1.5rem;
     border-radius: 8px;
     margin-top: 2.25rem;
+    display: block;
 }
 
 .accent-block__charm {

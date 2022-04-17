@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'users/:username/edit', to: 'users#edit'
   get 'users/:username/history', to: 'past_links#index', as: 'past_links'
   get 'users/:username/status.json', to: 'users#status', as: 'user_status'
+  post 'users/:username/key', to: 'users#new_api_key', as: 'user_new_api_key'
   get 'notifications/:id', to: 'notification#show', as: 'notification'
   resources :users
   resources :session
