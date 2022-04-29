@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_17_173355) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_29_163135) do
   create_table "ahoy_events", force: :cascade do |t|
     t.integer "visit_id"
     t.integer "user_id"
@@ -108,6 +108,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_17_173355) do
     t.index ["creator_id"], name: "index_blazer_queries_on_creator_id"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.integer "link_id", null: false
+    t.integer "user_id", null: false
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["link_id"], name: "index_comments_on_link_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "friendships", force: :cascade do |t|
     t.integer "sender_id", null: false
     t.integer "receiver_id"
@@ -178,6 +188,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_17_173355) do
     t.index ["username"], name: "unique_usernames", unique: true
   end
 
+  add_foreign_key "comments", "links"
+  add_foreign_key "comments", "users"
   add_foreign_key "friendships", "users", column: "receiver_id"
   add_foreign_key "friendships", "users", column: "sender_id"
   add_foreign_key "links", "users"

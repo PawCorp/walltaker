@@ -85,6 +85,8 @@
   </div>
 <% end %>
 
+<%= turbo_frame_tag "link_comments", src: link_comments_path(link_id: @link.id) %>
+
 <%= turbo_stream_from "link_details_#{@link.id}" %>
 <%= render 'details', link: @link %>
 

@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     member do
       get :walltaker, to: 'links#export'
     end
+    resources :comments
   end
   mount Blazer::Engine, at: "blazer"
 end
