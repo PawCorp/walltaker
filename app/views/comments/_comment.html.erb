@@ -1,4 +1,19 @@
+<%
+  images = comment.content.scan(/(https:\/\/static\d*\.e621.net\/data\/\w\w\/\w\w\/)(\w*)\.(jpg|png)/)
+  filtered_content = comment.content.gsub(/https:\/\/static\d*\.e621.net\/data\/\w\w\/\w\w\/\w*\.(jpg|png)/, '')
+
+  # DO NOT TRUST `images`! It's coming from users, and we need to filter EVERYTHING thru CGI.escape if it's not
+  # heavily scoped by our Regex.
+%>
+
 <div id="<%= dom_id comment %>" class="comment" data-comments-sidebar-target="comment">
   <strong><%= comment.user.username %>: </strong>
-  <p><%= comment.content %></p>
+  <p>
+    <%= filtered_content %>
+    <% images.each do |image| %>
+      <a target="_blank" href="https://e621.net/posts?tags=md5%3A<%= CGI.escape image[1] %>">
+        <img src="<%= image[0] + (CGI.escape image[1]) + '.' + image[2] %>"/>
+      </a>
+    <% end %>
+  </p>
 </div>

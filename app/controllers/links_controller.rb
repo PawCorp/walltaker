@@ -103,9 +103,9 @@ class LinksController < ApplicationController
 
       Notification.create user_id: @link.set_by_id, notification_type: :post_response, text: notification_text, link: "/links/#{@link.id}"
 
-      comment_text = "loved it -- #{ @link.post_url }" if link_params['response_type'] == 'horny'
-      comment_text = "hated it -- #{ @link.post_url }" if link_params['response_type'] == 'disgust'
-      comment_text = "came to it -- #{ @link.post_url }" if link_params['response_type'] == 'came'
+      comment_text = "> loved it! #{ @link.post_url }" if link_params['response_type'] == 'horny'
+      comment_text = "> hated it. #{ @link.post_url }" if link_params['response_type'] == 'disgust'
+      comment_text = "> came to it! #{ @link.post_url }" if link_params['response_type'] == 'came'
       Comment.create user_id: current_user.id, link_id: @link.id, content: comment_text
       Comment.create user_id: current_user.id, link_id: @link.id, content: link_params['response_text'] unless link_params['response_type'].nil?
     end

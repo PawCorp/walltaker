@@ -445,6 +445,13 @@ figcaption.link--description {
     hyphens: auto;
 }
 
+.comment > p img {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    max-height: 190px;
+    display: block;
+}
+
 .new_comment_form {
     display: flex;
     gap: 0.5rem;
