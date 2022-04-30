@@ -1,17 +1,7 @@
-<div id="<%= dom_id comment %>">
-  <p>
-    <strong>Link:</strong>
-    <%= comment.link_id %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= comment.user_id %>
-  </p>
-
-  <p>
-    <strong>Content:</strong>
-    <%= comment.content %>
-  </p>
-
+<div id="<%= dom_id comment %>" class="comment">
+  <strong><%= comment.user.username %>: </strong>
+  <p><%= comment.content %></p>
+  <%= time_tag comment.created_at, class: 'small' do %>
+    <%= time_ago_in_words comment.created_at %> ago
+  <% end %>
 </div>

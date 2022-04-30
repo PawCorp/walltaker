@@ -411,3 +411,25 @@ figcaption.link--description {
     overflow: scroll;
     padding: 1rem 0.5rem;
 }
+
+#comments {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.5rem;
+}
+
+.comment {
+    display: contents;
+}
+
+.comment > p {
+    margin: 0;
+    line-height: inherit;
+    flex: 1 1 auto;
+}
+
+.comment > time {
+    color: var(--border);
+    display: flex;
+    align-items: flex-end;
+}
