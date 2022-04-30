@@ -466,6 +466,10 @@ figcaption.link--description {
     flex: 0;
 }
 
+.new_comment_form input[type=submit][disabled] {
+    color: var(--border);
+}
+
 .new_comment_form .field_with_errors {
     display: contents;
 }
