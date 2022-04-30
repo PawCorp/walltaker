@@ -524,6 +524,22 @@ aside.comments-sidebar[data-hidden=true] > button .toggle-close-icon { display: 
 aside.comments-sidebar[data-hidden=false] > button .toggle-open-icon { display: none; }
 aside.comments-sidebar[data-hidden=false] > button .toggle-close-icon { display: block; }
 
+aside.comments-sidebar > button .toggle-badge {
+    position: absolute;
+    top: 0;
+    background: var(--accent);
+    width: 1rem;
+    height: 1rem;
+    color: var(--bg);
+    font-weight: bold;
+    font-size: 0.8rem;
+    border-radius: 1rem;
+    left: 0;
+    text-align: center;
+}
+
+aside.comments-sidebar > button .toggle-badge[data-hidden=true] { display: none; }
+
 @media screen and (max-width: 525px) {
     aside.comments-sidebar > button {
         position: static;

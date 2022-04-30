@@ -1,8 +1,10 @@
 import {Controller} from "@hotwired/stimulus"
 
 export default class CommentsSidebarController extends Controller {
-    static targets = ['toggle']
+    static targets = ['toggle', 'badge', 'comment']
     hidden = true
+    unseen = 0
+    past_first_load = false
 
     connect() {
         document.body.addEventListener('click', (e) => {
@@ -16,6 +18,13 @@ export default class CommentsSidebarController extends Controller {
                 this.setHidden(true)
             }
         })
+        setTimeout(() => this.past_first_load = true, 500)
+    }
+
+    commentTargetConnected(comment) {
+        if (this.past_first_load && this.hidden && this.badgeTarget) {
+            this.setUnseen(this.unseen + 1)
+        }
     }
 
     toggleClick(e) {
@@ -28,5 +37,17 @@ export default class CommentsSidebarController extends Controller {
     setHidden(isHidden) {
         this.hidden = isHidden
         this.element.dataset.hidden = isHidden
+        if (!this.hidden) {
+            this.setUnseen(0)
+        }
+    }
+
+    setUnseen(count) {
+        this.unseen = count
+        const badge = this.unseen > 9 ? '+' : this.unseen
+        if (this.badgeTarget) {
+            this.badgeTarget.innerText = this.unseen ? badge : ''
+            this.badgeTarget.dataset.hidden = !this.unseen
+        }
     }
 }
