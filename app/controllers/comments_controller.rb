@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
 
     if @comment.save
-      redirect_to new_link_comment_url(@link), notice: "Comment was successfully created."
+      redirect_to new_link_comment_url(@link)
     else
       render :new, status: :unprocessable_entity
     end

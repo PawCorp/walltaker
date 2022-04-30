@@ -416,10 +416,9 @@ figcaption.link--description {
     display: flex;
     flex-direction: column-reverse;
     gap: 0.5rem;
-    max-height: 200px;
     overflow-y: scroll;
     padding: 1rem 0 0;
-    margin-top: 1rem;
+    flex: 1;
 }
 
 #comments > turbo-frame {
@@ -442,7 +441,8 @@ figcaption.link--description {
 .comment > p {
     margin: 0;
     line-height: inherit;
-    flex: 1 1 auto;
+    word-wrap: anywhere;
+    hyphens: auto;
 }
 
 .new_comment_form {
@@ -472,4 +472,77 @@ figcaption.link--description {
 
 .new_comment_form .field_with_errors {
     display: contents;
+}
+
+aside.comments-sidebar[data-hidden=true] {
+    transform: translateX(100%);
+}
+
+aside.comments-sidebar {
+    z-index: 999999;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    background: var(--bg);
+    border-left: 1px solid var(--border);
+    padding: 0 1rem 1rem;
+    box-sizing: border-box;
+    min-width: 320px;
+    width: 100vw;
+    max-width: 480px;
+    box-shadow: 0 0 30px 5px #1111116e;
+    transform: translateX(0);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+aside.comments-sidebar > button {
+    background: var(--bg);
+    position: absolute;
+    left: 0px;
+    transform: translateX(-100%);
+    bottom: 74px;
+    width: auto;
+    padding: 0.6rem 0.4rem;
+    margin: 0;
+    color: var(--text);
+    font-size: 1.7rem;
+    line-height: 1rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    border-left: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+aside.comments-sidebar[data-hidden=true] > button .toggle-open-icon { display: block; }
+aside.comments-sidebar[data-hidden=true] > button .toggle-close-icon { display: none; }
+aside.comments-sidebar[data-hidden=false] > button .toggle-open-icon { display: none; }
+aside.comments-sidebar[data-hidden=false] > button .toggle-close-icon { display: block; }
+
+@media screen and (max-width: 525px) {
+    aside.comments-sidebar > button {
+        position: static;
+        width: 55px;
+        border: none;
+        border-top-left-radius: 0;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        transform: translateX(calc(-100% - 1rem));
+        background: var(--accent);
+        color: var(--bg);
+        transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    aside.comments-sidebar[data-hidden=false] > button {
+        transform: translateX(-1rem);
+        border-radius: 0;
+        background: rgba(0,0,0,0);
+        color: var(--text);
+    }
 }

@@ -85,12 +85,17 @@
   </div>
 <% end %>
 
-<%= turbo_stream_from "link_comments_#{@link.id}" %>
-
-<div id="comments">
-  <%= turbo_frame_tag "link_comments", src: link_comments_path(link_id: @link.id) %>
-</div>
-<%= turbo_frame_tag "link_comments_new", src: new_link_comment_path(link_id: @link.id) %>
+<aside class="comments-sidebar" data-controller="comments-sidebar" data-hidden="true">
+  <button data-comments-sidebar-target="toggle" data-action="click->comments-sidebar#toggleClick" data-hidden="true">
+    <ion-icon class="toggle-open-icon" name="chatbox-ellipses"></ion-icon>
+    <ion-icon class="toggle-close-icon" name="caret-forward"></ion-icon>
+  </button>
+  <%= turbo_stream_from "link_comments_#{@link.id}" %>
+  <div id="comments">
+    <%= turbo_frame_tag "link_comments", src: link_comments_path(link_id: @link.id) %>
+  </div>
+  <%= turbo_frame_tag "link_comments_new", src: new_link_comment_path(link_id: @link.id) %>
+</aside>
 
 <%= turbo_stream_from "link_details_#{@link.id}" %>
 <%= render 'details', link: @link %>
