@@ -1,0 +1,12 @@
+<%= turbo_frame_tag "link_comments" do %>
+  <div id="comments">
+    <% @comments.each do |comment| %>
+      <%= render comment %>
+      <p>
+        <%= link_to "Show this comment", comment %>
+      </p>
+    <% end %>
+  </div>
+
+  <%= link_to "New comment", new_link_comment_path %>
+<% end %>
