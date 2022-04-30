@@ -1,9 +1,4 @@
-<%= form_with(model: comment, url: [link, comment]) do |form| %>
-  <div>
-    <%= form.text_field :content %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+<%= form_with(model: comment, url: [link, comment], class: 'new_comment_form', data: { controller: 'new-comment-form' }) do |form| %>
+    <%= form.text_field :content, data: { 'new-comment-form-target': 'input', action: 'input->new-comment-form#inputChange' } %>
+    <%= form.submit 'Send', data: { 'new-comment-form-target': 'send' }, disabled: true %>
 <% end %>

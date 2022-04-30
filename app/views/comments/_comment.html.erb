@@ -1,7 +1,4 @@
 <div id="<%= dom_id comment %>" class="comment">
   <strong><%= comment.user.username %>: </strong>
   <p><%= comment.content %></p>
-  <%= time_tag comment.created_at, class: 'small' do %>
-    <%= comment.created_at.strftime '%I:%M%p' %>
-  <% end %>
 </div>

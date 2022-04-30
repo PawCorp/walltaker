@@ -413,13 +413,30 @@ figcaption.link--description {
 }
 
 #comments {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
+    display: flex;
+    flex-direction: column-reverse;
     gap: 0.5rem;
+    max-height: 200px;
+    overflow-y: scroll;
+    padding: 1rem 0 0;
+    margin-top: 1rem;
+}
+
+#comments > turbo-frame {
+    display: contents;
 }
 
 .comment {
-    display: contents;
+    display: grid;
+    grid-template-columns: 95px 1fr;
+    gap: 0.5rem;
+}
+
+.comment > strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: right;
 }
 
 .comment > p {
@@ -428,8 +445,27 @@ figcaption.link--description {
     flex: 1 1 auto;
 }
 
-.comment > time {
-    color: var(--border);
+.new_comment_form {
     display: flex;
-    align-items: flex-end;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.new_comment_form #comment_content,
+.new_comment_form input[type=submit] {
+    margin: 0;
+}
+
+.new_comment_form #comment_content {
+    flex: 1 1 auto;
+}
+
+.new_comment_form input[type=submit] {
+    flex: 0;
+}
+
+.new_comment_form .field_with_errors {
+    display: contents;
 }

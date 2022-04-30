@@ -1,7 +1,5 @@
 <%= turbo_frame_tag "link_comments" do %>
-  <div id="comments">
-    <% @comments.each do |comment| %>
+    <% @comments.reverse.each do |comment| %>
       <%= render comment %>
     <% end %>
-  </div>
 <% end %>
