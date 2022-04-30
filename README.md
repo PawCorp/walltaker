@@ -28,7 +28,7 @@ can skip downloading if it hasn't changed since the last one.
 
 ---
 
-### GET `http://walltaker.joi.how/api/links/[id].json`
+### GET `https://walltaker.joi.how/api/links/[id].json`
 
 🔓 No API key required
 
@@ -56,7 +56,7 @@ Get the current post details for a given link.
 
 ---
 
-### POST `http://walltaker.joi.how/api/links/[id]/response.json`
+### POST `https://walltaker.joi.how/api/links/[id]/response.json`
 
 🔑 Requires user's API Key
 
@@ -74,11 +74,11 @@ Set a reponse for a given link. There are 3 kinds of responses.
 The body must be a valid JSON string, like shown below
 
 ```http request
-POST http://walltaker.joi.how/api/links/[id]/response.json HTTP/1.1
+POST https://walltaker.joi.how/api/links/[id]/response.json HTTP/1.1
 Content-Type: application/json;
 {
-  "api_key": "23unFe3i"  // User's API key, always 8 characters long, REQUIRED
-  "type": "horny"        // "horny" | "disgust" | "came", horny will be used if not supplied
+  "api_key": "23unFe3i",  // User's API key, always 8 characters long, REQUIRED
+  "type": "horny",        // "horny" | "disgust" | "came", horny will be used if not supplied
   "text": "mmph nice"    // User's supplied text, an empty string will be used if not supplied
 }
 ```
@@ -92,7 +92,7 @@ Content-Type: application/json;
 
 ---
 
-### GET `http://walltaker.joi.how/api/users/[username].json`
+### GET `https://walltaker.joi.how/api/users/[username].json`
 
 🔓 No API key required
 
