@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 
   # GET /links/1/comments
   def index
-    @comments = Comment.all.where(link_id: params['link_id'])
+    @comments = Comment.all.where(link_id: params['link_id']).last(50)
   end
 
   # GET /links/1/comments/new
