@@ -225,7 +225,10 @@ class LinksController < ApplicationController
       "https://e621.net/posts/#{post_id.to_i}.json",
       headers: { 'User-Agent': 'walltaker.joi.how (by ailurus on e621)' }
     )
-    return nil if response.status != 200
+    if response.status != 200
+      track :error, :e621_post_api_fail, response: response, post_id: post_id.to_i
+      return nil
+    end
 
     JSON.parse(response.body)
   end

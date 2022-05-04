@@ -29,7 +29,10 @@ class PornSearchController < ApplicationController
     after_id = after.gsub(/\D/, '') if after
     url = "#{url}&page=b#{after_id}" if after_id
     response = Excon.get(url, headers: { 'User-Agent': 'walltaker.joi.how (by ailurus on e621)' })
-    return nil if response.status != 200
+    if response.status != 200
+      track :error, :e621_posts_api_fail, response: response
+      return nil
+    end
 
     JSON.parse(response.body)['posts']
   end
