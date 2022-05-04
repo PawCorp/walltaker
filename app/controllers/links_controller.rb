@@ -222,7 +222,8 @@ class LinksController < ApplicationController
 
   def request_post(post_id)
     response = Excon.get(
-      "https://e621.net/posts/#{post_id.to_i}.json"
+      "https://e621.net/posts/#{post_id.to_i}.json",
+      headers: { 'User-Agent': 'walltaker.joi.how (by ailurus on e621)' }
     )
     return nil if response.status != 200
 

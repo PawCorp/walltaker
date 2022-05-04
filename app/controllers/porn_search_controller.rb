@@ -28,7 +28,7 @@ class PornSearchController < ApplicationController
     url = "https://e621.net/posts.json?tags=#{tags}&limit=15"
     after_id = after.gsub(/\D/, '') if after
     url = "#{url}&page=b#{after_id}" if after_id
-    response = Excon.get(url)
+    response = Excon.get(url, headers: { 'User-Agent': 'walltaker.joi.how (by ailurus on e621)' })
     return nil if response.status != 200
 
     JSON.parse(response.body)['posts']
