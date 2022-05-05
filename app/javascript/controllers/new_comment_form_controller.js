@@ -17,7 +17,6 @@ export default class NewCommentFormController extends Controller {
     inputChange(e) {
         if (e.target) {
             const valid = e.target.value.length > 0
-            console.log(valid, e.target.value)
             this.setDisabled(!valid)
         }
     }
