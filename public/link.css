@@ -146,6 +146,10 @@ strong.offline {
     margin-left: 0.5rem;
 }
 
+.link--device-in-use ion-icon.apple-icon {
+    transform: translateY(-2px);
+}
+
 .link--friends-only {
     align-self: flex-start;
     display: flex;
