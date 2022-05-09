@@ -18,6 +18,12 @@
     margin-top: 0;
 }
 
+.dashboard table tbody {
+    width: 100%;
+    display: table;
+    box-sizing: border-box;
+}
+
 .dashboard table a[data-online=true]::after {
     content: '';
     display: inline-block;
