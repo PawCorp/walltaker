@@ -42,7 +42,7 @@
           <% @total_wallpapers_changed_today_by_user.each do |past_link| %>
             <tr>
               <td>
-                <%= link_to past_link.username, user_path(past_link.username) %>
+                <%= link_to past_link.username, user_path(past_link.username), data: { controller: "user-reference" } %>
               </td>
               <td>
                 <%= pluralize past_link.total, 'wallpaper' %>
