@@ -10,7 +10,7 @@
   <%= form_with model: link, method: 'PATCH', class: 'set-post-id' do |form| %>
     <div>
       <%= form.label :post_id, 'E621 Post ID', style: "display: block" %>
-      <%= form.text_field :post_id %>
+      <%= form.text_field :post_id, autocomplete: 'off' %>
     </div>
 
     <div>

@@ -61,7 +61,7 @@
       it!" will remove the current wallpaper entirely.</p>
     <%= form_with model: @link, method: 'PATCH', class: 'set-post-response' do |form| %>
       <div>
-        <%= form.text_field :response_text, placeholder: 'How do you feel about this wallpaper?' %>
+        <%= form.text_field :response_text, placeholder: 'How do you feel about this wallpaper?', autocomplete: 'off' %>
         <%= form.select :response_type, [['Love it!', :horny], ['Hate it!', :disgust], ['I came', :came]] %>
       </div>
 
