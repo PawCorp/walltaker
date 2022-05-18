@@ -38,13 +38,7 @@ class ApiController < ApplicationController
       @link.post_thumbnail_url = last_past_link ? last_past_link.post_thumbnail_url : nil
     end
 
-    notification_text = "#{@link.user.username} loved your post!" if @link.response_type == 'horny'
-    notification_text = "#{@link.user.username} did not like your post." if @link.response_type == 'disgust'
-    notification_text = "#{@link.user.username} came to your post!" if @link.response_type == 'came'
-
-    notification_text = "#{notification_text} \"#{@link.response_text}\"" unless @link.response_text.nil?
-
-    Notification.create user_id: @link.set_by_id, notification_type: :post_response, text: notification_text, link: "/links/#{@link.id}"
+    on_link_react(@link)
 
     result = @link.save
 

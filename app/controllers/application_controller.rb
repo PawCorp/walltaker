@@ -49,6 +49,22 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def on_link_react (link)
+    notification_text = "#{link.user.username} loved your post!" if link.response_type == 'horny'
+    notification_text = "#{link.user.username} did not like your post." if link.response_type == 'disgust'
+    notification_text = "#{link.user.username} came to your post!" if link.response_type == 'came'
+
+    notification_text = "#{notification_text} \"#{link.response_text}\"" unless link.response_type.nil?
+
+    Notification.create user_id: link.set_by_id, notification_type: :post_response, text: notification_text, link: "/links/#{link.id}"
+
+    comment_text = "> loved it! #{ link.post_url }" if link.response_type == 'horny'
+    comment_text = "> hated it. #{ link.post_url }" if link.response_type == 'disgust'
+    comment_text = "> came to it! #{ link.post_url }" if link.response_type == 'came'
+    Comment.create user_id: link.user.id, link_id: link.id, content: comment_text
+    Comment.create user_id: link.user.id, link_id: link.id, content: link.response_text unless link.response_type.nil?
+  end
+
   helper_method :log_link_presence
 
   def authorize
