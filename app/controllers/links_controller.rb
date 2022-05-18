@@ -94,25 +94,17 @@ class LinksController < ApplicationController
       return
     end
 
-    if link_params['response_type'] == 'disgust'
-      past_links = PastLink.where(link_id: @link.id, post_url: @link.post_url)
-      past_links.destroy_all unless past_links.empty?
-
-      last_past_link = PastLink.where(link_id: @link.id).where.not(post_url: @link.post_url).order('created_at').last
-
-      @link.post_url = last_past_link ? last_past_link.post_url : nil
-      @link.post_thumbnail_url = last_past_link ? last_past_link.post_thumbnail_url : nil
-    end
-
     result = if e621_post.nil?
-               new_link = @link.update(link_params)
+               @link.assign_attributes(link_params)
 
                unless link_params['response_type'].nil?
-                 on_link_react(@link)
+                 @link = on_link_react(@link)
                end
 
+               did_save_successfully = @link.save
+
                track :regular, :update_link_details
-               new_link
+               did_save_successfully
              else
                @link.update(
                  HashWithIndifferentAccess.new(

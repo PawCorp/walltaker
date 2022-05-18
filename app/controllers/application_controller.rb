@@ -50,19 +50,32 @@ class ApplicationController < ActionController::Base
   end
 
   def on_link_react (link)
+    # Make notification for setter
     notification_text = "#{link.user.username} loved your post!" if link.response_type == 'horny'
     notification_text = "#{link.user.username} did not like your post." if link.response_type == 'disgust'
     notification_text = "#{link.user.username} came to your post!" if link.response_type == 'came'
-
     notification_text = "#{notification_text} \"#{link.response_text}\"" unless link.response_type.nil?
-
     Notification.create user_id: link.set_by_id, notification_type: :post_response, text: notification_text, link: "/links/#{link.id}"
 
+    # Log reaction in chat sidebar
     comment_text = "> loved it! #{ link.post_url }" if link.response_type == 'horny'
     comment_text = "> hated it. #{ link.post_url }" if link.response_type == 'disgust'
     comment_text = "> came to it! #{ link.post_url }" if link.response_type == 'came'
     Comment.create user_id: link.user.id, link_id: link.id, content: comment_text
     Comment.create user_id: link.user.id, link_id: link.id, content: link.response_text unless link.response_type.nil?
+
+    # If a disgust reaction, revert to old wallpaper
+    if link.response_type == 'disgust'
+      past_links = PastLink.where(link_id: link.id, post_url: link.post_url)
+      past_links.destroy_all unless past_links.empty?
+
+      last_past_link = PastLink.where(link_id: link.id).where.not(post_url: link.post_url).order('created_at').last
+
+      link.post_url = last_past_link ? last_past_link.post_url : nil
+      link.post_thumbnail_url = last_past_link ? last_past_link.post_thumbnail_url : nil
+    end
+
+    link
   end
 
   helper_method :log_link_presence

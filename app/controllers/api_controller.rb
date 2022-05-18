@@ -28,17 +28,7 @@ class ApiController < ApplicationController
 
     @link.response_text = params[:text].nil? ? "" : params[:text]
 
-    if @link.response_type == :disgust
-      past_links = PastLink.where(link_id: @link.id, post_url: @link.post_url)
-      past_links.destroy_all unless past_links.empty?
-
-      last_past_link = PastLink.where(link_id: @link.id).where.not(post_url: @link.post_url).order('created_at').last
-
-      @link.post_url = last_past_link ? last_past_link.post_url : nil
-      @link.post_thumbnail_url = last_past_link ? last_past_link.post_thumbnail_url : nil
-    end
-
-    on_link_react(@link)
+    @link = on_link_react(@link)
 
     result = @link.save
 
