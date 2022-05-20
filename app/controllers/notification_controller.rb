@@ -1,6 +1,6 @@
 class NotificationController < ApplicationController
   before_action :set_notification, only: %i[show]
-  #before_action :authorize
+  before_action :authorize
 
   def show
     if @notification && (@notification.user.id == current_user.id)
