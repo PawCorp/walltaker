@@ -92,9 +92,9 @@ Content-Type: application/json;
 
 ---
 
-### GET `https://walltaker.joi.how/api/users/[username].json`
+### GET `https://walltaker.joi.how/api/users/[username].json?api_key=xxxxxxxx`
 
-🔓 No API key required
+🔓/🔐 API key required for some, but not all data
 
 Get details about this user's status such as if they're online, a friend, or the currently authenticated user for a given session.
 
@@ -106,11 +106,13 @@ Get details about this user's status such as if they're online, a friend, or the
 {
   "username": "apple", // The user's name
   "id": 24, // The user's internal ID
+  "set_count": 540, // How many wallpapers this user has set for others
   "online": true, // If the user is online, meaning they have pinged a link recently
   "links": [ // Public links owned by this user, both online and offline.
     ... see link response ...
   ],
-  "friend": true, // 🔐 If they are a friend of this session's user, requires Authentication token in header.
-  "self": false // 🔐 If they are logged in as this session's user, requires Authentication token in header.
+  "authenticated": true, // If this request was authenticated with a api_key successfully
+  "friend": true, // 🔐 If they are a friend of this api_key's user, requires api_key param.
+  "self": false // 🔐 If they are logged in as this api_key's user, requires api_key param.
 }
 ```

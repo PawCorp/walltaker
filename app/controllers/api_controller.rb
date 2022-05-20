@@ -45,14 +45,21 @@ class ApiController < ApplicationController
 
   # GET /api/users/:username.json
   def show_user
+    if params['api_key'].present?
+      current_user_or_api_user = User.find_by(api_key: params['api_key'])
+    else
+      current_user_or_api_user = current_user.present? ? current_user : nil
+    end
+
     @user = User.find_by(username: params[:username])
-    @has_friendship = Friendship.find_friendship(current_user, @user).exists? if current_user
+    @has_friendship = Friendship.find_friendship(current_user_or_api_user, @user).exists? if current_user_or_api_user
     online_links = @user.link.where(friends_only: false).and(@user.link.where('expires > ?', Time.now).or(@user.link.where(never_expires: true))).and(@user.link.where('last_ping > ?', Time.now - 1.minute)) unless @has_friendship
     online_links = @user.link.where('expires > ?', Time.now).or(@user.link.where(never_expires: true)).and(@user.link.where('last_ping > ?', Time.now - 1.minute)) if @has_friendship
 
-    @is_self = @user.id == current_user.id if current_user
-    @is_self = false unless current_user
+    @is_self = @user.id == current_user_or_api_user.id if current_user_or_api_user
+    @is_self = false unless current_user_or_api_user
     @is_online = online_links.count > 0
+    @is_authenticated = !!current_user_or_api_user
     @public_links = @user.link.where(friends_only: false).and(@user.link.where('expires > ?', Time.now).or(@user.link.where(never_expires: true)))
   rescue => e
     track :error, :api_user_missing, username: params[:username], message: e.message
