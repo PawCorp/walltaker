@@ -2,6 +2,7 @@ class User < ApplicationRecord
   include ActiveModel::SecurePassword
   has_secure_password
   has_many :link
+  has_many :notifications
 
   validates_uniqueness_of :email, :username
 

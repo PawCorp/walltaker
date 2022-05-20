@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'notification/show'
+  delete 'notification', to: 'notification#delete_all', as: 'clear_notifications'
   get 'porn_search/index'
   get 'porn_search/search'
   root 'dashboard#index'

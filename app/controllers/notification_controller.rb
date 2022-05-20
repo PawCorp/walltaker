@@ -1,8 +1,9 @@
 class NotificationController < ApplicationController
-  before_action :set_notification
+  before_action :set_notification, only: %i[show]
+  #before_action :authorize
 
   def show
-    if @notification
+    if @notification && (@notification.user.id == current_user.id)
       link = @notification.link
       if @notification.delete
         track :regular, :notification_click, link: link
@@ -10,6 +11,15 @@ class NotificationController < ApplicationController
       else
         track :error, :notification_not_found, link: link
       end
+    else
+      track :nefarious, :tried_to_read_others_notification, logged_in_as: current_user, notification: @notification
+    end
+  end
+
+  def delete_all
+    @notifications = current_user.notifications
+    if @notifications.destroy_all
+      redirect_back fallback_location: root_path
     end
   end
 

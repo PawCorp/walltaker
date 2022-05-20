@@ -720,6 +720,11 @@ footer small a {
     transform: translate(0, -0.7rem);
 }
 
+.notifications__popover > form {
+    display: flex;
+    justify-content: center;
+}
+
 .notifications__popover .notification {
     display: flex;
     gap: 0.75rem;

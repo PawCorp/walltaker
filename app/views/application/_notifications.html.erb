@@ -9,25 +9,30 @@
         <div class="notifications__empty">
           No notifications yet.
         </div>
-      <% end %>
-      <% notifications.each do |notification| %>
-        <%= link_to notification_path(notification.id), class: 'notification' do %>
-          <% case notification.notification_type %>
-      <% when 'friend_request_sent' %>
-            <ion-icon name="send"></ion-icon>
-          <% when 'friend_request_received' %>
-            <ion-icon name="boat"></ion-icon>
-          <% when 'friend_request_they_accepted' %>
-            <ion-icon name="heart"></ion-icon>
-          <% when 'post_response' %>
-            <ion-icon name="chatbubble-ellipses"></ion-icon>
-          <% end %>
-          <div>
-            <p><%= notification.text %></p>
-            <%= time_tag notification.created_at do %>
-              <%= time_ago_in_words notification.created_at %> ago
+      <% else %>
+        <% notifications.each do |notification| %>
+          <%= link_to notification_path(notification.id), class: 'notification' do %>
+            <% case notification.notification_type %>
+              <% when 'friend_request_sent' %>
+                <ion-icon name="send"></ion-icon>
+              <% when 'friend_request_received' %>
+                <ion-icon name="boat"></ion-icon>
+              <% when 'friend_request_they_accepted' %>
+                <ion-icon name="heart"></ion-icon>
+              <% when 'post_response' %>
+                <ion-icon name="chatbubble-ellipses"></ion-icon>
             <% end %>
-          </div>
+            <div>
+              <p><%= notification.text %></p>
+              <%= time_tag notification.created_at do %>
+                <%= time_ago_in_words notification.created_at %> ago
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+
+        <%= button_to clear_notifications_path, method: 'delete' do %>
+          <ion-icon name="trash"></ion-icon>
         <% end %>
       <% end %>
     </div>
