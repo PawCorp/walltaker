@@ -425,16 +425,6 @@ form.button_to {
     padding: 0.1rem 1.7rem;
 }
 
-.friendship__names > a[data-online=true]::after {
-    content: '';
-    display: inline-block;
-    width: 0.5rem;
-    height: 0.5rem;
-    background: var(--success);
-    border-radius: 100%;
-    margin-left: 0.25rem;
-}
-
 .friendship__names {
     flex: 1 1 320px;
 }
@@ -795,4 +785,39 @@ header turbo-frame {
 turbo-cable-stream-source {
     display: none;
 }
+
+.text-charm {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 0.25rem;
+}
+
+.text-charm__online {
+    background: var(--success);
+    border-radius: 100%;
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.text-charm__medal {
+    transform: translateY(0.3rem);
+    background: var(--accent-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.4rem;
+    font-size: 1rem;
+}
+
+.text-charm > small {
+    font-size: 0.5rem;
+}
+
+.text-charm__medal-driftwood { color: darkolivegreen; }
+.text-charm__medal-tin { color: dimgrey; }
+.text-charm__medal-bronze { color: saddlebrown; }
+.text-charm__medal-silver { color: silver; }
+.text-charm__medal-gold { color: goldenrod; }
+.text-charm__medal-platinum { color: lightsteelblue; }
+.text-charm__medal-uranium { color: greenyellow; }
+.text-charm__medal-green { color: green; }
+.text-charm__medal-cum { color: lightgoldenrodyellow; }
 
