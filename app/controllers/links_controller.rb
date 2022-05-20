@@ -118,6 +118,10 @@ class LinksController < ApplicationController
                    }
                  )
                )
+               if current_user.present? && @link.user.id != current_user.id
+                 current_user.set_count = current_user.set_count + 1
+                 current_user.save
+               end
                track :regular, :update_link_post, attempted_post_id: params['link'][:post_id]
                PastLink.log_link(@link).save
              end
