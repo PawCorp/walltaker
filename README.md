@@ -39,7 +39,7 @@ Get the current post details for a given link.
 {
   "id": 1, // The ID, you already know this
   "expires": "2025-03-05T00:00:00.000Z", // Expiry timestamp, will be inaccessible after this time
-  "user_id": 1, // The user this refers to, currently not useful
+  "username": "gray", // The user this refers to, queryable at the /api/user/[username] endpoint.
   "terms": "I'm trying out something new, break this please! :)", // Open text feild for user to describe terms of posting
   "blacklist": "feet blood", // e621 style blacklist
   "post_url": "https://static1.e621.net/data/5d/87/5d87428c4839b0dc7d585b87a25af61a.png", // Full size post image
@@ -97,6 +97,8 @@ Content-Type: application/json;
 🔓 No API key required
 
 Get details about this user's status such as if they're online, a friend, or the currently authenticated user for a given session.
+
+ℹ️ To ensure this query is processed quickly, `set_by` has been excluded from the links array.
 
 #### Response:
 ```json
