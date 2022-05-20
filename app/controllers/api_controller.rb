@@ -14,6 +14,7 @@ class ApiController < ApplicationController
   def set_link_response
     params.permit(:type, :text)
     @link = Link.find(params[:id])
+    @set_by = User.find(@link.set_by_id) if @link.set_by_id
     valid = !@link.user.api_key.nil? && @link.user.api_key == params[:api_key]
 
     unless valid
@@ -33,7 +34,7 @@ class ApiController < ApplicationController
     result = @link.save
 
     if result
-      return render partial: 'link', locals: { link: @link }
+      return render partial: 'link', locals: { link: @link, set_by: @set_by }
     else
       return render json: { message: 'Bad request body, something with the response you sent looks malicious.' }, status: 400
     end
