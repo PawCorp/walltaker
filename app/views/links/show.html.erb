@@ -109,7 +109,26 @@
     Select wallpaper via...
   </div>
 
-  <div class="tab" data-tabs-target="tab" data-title="Search">
+  <% seconds_since_last_wallpaper = @link.past_links.last.present? ? Time.now - @link.past_links.last.created_at : 9999 %>
+
+  <div
+    class="tab"
+    data-tabs-target="tab"
+    data-title="Search"
+    data-controller="porn-search"
+    data-porn-search-seconds-since-last-wallpaper-value="<%= seconds_since_last_wallpaper %>"
+  >
+    <dialog class="modal" data-porn-search-target="modal">
+      <h4>Confirm Wallpaper</h4>
+      <p>This link's wallpaper was changed less than a minute ago, are you sure you want to overwrite it so soon?</p>
+      <div class="modal__buttons">
+        <%= button_tag class: 'no-underline primary', data: { 'link-target': 'cancel', action: 'click->porn-search#cancel' } do %>
+          <ion-icon name="close"></ion-icon>
+          Cancel
+        <% end %>
+        <%= button_tag "Yes, Use This Wallpaper", class: 'no-underline secondary', data: { action: 'click->porn-search#confirm' } %>
+      </div>
+    </dialog>
     <p>
       Enter some e621 tags, click search, then click any post to
       set <%= @link.user.username %>'s wallpaper.

@@ -4,7 +4,11 @@
       <% @posts.each do |post| %>
         <% if post['preview']['url'] %>
           <% new_link = { id: @link.id, post_id: post['id'] } %>
-          <%= button_to url_for(controller: :links, action: :update, id: @link.id, link: new_link), method: :patch, data: { turbo_frame: '_top' } do %>
+          <%= button_to url_for(controller: :links, action: :update, id: @link.id, link: new_link), method: :patch, data: {
+            turbo_frame: '_top',
+            'porn-search-target': 'thumbnail',
+            action: 'click->porn-search#click_thumbnail'
+          } do %>
             <img src="<%= post['preview']['url'] %>"/>
           <% end %>
         <% else %>
