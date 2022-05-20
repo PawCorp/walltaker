@@ -789,7 +789,7 @@ turbo-cable-stream-source {
 .text-charm {
     display: inline-flex;
     align-items: center;
-    margin-left: 0.25rem;
+    margin-left: 0.25em;
 }
 
 .text-charm__online {
@@ -800,15 +800,25 @@ turbo-cable-stream-source {
 }
 
 .text-charm__medal {
-    transform: translateY(0.3rem);
+    transform: translateY(0.2em);
     background: var(--accent-bg);
-    padding: 0.2rem 0.4rem;
-    border-radius: 0.4rem;
-    font-size: 1rem;
+    padding: 0.175em 0.4em;
+    border-radius: 0.4em;
+    font-size: 1em;
+    cursor: zoom-in;
+    transition: transform 80ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.text-charm__medal:hover {
+    transform: translateY(0.2em) scale(1.75);
+}
+
+.text-charm__medal > ion-icon {
+    pointer-events: none;
 }
 
 .text-charm > small {
-    font-size: 0.5rem;
+    font-size: 0.5em;
 }
 
 .text-charm__medal-driftwood { color: darkolivegreen; }

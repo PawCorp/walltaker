@@ -29,6 +29,12 @@ h2 > small + small {
     margin-top: 0.5rem !important;
 }
 
+h2 > span > .text-charm__medal,
+h2 > span > .text-charm__medal:hover {
+    transform: translateY(0.1rem) !important;
+    cursor: default;
+}
+
 .details__container {
     display: grid;
 }

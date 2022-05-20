@@ -9,5 +9,9 @@
       </div>
     </div>
   <% end %>
-  <blockquote><%= simple_format user.details %></blockquote>
+  <% if user.details.present? %>
+    <blockquote><%= simple_format user.details %></blockquote>
+  <% else %>
+    <blockquote><small>No profile description... yet!</small></blockquote>
+  <% end %>
 </div>

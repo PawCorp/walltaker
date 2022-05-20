@@ -13,6 +13,7 @@ const MEDALS = [
 ]
 
 export default class UserReferenceController extends Controller {
+    static values = { hideOnline: String }
     online = false;
     setCount = 0;
 
@@ -22,7 +23,9 @@ export default class UserReferenceController extends Controller {
             fetch(`/api/users/${username}.json`)
                 .then(stream => stream.json())
                 .then(result => {
-                    this.online = !!result.online;
+                    if (!this.hasHideOnlineValue) {
+                        this.online = !!result.online;
+                    }
                     this.setCount = result.set_count ?? 0;
                 })
                 .catch(() => {
@@ -52,11 +55,12 @@ export default class UserReferenceController extends Controller {
             const medal = MEDALS.find(medal => medal.colour === colour)
             if (medal) {
                 charm.className = `text-charm text-charm__medal text-charm__${type}`
+                charm.title = `The ${type.replace('medal-', '')} medal`
                 charm.innerHTML = `
                     <ion-icon
                         aria-label="The ${type.replace('medal-', '')} medal"
                         title="The ${type.replace('medal-', '')} medal"
-                        name="medal">
+                        name="trophy-sharp">
                     </ion-icon>
                     <small>${medal.over}</small>
                 `
@@ -73,7 +77,7 @@ export default class UserReferenceController extends Controller {
 
     setMedal () {
         const currentMedal = MEDALS.reduce((acc, i) => {
-            if (this.setCount > i.over) acc = i
+            if (this.setCount >= i.over) acc = i
             return acc
         }, null)
         MEDALS.forEach((medalType) => {

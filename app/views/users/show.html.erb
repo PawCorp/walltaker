@@ -22,14 +22,16 @@
 </div>
 
 <h2 class="one-line">
-  <ion-icon name="person" class="big"></ion-icon> <%= @user.username %>
+  <ion-icon name="person" class="big"></ion-icon> <span data-controller="user-reference" data-user-reference-hide-online-value><%= @user.username %></span>
   <% if @any_links_online %>
     <strong class="online" title="User is online"></strong>
   <% end %>
-  <small>User since <%= @user.created_at.strftime('%B %e, %Y') %></small>
+  <small>
+    Set <%= @user.set_count %> wallpapers
+  </small>
   <small>
     Last online
-    <%= @most_recent_pinged_link && @most_recent_pinged_link[0].last_ping ? @most_recent_pinged_link[0].last_ping.strftime('%A, %B %e, %Y, %I:%M %p') : 'never' %>
+    <%= @most_recent_pinged_link && @most_recent_pinged_link[0].last_ping ? time_tag(@most_recent_pinged_link[0].last_ping, (time_ago_in_words @most_recent_pinged_link[0].last_ping) + ' ago') : 'never' %>
   </small>
 </h2>
 
