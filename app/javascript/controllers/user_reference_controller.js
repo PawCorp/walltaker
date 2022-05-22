@@ -50,6 +50,8 @@ export default class UserReferenceController extends Controller {
         const charm = document.createElement('div')
         charm.className = `text-charm text-charm__${type}`
 
+        if (this.element.querySelector(`.text-charm__${type}`)) return
+
         if (type.includes('medal-')) {
             const colour = type.replace('medal-', '')
             const medal = MEDALS.find(medal => medal.colour === colour)
