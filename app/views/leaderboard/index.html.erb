@@ -10,7 +10,7 @@
     <% @top_setters.each do |setter| %>
       <li>
         <a href="<%= user_path setter.username %>" target="_top" data-controller="user-reference"><%= setter.username %></a>
-        <span><%= pluralize setter.set_count, 'wallpaper' %></span>
+        <span><%= pluralize setter.set_count, 'change' %></span>
       </li>
     <% end %>
   </ol>
