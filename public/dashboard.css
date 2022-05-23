@@ -149,7 +149,7 @@
 
 @media screen and (max-width: 590px) {
     .dashboard {
-        grid-template-columns: 1fr;
+        grid-template-columns: 100%;
     }
 
     .dashboard__updates {
