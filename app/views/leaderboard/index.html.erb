@@ -9,7 +9,7 @@
   <ol>
     <% @top_setters.each do |setter| %>
       <li>
-        <a href="<%= user_path setter.username %>" data-controller="user-reference"><%= setter.username %></a>
+        <a href="<%= user_path setter.username %>" target="_top" data-controller="user-reference"><%= setter.username %></a>
         <span><%= pluralize setter.set_count, 'wallpaper' %></span>
       </li>
     <% end %>
