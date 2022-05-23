@@ -73,6 +73,10 @@
         <%= link_to @newest_user.username, user_path(@newest_user.username) %>
       </div>
     </div>
+
+    <div class="dashboard__leaderboard">
+      <%= turbo_frame_tag 'leaderboard', src: leaderboard_path %>
+    </div>
   </div>
 <% end %>
 

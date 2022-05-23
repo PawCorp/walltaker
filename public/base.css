@@ -790,6 +790,7 @@ turbo-cable-stream-source {
     display: inline-flex;
     align-items: center;
     margin-left: 0.25em;
+    text-decoration: none;
 }
 
 .text-charm__online {
@@ -807,6 +808,7 @@ turbo-cable-stream-source {
     font-size: 1em;
     cursor: zoom-in;
     transition: transform 80ms cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
 }
 
 .text-charm__medal:hover {
@@ -819,6 +821,7 @@ turbo-cable-stream-source {
 
 .text-charm > small {
     font-size: 0.5em;
+    text-decoration: none;
 }
 
 .text-charm__medal-driftwood { color: darkolivegreen; }
@@ -831,3 +834,37 @@ turbo-cable-stream-source {
 .text-charm__medal-green { color: green; }
 .text-charm__medal-cum { color: lightgoldenrodyellow; }
 
+ol {
+    counter-reset: orderedlist;
+    padding: 0;
+}
+
+ol > li {
+    padding: 0.5em 1em;
+    display: flex;
+    gap: 1.5em;
+}
+
+ol > li::marker {
+    content: "";
+}
+
+ol > li::before {
+    content: "#" counter(orderedlist);
+    counter-increment: orderedlist;
+    display: inline-block;
+    min-width: 3ch;
+}
+
+ol > li:nth-child(2n+1) {
+    background: var(--accent-bg);
+}
+
+ol > li > * {
+    flex: 1 1 100%;
+}
+
+ol > li > *:last-child {
+    flex: auto;
+    white-space: nowrap;
+}
