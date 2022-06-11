@@ -17,5 +17,9 @@
     <%= label_tag :password %><br />
     <%= password_field_tag :password %>
   </div>
+  <div class="field checkbox">
+    <%= check_box_tag :keep_me_logged_in %>
+    <%= label_tag :keep_me_logged_in %>
+  </div>
   <%= submit_tag 'Log In' %>
 <% end %>

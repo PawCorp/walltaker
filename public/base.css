@@ -3,6 +3,31 @@
     --success: #30AA65;
 }
 
+form .field.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+form .field.checkbox input[type=checkbox] {
+    margin: 0;
+    height: 100%;
+}
+input[type=checkbox]:checked::after {
+    content: " ";
+    width: .1em;
+    height: .25em;
+    border-radius: 0;
+    position: absolute;
+    top: calc(50% - 0.05rem);
+    left: 50%;
+    background: 0 0;
+    border-right: solid var(--bg) .08em;
+    border-bottom: solid var(--bg) .08em;
+    font-size: 1.8em;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
 @media (prefers-color-scheme: light) {
     :root {
         --border: #5b658a;

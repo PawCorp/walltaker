@@ -23,7 +23,10 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
+    @current_user ||= User.find(cookies.signed[:permanent_session_id]) if cookies.signed[:permanent_session_id]
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
+
+    @current_user
   end
 
   helper_method :current_user
@@ -81,7 +84,7 @@ class ApplicationController < ActionController::Base
   helper_method :log_link_presence
 
   def authorize
-    redirect_to new_session_url, alert: 'Not authorized' if session[:user_id].nil?
+    redirect_to new_session_url, alert: 'Not authorized' if current_user.nil?
   end
 
   def authorize_with_admin
