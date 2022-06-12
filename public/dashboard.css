@@ -150,6 +150,7 @@
 
 .dashboard__updates__content {
     overflow-y: scroll;
+    flex: 1 1 100%;
 }
 
 @media screen and (max-width: 590px) {

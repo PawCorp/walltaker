@@ -1,0 +1,362 @@
+<h2>
+  <ion-icon name="information-circle" class="big"></ion-icon>
+  Help!
+</h2>
+
+<section id="getting-started">
+  <h3>Getting started</h3>
+  <p>
+    Thanks for being willing to give Walltaker a try! It's pretty easy to get started, but it might seem a bit weird at
+    first since there's some hoops we have to jump thru to be able to update your wallpaper.
+  </p>
+
+  <h4 id="getting-started-log-in">0. Log in</h4>
+  <div>
+    <p>
+      Firstly, <strong>you will need an account.</strong> You can make an account by pressing the
+      <span class="mock-link">Sign Up</span> link in the top-right-hand side of the screen, in the header. Once you have
+      an account (which should only take 1 minute) return to this page. You must be logged in to continue.
+    </p>
+  </div>
+
+  <h4 id="getting-started-make-a-link">1. Your First Link</h4>
+  <div>
+    <p>
+      Now that you have an account, you should make a
+      <strong>
+        <ion-icon name="document"></ion-icon>
+        Link.
+      </strong>
+      The core "thing" in Walltaker is links. They are the sharable page that you can post on social media
+      or give to friends that lets them change your wallpaper. In order to create your own link:
+    </p>
+    <ul class="task-list">
+      <li>
+        Click
+        <div class="mock-link">Links</div>
+        in the header.
+        <%= image_tag '/help/header-links-location.png' %>
+      </li>
+      <li>
+        ...then click
+        <div class="mock-button">New Link</div>
+        <%= image_tag '/help/new-link-button-location.png' %>
+      </li>
+      <li>
+        ...then confire your new link.
+
+        <p>
+          <strong>There are 6 options</strong> to change here that affect who can set your wallpaper, and what
+          restrictions they have to work within. Set these as you see fit, using the key below to explain what each
+          option does.
+        </p>
+        <%= image_tag '/help/new-link-form.png', class: 'small' %>
+
+        <div class="accordion" data-controller="accordion">
+          <button class="accordion__trigger" data-action="click->accordion#toggle" aria-controls="options-explanation">
+            <ion-icon name="expand"></ion-icon>
+            Toggle options explanation
+          </button>
+          <div class="accordion__content" data-accordion-target="content" id="options-explanation" aria-label="Explanation of options shown in Link Form">
+            <h5>#1 Expires</h5>
+            <p>
+              This is the date at which this link will not accept more wallpaper changes. Clicking
+              it will open a date picker. You could use this for example if you want to use walltaker for a full
+              weekend,
+              but
+              want it to stop on monday for work.
+            </p>
+
+            <h5>#2 Never Expires</h5>
+            <p>
+              Ensures that the link will never expire, and people you allow to set the link will be able to do so until
+              you
+              delete it.
+            </p>
+            <blockquote>
+              <strong>
+                <ion-icon name="checkbox-outline"></ion-icon>
+                When checked,</strong>
+              this link will never expire, and the #1 Expires option will be ignored.<br/>
+              <strong>
+                <ion-icon name="square-outline"></ion-icon>
+                When unchecked,</strong>
+              this link will expire at the date indicated by the #1 Expires option.
+            </blockquote>
+
+            <h5>#3 Friends Only</h5>
+            <p>
+              This restricts who can set wallpapers on this link.
+            </p>
+            <blockquote>
+              <strong>
+                <ion-icon name="checkbox-outline"></ion-icon>
+                When checked,</strong>
+              ONLY people you have accepted friend requests with will be able to see and set your wallpaper.<br/>
+              <strong>
+                <ion-icon name="square-outline"></ion-icon>
+                When unchecked,</strong>
+              ANYONE (including anon users) will be able to see and set your wallpaper.
+            </blockquote>
+
+            <h5>#4 Blacklist</h5>
+            <p>
+              A list of E621 tags that must NOT appear on wallpapers people submit.
+              <strong>Tags are separated by spaces or commas,</strong> and cannot be special tags. (such as rating:e)
+            </p>
+            <blockquote>
+              <strong>female feral feline</strong> will prevent any posts with females presenting characters, feral
+              characters, or felines.<br/>
+              <strong>male/male group_sex solo</strong> will mean you only get extremely boring, straight, 1-on-1 porn.
+              You
+              weirdo.
+            </blockquote>
+
+            <h5>#5 Terms</h5>
+            <p>
+              Your link terms are simply an area to express what you'd like to see as wallpapers more generally. Nothing
+              here
+              is enforced, it's just a text field for you to leave a note that appears on the link. I suggest you
+              outline
+              what
+              things turn you on here.
+            </p>
+
+            <h5>#6 Theme Tag</h5>
+            <p>
+              Theme tags are special! This is a way to enforce all wallpapers submitted to this link to be tagged with a
+              single, specific tag of your choosing. Use this when you're looking for something specific, like a
+              specific
+              species or sex act. You're horny, you'll come up with something fun.
+              <strong>Be careful about how you type your tag in here.</strong> If you misspell this theme tag, no one
+              will
+              be
+              able to submit anything until you remove it or correct the spelling. Confirm spelling on E621 if you have
+              to.
+            </p>
+            <blockquote>
+              <strong>
+                <ion-icon name="checkmark-outline"></ion-icon>
+                loimu_(character)</strong> all posts will feature Loimu 🦌. Any other characters are blocked.<br/>
+              <strong>
+                <ion-icon name="hand-left-outline"></ion-icon>
+                pokeemon</strong> a missspelled tag! No one will be able to submit anything.<br/>
+              <strong>
+                <ion-icon name="hand-left-outline"></ion-icon>
+                tits</strong> an alias tag! While this works in e621 search, the real tag is "breasts", so this is the
+              same
+              as misspelling a tag.
+            </blockquote>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="then">Then...</div>
+
+    <p>
+      When you've set it up how you'd like, click the
+      <span class="mock-button">Create Link</span>
+      button.
+    </p>
+  </div>
+
+  <h4 id="getting-started-configure-client">2. Configure Your Client</h4>
+  <div>
+    <p>
+      Congratulations! You should have a fresh link ready to share with the world. However, it currently doesn't change
+      the wallpaper on anything. This is because, as simply a website, Walltaker can not change your wallpaper for you.
+      To allow us to do this,
+      <strong>we need a Walltaker Client, which is an app you can install on which ever devices you'd
+        like to get wallpaper updates on.</strong> It will silently check your link every 10 seconds, and update your
+      wallpaper if
+      there's a new one, automatically.
+    </p>
+    <p>
+      You can download a client for which ever device you'd like to use. Follow the instructions for each one for how to
+      install it, then return to this tutorial.
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/PawCorp/walltaker-desktop-client/releases/latest" target="_blank">Desktop
+          Client</a>
+        (Windows/Linux)
+      </li>
+      <li>
+        <a href="https://github.com/PawCorp/walltaker-android-client/releases/latest" target="_blank">Android
+          Client</a>
+        (Android 12+)
+      </li>
+      <li>
+        <a href="https://github.com/Lycraon/Walltaker-for-WallpaperEngine" target="_blank">Lycraon's Wallpaper Engine
+          Client</a>
+        (<a href="https://store.steampowered.com/app/431960/Wallpaper_Engine/">Wallpaper Engine for Windows</a>)
+      </li>
+      <li>
+        <a href="https://github.com/Deanskond/walltaker_automate" target="_blank">Deanskond's Automate Client</a>
+        (<a href="https://llamalab.com/automate/">Automate App for Android</a>)
+      </li>
+      <li>
+        <a href="https://github.com/PawCorp/walltaker-macos/releases/latest" target="_blank">MacOS Client</a>
+        (MacOS)
+      </li>
+      <li>
+        <a href="http://joi.how/" target="_blank">JOI.how</a> (Web-based)
+      </li>
+    </ul>
+
+    <div class="then">Then...</div>
+
+    <p>
+      Once you've installed your client, you need to configure it to pull wallpapers from specifically YOUR link. You
+      can do this by going to your link page, and getting the link ID.
+    </p>
+
+    <ul class="task-list">
+      <li>
+        Click
+        <div class="mock-link">Links</div>
+        in the header.
+        <%= image_tag '/help/header-links-location.png' %>
+      </li>
+      <li>
+        ...then click the link you made from the list
+        <%= image_tag '/help/own-link-location.png' %>
+      </li>
+      <li>
+        ...then note the number that appears in this box. This is your link's ID. It's used as the identifier of which
+        link you want to pull wallpapers from. In this case my ID is <strong>1</strong>. Your link ID is not private.
+        <%= image_tag '/help/own-link-id-location.png' %>
+
+        <div class="accordion" data-controller="accordion">
+          <button class="accordion__trigger" data-action="click->accordion#toggle" aria-controls="toml-explanation">
+            <ion-icon name="expand"></ion-icon>
+            But my client wants a .toml file?
+          </button>
+          <div class="accordion__content" data-accordion-target="content" id="toml-explanation" aria-label="Explanation of TOML files">
+            <h5>.toml files</h5>
+            <p>
+              Some clients have fancier settings that you can change. They normally store these settings in a text
+              configuration file called <code>walltaker.toml</code>. If you're using a client that prefers you use a
+              .toml file, click the
+              <strong>
+                <ion-icon name="document-outline"></ion-icon>
+                walltaker.toml
+              </strong>
+              link inside of this box to download a premade one for your link.list
+              <%= image_tag '/help/own-link-toml-download-location.png' %>
+            </p>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="then">Then...</div>
+
+    <p>
+      Follow the instructions for your client to add this link to it. Normally it's in a menu where you can simply type
+      in the link ID.
+    </p>
+  </div>
+
+  <h4 id="getting-started-share-link">3. Share Your Link!</h4>
+  <div>
+    <p>
+      Wow! You have everything set up now! Let's just verify that everything is working, and then you can share your
+      link publicly!
+    </p>
+    <ul class="task-list">
+      <li>
+        Click
+        <div class="mock-link">Links</div>
+        in the header.
+        <%= image_tag '/help/header-links-location.png' %>
+      </li>
+      <li>
+        ...then look at the link you made in the list. It should say
+        <div class="mock-online">Online
+          <div class="text-charm text-charm__online"></div>
+        </div>
+        <%= image_tag '/help/own-link-online.png' %>
+
+        <div class="accordion" data-controller="accordion">
+          <button class="accordion__trigger" data-action="click->accordion#toggle" aria-controls="offline-explanation">
+            <ion-icon name="expand"></ion-icon>
+            My link doesn't say online!
+          </button>
+          <div class="accordion__content" data-accordion-target="content" id="offline-explanation" aria-label="Explanation of offline or new links">
+            <h5>It says New</h5>
+            <p>
+              Your client NEVER successfully pinged the link.
+            <ul>
+              <li>Are you sure your set the right link ID?
+                <a href="#getting-started-configure-client">Refer to step #2.</a></li>
+              <li>Did your client crash?</li>
+            </ul>
+            </p>
+
+            <h5>It says Offline</h5>
+            <p>
+              Your client pinged this link at least once, but gave up! This could be due to a number of things:
+            <ul>
+              <li>Did your client crash?</li>
+              <li>Some phone operating systems kill background apps, this can sometimes affect clients. Refer to client
+                documentation.
+              </li>
+              <li>Did you change the frequency of checks? It must be under 1minute to be
+                <div class="mock-online">Online
+                  <div class="text-charm text-charm__online"></div>
+                </div>
+                .
+              </li>
+            </ul>
+            </p>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="then">Then...</div>
+
+    <p>
+      Now it's time to share your link! This couldn't be easier. Just copy and paste the URL from your browser. it
+      should look like <code>https://walltaker.joi.how/links/420</code> where the last number is your link ID.
+      <strong>
+        Share this with anyone you want! This is where people edit your wallpaper.
+      </strong>
+      <%= image_tag '/help/own-link-copy-url.png' %>
+    </p>
+  </div>
+</section>
+
+<section id="bad-wallpaper">
+  <h3>I got a wallpaper I don't like.</h3>
+  <p>
+    Walltaker is an app for letting others change your wallpaper, <strong>without</strong> your
+    approval. While I provide as many tools as possible to ensure you only get wallpapers you like, know that the point
+    of this app is to be <strong>out of control</strong> to some extent. Here are some tips to use walltaker's filtering
+    features to their fullest:
+  </p>
+  <ul>
+    <li><strong>Add people you trust as friends,</strong> this allows you to use
+      <ion-icon name="document-lock"></ion-icon>
+      friends-only links, which stops anon spam. This is by far the most effective route.
+    </li>
+    <li><strong>Use a theme tag.</strong> A theme tag allows you to force a tag to be present on wallpapers people pick
+      for you. This can normally be good at filtering out things like genitalia (gay) you don't want to see or forcing a
+      specific sexuality. (male/female)
+    </li>
+    <li><strong>Fill out your blacklist honestly.</strong> If you don't like <em>most</em> foot-fetish art, then it
+      should be in your
+      blacklist, even if there's some art you do like. People don't read your link terms enough to understand nuance.
+    </li>
+    <li><strong>Be clear in your terms.</strong> A lot of bad wallpapers are simply mistakes. Use as few words as
+      possible to express
+      what you want.
+    </li>
+  </ul>
+  <p>
+    As always, if you think you're being harassed, contact an admin on the discord (See link in the header) who can
+    look into it for you, and IP ban an anon user if they're trying to be malicious.
+  </p>
+</section>

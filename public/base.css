@@ -350,6 +350,20 @@ p {
     border-radius: 4px;
 }
 
+.mock-link {
+    padding: 0px 8px;
+    color: var(--accent);
+    display: inline-block;
+    font-size: 1.1em;
+}
+
+.mock-online {
+    display: inline-block;
+    font-weight: bold;
+    margin-left: 0.3rem;
+    color: var(--success);
+}
+
 form.set-post-response div {
     display: flex;
     gap: 1rem;
@@ -892,4 +906,107 @@ ol > li > * {
 ol > li > *:last-child {
     flex: auto;
     white-space: nowrap;
+}
+
+/* Sections are for document-like pages, like /help */
+section {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+section + section {
+    padding-top: 1rem;
+}
+
+section ul {
+    line-height: 1.6rem;
+    list-style-type: square;
+}
+
+section ul.task-list {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+section ul.task-list li + li {
+    margin-top: 1rem;
+}
+
+section ul li {
+    margin-bottom: 1.2rem;
+}
+
+
+section p ion-icon,
+section li ion-icon {
+    transform: translateY(1px);
+    margin-left: 0.25em;
+}
+
+section img {
+    display: block;
+    margin-top: 1rem;
+    border: 1px solid var(--preformatted);
+    max-width: 420px;
+}
+
+section img.small {
+    max-width: 240px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+section h4 {
+    text-align: left;
+    margin-top: 2.1rem;
+    background: var(--border);
+    color: var(--bg);
+    display: inline-block;
+    padding: 0.2rem 1rem;
+    border-radius: 0.6rem;
+    margin-bottom: 0.7rem;
+    font-size: 1rem;
+}
+
+section h4 + p {
+    margin: 0;
+    max-width: initial;
+}
+
+section h4 + div {
+    padding: 0.1rem 1.5rem;
+    border-radius: 0.6rem;
+    background: var(--accent-bg);
+}
+
+section li blockquote {
+    margin-top: 1rem;
+}
+
+section h5 {
+    margin-bottom: 0;
+    font-size: 1em;
+    color: var(--border);
+    font-weight: normal;
+    border-bottom: 1px solid currentColor;
+}
+
+section .then {
+    display: block;
+    color: var(--border);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 2.5rem 0 1rem;
+}
+
+.accordion__trigger {
+    margin: 1.5rem auto 0;
+    display: block;
+    background: var(--bg);
+    color: var(--text)
+}
+
+.accordion__trigger ion-icon {
+    transform: translateY(2.5px);
 }
