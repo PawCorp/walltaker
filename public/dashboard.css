@@ -143,8 +143,13 @@
 .dashboard__updates {
     grid-column: 2 / -1;
     grid-row: 2 / span 4;
-    overflow: scroll;
     max-height: 830px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard__updates__content {
+    overflow-y: scroll;
 }
 
 @media screen and (max-width: 590px) {
@@ -157,6 +162,10 @@
         grid-row: 2 / span 1;
         overflow: initial;
         max-height: initial;
+    }
+
+    .dashboard__updates__content {
+        max-height: 300px;
     }
 
     .dashboard__online {
