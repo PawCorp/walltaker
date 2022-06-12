@@ -11,9 +11,12 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_05_20_154036) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "ahoy_events", force: :cascade do |t|
-    t.integer "visit_id"
-    t.integer "user_id"
+    t.bigint "visit_id"
+    t.bigint "user_id"
     t.string "name"
     t.text "properties"
     t.datetime "time"
@@ -25,7 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_154036) do
   create_table "ahoy_visits", force: :cascade do |t|
     t.string "visit_token"
     t.string "visitor_token"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "ip"
     t.text "user_agent"
     t.text "referrer"
@@ -53,8 +56,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_154036) do
   end
 
   create_table "blazer_audits", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "query_id"
+    t.bigint "user_id"
+    t.bigint "query_id"
     t.text "statement"
     t.string "data_source"
     t.datetime "created_at"
@@ -63,8 +66,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_154036) do
   end
 
   create_table "blazer_checks", force: :cascade do |t|
-    t.integer "creator_id"
-    t.integer "query_id"
+    t.bigint "creator_id"
+    t.bigint "query_id"
     t.string "state"
     t.string "schedule"
     t.text "emails"
@@ -79,8 +82,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_154036) do
   end
 
   create_table "blazer_dashboard_queries", force: :cascade do |t|
-    t.integer "dashboard_id"
-    t.integer "query_id"
+    t.bigint "dashboard_id"
+    t.bigint "query_id"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -89,7 +92,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_154036) do
   end
 
   create_table "blazer_dashboards", force: :cascade do |t|
-    t.integer "creator_id"
+    t.bigint "creator_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -97,7 +100,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_154036) do
   end
 
   create_table "blazer_queries", force: :cascade do |t|
-    t.integer "creator_id"
+    t.bigint "creator_id"
     t.string "name"
     t.text "description"
     t.text "statement"
@@ -109,8 +112,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_154036) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer "link_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "link_id", null: false
+    t.bigint "user_id", null: false
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -119,8 +122,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_154036) do
   end
 
   create_table "friendships", force: :cascade do |t|
-    t.integer "sender_id", null: false
-    t.integer "receiver_id"
+    t.bigint "sender_id", null: false
+    t.bigint "receiver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "confirmed"
@@ -131,7 +134,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_154036) do
 
   create_table "links", force: :cascade do |t|
     t.datetime "expires"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.string "terms"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -140,7 +143,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_154036) do
     t.string "post_thumbnail_url"
     t.string "post_description"
     t.datetime "last_ping", precision: nil
-    t.integer "set_by_id"
+    t.bigint "set_by_id"
     t.boolean "friends_only"
     t.string "last_ping_user_agent"
     t.boolean "never_expires", default: false
@@ -152,7 +155,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_154036) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.integer "notification_type"
     t.string "text"
     t.string "link"
@@ -167,8 +170,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_154036) do
     t.string "post_thumbnail_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "link_id"
-    t.integer "set_by_id"
+    t.bigint "link_id"
+    t.bigint "set_by_id"
     t.bigint "ahoy_visit_id"
     t.index ["link_id"], name: "index_past_links_on_link_id"
     t.index ["set_by_id"], name: "index_past_links_on_set_by_id"
