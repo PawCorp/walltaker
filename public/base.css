@@ -589,6 +589,11 @@ a.small:hover {
     display: block;
 }
 
+.accent-block.spaced {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
 .accent-block__charm {
     color: var(--border);
     display: flex;

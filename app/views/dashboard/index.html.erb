@@ -1,3 +1,13 @@
+<% if @your_total_wallpapers_changed_all == 0 %>
+  <div class="accent-block spaced">
+    <div class="accent-block__charm">
+      <ion-icon name="information-circle"></ion-icon>
+      Need help?
+    </div>
+    I made a getting started guide on the <a href="<%= help_path %>">help page!</a>
+  </div>
+<% end %>
+
 <% unless current_user.nil? %>
   <% content_for(:html_title) { 'Walltaker Dashboard' } %>
   <div class="dashboard">
@@ -141,11 +151,17 @@
 </p>
 <p>
   Know that this is
-  just for donating to us, because we like money. The site is cheap to run, interesting to work on, and is <strong>not in danger</strong> of being shut down due
+  just for donating to us, because we like money. The site is cheap to run, interesting to work on, and is
+  <strong>not in danger</strong> of being shut down due
   to expenses. It's just a nice gesture that's very much appreciated.
 </p>
 
-<a href="https://ko-fi.com/pawcorp" target="_blank" class="kofi-button"><button><ion-icon name="cafe"></ion-icon> Just the tip!</button></a>
+<a href="https://ko-fi.com/pawcorp" target="_blank" class="kofi-button">
+  <button>
+    <ion-icon name="cafe"></ion-icon>
+    Just the tip!
+  </button>
+</a>
 
 <h2 class="page-break">Frequently Asked Question</h2>
 <blockquote>
