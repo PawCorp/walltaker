@@ -1,0 +1,7 @@
+<%= turbo_frame_tag "recent_posts" do %>
+  <% recent_posts.each do |past_link| %>
+    <%= link_to user_url(past_link.user.username) do %>
+      <%= image_tag past_link.post_thumbnail_url %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -56,14 +56,14 @@
     text-align: center;
 }
 
-.dashboard__recent__content {
+.dashboard__recent__content turbo-frame {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 1rem;
 }
-.dashboard__recent__content > * {
+.dashboard__recent__content turbo-frame > * {
     flex: 1 1 100px;
 }
 

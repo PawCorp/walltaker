@@ -15,5 +15,8 @@ class PastLink < ApplicationRecord
 
   after_commit do
     broadcast_replace_to "link_details_#{link_id}", target: "link_details_#{link_id}", partial: 'links/details', locals: { link: self.link }
+    broadcast_replace_to "dashboard_recent_posts", target: "recent_posts", partial: "dashboard/recent_posts", locals: {
+      recent_posts: PastLink.order(id: :desc).take(6)
+    }
   end
 end

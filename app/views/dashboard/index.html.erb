@@ -4,11 +4,8 @@
     <div class="dashboard__recent">
       <h2>Recent Backgrounds</h2>
       <div class="dashboard__recent__content">
-        <% @recent_posts.each do |past_link| %>
-          <%= link_to user_url(past_link.user.username) do %>
-            <%= image_tag past_link.post_thumbnail_url %>
-          <% end %>
-        <% end %>
+        <%= turbo_stream_from "dashboard_recent_posts" %>
+        <%= render 'recent_posts', recent_posts: @recent_posts %>
       </div>
     </div>
     <div class="dashboard__online">
