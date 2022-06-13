@@ -4,8 +4,9 @@
 </h2>
 
 <section id="getting-started">
-  <h3>Getting started</h3>
+  <h3><small>Q:</small> How do I set this up?</h3>
   <p>
+    <small>A:</small>
     Thanks for being willing to give Walltaker a try! It's pretty easy to get started, but it might seem a bit weird at
     first since there's some hoops we have to jump thru to be able to update your wallpaper.
   </p>
@@ -243,7 +244,7 @@
                 <ion-icon name="document-outline"></ion-icon>
                 walltaker.toml
               </strong>
-              link inside of this box to download a premade one for your link.list
+              link inside of this box to download a pre-made one for your link.
               <%= image_tag '/help/own-link-toml-download-location.png' %>
             </p>
           </div>
@@ -330,8 +331,9 @@
 </section>
 
 <section id="bad-wallpaper">
-  <h3>I got a wallpaper I don't like.</h3>
+  <h3><small>Q:</small> I got a wallpaper I don't like.</h3>
   <p>
+    <small>A:</small>
     Walltaker is an app for letting others change your wallpaper, <strong>without</strong> your
     approval. While I provide as many tools as possible to ensure you only get wallpapers you like, know that the point
     of this app is to be <strong>out of control</strong> to some extent. Here are some tips to use walltaker's filtering
@@ -359,4 +361,31 @@
     As always, if you think you're being harassed, contact an admin on the discord (See link in the header) who can
     look into it for you, and IP ban an anon user if they're trying to be malicious.
   </p>
+</section>
+
+<section id="make-your-own-client">
+  <h3><small>Q:</small> Can I make my own client?</h3>
+  <p>
+    <small>A:</small>
+    Yes! I have some API documentation on our <a href="https://github.com/PawCorp/walltaker" target="_blank">github.</a> You can contact
+    an admin on discord to get it listed on the site. Here's some tips for what makes a good client:
+  </p>
+  <ul>
+    <li>
+      <strong>It doesn't just have to be wallpapers!</strong> iOS has no native APIs for setting lock screen or home
+      screen wallpapers. Maybe a good idea would be a home screen widget that could show the current wallpaper instead?
+    </li>
+    <li>
+      <strong>Just because we're short-polling, doesn't mean you can ping us as fast as you want!</strong> Please keep
+      requests at around 1request per 10seconds. This service is hosted at my expensive, and heavy load will mean I have
+      to vertically scale up the server it lives on. Don't be an asshole.
+    </li>
+    <li>
+      <strong>Use native APIs to set the wallpaper if available.</strong> A good example of why this is a good idea is
+      the MacOS client. It uses the Cocoa APIs to affect the wallpaper instead of using the more-universal apple-script
+      solution common in apps not made with swift/obj-c. This is MUCH less buggy way to assign wallpapers, and doesn't
+      require as many permissions. Research if there's an SDK/language you should use to better take advantage of native
+      APIs.
+    </li>
+  </ul>
 </section>
