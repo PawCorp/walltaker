@@ -8,6 +8,8 @@ class FriendshipsController < ApplicationController
     @friendships = Friendship.all.where(sender: current_user)
                              .or(Friendship.all.where(receiver: current_user))
                              .where(confirmed: true)
+    @pending_friendship_requests = Friendship.all.where(sender: current_user)
+                             .where(confirmed: false)
   end
 
   # GET /friendship/requests

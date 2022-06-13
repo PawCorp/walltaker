@@ -464,6 +464,14 @@ form.button_to {
     padding: 0.1rem 1.7rem;
 }
 
+.friendship--pending {
+    color: var(--border);
+}
+
+.friendship--pending a[data-controller=user-reference] {
+    color: var(--border);
+}
+
 .friendship__names {
     flex: 1 1 320px;
 }

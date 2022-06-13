@@ -44,3 +44,11 @@
     <% end %>
   <% end %>
 </div>
+
+<% if @pending_friendship_requests.present? %>
+  <h4 class="subdued">Pending Requests You've Sent</h4>
+
+  <% @pending_friendship_requests.each do |pending_request| %>
+    <%= render 'pending_friendship', friendship: pending_request %>
+  <% end %>
+<% end %>
