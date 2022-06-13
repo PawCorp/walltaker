@@ -962,6 +962,7 @@ section img {
     margin-top: 1rem;
     border: 1px solid var(--preformatted);
     max-width: 420px;
+    width: 100%;
 }
 
 section img.small {
