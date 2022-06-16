@@ -8,6 +8,9 @@ const MEDALS = [
     { over: 500, colour: 'gold' },
     { over: 800, colour: 'platinum' },
     { over: 1000, colour: 'uranium' },
+    { over: 1400, colour: 'ruby' },
+    { over: 1800, colour: 'jade' },
+    { over: 2400, colour: 'regal-purple' },
     { over: 4200, colour: 'green' },
     { over: 6900, colour: 'cum' }
 ]

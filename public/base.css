@@ -883,6 +883,9 @@ turbo-cable-stream-source {
 .text-charm__medal-gold { background: goldenrod; color: black; }
 .text-charm__medal-platinum { background: lightsteelblue; color: black; }
 .text-charm__medal-uranium { background: greenyellow; color: black; }
+.text-charm__medal-ruby { background: indianred; color: white; }
+.text-charm__medal-jade { background: mediumspringgreen; color: black; }
+.text-charm__medal-regal-purple { background: rebeccapurple; color: white; }
 .text-charm__medal-green { background: green; color: white; }
 .text-charm__medal-cum { background: lightgoldenrodyellow; color: black; border: var(--border) 1px solid; }
 
