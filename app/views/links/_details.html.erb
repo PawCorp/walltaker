@@ -19,7 +19,7 @@
     <small>
       Last changed <%= link.past_links.empty? ? 'never' : (time_ago_in_words link.past_links.last.created_at) + ' ago' %>
       <% if link.past_links.last.present? %>
-        by <%= link_to link.past_links.last.set_by_user.username, user_path(link.past_links.last.set_by_user.username), target: '_top' %>
+        by <%= link_to link.past_links.last.set_by_user.username, user_path(link.past_links.last.set_by_user.username), target: '_top', data: { controller: 'user-reference' } %>
       <% end %>
     </small>
   </h2>
