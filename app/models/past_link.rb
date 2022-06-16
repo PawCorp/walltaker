@@ -1,6 +1,7 @@
 class PastLink < ApplicationRecord
   belongs_to :link
   belongs_to :user
+  belongs_to :set_by_user, foreign_key: 'set_by_id', class_name: 'User'
   visitable :ahoy_visit
 
   def self.log_link(link)

@@ -16,8 +16,12 @@
 
   <h2 class="one-line">
     <%= link_to link.user.username, user_path(link.user.username), target: '_top' %>'s wallpaper
-    <small>Last
-      changed <%= link.past_links.empty? ? 'never' : (time_ago_in_words link.past_links.last.created_at) + ' ago' %></small>
+    <small>
+      Last changed <%= link.past_links.empty? ? 'never' : (time_ago_in_words link.past_links.last.created_at) + ' ago' %>
+      <% if link.past_links.last.present? %>
+        by <%= link_to link.past_links.last.set_by_user.username, user_path(link.past_links.last.set_by_user.username), target: '_top' %>
+      <% end %>
+    </small>
   </h2>
 
   <% if link.post_thumbnail_url && link.post_url %>
