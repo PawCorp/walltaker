@@ -109,7 +109,7 @@
 <% end %>
 
 <%= turbo_stream_from "link_details_#{@link.id}" %>
-<%= render 'details', link: @link %>
+<%= render 'details', link: @link, set_by: @set_by %>
 
 <div class="tabs" data-controller="tabs">
   <div class="tabs__charm">

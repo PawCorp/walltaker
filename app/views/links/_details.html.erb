@@ -17,9 +17,16 @@
   <h2 class="one-line">
     <%= link_to link.user.username, user_path(link.user.username), target: '_top' %>'s wallpaper
     <small>
-      Last changed <%= link.past_links.empty? ? 'never' : (time_ago_in_words link.past_links.last.created_at) + ' ago' %>
+      Last
+      changed <%= link.past_links.empty? ? 'never' : (time_ago_in_words link.past_links.last.created_at) + ' ago' %>
       <% if link.past_links.last.present? %>
-        by <%= link_to link.past_links.last.set_by_user.username, user_path(link.past_links.last.set_by_user.username), target: '_top', data: { controller: 'user-reference' } %>
+        by
+        <% if link.past_links.last.set_by_id.present? %>
+          <% set_by = User.find(link.past_links.last.set_by_id) %>
+          <%= link_to set_by.username, user_path(set_by.username), target: '_top', data: { controller: 'user-reference' } %>
+        <% else %>
+          anon
+        <% end %>
       <% end %>
     </small>
   </h2>
