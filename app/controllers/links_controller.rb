@@ -26,7 +26,7 @@ class LinksController < ApplicationController
                  .joins(:past_links)
                  .where('past_links.created_at = (SELECT MAX(created_at) FROM past_links WHERE past_links.link_id = links.id)')
                  .order(Arel.sql(%q{
-                    CASE WHEN users.created_at > now() - interval '48 hours' THEN 1 ELSE 0 END DESC,
+                    CASE WHEN users.created_at > now() - interval '8 hours' THEN 1 ELSE 0 END DESC,
                     past_links.created_at - make_interval(secs := users.set_count * 6) ASC
                  }))
 
