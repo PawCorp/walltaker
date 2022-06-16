@@ -876,15 +876,15 @@ turbo-cable-stream-source {
     text-decoration: none;
 }
 
-.text-charm__medal-driftwood { color: darkolivegreen; }
-.text-charm__medal-tin { color: dimgrey; }
-.text-charm__medal-bronze { color: saddlebrown; }
-.text-charm__medal-silver { color: silver; }
-.text-charm__medal-gold { color: goldenrod; }
-.text-charm__medal-platinum { color: lightsteelblue; }
-.text-charm__medal-uranium { color: greenyellow; }
-.text-charm__medal-green { color: green; }
-.text-charm__medal-cum { color: lightgoldenrodyellow; }
+.text-charm__medal-driftwood { background: darkolivegreen; color: white; }
+.text-charm__medal-tin { background: dimgrey; color: white; }
+.text-charm__medal-bronze { background: saddlebrown; color: white; }
+.text-charm__medal-silver { background: silver; color: black; }
+.text-charm__medal-gold { background: goldenrod; color: black; }
+.text-charm__medal-platinum { background: lightsteelblue; color: black; }
+.text-charm__medal-uranium { background: greenyellow; color: black; }
+.text-charm__medal-green { background: green; color: white; }
+.text-charm__medal-cum { background: lightgoldenrodyellow; color: black; border: var(--border) 1px solid; }
 
 ol {
     counter-reset: orderedlist;
