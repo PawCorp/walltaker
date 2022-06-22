@@ -42,22 +42,30 @@
 
     <% unless link.theme.nil? || link.theme.empty? %>
       <div class="link--theme">
-        <ion-icon name="pricetag-outline"></ion-icon>
-        <%= link.theme %>
+        <strong>
+          <ion-icon name="pricetag-outline"></ion-icon>
+          Theme
+        </strong>
+        <span><%= link.theme %></span>
       </div>
     <% end %>
 
     <div class="link--blacklist">
-      <strong>Blacklist:</strong>
-      <%= '⚠️ No Blacklisted Tags' if link.blacklist == '' %>
-      <%= link.blacklist %>
+      <strong>
+        <ion-icon name="cut"></ion-icon>
+        Blacklist</strong>
+      <div>
+        <%= 'No Blacklisted Tags' if link.blacklist == '' %>
+        <% if link.blacklist != '' %>
+          <% link.blacklist.split(/(\s|,)/).filter { |tag| tag.length > 1 }.map { |tag| tag.gsub(/^-/, '') }.each do |tag| %>
+            <span><%= tag %></span>
+          <% end %>
+        <% end %>
+      </div>
     </div>
 
     <div class="link--terms">
-      <strong>Terms:</strong>
-      <% if link.terms == '' %>
-        ⚠️ No Terms
-      <% else %>
+      <% if link.terms != '' %>
         <blockquote>
           <%= simple_format link.terms %>
         </blockquote>
@@ -86,7 +94,9 @@
           <ion-icon name="earth-outline"></ion-icon>
         <% when :automate %>
           <span>Deans' Client</span>
-          <svg height="28" width="28"><use xlink:href="/icon-automate.svg#Calque_1"></use></svg>
+          <svg height="28" width="28">
+            <use xlink:href="/icon-automate.svg#Calque_1"></use>
+          </svg>
         <% when :wallpaper_engine %>
           <span>Lycaon's Wallpaper Engine</span>
           <ion-icon name="cog"></ion-icon>
