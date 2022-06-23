@@ -15,6 +15,28 @@
     overflow: hidden;
 }
 
+@media screen and (max-width: 512px) {
+    .link {
+        grid-template-areas:
+                'expires      presence'
+                'theme        theme'
+                'terms        terms'
+                'blacklist    blacklist'
+                'friends-only friends-only';
+    }
+
+    .link--theme {
+        display: flex !important;
+        gap: 0.5rem;
+        font-size: 0.8rem !important;
+        font-weight: bold !important;
+    }
+
+    .link--theme > strong {
+        display: inline-flex !important;
+    }
+}
+
 .link > .link--backdrop {
     object-fit: cover;
     height: 100%;
@@ -224,6 +246,7 @@ input[type=checkbox] {
 input[type=checkbox].toggle-next + * {
     display: none;
 }
+
 input[type=checkbox].toggle-next:checked + * {
     display: block;
 }
@@ -247,6 +270,7 @@ label {
     align-content: center;
     gap: 0.4rem;
 }
+
 .link--form--theme label input[type=checkbox] {
     transform: translateY(-0.1em);
 }
@@ -278,14 +302,17 @@ turbo-frame#pornsearch form {
     display: flex;
     gap: 1rem;
 }
+
 turbo-frame#pornsearch form input#tags {
     flex: 1 1 400px;
     margin: 0;
 }
+
 turbo-frame#pornsearch form > button {
     flex: 0 0 auto;
     margin: 0;
 }
+
 turbo-frame#pornsearch form > button ion-icon {
     transform: translateY(0.1rem);
 }
@@ -298,6 +325,7 @@ turbo-frame#pornsearch_results .results {
     align-items: center;
     margin: 2rem 0;
 }
+
 turbo-frame#pornsearch_results .results form {
     display: block;
     position: relative;
@@ -321,6 +349,7 @@ turbo-frame#pornsearch_results .results form button {
 
     animation: linkResponseAppear 0.5s 1s normal forwards ease-in-out;
 }
+
 .link--response small {
     display: block;
 }
@@ -421,6 +450,7 @@ figure > a.background-sample img.background-sample__image--desktop {
     height: 96px;
     width: 136px;
 }
+
 figure > a.background-sample img.background-sample__image--mobile {
     top: calc(50% + 8px);
     height: 160px;
@@ -561,10 +591,21 @@ aside.comments-sidebar > button {
     border-bottom: 1px solid var(--border);
 }
 
-aside.comments-sidebar[data-hidden=true] > button .toggle-open-icon { display: block; }
-aside.comments-sidebar[data-hidden=true] > button .toggle-close-icon { display: none; }
-aside.comments-sidebar[data-hidden=false] > button .toggle-open-icon { display: none; }
-aside.comments-sidebar[data-hidden=false] > button .toggle-close-icon { display: block; }
+aside.comments-sidebar[data-hidden=true] > button .toggle-open-icon {
+    display: block;
+}
+
+aside.comments-sidebar[data-hidden=true] > button .toggle-close-icon {
+    display: none;
+}
+
+aside.comments-sidebar[data-hidden=false] > button .toggle-open-icon {
+    display: none;
+}
+
+aside.comments-sidebar[data-hidden=false] > button .toggle-close-icon {
+    display: block;
+}
 
 aside.comments-sidebar > button .toggle-badge {
     position: absolute;
@@ -580,7 +621,9 @@ aside.comments-sidebar > button .toggle-badge {
     text-align: center;
 }
 
-aside.comments-sidebar > button .toggle-badge[data-hidden=true] { display: none; }
+aside.comments-sidebar > button .toggle-badge[data-hidden=true] {
+    display: none;
+}
 
 @media screen and (max-width: 525px) {
     aside.comments-sidebar > button {
@@ -600,7 +643,7 @@ aside.comments-sidebar > button .toggle-badge[data-hidden=true] { display: none;
     aside.comments-sidebar[data-hidden=false] > button {
         transform: translateX(-1rem);
         border-radius: 0;
-        background: rgba(0,0,0,0);
+        background: rgba(0, 0, 0, 0);
         color: var(--text);
     }
 }
