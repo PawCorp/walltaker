@@ -63,6 +63,17 @@
     filter: blur(2px) brightness(0.5);
 }
 
+@media screen and (prefers-color-scheme: light) {
+    .link > .link--backdrop::before {
+        mix-blend-mode: color;
+        filter: brightness(1);
+    }
+
+    .link > .link--backdrop > img {
+        filter: blur(1px) contrast(0.55) brightness(1.4);
+    }
+}
+
 .link em {
     color: var(--border);
 }
