@@ -9,7 +9,9 @@
   <div class="link" data-feed-number="<%= link_id_for_decoration link.id %>">
 
     <% unless link.post_thumbnail_url.nil? %>
-      <%= image_tag link.post_thumbnail_url, class: 'link--backdrop' %>
+      <div class="link--backdrop">
+        <%= image_tag link.post_thumbnail_url %>
+      </div>
     <% end %>
 
     <div class="link--presence">
