@@ -115,14 +115,15 @@
 
   <% if link.response_text && !link.disgust? %>
     <div class="link--response">
-      <strong><%= link.user.username %>:</strong> <%= link.response_text %>
-      <small>
+      <strong>
+        <%= link.user.username %>
         <% if link.horny? %>
-          😍
+          😍:
         <% elsif link.came? %>
-          💦 this post made them cum!
+          💦 said while cumming:
         <% end %>
-      </small>
+      </strong>
+      <%= link.response_text %>
     </div>
   <% end %>
 

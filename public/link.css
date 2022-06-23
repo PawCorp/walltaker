@@ -366,15 +366,39 @@ turbo-frame#pornsearch_results .results form button {
 }
 
 .link--response {
-    padding: 0.9rem 1rem;
     text-align: center;
     font-size: 0.8rem;
-    color: var(--text-light);
     transform: translateY(-100%);
     max-height: 0;
     opacity: 0;
+    background: var(--accent);
+    padding: 0.3rem;
+    margin-right: 1.5rem;
+    margin-left: 1.5rem;
+    margin-top: 1.3rem;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+    color: var(--bg);
 
     animation: linkResponseAppear 0.5s 1s normal forwards ease-in-out;
+}
+
+.link--response::before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 0.7rem solid transparent;
+    border-bottom: 0.7rem solid var(--accent);
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(0, -0.7rem);
+}
+
+.link--response strong {
+    color: var(--bg);
 }
 
 .link--response small {
