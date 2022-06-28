@@ -1,3 +1,9 @@
+PATH
+  remote: nuttracker
+  specs:
+    nuttracker (0.1.0)
+      rails (>= 7.0.2.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -263,6 +269,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   lograge
+  nuttracker!
   pg
   puma (~> 5.0)
   rack-cors
