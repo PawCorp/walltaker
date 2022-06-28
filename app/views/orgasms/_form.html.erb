@@ -1,0 +1,32 @@
+<%= form_with(model: orgasm) do |form| %>
+  <% if orgasm.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(orgasm.errors.count, "error") %> prohibited this orgasm from being saved:</h2>
+
+      <ul>
+        <% orgasm.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div>
+    <%= form.label :is_ruined, style: "display: block" %>
+    <%= form.check_box :is_ruined %>
+  </div>
+
+  <div>
+    <%= form.label :rating, style: "display: block" %>
+    <%= form.number_field :rating %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

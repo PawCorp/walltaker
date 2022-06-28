@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Orgasms</h1>
+
+<div id="orgasms">
+  <% @orgasms.each do |orgasm| %>
+    <%= render orgasm %>
+    <p>
+      <%= link_to "Show this orgasm", orgasm %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New orgasm", new_orgasm_path %>

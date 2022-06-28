@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @orgasm %>
+
+<div>
+  <%= link_to "Edit this orgasm", edit_orgasm_path(@orgasm) %> |
+  <%= link_to "Back to orgasms", orgasms_path %>
+
+  <%= button_to "Destroy this orgasm", @orgasm, method: :delete %>
+</div>

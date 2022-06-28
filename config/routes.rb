@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Nuttracker::Engine => "/nut"
   get 'help', to: 'help#index', as: 'help'
   get 'leaderboard', to: 'leaderboard#index', as: 'leaderboard'
   get 'notification/show'
