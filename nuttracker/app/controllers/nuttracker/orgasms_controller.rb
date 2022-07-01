@@ -1,10 +1,18 @@
 module Nuttracker
   class OrgasmsController < ApplicationController
     before_action :set_orgasm, only: %i[ show edit update destroy ]
+    before_action :authorize, only: %i[ create new edit update destroy ]
 
     # GET /orgasms
     def index
       @orgasms = Orgasm.all
+    end
+
+    # GET /orgasmers/:username
+    def index_for_user
+      @user = User.find_by(username: params['username']) if params['username']
+      @orgasms = Orgasm.all.where(user: @user) if @user.present?
+      @orgasms = Orgasm.none unless @user.present?
     end
 
     # GET /orgasms/1
@@ -23,9 +31,10 @@ module Nuttracker
     # POST /orgasms
     def create
       @orgasm = Orgasm.new(orgasm_params)
+      @orgasm.user_id = current_user&.id || nil
 
       if @orgasm.save
-        redirect_to @orgasm, notice: "Orgasm was successfully created."
+        redirect_to new_orgasm_path, notice: "Orgasm was successfully created."
       else
         render :new, status: :unprocessable_entity
       end
@@ -54,7 +63,7 @@ module Nuttracker
 
       # Only allow a list of trusted parameters through.
       def orgasm_params
-        params.require(:orgasm).permit(:user_id, :is_ruined, :rating)
+        params.require(:orgasm).permit(:is_ruined, :rating)
       end
   end
 end

@@ -41,6 +41,8 @@
   <%= render 'details_edit', user: @user %>
 <% end %>
 
+<%= turbo_frame_tag 'orgasm_form', src: '/nut/orgasms/new' %>
+
 <%= render partial: 'past_links', locals: { past_links: @past_links } %>
 
 <% unless @past_links.empty? %>

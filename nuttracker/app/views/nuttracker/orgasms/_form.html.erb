@@ -1,32 +1,45 @@
-<%= form_with(model: orgasm) do |form| %>
-  <% if orgasm.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(orgasm.errors.count, "error") %> prohibited this orgasm from being saved:</h2>
+<%= turbo_frame_tag 'orgasm_form' do %>
 
-      <ul>
-        <% orgasm.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <div class="flashes">
+    <% if notice %>
+      <div class="flash--success unbounded">
+        <%= notice %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= form_with(model: orgasm, class: 'orgasms') do |form| %>
+    <h3>Rate a recent orgasm</h3>
+    <div class="orgasms__rating">
+      <%= form.label :rating do %>
+        1 😿
+        <%= form.radio_button :rating, 1 %>
+      <% end %>
+      <%= form.label :rating do %>
+        2
+        <%= form.radio_button :rating, 2 %>
+      <% end %>
+      <%= form.label :rating do %>
+        3
+        <%= form.radio_button :rating, 3, checked: true %>
+      <% end %>
+      <%= form.label :rating do %>
+        4
+        <%= form.radio_button :rating, 4 %>
+      <% end %>
+      <%= form.label :rating do %>
+        5 😻
+        <%= form.radio_button :rating, 5 %>
+      <% end %>
+    </div>
+    <%= form.label :is_ruined, class: 'form__row' do %>
+      <ion-icon name="water"></ion-icon>
+      Was Ruined
+      <%= form.check_box :is_ruined %>
+    <% end %>
+
+    <div>
+      <%= form.submit 'Log Orgasm' %>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.label :is_ruined, style: "display: block" %>
-    <%= form.check_box :is_ruined %>
-  </div>
-
-  <div>
-    <%= form.label :rating, style: "display: block" %>
-    <%= form.number_field :rating %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>

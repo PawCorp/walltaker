@@ -232,31 +232,36 @@ blockquote > .byline {
     padding-right: 3rem;
 }
 
-body > .flashes {
+.flashes {
     display: flex;
     flex-direction: column;
 }
 
-body > .flashes > * {
+.flashes > * {
     background: var(--accent-bg);
     padding: 0.5rem 1rem 0.6rem;
     border: 1px solid var(--border);
     border-top: 0;
 }
 
-body > .flashes > .flash--success {
+.flashes > .unbounded {
+    border-top: 1px solid var(--border);
+    margin: 0.5rem 0;
+}
+
+.flashes > .flash--success {
     color: var(--success);
 }
 
-body > .flashes > .flash--success::before {
+.flashes > .flash--success::before {
     content: "✅"
 }
 
-body > .flashes > .flash--danger {
+.flashes > .flash--danger {
     color: var(--danger);
 }
 
-body > .flashes > .flash--danger::before {
+.flashes > .flash--danger::before {
     content: "🚫"
 }
 

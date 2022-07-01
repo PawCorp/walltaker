@@ -86,3 +86,46 @@ h2 > span > .text-charm__medal:hover {
         font-size: 2rem;
     }
 }
+
+form.orgasms {
+    background: var(--accent-bg);
+    padding: 1.5rem;
+}
+
+form.orgasms h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+form.orgasms input[type=submit] {
+    width: auto;
+}
+
+.orgasms__rating {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.orgasms__rating label {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form__row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin: 0.75rem 0;
+    cursor: pointer;
+}
+
+.form__row label {
+    margin: 0;
+}
+
+.form__row input[type=checkbox] {
+    transform: translateY(0.1em);
+}
