@@ -1031,3 +1031,17 @@ section .then {
 .accordion__trigger ion-icon {
     transform: translateY(2.5px);
 }
+
+.two-col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+@media screen and (max-width: 760px) {
+    .two-col {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}

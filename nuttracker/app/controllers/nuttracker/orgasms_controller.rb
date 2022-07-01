@@ -36,7 +36,7 @@ module Nuttracker
       if @orgasm.save
         redirect_to new_orgasm_path, notice: "Orgasm was successfully created."
       else
-        render :new, status: :unprocessable_entity
+        redirect_to new_orgasm_path, alert: @orgasm.errors.first.full_message
       end
     end
 

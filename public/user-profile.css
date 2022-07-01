@@ -87,19 +87,36 @@ h2 > span > .text-charm__medal:hover {
     }
 }
 
+turbo-frame#orgasm_form {
+    display: flex;
+    flex-direction: column;
+}
+
+turbo-frame#orgasm_form .accent-block {
+    flex: 1 1 100%;
+    margin-top: 0;
+}
+
+turbo-frame.accent-block {
+    margin-top: 0;
+}
+
 form.orgasms {
-    background: var(--accent-bg);
-    padding: 1.5rem;
+    padding: 0;
 }
 
 form.orgasms h3 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent);
 }
 
 form.orgasms input[type=submit] {
     width: auto;
+    margin: 0 auto;
+    display: block;
 }
 
 .orgasms__rating {
@@ -107,11 +124,21 @@ form.orgasms input[type=submit] {
     grid-template-columns: repeat(5, 1fr);
 }
 
-.orgasms__rating label {
+.orgasms__rating .orgasms__rating__option {
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-size: 1.1rem;
+    color: var(--accent);
+    font-weight: bold;
+}
+.orgasms__rating .orgasms__rating__option label {
+    margin-bottom: 0.2rem;
+}
+
+form.orgasms .form__row {
+    justify-content: center;
 }
 
 .form__row {

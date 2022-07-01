@@ -1,45 +1,69 @@
 <%= turbo_frame_tag 'orgasm_form' do %>
+  <div class="accent-block">
+    <div class="accent-block__charm">
+      <ion-icon name="eye-off"></ion-icon>
+      Only you see this
+    </div>
+    <%= form_with(model: orgasm, class: 'orgasms') do |form| %>
+      <h2>
+        <ion-icon name="ice-cream" class="big"></ion-icon>
+        Orgasm
+      </h2>
 
-  <div class="flashes">
-    <% if notice %>
-      <div class="flash--success unbounded">
-        <%= notice %>
+      <p>
+        A logged orgasm is recorded on your public profile, and will benefit your ranking on the browse page! It's also just fun.
+      </p>
+
+      <div class="flashes">
+        <% flash.each do |type, msg| %>
+          <div class="flash--<%= type == 'notice' ? 'success' : 'danger' %> unbounded">
+            <%= msg %>
+          </div>
+        <% end %>
+      </div>
+
+      <h3>Satisfaction rating for this orgasm</h3>
+      <div class="orgasms__rating">
+        <div class="orgasms__rating__option">
+          <%= form.label :rating do %>
+            😿 1
+          <% end %>
+          <%= form.radio_button :rating, 1 %>
+        </div>
+        <div class="orgasms__rating__option">
+          <%= form.label :rating do %>
+            2
+          <% end %>
+          <%= form.radio_button :rating, 2 %>
+        </div>
+        <div class="orgasms__rating__option">
+          <%= form.label :rating do %>
+            3
+          <% end %>
+          <%= form.radio_button :rating, 3 %>
+        </div>
+        <div class="orgasms__rating__option">
+          <%= form.label :rating do %>
+            4
+          <% end %>
+          <%= form.radio_button :rating, 4 %>
+        </div>
+        <div class="orgasms__rating__option">
+          <%= form.label :rating do %>
+            5 😻
+          <% end %>
+          <%= form.radio_button :rating, 5 %>
+        </div>
+      </div>
+      <%= form.label :is_ruined, class: 'form__row' do %>
+        <ion-icon name="water"></ion-icon>
+        Was Ruined
+        <%= form.check_box :is_ruined %>
+      <% end %>
+
+      <div>
+        <%= form.submit 'Log Orgasm' %>
       </div>
     <% end %>
   </div>
-
-  <%= form_with(model: orgasm, class: 'orgasms') do |form| %>
-    <h3>Rate a recent orgasm</h3>
-    <div class="orgasms__rating">
-      <%= form.label :rating do %>
-        1 😿
-        <%= form.radio_button :rating, 1 %>
-      <% end %>
-      <%= form.label :rating do %>
-        2
-        <%= form.radio_button :rating, 2 %>
-      <% end %>
-      <%= form.label :rating do %>
-        3
-        <%= form.radio_button :rating, 3, checked: true %>
-      <% end %>
-      <%= form.label :rating do %>
-        4
-        <%= form.radio_button :rating, 4 %>
-      <% end %>
-      <%= form.label :rating do %>
-        5 😻
-        <%= form.radio_button :rating, 5 %>
-      <% end %>
-    </div>
-    <%= form.label :is_ruined, class: 'form__row' do %>
-      <ion-icon name="water"></ion-icon>
-      Was Ruined
-      <%= form.check_box :is_ruined %>
-    <% end %>
-
-    <div>
-      <%= form.submit 'Log Orgasm' %>
-    </div>
-  <% end %>
 <% end %>
