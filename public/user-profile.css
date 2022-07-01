@@ -156,3 +156,11 @@ form.orgasms .form__row {
 .form__row input[type=checkbox] {
     transform: translateY(0.1em);
 }
+
+h2.with-chart {
+    padding: 0;
+}
+
+h2.with-chart #chart-1 {
+    transform: translateY(7px);
+}

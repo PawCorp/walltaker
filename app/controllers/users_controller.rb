@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def show
     set_user_vars
+    @total_orgasms_by_day = Nuttracker::Orgasm.all.where(user: @user).group_by_day(:created_at, range: 1.weeks.ago.midnight..Time.now).count
   end
 
   def edit
