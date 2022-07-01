@@ -2,6 +2,7 @@ module Nuttracker
   class OrgasmsController < ApplicationController
     before_action :set_orgasm, only: %i[ show edit update destroy ]
     before_action :authorize, only: %i[ create new edit update destroy ]
+    before_action :protected, only: %i[ edit update destroy ]
 
     # GET /orgasms
     def index
@@ -56,14 +57,19 @@ module Nuttracker
     end
 
     private
-      # Use callbacks to share common setup or constraints between actions.
-      def set_orgasm
-        @orgasm = Orgasm.find(params[:id])
-      end
 
-      # Only allow a list of trusted parameters through.
-      def orgasm_params
-        params.require(:orgasm).permit(:is_ruined, :rating)
-      end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_orgasm
+      @orgasm = Orgasm.find(params[:id])
+    end
+
+    # Only allow a list of trusted parameters through.
+    def orgasm_params
+      params.require(:orgasm).permit(:is_ruined, :rating)
+    end
+
+    def protected
+      redirect_to '/', alert: 'Not authorized' if @orgasm.user.id != current_user.id
+    end
   end
 end
