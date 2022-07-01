@@ -67,6 +67,9 @@ class ApplicationController < ActionController::Base
     Comment.create user_id: link.user.id, link_id: link.id, content: comment_text
     Comment.create user_id: link.user.id, link_id: link.id, content: link.response_text unless link.response_type.nil?
 
+    # If a came reaction, log an orgasm
+    Nuttracker::Orgasm.create rating: 3, is_ruined: false, user_id: link.user.id if link.response_type == 'came'
+
     # If a disgust reaction, revert to old wallpaper
     if link.response_type == 'disgust'
       past_links = PastLink.where(link_id: link.id, post_url: link.post_url)
