@@ -64,10 +64,10 @@
   <% end %>
 <% end %>
 
-<div class="two-col">
-  <%= turbo_frame_tag 'orgasm_form', src: '/nut/orgasms/new' %>
 
-  <% if @is_current_user %>
+<% if @is_current_user %>
+  <div class="two-col">
+    <%= turbo_frame_tag 'orgasm_form', src: '/nut/orgasms/new' %>
     <%= turbo_frame_tag 'api_key_form', class: "accent-block" do %>
       <div class="accent-block__charm">
         <ion-icon name="eye-off"></ion-icon>
@@ -100,8 +100,8 @@
         <% end %>
       </div>
     <% end %>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
 <% if @links.count.positive? %>
   <% @links.each do |link| %>
