@@ -353,6 +353,11 @@ turbo-frame#pornsearch_results .results {
     margin: 2rem 0;
 }
 
+turbo-frame#pornsearch_results .pornsearch_results__buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
 turbo-frame#pornsearch_results .results form {
     display: block;
     position: relative;

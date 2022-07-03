@@ -16,7 +16,10 @@
         <% end %>
       <% end %>
     </div>
-    <%= link_to 'next', url_for({ tags: @last_tags, after: @posts.last['id'], link: @link.id }) %>
+    <div class="pornsearch_results__buttons">
+      <%= link_to 'back', url_for({ tags: @last_tags, before: @posts.first['id'], link: @link.id }) %>
+      <%= link_to 'next', url_for({ tags: @last_tags, after: @posts.last['id'], link: @link.id }) %>
+    </div>
   <% end %>
   <% if @posts.empty? %>
     <p>
