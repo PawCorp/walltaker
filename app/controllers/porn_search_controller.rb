@@ -10,7 +10,7 @@ class PornSearchController < ApplicationController
     sanitized_blacklist = @link.blacklist.downcase.gsub(/[^a-z_\(\)\d ]/, '')
     append_to_tags = ''
     append_to_tags += @link.theme if (@link.theme)
-    append_to_tags += ' ' + ((sanitized_blacklist.split.map { |tag| "-#{tag}"}).join ' ') unless (sanitized_blacklist.empty?)
+    append_to_tags += ' ' + ((sanitized_blacklist.split.map { |tag| "-#{tag}" }).join ' ') unless (sanitized_blacklist.empty?)
     @posts = get_tag_results porn_search_params[:tags], porn_search_params[:after], porn_search_params[:before], append_to_tags
     @last_tags = porn_search_params[:tags]
 
@@ -22,7 +22,7 @@ class PornSearchController < ApplicationController
   private
 
   def get_tag_results(tag_string, after, before, append_to_tags)
-    padded_tag_string = tag_string + ' type:jpg type:png'
+    padded_tag_string = tag_string + ' -animated'
     unless append_to_tags.nil? || append_to_tags.empty?
       padded_tag_string = "#{padded_tag_string} #{append_to_tags.to_s}"
     end
@@ -38,7 +38,15 @@ class PornSearchController < ApplicationController
       return nil
     end
 
-    JSON.parse(response.body)['posts']
+    results = JSON.parse(response.body)['posts']
+
+    if results.present? && results.class == Array
+      results.filter do |post|
+        post['file']['ext'] == 'png' || post['file']['ext'] == 'jpg' if post['file'] && post['file']['ext']
+      end
+    else
+      []
+    end
   end
 
   # Only allow a list of trusted parameters through.
