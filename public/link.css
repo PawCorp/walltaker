@@ -355,7 +355,24 @@ turbo-frame#pornsearch_results .results {
 
 turbo-frame#pornsearch_results .pornsearch_results__buttons {
     display: flex;
+    gap: 0.5rem;
     justify-content: space-between;
+    align-items: center;
+    background: var(--bg);
+    margin: 1rem -0 0;
+    border-radius: 0.3rem;
+    overflow-x: hidden;
+}
+turbo-frame#pornsearch_results .pornsearch_results__buttons a {
+    padding: 0.5rem 1rem 0.5rem;
+    background: var(--accent);
+    color: var(--bg);
+}
+
+turbo-frame#pornsearch_results .pornsearch_results__buttons a[disabled] {
+    pointer-events: none;
+    background: var(--border);
+    color: var(--disabled);
 }
 
 turbo-frame#pornsearch_results .results form {

@@ -1,5 +1,10 @@
 <%= turbo_frame_tag "pornsearch_results" do %>
   <% unless @posts.empty? || @link.id.nil? %>
+    <div class="pornsearch_results__buttons">
+      <%= link_to 'back', url_for({ tags: @last_tags, before: @posts.first['id'], page_number: @page_number - 1, link: @link.id }), disabled: @page_number <= 1 %>
+      <span><%= @page_number %></span>
+      <%= link_to 'next', url_for({ tags: @last_tags, after: @posts.last['id'], page_number: @page_number + 1, link: @link.id }) %>
+    </div>
     <div class="results">
       <% @posts.each do |post| %>
         <% if post['preview']['url'] %>
@@ -15,10 +20,6 @@
           <strong>Blacklisted</strong>
         <% end %>
       <% end %>
-    </div>
-    <div class="pornsearch_results__buttons">
-      <%= link_to 'back', url_for({ tags: @last_tags, before: @posts.first['id'], link: @link.id }) %>
-      <%= link_to 'next', url_for({ tags: @last_tags, after: @posts.last['id'], link: @link.id }) %>
     </div>
   <% end %>
   <% if @posts.empty? %>

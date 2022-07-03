@@ -4,6 +4,8 @@ class PornSearchController < ApplicationController
   end
 
   def search
+    @page_number = porn_search_params[:page_number].to_i
+    @page_number = 1 if @page_number == 0
     @link = Link.find(porn_search_params[:link]) if porn_search_params[:link]
     sanitized_blacklist = @link.blacklist.downcase.gsub(/[^a-z_\(\)\d ]/, '')
     append_to_tags = ''
@@ -41,6 +43,6 @@ class PornSearchController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def porn_search_params
-    params.permit(:tags, :after, :before, :link)
+    params.permit(:tags, :after, :before, :page_number, :link)
   end
 end
