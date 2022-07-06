@@ -82,4 +82,7 @@ gem 'rbs_rails', require: false
 gem 'ahoy_matey'
 gem "blazer"
 gem "lograge"
+gem "graphql"
+
 gem 'nuttracker', path: 'nuttracker'
+gem "graphiql-rails", group: :development

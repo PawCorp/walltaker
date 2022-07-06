@@ -4,6 +4,12 @@ class User < ApplicationRecord
   has_many :link
   has_many :notifications
 
+  # has many friendships, except they could be the sender OR receiver.
+  def friendships
+    Friendship.where("sender_id = ? OR receiver_id = ?", self.id, self.id)
+  end
+
+
   validates_uniqueness_of :email, :username
 
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,

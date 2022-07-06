@@ -60,6 +60,7 @@
     <orderEntry type="library" scope="PROVIDED" name="erubi (v1.10.0, ruby-3.1.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="excon (v0.91.0, ruby-3.1.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="globalid (v1.0.0, ruby-3.1.0-p0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="graphql (v2.0.11, ruby-3.1.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="groupdate (v6.0.1, ruby-3.1.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v1.9.1, ruby-3.1.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="importmap-rails (v1.0.2, ruby-3.1.0-p0) [gem]" level="application" />
@@ -136,6 +137,20 @@
         <option value="channel" />
         <option value="controller" />
         <option value="generator" />
+        <option value="graphql:enum" />
+        <option value="graphql:input" />
+        <option value="graphql:install" />
+        <option value="graphql:install:mutation_root" />
+        <option value="graphql:interface" />
+        <option value="graphql:loader" />
+        <option value="graphql:mutation" />
+        <option value="graphql:mutation_create" />
+        <option value="graphql:mutation_delete" />
+        <option value="graphql:mutation_update" />
+        <option value="graphql:object" />
+        <option value="graphql:relay" />
+        <option value="graphql:scalar" />
+        <option value="graphql:union" />
         <option value="helper" />
         <option value="integration_test" />
         <option value="jbuilder" />
@@ -172,6 +187,20 @@
         <option value="channel" />
         <option value="controller" />
         <option value="generator" />
+        <option value="graphql:enum" />
+        <option value="graphql:input" />
+        <option value="graphql:install" />
+        <option value="graphql:install:mutation_root" />
+        <option value="graphql:interface" />
+        <option value="graphql:loader" />
+        <option value="graphql:mutation" />
+        <option value="graphql:mutation_create" />
+        <option value="graphql:mutation_delete" />
+        <option value="graphql:mutation_update" />
+        <option value="graphql:object" />
+        <option value="graphql:relay" />
+        <option value="graphql:scalar" />
+        <option value="graphql:union" />
         <option value="helper" />
         <option value="integration_test" />
         <option value="jbuilder" />
