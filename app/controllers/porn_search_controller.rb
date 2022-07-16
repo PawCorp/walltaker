@@ -11,6 +11,7 @@ class PornSearchController < ApplicationController
     append_to_tags = ''
     append_to_tags += @link.theme if (@link.theme)
     append_to_tags += ' ' + ((sanitized_blacklist.split.map { |tag| "-#{tag}" }).join ' ') unless (sanitized_blacklist.empty?)
+    append_to_tags += ' score:>' + @link.min_score.to_s if @link.min_score.present? && @link.min_score != 0
     @posts = get_tag_results porn_search_params[:tags], porn_search_params[:after], porn_search_params[:before], append_to_tags
     @last_tags = porn_search_params[:tags]
 
