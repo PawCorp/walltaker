@@ -1,7 +1,5 @@
 class ApplicationController < ActionController::Base
 
-  private
-
   def get_tag_results(tag_string, after, before, append_to_tags, limit = 15)
     padded_tag_string = tag_string + ' -animated'
     unless append_to_tags.nil? || append_to_tags.empty?
@@ -107,6 +105,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  helper_method :log_link_presence
+
   def on_link_react (link)
     # Make notification for setter
     notification_text = "#{link.user.username} loved your post!" if link.response_type == 'horny'
@@ -138,8 +138,6 @@ class ApplicationController < ActionController::Base
 
     link
   end
-
-  helper_method :log_link_presence
 
   def authorize
     redirect_to new_session_url, alert: 'Not authorized' if current_user.nil?
