@@ -177,7 +177,7 @@ class LinksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def link_params
-    params.require(:link).permit(:expires, :terms, :blacklist, :friends_only, :never_expires, :theme, :response_text, :response_type)
+    params.require(:link).permit(:expires, :terms, :blacklist, :friends_only, :never_expires, :theme, :min_score, :response_text, :response_type)
   end
 
   def post_blacklisted?(blacklist, theme, e621_post)

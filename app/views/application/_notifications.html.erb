@@ -1,7 +1,7 @@
 <%= turbo_frame_tag "header_notifications", target: '_top' do %>
   <div class="notifications" data-controller="notifications">
     <%= button_tag class: 'notification-bell', data: { 'notifications-target': 'trigger', 'action': 'click->notifications#toggle' } do %>
-      <ion-icon name="notifications"></ion-icon>
+      <ion-icon role="presentation" name="notifications"></ion-icon>
     <% end %>
 
     <div class="notifications__popover" data-notifications-target="popover">
@@ -14,13 +14,13 @@
           <%= link_to notification_path(notification.id), class: 'notification' do %>
             <% case notification.notification_type %>
               <% when 'friend_request_sent' %>
-                <ion-icon name="send"></ion-icon>
+                <ion-icon role="presentation" name="send"></ion-icon>
               <% when 'friend_request_received' %>
-                <ion-icon name="boat"></ion-icon>
+                <ion-icon role="presentation" name="boat"></ion-icon>
               <% when 'friend_request_they_accepted' %>
-                <ion-icon name="heart"></ion-icon>
+                <ion-icon role="presentation" name="heart"></ion-icon>
               <% when 'post_response' %>
-                <ion-icon name="chatbubble-ellipses"></ion-icon>
+                <ion-icon role="presentation" name="chatbubble-ellipses"></ion-icon>
             <% end %>
             <div>
               <p><%= notification.text %></p>
@@ -32,7 +32,7 @@
         <% end %>
 
         <%= button_to clear_notifications_path, method: 'delete' do %>
-          <ion-icon name="trash"></ion-icon>
+          <ion-icon role="presentation" name="trash"></ion-icon>
         <% end %>
       <% end %>
     </div>

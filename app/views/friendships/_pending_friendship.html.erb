@@ -10,11 +10,11 @@
     <p>Are you sure you want to delete your pending friend request to <strong><%= other_user.username %></strong>? You can always send another later.</p>
     <div class="modal__buttons">
       <%= button_tag class: 'no-underline primary', data: { 'friendship-target': 'cancel', action: 'click->friendship#cancel' } do %>
-        <ion-icon name="close"></ion-icon>
+        <ion-icon role="presentation" name="close"></ion-icon>
         Leave as-is
       <% end %>
       <%= button_to friendship, method: :delete, class: 'no-underline secondary', data: { action: 'click->friendship#confirm' } do %>
-        <ion-icon name="heart-dislike"></ion-icon>
+        <ion-icon role="presentation" name="heart-dislike"></ion-icon>
         Confirm
       <% end %>
     </div>
@@ -22,24 +22,24 @@
 
   <!-- markup -->
   <div class="friendship__names">
-    <ion-icon name="send"></ion-icon>
+    <ion-icon role="presentation" name="send"></ion-icon>
     <%= link_to other_user.username, user_path(other_user.username), data: { controller: "user-reference" } %>
     sent <%= time_ago_in_words friendship.updated_at %> ago
   </div>
   <div class="friendship__actions">
     <% if action_name == 'index' %>
       <%= button_tag class: 'no-underline secondary', data: { action: 'click->friendship#confirm' } do %>
-        <ion-icon name="heart-dislike"></ion-icon>
+        <ion-icon role="presentation" name="heart-dislike"></ion-icon>
         Cancel
       <% end %>
     <% end %>
     <% if action_name == 'requests' %>
       <%= button_to "#{url_for(friendship)}/accept", method: :put, class: 'no-underline' do %>
-        <ion-icon name="heart"></ion-icon>
+        <ion-icon role="presentation" name="heart"></ion-icon>
         Accept
       <% end %>
       <%= button_to friendship, method: :delete, class: 'no-underline secondary' do %>
-        <ion-icon name="heart-dislike"></ion-icon>
+        <ion-icon role="presentation" name="heart-dislike"></ion-icon>
         Ignore
       <% end %>
     <% end %>

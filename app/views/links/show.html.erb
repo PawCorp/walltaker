@@ -7,7 +7,7 @@
       <p>Are you sure you want to delete this link?</p>
       <div class="modal__buttons">
         <%= button_tag class: 'no-underline primary', data: { 'link-target': 'cancel', action: 'click->link#cancel' } do %>
-          <ion-icon name="close"></ion-icon>
+          <ion-icon role="presentation" name="close"></ion-icon>
           Cancel
         <% end %>
         <%= button_to "Delete this link", @link, method: :delete, class: 'no-underline secondary' %>
@@ -18,7 +18,7 @@
     </div>
     <div class="right">
       <a href="<%= edit_link_path(@link) %>" title="Edit this link" class="no-underline">
-        <ion-icon name="build"></ion-icon>
+        <ion-icon role="presentation" name="build"></ion-icon>
         Edit
       </a>
       <%= button_tag "Delete this link", data: { action: 'click->link#confirm' } %>
@@ -34,7 +34,7 @@
     <% if !@has_friendship %>
       <div class="right">
         <a href="<%= url_for :action => :new, :controller => :friendships, :params => { :with => @link.user.username } %>" title="Become friends" class="no-underline">
-          <ion-icon name="person-add"></ion-icon>
+          <ion-icon role="presentation" name="person-add"></ion-icon>
           Send Friend Request
         </a>
       </div>
@@ -48,12 +48,12 @@
 <% if @is_current_user %>
   <div class="accent-block">
     <div class="accent-block__charm">
-      <ion-icon name="eye-off"></ion-icon>
+      <ion-icon role="presentation" name="eye-off"></ion-icon>
       Only you see this
     </div>
 
     <h2>
-      <ion-icon name="person" class="big"></ion-icon>
+      <ion-icon role="presentation" name="person" class="big"></ion-icon>
       Your Link
     </h2>
 
@@ -79,14 +79,14 @@
     </p>
 
     <a download href="<%= link_url(@link) %>/walltaker.toml">
-      <ion-icon name="document-outline"></ion-icon>
+      <ion-icon role="presentation" name="document-outline"></ion-icon>
       walltaker.toml
     </a>
   </div>
 
   <div class="accent-block">
     <div class="accent-block__charm">
-      <ion-icon name="information-circle"></ion-icon>
+      <ion-icon role="presentation" name="information-circle"></ion-icon>
       Need help?
     </div>
     I wrote up some tips about combating harassment on the <a href="<%= help_path %>#bad-wallpaper">help page.</a>
@@ -96,8 +96,8 @@
 <% if current_user %>
   <aside class="comments-sidebar" data-controller="comments-sidebar" data-hidden="true">
     <button data-comments-sidebar-target="toggle" data-action="click->comments-sidebar#toggleClick" data-hidden="true">
-      <ion-icon class="toggle-open-icon" name="chatbox-ellipses"></ion-icon>
-      <ion-icon class="toggle-close-icon" name="caret-forward"></ion-icon>
+      <ion-icon role="presentation" class="toggle-open-icon" name="chatbox-ellipses"></ion-icon>
+      <ion-icon role="presentation" class="toggle-close-icon" name="caret-forward"></ion-icon>
       <div class="toggle-badge" data-comments-sidebar-target="badge" data-hidden="true"></div>
     </button>
     <%= turbo_stream_from "link_comments_#{@link.id}" %>
@@ -113,7 +113,7 @@
 
 <div class="tabs" data-controller="tabs">
   <div class="tabs__charm">
-    <ion-icon name="magnet"></ion-icon>
+    <ion-icon role="presentation" name="magnet"></ion-icon>
     Select wallpaper via...
   </div>
 
@@ -131,7 +131,7 @@
       <p>This link's wallpaper was changed less than a minute ago, are you sure you want to overwrite it so soon?</p>
       <div class="modal__buttons">
         <%= button_tag class: 'no-underline primary', data: { 'link-target': 'cancel', action: 'click->porn-search#cancel' } do %>
-          <ion-icon name="close"></ion-icon>
+          <ion-icon role="presentation" name="close"></ion-icon>
           Cancel
         <% end %>
         <%= button_tag "Yes, Use This Wallpaper", class: 'no-underline secondary', data: { action: 'click->porn-search#confirm' } %>
@@ -144,7 +144,7 @@
     <% unless (@link.theme.nil? || @link.theme.empty?) %>
       <p class="subdued">
         The theme tag <strong>
-        <ion-icon name="pricetag-outline"></ion-icon> <%= @link.theme %></strong> is being automatically applied.
+        <ion-icon role="presentation" name="pricetag-outline"></ion-icon> <%= @link.theme %></strong> is being automatically applied.
       </p>
     <% end %>
     <%= turbo_frame_tag "pornsearch", src: porn_search_index_path({ link: @link.id }) do %>

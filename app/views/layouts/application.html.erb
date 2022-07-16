@@ -37,7 +37,7 @@
           <%= current_user.username %>
         </a>
         <a href="<%= url_for :action => :browse, :controller => :links %>">
-          <ion-icon name="sparkles"></ion-icon>
+          <ion-icon role="presentation" name="sparkles"></ion-icon>
           Browse
         </a>
         <%= link_to 'Links', links_path %>
@@ -48,7 +48,7 @@
         <%= render partial: 'notifications' %>
       <% else %>
         <a href="<%= url_for :action => :browse, :controller => :links %>">
-          <ion-icon name="sparkles"></ion-icon>
+          <ion-icon role="presentation" name="sparkles"></ion-icon>
           Browse
         </a>
         <%= link_to 'Sign Up', signup_path %>
@@ -79,7 +79,7 @@
     © joi.how 2022 / Build #{{--buildnumber--}} by {{--buildagent--}}
     <% if current_user && current_user.admin %>
       <%= link_to blazer_path do %>
-        <ion-icon name="stats-chart"></ion-icon> Stats
+        <ion-icon role="presentation" name="stats-chart"></ion-icon> Stats
       <% end %>
     <% end %>
   </small>

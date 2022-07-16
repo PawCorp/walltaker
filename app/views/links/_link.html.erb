@@ -2,7 +2,7 @@
   <% if !link.never_expires && link.expires <= Time.now.utc %>
     <div class="accent-block accent-block--link">
       <div class="accent-block__charm">
-        <ion-icon name="eye-off"></ion-icon>
+        <ion-icon role="presentation" name="eye-off"></ion-icon>
         Only you see this because it's expired
       </div>
   <% end %>
@@ -29,7 +29,7 @@
     <div class="link--expires">
       <% if link.never_expires %>
         <em>
-          <ion-icon name="infinite"></ion-icon>
+          <ion-icon role="presentation" name="infinite"></ion-icon>
           Never expires
         </em>
       <% else %>
@@ -45,7 +45,7 @@
     <% unless link.theme.nil? || link.theme.empty? %>
       <div class="link--theme">
         <strong>
-          <ion-icon name="pricetag-outline"></ion-icon>
+          <ion-icon role="presentation" name="pricetag-outline"></ion-icon>
           Theme
         </strong>
         <span><%= link.theme %></span>
@@ -54,7 +54,7 @@
 
     <div class="link--blacklist">
       <strong>
-        <ion-icon name="cut"></ion-icon>
+        <ion-icon role="presentation" name="cut"></ion-icon>
         Blacklist</strong>
       <div>
         <%= 'No Blacklisted Tags' if link.blacklist == '' %>
@@ -77,7 +77,7 @@
     <div class="link--status-bar">
       <% if link.friends_only %>
         <abbr title="This link is for friends only" class="link--friends-only">
-          <ion-icon name="document-lock"></ion-icon>
+          <ion-icon role="presentation" name="document-lock"></ion-icon>
         </abbr>
       <% end %>
 
@@ -87,13 +87,13 @@
         <% case link_agent_to_icon link.last_ping_user_agent %>
         <% when :desktop %>
           <span>Pawcorp Desktop</span>
-          <ion-icon name="laptop-outline"></ion-icon>
+          <ion-icon role="presentation" name="laptop-outline"></ion-icon>
         <% when :android %>
           <span>Pawcorp Android</span>
-          <ion-icon name="phone-portrait-outline"></ion-icon>
+          <ion-icon role="presentation" name="phone-portrait-outline"></ion-icon>
         <% when :joihow %>
           <span>JOI.how</span>
-          <ion-icon name="earth-outline"></ion-icon>
+          <ion-icon role="presentation" name="earth-outline"></ion-icon>
         <% when :automate %>
           <span>Deans' Client</span>
           <svg height="28" width="28">
@@ -101,12 +101,12 @@
           </svg>
         <% when :wallpaper_engine %>
           <span>Lycaon's Wallpaper Engine</span>
-          <ion-icon name="cog"></ion-icon>
+          <ion-icon role="presentation" name="cog"></ion-icon>
         <% when :swift %>
           <span>Mac Client</span>
-          <ion-icon class="apple-icon" name="logo-apple"></ion-icon>
+          <ion-icon role="presentation" class="apple-icon" name="logo-apple"></ion-icon>
         <% when :unknown %>
-          <ion-icon name="help-circle-outline"></ion-icon>
+          <ion-icon role="presentation" name="help-circle-outline"></ion-icon>
         <% end %>
       </div>
     </div>

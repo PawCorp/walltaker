@@ -1,7 +1,7 @@
 <% if @your_total_wallpapers_changed_all == 0 %>
   <div class="accent-block spaced">
     <div class="accent-block__charm">
-      <ion-icon name="information-circle"></ion-icon>
+      <ion-icon role="presentation" name="information-circle"></ion-icon>
       Need help?
     </div>
     I made a getting started guide on the <a href="<%= help_path %>">help page!</a>
@@ -67,7 +67,7 @@
       <h2>Your Total</h2>
       <div class="accent-block tight-top">
         <div class="accent-block__charm">
-          <ion-icon name="eye-off"></ion-icon>
+          <ion-icon role="presentation" name="eye-off"></ion-icon>
           Only you see this
         </div>
         <div class="dashboard__total-updates__content"><em><%= @your_total_wallpapers_changed_all %></em>wallpapers
@@ -158,7 +158,7 @@
 
 <a href="https://ko-fi.com/pawcorp" target="_blank" class="kofi-button">
   <button>
-    <ion-icon name="cafe"></ion-icon>
+    <ion-icon role="presentation" name="cafe"></ion-icon>
     Just the tip!
   </button>
 </a>

@@ -6,6 +6,7 @@ class Link < ApplicationRecord
   validates :expires, presence: true, unless: :never_expires?
   validates :theme, format: { without: /\s+/i, message: 'must be only 1 tag.' }
   validates :theme, format: { without: /\:/, message: 'must not contain filter or sort tags. (like score:>30)' }
+  validates :min_score, comparison: { greater_than: -1, less_than: 301 }
   visitable :ahoy_visit
 
   after_update_commit do

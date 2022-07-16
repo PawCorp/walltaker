@@ -17,7 +17,7 @@
 
     <div class="link--form--checkbox-row">
       <%= form.label :never_expires do %>
-        <ion-icon name="infinite"></ion-icon>
+        <ion-icon role="presentation" name="infinite"></ion-icon>
         Never expires
       <% end %>
       <%= form.check_box :never_expires, "data-expiry-form-target": "switch", "data-action": "click->expiry-form#toggle" %>
@@ -26,7 +26,7 @@
 
   <div class="link--form--checkbox-row">
     <%= form.label :friends_only do %>
-      <ion-icon name="document-lock"></ion-icon>
+      <ion-icon role="presentation" name="document-lock"></ion-icon>
       Friends Only (No public access)
     <% end %>
     <%= form.check_box :friends_only %>
@@ -42,9 +42,18 @@
     <%= form.text_area :terms, size: '70x5' %>
   </div>
 
+  <div class="link--form--min_score" data-controller="range">
+    <%= form.label :min_score do %>
+      <ion-icon role="presentation" name="shield-outline"></ion-icon>
+      Minimum score
+    <% end %>
+    <%= form.range_field :min_score, min: 0, max: 300, value: link.min_score || 0, data: { 'range-target': 'input', action: 'input->range#refresh' } %>
+    <output for="link_min_score" data-range-target="value"></output>
+  </div>
+
   <div data-controller="theme-form" class="link--form--theme">
     <%= form.label :theme do %>
-      <ion-icon name="pricetag-outline"></ion-icon>
+      <ion-icon role="presentation" name="pricetag-outline"></ion-icon>
       Theme tag
       <input type="checkbox" data-theme-form-target="switch" data-action="click->theme-form#toggle"/>
     <% end %>
@@ -62,7 +71,7 @@
 
 <div class="accent-block">
   <div class="accent-block__charm">
-    <ion-icon name="information-circle"></ion-icon>
+    <ion-icon role="presentation" name="information-circle"></ion-icon>
     Need help?
   </div>
   There's a concise explanation of every single one of these options on the <a href="<%= help_path %>#getting-started-make-a-link">help page.</a>

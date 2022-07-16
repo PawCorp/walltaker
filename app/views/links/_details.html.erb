@@ -36,9 +36,9 @@
       <a href="<%= link.post_url %>" target="_blank" class="background-sample">
         <% case device %>
         <% when :desktop %>
-          <ion-icon name="laptop-outline" class="background-sample__icon--desktop"></ion-icon>
+          <ion-icon role="presentation" name="laptop-outline" class="background-sample__icon--desktop"></ion-icon>
         <% when :mobile %>
-          <ion-icon name="phone-portrait-outline" class="background-sample__icon--mobile"></ion-icon>
+          <ion-icon role="presentation" name="phone-portrait-outline" class="background-sample__icon--mobile"></ion-icon>
         <% end %>
 
         <img src="<%= link.post_thumbnail_url %>" class="background-sample__image--<%= device %>"/>
@@ -46,7 +46,7 @@
       <figcaption class="link--description">
         <%= link_to e621_url, class: 'small' do %>
           Show on E621
-          <ion-icon name="arrow-forward"></ion-icon>
+          <ion-icon role="presentation" name="arrow-forward"></ion-icon>
         <% end %>
         <%= simple_format link.post_description %>
       </figcaption>

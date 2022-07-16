@@ -325,6 +325,51 @@ label {
     transform: translateY(0em);
 }
 
+.link--form--min_score {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0rem 1rem;
+    margin-bottom: 1.5rem;
+    margin-top: 0.5rem;
+}
+.link--form--min_score label {
+    flex: 1 1 100%;
+}
+.link--form--min_score input {
+    margin: 0;
+    border: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+}
+.link--form--min_score output {
+    color: var(--border);
+}
+
+.link--form--min_score input::-webkit-slider-runnable-track,
+.link--form--min_score input::-moz-range-track {
+    background: var(--accent);
+    height: 3px;
+    border-radius: 3px;
+}
+
+.link--form--min_score input::-webkit-slider-thumb,
+.link--form--min_score input::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--accent-bg);
+    height: 18px;
+    width: 18px;
+    border-radius: 18px;
+}
+
+.link--form--min_score input:active::-webkit-slider-thumb,
+.link--form--min_score input:active::-moz-range-thumb {
+    background-color: var(--accent);
+}
+
 turbo-frame#pornsearch form {
     display: flex;
     gap: 1rem;

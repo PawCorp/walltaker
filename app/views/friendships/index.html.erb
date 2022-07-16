@@ -9,7 +9,7 @@
   <div class="right">
     <% if action_name == 'index' %>
       <% if has_requests? %>
-        <span class="notice-right">New Requests <ion-icon name="arrow-forward-outline"></ion-icon></span>
+        <span class="notice-right">New Requests <ion-icon role="presentation" name="arrow-forward-outline"></ion-icon></span>
       <% end %>
       <%= button_to "Check Requests", url_for(action: :requests, controller: :friendships), method: :get %>
     <% end %>
@@ -17,7 +17,7 @@
 </div>
 
 <h2>
-  <ion-icon name="boat" class="big"></ion-icon>
+  <ion-icon role="presentation" name="boat" class="big"></ion-icon>
   <%= action_name == 'requests' ? 'Your Requests' : 'Your Friendships' %>
 </h2>
 
@@ -37,7 +37,7 @@
       <h4>No friends?</h4>
       <p>
         When viewing anyone else's links, you can click the <strong>
-        <ion-icon name="person-add"></ion-icon>
+        <ion-icon role="presentation" name="person-add"></ion-icon>
         Send Friends Request</strong> button to start making some horny friends! If some one has already sent you a
         request, you can see it by clicking <span class="mock-button">Check Requests</span>
       </p>

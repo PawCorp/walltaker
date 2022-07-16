@@ -4,7 +4,7 @@
     <%= form.text_field :tags, placeholder: 'E621 Tags' %>
     <%= form.hidden_field :link, value: params['link'] %>
     <%= form.button type: :submit do %>
-      <ion-icon name="search-outline"></ion-icon>
+      <ion-icon role="presentation" name="search-outline"></ion-icon>
       Search E621
     <% end %>
   <% end %>
