@@ -52,9 +52,22 @@ class LinksController < ApplicationController
   def create
     @link = Link.new(link_params)
     @link.user_id = current_user.id
+    result = @link.save
+
+    if params[:commit] == 'Update and Test'
+      post_count = get_possible_post_count @link
+      if post_count > 99
+        redirect_to edit_link_path(@link), notice: "Many posts are selectable with these settings."
+      elsif post_count > 0
+        redirect_to edit_link_path(@link), notice: "Only #{post_count} #{'post'.pluralize post_count} can be selected with these settings. You may not get many wallpapers."
+      else
+        redirect_to edit_link_path(@link), alert: "No posts are selectable with these settings! Check if your theme tag is an aliased tag, or if your blacklist is impossible."
+      end
+      return
+    end
 
     respond_to do |format|
-      if @link.save
+      if result
         track :regular, :new_link
         format.html { redirect_to link_url(@link), notice: 'Link was successfully created.' }
         format.json { render :show, status: :created, location: @link }
@@ -147,7 +160,6 @@ class LinksController < ApplicationController
       else
         redirect_back fallback_location: edit_link_path(@link), alert: "No posts are selectable with these settings! Check if your theme tag is an aliased tag, or if your blacklist is impossible."
       end
-
       return
     end
 
