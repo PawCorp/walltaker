@@ -342,36 +342,9 @@ label {
 }
 .link--form--min_score input {
     margin: 0;
-    border: 0;
-    -webkit-appearance: none;
-    appearance: none;
-    background: transparent;
-    cursor: pointer;
 }
 .link--form--min_score output {
     color: var(--border);
-}
-
-.link--form--min_score input::-webkit-slider-runnable-track,
-.link--form--min_score input::-moz-range-track {
-    background: var(--accent);
-    height: 3px;
-    border-radius: 3px;
-}
-
-.link--form--min_score input::-webkit-slider-thumb,
-.link--form--min_score input::-moz-range-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    background-color: var(--accent-bg);
-    height: 18px;
-    width: 18px;
-    border-radius: 18px;
-}
-
-.link--form--min_score input:active::-webkit-slider-thumb,
-.link--form--min_score input:active::-moz-range-thumb {
-    background-color: var(--accent);
 }
 
 turbo-frame#pornsearch form {
