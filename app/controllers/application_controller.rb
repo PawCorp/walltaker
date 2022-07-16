@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
 
+  private
+
   def get_tag_results(tag_string, after, before, append_to_tags, limit = 15)
     padded_tag_string = tag_string + ' -animated'
     unless append_to_tags.nil? || append_to_tags.empty?

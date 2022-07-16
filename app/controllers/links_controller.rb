@@ -2,11 +2,11 @@
 
 class LinksController < ApplicationController
   before_action :authorize, only: %i[index new edit create destroy]
-  after_action :log_presence, only: %i[show]
   after_action :track_visit, only: %i[index browse new show edit]
   before_action :set_link, only: %i[show edit update destroy export]
   before_action :prevent_public_expired, only: %i[show update]
   before_action :protect_friends_only_links, only: %i[show update]
+  after_action :log_presence, only: %i[show]
 
   # GET /links or /links.json (only your links)
   def index
