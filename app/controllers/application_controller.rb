@@ -2,6 +2,61 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def get_tag_results(tag_string, after, before, append_to_tags, limit = 15)
+    padded_tag_string = tag_string + ' -animated'
+    unless append_to_tags.nil? || append_to_tags.empty?
+      padded_tag_string = "#{padded_tag_string} #{append_to_tags.to_s}"
+    end
+    tags = CGI.escape padded_tag_string
+    url = "https://e621.net/posts.json?tags=#{tags}&limit=15"
+    after_id = after.gsub(/\D/, '') if after
+    url = "#{url}&page=b#{after_id}" if after_id
+    before_id = before.gsub(/\D/, '') if before
+    url = "#{url}&page=a#{before_id}" if before_id
+    url = "#{url}&limit=#{limit}" if limit
+    response = Excon.get(url, headers: { 'User-Agent': 'walltaker.joi.how (by ailurus on e621)' })
+    if response.status != 200
+      track :error, :e621_posts_api_fail, response: response
+      return nil
+    end
+
+    results = JSON.parse(response.body)['posts']
+
+    if results.present? && results.class == Array
+      results.filter do |post|
+        post['file']['ext'] == 'png' || post['file']['ext'] == 'jpg' if post['file'] && post['file']['ext']
+      end
+    else
+      []
+    end
+  end
+
+  helper_method :get_tag_results
+
+  def get_possible_post_count(link)
+    sanitized_blacklist = make_blacklist(link)
+    append_to_tags = make_tag_suffix(link, sanitized_blacklist)
+    (get_tag_results '', nil, nil, append_to_tags, 100).count
+  end
+
+  helper_method :get_possible_post_count
+
+  def make_tag_suffix(link, sanitized_blacklist)
+    append_to_tags = ''
+    append_to_tags += link.theme if (link.theme)
+    append_to_tags += ' ' + ((sanitized_blacklist.split.map { |tag| "-#{tag}" }).join ' ') unless (sanitized_blacklist.empty?)
+    append_to_tags += ' score:>' + link.min_score.to_s if link.min_score.present? && link.min_score != 0
+    append_to_tags
+  end
+
+  helper_method :make_tag_suffix
+
+  def make_blacklist(link)
+    sanitized_blacklist = link.blacklist.downcase.gsub(/[^a-z_\(\)\d ]/, '')
+  end
+
+  helper_method :make_blacklist
+
   # @param [Symbol<:regular, :nefarious, :visit>] level
   # @param [Symbol, String] id
   def track (level, id, **details)
