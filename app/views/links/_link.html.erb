@@ -42,13 +42,16 @@
       <% end %>
     </div>
 
-    <% unless link.theme.nil? || link.theme.empty? %>
+    <% unless (link.theme.nil? || link.theme.empty?) && (link.min_score.nil? || link.min_score === 0) %>
       <div class="link--theme">
         <strong>
           <ion-icon role="presentation" name="pricetag-outline"></ion-icon>
           Theme
         </strong>
-        <span><%= link.theme %></span>
+        <span>
+          <%= link.theme %>
+          <%= 'score:>' + link.min_score.to_s if link.min_score > 0 %>
+        </span>
       </div>
     <% end %>
 

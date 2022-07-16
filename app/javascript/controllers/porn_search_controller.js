@@ -32,8 +32,9 @@ class PornSearchController extends Controller {
 
     confirm () {
         if (this.thumbnailToConfirm) {
+            const button = this.thumbnailToConfirm.closest('button')
             const form = this.thumbnailToConfirm.closest('form')
-            if (form) form.requestSubmit()
+            if (button) form.requestSubmit(button)
         }
         this.modal.close()
     }

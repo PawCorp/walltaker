@@ -137,6 +137,15 @@
         <%= button_tag "Yes, Use This Wallpaper", class: 'no-underline secondary', data: { action: 'click->porn-search#confirm' } %>
       </div>
     </dialog>
+    <div class="link--flashes">
+      <% flash.each do |type, msg| %>
+        <% unless type === 'notice' %>
+          <div class="flash--danger">
+            <%= msg %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
     <p>
       Enter some e621 tags, click search, then click any post to
       set <%= @link.user.username %>'s wallpaper.
@@ -144,7 +153,8 @@
     <% unless (@link.theme.nil? || @link.theme.empty?) %>
       <p class="subdued">
         The theme tag <strong>
-        <ion-icon role="presentation" name="pricetag-outline"></ion-icon> <%= @link.theme %></strong> is being automatically applied.
+        <ion-icon role="presentation" name="pricetag-outline"></ion-icon> <%= @link.theme %></strong> is being
+        automatically applied.
       </p>
     <% end %>
     <%= turbo_frame_tag "pornsearch", src: porn_search_index_path({ link: @link.id }) do %>

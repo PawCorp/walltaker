@@ -1,9 +1,11 @@
 <%= turbo_frame_tag "submit_link_#{link.id}" do %>
   <div class="link--flashes">
     <% flash.each do |type, msg| %>
-      <div class="flash--<%= type == 'notice' ? 'success' : 'danger' %>">
-        <%= msg %>
-      </div>
+      <% unless type === 'notice' %>
+        <div class="flash--danger">
+          <%= msg %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 

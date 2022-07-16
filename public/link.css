@@ -132,6 +132,10 @@ strong.offline {
     color: var(--accent);
 }
 
+.link--theme span {
+    white-space: initial;
+}
+
 .link--theme ion-icon {
     transform: translateY(0.1em);
 }

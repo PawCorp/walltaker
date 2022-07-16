@@ -99,6 +99,12 @@ class LinksController < ApplicationController
       return
     end
 
+    if !@link.min_score.nil? && @link.min_score != 0 && !e621_post.nil? && e621_post['post']['score']['total'] < @link.min_score
+      redirect_to link_url(@link), alert: 'Post was too low-rated.'
+      track :nefarious, :low_post_rating, attempted_post_id: params['link'][:post_id], score_at_the_time: e621_post['post']['score']['total']
+      return
+    end
+
     result = if e621_post.nil?
                @link.assign_attributes(link_params)
 
