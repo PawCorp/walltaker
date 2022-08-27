@@ -1,0 +1,75 @@
+.messages {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1rem;
+    height: 420px;
+    overflow-y: scroll;
+    padding: 0;
+    margin: 0 0 1rem;
+}
+
+#new_message_form > form {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#new_message_form button[type=submit],
+#new_message_form #message_content {
+    margin: 0;
+    padding: 0.75rem 1rem;
+}
+
+
+#new_message_form button[type=submit] {
+    flex: 0 0 auto;
+}
+#new_message_form #message_content {
+    flex: 1;
+}
+
+.messages__message__container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.messages__message {
+    flex: 0 1 auto;
+}
+
+.messages__message > p {
+    background: var(--accent);
+    border-radius: 0.25rem;
+    text-align: right;
+    color: var(--bg);
+    padding: 0.5rem 0.8rem;
+    margin: 0;
+}
+
+.messages__message > strong {
+    text-align: right;
+    display: block;
+    color: var(--text-light);
+    font-weight: normal;
+    font-size: 0.8rem;
+    margin: 0.25rem 0 0;
+}
+
+.messages__message_container--self {
+    justify-content: flex-start;
+}
+
+.messages__message_container--self .messages__message > strong {
+    text-align: left;
+}
+
+.messages__message_container--self .messages__message > p {
+    text-align: left;
+    background: var(--accent-bg);
+    color: var(--text);
+}
+
+.threads__thread {
+    display: block;
+    height: 3.5rem;
+}

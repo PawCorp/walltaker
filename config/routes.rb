@@ -25,6 +25,13 @@ Rails.application.routes.draw do
 
   resources :users
   resources :session
+  resources :message_thread, path: 'messages' do
+    member do
+      post :send, to: 'message_thread#send_message', as: 'send_to'
+      post 'users/:user_id', to: 'message_thread#add_user', as: 'add_user'
+      delete 'users/:user_id', to: 'message_thread#remove_user', as: 'remove_user'
+    end
+  end
   resources :friendships do
     collection do
       get :requests, to: 'friendships#requests'

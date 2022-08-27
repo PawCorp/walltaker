@@ -1,0 +1,22 @@
+<div class="task-tools">
+  <div class="right">
+    <%= button_to new_message_thread_path, method: :get do %>
+      <ion-icon name="mail"></ion-icon>
+      New thread
+    <% end %>
+  </div>
+</div>
+
+<h2 class="one-line">
+  <ion-icon name="chatbubbles"></ion-icon>
+  Goon Threads
+  <span class="beta-tag">beta</span>
+</h2>
+
+<div class="threads">
+  <% @message_threads.each do |message_thread| %>
+    <%= link_to message_thread, class: 'threads__thread' do %>
+      <%= message_thread.users.all.map(&:username).map(&:capitalize).join ', ' %>
+    <% end %>
+  <% end %>
+</div>

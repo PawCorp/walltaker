@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_16_153635) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_08_232806) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -200,6 +200,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_16_153635) do
     t.bigint "ahoy_visit_id"
     t.integer "min_score"
     t.index ["user_id"], name: "index_links_on_user_id"
+  end
+
+  create_table "message_thread_participants", force: :cascade do |t|
+    t.bigint "message_thread_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "message_threads", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "message_thread_id", null: false
+    t.bigint "from_user_id", null: false
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "notifications", force: :cascade do |t|

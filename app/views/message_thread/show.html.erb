@@ -1,0 +1,30 @@
+<div class="task-tools">
+  <div class="left">
+    <%= link_to "All threads", message_thread_index_path %>
+  </div>
+  <div class="right">
+    <a href="<%= edit_message_thread_path @message_thread %>" title="Manage Members" class="no-underline">
+      <ion-icon name="people"></ion-icon>
+      Manage Members
+    </a>
+  </div>
+</div>
+
+<h2 class="one-line">
+  <ion-icon name="chatbubbles"></ion-icon>
+  <%= @message_thread.users.all.map(&:username).map(&:capitalize).join ', ' %>
+</h2>
+
+<%= turbo_stream_from @message_thread %>
+<%= turbo_frame_tag @message_thread do %>
+  <%= render 'messages_from_thread', message_thread: @message_thread %>
+<% end %>
+
+<%= turbo_frame_tag 'new_message_form' do %>
+  <%= form_with(model: @new_message, url: send_to_message_thread_path(@message_thread)) do |form| %>
+    <%= form.text_field :content, autocomplete: 'off' %>
+    <%= form.button type: :submit do %>
+      <ion-icon name="send"></ion-icon>
+    <% end %>
+  <% end %>
+<% end %>

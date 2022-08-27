@@ -1,0 +1,40 @@
+.member-editor {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.member-editor > *:is(.members__container, .friends__container) {
+    position: relative;
+}
+
+.member-editor > *:is(.members__container, .friends__container) + *:is(.members__container, .friends__container)::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(calc(-1rem + 3px));
+    height: 100%;
+    width: 1px;
+    background: var(--border);
+}
+
+.member-editor > *:is(.members__container, .friends__container) > h3 {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-top: 0.25rem;
+    text-align: center;
+}
+
+.member-editor > *:is(.members__container, .friends__container) ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+:is(.members__member, .friends__friend) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 3.5rem;
+}

@@ -1,0 +1,16 @@
+<% messages = message_thread.messages.all.reverse %>
+
+<div class="messages">
+  <% messages.each_with_index do |message, index| %>
+    <div class="messages__message__container" data-controller="message" data-message-from-value="<%= message.from_user.username %>">
+      <div class="messages__message">
+        <p><%= message.content %></p>
+
+        <% next_message = messages[index - 1] %> <!-- Remember, the list is reversed -->
+        <% if (next_message && next_message.from_user.username != message.from_user.username) || index == 0 %>
+          <strong><%= message.from_user.username %></strong>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

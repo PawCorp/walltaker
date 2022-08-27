@@ -285,6 +285,10 @@ p {
     gap: 1.5rem;
 }
 
+.task-tools button ion-icon {
+    transform: translateY(2px);
+}
+
 .task-tools.small {
     background: var(--border);
     border-bottom-left-radius: 5px;
@@ -515,7 +519,7 @@ label ion-icon {
         font-size: 0.8rem;
     }
 
-    header .user-tools ion-icon {
+    header .user-tools ion-icon:not(.dont-hide) {
         display: none;
     }
 

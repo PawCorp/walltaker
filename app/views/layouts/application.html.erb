@@ -4,11 +4,13 @@
   <title><%= content_for?(:html_title) ? yield(:html_title) : "Walltaker" %></title>
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
   <meta name="rating" content="adult"/>
-  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <link rel="stylesheet" href="/simple.min.css">
   <link rel="stylesheet" href="/base.css?x={{--buildnumber--}}"/>
   <link rel="stylesheet" href="/link.css?x={{--buildnumber--}}"/>
   <link rel="stylesheet" href="/dashboard.css?x={{--buildnumber--}}"/>
   <link rel="stylesheet" href="/user-profile.css?x={{--buildnumber--}}"/>
+  <link rel="stylesheet" href="/member-editor.css?x={{--buildnumber--}}"/>
+  <link rel="stylesheet" href="/messages.css?x={{--buildnumber--}}"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -44,6 +46,9 @@
         <%= link_to 'Friends', friendships_path, class: has_requests? ? 'pinged' : '' %>
         <%= link_to 'Logout', logout_path %>
 
+        <%= link_to message_thread_index_path do %>
+          <ion-icon name="chatbubbles" class="dont-hide"></ion-icon>
+        <% end %>
         <%= turbo_stream_from "header_notifications_#{current_user.id}" %>
         <%= render partial: 'notifications' %>
       <% else %>
@@ -79,7 +84,8 @@
     © joi.how 2022 / Build #{{--buildnumber--}} by {{--buildagent--}}
     <% if current_user && current_user.admin %>
       <%= link_to blazer_path do %>
-        <ion-icon role="presentation" name="stats-chart"></ion-icon> Stats
+        <ion-icon role="presentation" name="stats-chart"></ion-icon>
+        Stats
       <% end %>
     <% end %>
   </small>
