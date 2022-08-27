@@ -9,15 +9,45 @@
   Members
 </h2>
 
-<ul class="members">
-<% @message_thread.users.all.each do |user| %>
-  <li class="members__member">
-    <%= link_to user.username, user_path(user.username), data: { controller: "user-reference" } %>
+<div class="member-editor">
+  <div class="members__container">
+    <h3>Members</h3>
+    <ul class="members">
+      <% @message_thread.users.all.each do |user| %>
+        <li class="members__member">
+          <%= link_to user.username, user_path(user.username), target: '_blank', data: { controller: "user-reference" } %>
 
-    <%= button_to remove_user_message_thread_path(@message_thread, user), method: :delete, class: 'no-underline' do %>
-      <ion-icon name="person-remove"></ion-icon>
-      Remove
-    <% end %>
-  </li>
-<% end %>
-</ul>
+          <% if user.username == current_user.username %>
+            <small>(you!)</small>
+          <% end %>
+
+          <% if user.username != current_user.username %>
+            <%= button_to remove_user_message_thread_path(@message_thread, user), method: :delete, class: 'no-underline secondary' do %>
+              <ion-icon name="person-remove"></ion-icon>
+              <ion-icon name="arrow-forward"></ion-icon>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="friends__container">
+    <h3>Not Members</h3>
+    <ul class="friends">
+      <% @friendships.each do |friendship| %>
+        <%
+          other_user = friendship.sender if friendship.sender.id != current_user.id
+          other_user = friendship.receiver if friendship.receiver.id != current_user.id
+        %>
+        <li class="friends__friend">
+          <%= button_to add_user_message_thread_path(@message_thread, other_user), method: :post, class: 'no-underline' do %>
+            <ion-icon name="arrow-back"></ion-icon>
+            <ion-icon name="person-add"></ion-icon>
+          <% end %>
+          <%= link_to other_user.username, user_path(other_user.username), target: '_blank', data: { controller: "user-reference" } %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

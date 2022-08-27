@@ -38,9 +38,14 @@ class MessageThreadController < ApplicationController
 
   def edit
     set_message_thread
-    if @message_thread
-
-    end
+    @current_participants = @message_thread.users
+    @friendships = Friendship.all.where(sender: current_user)
+                             .or(Friendship.all.where(receiver: current_user))
+                             .where(confirmed: true).and(
+                               Friendship.all.where.not(sender: @current_participants).or(
+                                 Friendship.all.where.not(receiver: @current_participants)
+                               )
+                             )
   end
 
   def remove_user
@@ -52,7 +57,17 @@ class MessageThreadController < ApplicationController
     end
   end
 
+  def add_user
+    set_message_thread
+    user = User.find params['user_id']
+    if user && @message_thread
+      @message_thread.users << user
+      redirect_to edit_message_thread_path @message_thread
+    end
+  end
+
   def update
+    # To be implemented later, for now, updates happen with different actions
   end
 
   private
