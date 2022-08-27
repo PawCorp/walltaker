@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :session
+  resources :message_thread
   resources :friendships do
     collection do
       get :requests, to: 'friendships#requests'
