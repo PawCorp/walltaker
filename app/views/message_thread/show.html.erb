@@ -1,2 +1,11 @@
-<h1>MessageThread#show</h1>
-<p>Find me in app/views/message_thread/show.html.erb</p>
+<h2 class="one-line">
+  <ion-icon name="chatbubbles"></ion-icon>
+  <%= @message_thread.users.all.map(&:username).map(&:capitalize).join ', ' %>
+</h2>
+
+<% @message_thread.messages.each do |message| %>
+  <div class="message">
+    <strong><%= message.from_user.username %></strong>
+    <%= message.content %>
+  </div>
+<% end %>

@@ -1,2 +1,7 @@
-<h1>MessageThread#index</h1>
-<p>Find me in app/views/message_thread/index.html.erb</p>
+<% @message_threads.each do |message_thread| %>
+  <%= link_to message_thread do %>
+    <%= message_thread.users.all.map(&:username).map(&:capitalize).join ', ' %>
+  <% end %>
+  <br/>
+  <br/>
+<% end %>
