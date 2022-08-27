@@ -21,6 +21,10 @@
                 <ion-icon role="presentation" name="heart"></ion-icon>
               <% when 'post_response' %>
                 <ion-icon role="presentation" name="chatbubble-ellipses"></ion-icon>
+              <% when 'added_to_message_thread' %>
+                <ion-icon role="presentation" name="people"></ion-icon>
+              <% when 'new_message' %>
+                <ion-icon role="presentation" name="mail-unread"></ion-icon>
             <% end %>
             <div>
               <p><%= notification.text %></p>
