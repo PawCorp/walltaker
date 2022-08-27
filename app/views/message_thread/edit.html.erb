@@ -1,2 +1,23 @@
-<h1>MessageThread#edit</h1>
-<p>Find me in app/views/message_thread/edit.html.erb</p>
+<div class="task-tools">
+  <div class="left">
+    <%= link_to "Back", message_thread_path(@message_thread) %>
+  </div>
+</div>
+
+<h2 class="one-line">
+  <ion-icon name="people"></ion-icon>
+  Members
+</h2>
+
+<ul class="members">
+<% @message_thread.users.all.each do |user| %>
+  <li class="members__member">
+    <%= link_to user.username, user_path(user.username), data: { controller: "user-reference" } %>
+
+    <%= button_to remove_user_message_thread_path(@message_thread, user), method: :delete, class: 'no-underline' do %>
+      <ion-icon name="person-remove"></ion-icon>
+      Remove
+    <% end %>
+  </li>
+<% end %>
+</ul>
