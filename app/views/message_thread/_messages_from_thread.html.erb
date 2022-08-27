@@ -1,0 +1,6 @@
+<% message_thread.messages.all.each do |message| %>
+  <div class="message">
+    <strong><%= message.from_user.username %></strong>
+    <%= message.content %>
+  </div>
+<% end %>
