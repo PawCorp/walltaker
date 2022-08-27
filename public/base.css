@@ -519,7 +519,7 @@ label ion-icon {
         font-size: 0.8rem;
     }
 
-    header .user-tools ion-icon {
+    header .user-tools ion-icon:not(.dont-hide) {
         display: none;
     }
 
