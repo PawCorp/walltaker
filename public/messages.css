@@ -68,3 +68,8 @@
     background: var(--accent-bg);
     color: var(--text);
 }
+
+.threads__thread {
+    display: block;
+    height: 3.5rem;
+}

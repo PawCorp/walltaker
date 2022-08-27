@@ -285,6 +285,10 @@ p {
     gap: 1.5rem;
 }
 
+.task-tools button ion-icon {
+    transform: translateY(2px);
+}
+
 .task-tools.small {
     background: var(--border);
     border-bottom-left-radius: 5px;

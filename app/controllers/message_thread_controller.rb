@@ -33,9 +33,14 @@ class MessageThreadController < ApplicationController
   end
 
   def new
+    message_thread = MessageThread.new
+    message_thread.users << current_user
+    message_thread.save
+    redirect_to edit_message_thread_path message_thread
   end
 
   def create
+    # To be implemented later, for now, create happen with different actions
   end
 
   def destroy
