@@ -70,6 +70,15 @@
 }
 
 .threads__thread {
-    display: block;
-    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+    background: var(--accent-bg);
+    padding: 1rem 1.25rem;
+    text-decoration: none;
+}
+
+.threads__thread:hover {
+    background: var(--accent);
+    color: var(--bg);
 }
