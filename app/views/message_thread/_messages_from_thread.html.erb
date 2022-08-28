@@ -2,9 +2,32 @@
 
 <div class="messages">
   <% messages.each_with_index do |message, index| %>
+    <%
+      content = convert_all_e621_links_to_source_links message.content
+      images_source = content.scan(/(https:\/\/static\d*\.e621.net\/data\/\w\w\/\w\w\/)(\w*)\.(jpg|png)/)
+      videos_source = content.scan(/(https:\/\/static\d*\.e621.net\/data\/\w\w\/\w\w\/)(\w*)\.(webm)/)
+      filtered_content = content.gsub(/https:\/\/static\d*\.e621.net\/data\/\w\w\/\w\w\/\w*\.(jpg|png|webm)/, '')
+
+      # DO NOT TRUST `images`! It's coming from users, and we need to filter EVERYTHING thru CGI.escape if it's not
+      # heavily scoped by our Regex.
+    %>
     <div class="messages__message__container" data-controller="message" data-message-from-value="<%= message.from_user.username %>">
       <div class="messages__message">
-        <p><%= message.content %></p>
+        <% unless filtered_content.empty? %>
+          <%= (simple_format filtered_content).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe %>
+        <% end %>
+
+        <% images_source.each do |image| %>
+          <a target="_blank" href="https://e621.net/posts?tags=md5%3A<%= CGI.escape image[1] %>">
+            <img src="<%= image[0] + (CGI.escape image[1]) + '.' + image[2] %>"/>
+          </a>
+        <% end %>
+
+        <% videos_source.each do |video| %>
+          <video controls>
+            <source src="<%= video[0] + (CGI.escape video[1]) + '.' + video[2] %>" type="video/webm"/>
+          </video>
+        <% end %>
 
         <% next_message = messages[index - 1] %> <!-- Remember, the list is reversed -->
         <% if (next_message && next_message.from_user.username != message.from_user.username) || index == 0 %>

@@ -1,0 +1,2 @@
+class CachedPost < ApplicationRecord
+end
