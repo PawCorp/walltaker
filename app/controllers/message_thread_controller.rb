@@ -6,9 +6,7 @@ class MessageThreadController < ApplicationController
   end
 
   def show
-    if @message_thread
-      @new_message = @message_thread.messages.new
-    end
+    @new_message = @message_thread.messages.new
   end
 
   def send_message
@@ -75,7 +73,7 @@ class MessageThreadController < ApplicationController
   end
 
   def update
-    # To be implemented later, for now, updates happen with different actions
+
   end
 
   private
@@ -86,7 +84,8 @@ class MessageThreadController < ApplicationController
       begin
         @message_thread = MessageThread.includes(:users).where(users: { id: current_user.id }).find(message_thread_id)
       rescue
-        redirect_to message_thread_index_path
+        track :nefarious, :tried_to_access_unknown_thread, user: current_user, thread_id: message_thread_id
+        redirect_to message_thread_index_path, alert: 'Thread was not found, or you were removed from it.'
       end
     end
   end
