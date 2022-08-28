@@ -71,14 +71,40 @@
 
 .threads__thread {
     display: flex;
-    align-items: center;
     margin: 1rem 0;
+    position: relative;
+}
+
+.threads__thread:hover a {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+.threads__thread a {
+    flex: 1;
+    display: flex;
+    align-items: center;
     background: var(--accent-bg);
     padding: 1rem 1.25rem;
+    border-bottom-left-radius: 0.3rem;
+    border-top-left-radius: 0.3rem;
     text-decoration: none;
 }
 
-.threads__thread:hover {
-    background: var(--accent);
-    color: var(--bg);
+.threads__thread form.button_to {
+    display: block;
+}
+
+.threads__thread form.button_to button {
+    margin: 0;
+    background: var(--danger);
+    color: #FFF;
+    border: 0;
+    height: 100%;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+    font-size: 1.4rem;
+    padding: 0 1rem;
 }

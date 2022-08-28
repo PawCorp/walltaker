@@ -15,8 +15,13 @@
 
 <div class="threads">
   <% @message_threads.each do |message_thread| %>
-    <%= link_to message_thread, class: 'threads__thread' do %>
-      <%= message_thread.users.all.map(&:username).map(&:capitalize).join ', ' %>
-    <% end %>
+    <div class="threads__thread">
+      <%= link_to message_thread do %>
+        <%= message_thread.users.all.map(&:username).map(&:capitalize).join ', ' %>
+      <% end %>
+      <%= button_to remove_user_message_thread_path(message_thread, current_user), method: :delete, class: 'no-underline secondary', title: 'delete thread' do %>
+        <ion-icon name="trash"></ion-icon>
+      <% end %>
+    </div>
   <% end %>
 </div>
