@@ -1,17 +1,17 @@
 class MessageThreadController < ApplicationController
+  before_action :set_message_thread, only: %i[show send_message edit remove_user add_user]
+
   def index
     @message_threads = MessageThread.includes(:users).where(users: { id: current_user.id })
   end
 
   def show
-    set_message_thread
     if @message_thread
       @new_message = @message_thread.messages.new
     end
   end
 
   def send_message
-    set_message_thread
     message = params['message']
     if @message_thread && (message['content'].class == String) && (message['content'].length > 0)
       @new_message = @message_thread.messages.new
@@ -47,7 +47,6 @@ class MessageThreadController < ApplicationController
   end
 
   def edit
-    set_message_thread
     @current_participants = @message_thread.users
     @friendships = Friendship.all.where(sender: current_user)
                              .or(Friendship.all.where(receiver: current_user))
@@ -59,7 +58,6 @@ class MessageThreadController < ApplicationController
   end
 
   def remove_user
-    set_message_thread
     user = User.find params['user_id']
     if user && @message_thread
       @message_thread.users.delete user
@@ -68,7 +66,6 @@ class MessageThreadController < ApplicationController
   end
 
   def add_user
-    set_message_thread
     user = User.find params['user_id']
     if user && @message_thread
       @message_thread.users << user
@@ -86,7 +83,11 @@ class MessageThreadController < ApplicationController
   def set_message_thread
     message_thread_id = params['id']
     if message_thread_id
-      @message_thread = MessageThread.includes(:users).where(users: { id: current_user.id }).find(message_thread_id)
+      begin
+        @message_thread = MessageThread.includes(:users).where(users: { id: current_user.id }).find(message_thread_id)
+      rescue
+        redirect_to message_thread_index_path
+      end
     end
   end
 end

@@ -73,6 +73,7 @@
     display: flex;
     margin: 1rem 0;
     position: relative;
+    gap: 1rem;
 }
 
 .threads__thread:hover a {

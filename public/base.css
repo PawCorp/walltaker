@@ -1,5 +1,6 @@
 :root {
     --danger: #CC3525;
+    --danger-text: #461510;
     --success: #30AA65;
 }
 
@@ -606,6 +607,31 @@ a.small:hover {
     border-radius: 8px;
     margin-top: 2.25rem;
     display: block;
+}
+
+.accent-block > p {
+    margin: 0;
+}
+
+.accent-block.danger {
+    border: 2px solid var(--danger);
+}
+
+.accent-block.danger > p {
+}
+
+.accent-block.danger .accent-block__charm {
+    color: var(--danger);
+}
+
+.accent-block.danger button {
+    background: var(--danger);
+    color: #FFF;
+    border: none;
+}
+
+.accent-block button.main-action {
+    margin: 1rem 0 0;
 }
 
 .accent-block.spaced {
