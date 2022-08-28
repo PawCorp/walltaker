@@ -36,6 +36,7 @@
 
 .messages__message {
     flex: 0 1 auto;
+    text-align: right;
 }
 
 .messages__message img,
@@ -43,7 +44,7 @@
     max-width: 80%;
 }
 
-.messages__message p + img,
+.messages__message p + a > img,
 .messages__message p + video {
     margin-top: 1rem;
 }
@@ -68,6 +69,10 @@
 
 .messages__message_container--self {
     justify-content: flex-start;
+}
+
+.messages__message_container--self .messages__message {
+    text-align: left;
 }
 
 .messages__message_container--self .messages__message > strong {
