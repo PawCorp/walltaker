@@ -1,4 +1,4 @@
-<% messages = message_thread.messages.all.reverse %>
+<% messages = message_thread.messages.order(updated_at: :desc).all %>
 
 <div class="messages">
   <% messages.each_with_index do |message, index| %>
