@@ -1,5 +1,5 @@
 class MessageThreadController < ApplicationController
-  before_action :set_message_thread, only: %i[show send_message edit remove_user add_user]
+  before_action :set_message_thread, only: %i[show send_message edit update remove_user add_user]
 
   def index
     @message_threads = MessageThread.includes(:users).where(users: { id: current_user.id })
@@ -73,10 +73,23 @@ class MessageThreadController < ApplicationController
   end
 
   def update
-
+    new_message_thread = message_thread_params
+    if params[:commit] == 'Set'
+      @message_thread.name = new_message_thread[:name] unless new_message_thread[:name].empty?
+      @message_thread.name = nil if new_message_thread[:name].empty?
+    end
+    if params[:commit] == 'Reset'
+      @message_thread.name = nil
+    end
+    @message_thread.save
+    redirect_to edit_message_thread_path @message_thread
   end
 
   private
+
+  def message_thread_params
+    params.require(:message_thread).permit(:name)
+  end
 
   def set_message_thread
     message_thread_id = params['id']

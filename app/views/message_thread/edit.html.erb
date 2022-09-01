@@ -6,7 +6,7 @@
 
 <h2 class="one-line">
   <ion-icon name="people"></ion-icon>
-  Edit Thread
+  Edit <%= @message_thread.name ? @message_thread.name : 'Thread' %>
 </h2>
 
 <div class="member-editor">
@@ -57,8 +57,22 @@
     <ion-icon role="presentation" name="information-circle"></ion-icon>
     Good to know
   </div>
-  Only your friends will appear in the "Not Members" space. <strong>You need to become friends with someone before you can add them to a thread.</strong> Anyone already in the thread can add their own friends, regardless if other members are friends with them or not.
+  Only your friends will appear in the "Not Members" space.
+  <strong>You need to become friends with someone before you can add them to a thread.</strong> Anyone already in the
+  thread can add their own friends, regardless if other members are friends with them or not.
 </div>
+
+<h2>Change thread name</h2>
+<%= form_with model: @message_thread do |form| %>
+  <div class="form__row">
+    <%= form.text_field :name, class: 'full-width' %>
+  </div>
+
+  <div class="form__row">
+    <%= form.submit 'Set' %>
+    <%= form.submit 'Reset', class: 'secondary' %>
+  </div>
+<% end %>
 
 <div class="accent-block danger">
   <div class="accent-block__charm">
@@ -66,7 +80,8 @@
     Danger Zone
   </div>
   <p>
-    If you are 100% sure you would like to leave this thread, click the red button below. Note that should you want to rejoin, you will have to ask someone still in this thread to add you again, or contact support.
+    If you are 100% sure you would like to leave this thread, click the red button below. Note that should you want to
+    rejoin, you will have to ask someone still in this thread to add you again, or contact support.
   </p>
   <%= button_to remove_user_message_thread_path(@message_thread, current_user), method: :delete, class: 'no-underline main-action', title: 'delete thread' do %>
     <ion-icon name="trash"></ion-icon>

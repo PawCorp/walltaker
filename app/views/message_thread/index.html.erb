@@ -17,7 +17,11 @@
   <% @message_threads.each do |message_thread| %>
     <div class="threads__thread">
       <%= link_to message_thread do %>
-        <%= message_thread.users.all.map(&:username).map(&:capitalize).join ', ' %>
+        <% if message_thread.name.nil? %>
+          <%= message_thread.users.all.map(&:username).map(&:capitalize).join ', ' %>
+        <% else %>
+          <%= message_thread.name %>
+        <% end %>
       <% end %>
       <%= button_to remove_user_message_thread_path(message_thread, current_user), method: :delete, class: 'no-underline secondary', title: 'delete thread' do %>
         <ion-icon name="trash"></ion-icon>
