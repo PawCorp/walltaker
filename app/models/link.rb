@@ -12,6 +12,11 @@ class Link < ApplicationRecord
   after_update_commit do
     if blacklist_previously_changed? || terms_previously_changed? || theme_previously_changed? || response_text_previously_changed? || last_ping_user_agent_previously_changed? || expires_previously_changed? || never_expires_previously_changed? || friends_only_previously_changed? || post_url_previously_changed?
       broadcast_update
+
+      ActionCable.server.broadcast(
+        "Link::#{id}",
+        self
+      )
     end
   end
 end
