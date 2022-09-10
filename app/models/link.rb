@@ -9,13 +9,39 @@ class Link < ApplicationRecord
   validates :min_score, comparison: { greater_than: -1, less_than: 301 }
   visitable :ahoy_visit
 
+  # @return [User | nil]
+  def get_set_by_user
+    return User.find(self.set_by_id) if self.set_by_id
+    nil unless self.set_by_id
+  end
+
   after_update_commit do
     if blacklist_previously_changed? || terms_previously_changed? || theme_previously_changed? || response_text_previously_changed? || last_ping_user_agent_previously_changed? || expires_previously_changed? || never_expires_previously_changed? || friends_only_previously_changed? || post_url_previously_changed?
       broadcast_update
 
+      begin
+        link = {}
+        link[:success] = true
+        link[:id] = self.id
+        link[:expires] = self.expires
+        link[:terms] = self.terms
+        link[:blacklist] = self.blacklist
+        link[:post_url] = self.post_url
+        link[:post_thumbnail_url] = self.post_thumbnail_url
+        link[:post_description] = self.post_description
+        link[:response_type] = self.response_type
+        link[:response_text] = self.response_text
+        link[:set_by] = get_set_by_user&.username
+        link[:updated_at] = self.updated_at
+      rescue
+        link = {
+          success: false,
+          why: 'Fetching link failed.'
+        }
+      end
       ActionCable.server.broadcast(
         "Link::#{id}",
-        self
+        link
       )
     end
   end
