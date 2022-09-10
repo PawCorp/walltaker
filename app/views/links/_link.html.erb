@@ -15,7 +15,7 @@
     <% end %>
 
     <div class="link--presence">
-      <% if link.last_ping %>
+      <% if link.last_ping || link.live_client_started_at %>
         <% if link.is_online? %>
           <strong class="online">Online</strong>
         <% else %>
