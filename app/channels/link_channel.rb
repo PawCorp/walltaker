@@ -3,6 +3,10 @@ class LinkChannel < ApplicationCable::Channel
     if params[:id].present?
       link = Link.find(params[:id])
       if link
+        if connection&.watched_link
+          connection.watched_link.live_client_started_at = nil
+          connection.watched_link.save
+        end
         connection.watched_link = link
         link.live_client_started_at = Time.now
         link.save
@@ -12,6 +16,9 @@ class LinkChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
+    if connection&.watched_link
+      connection.watched_link.live_client_started_at = nil
+      connection.watched_link.save
+    end
   end
 end
