@@ -1,7 +1,7 @@
-// import consumer from "channels/consumer"
+//import consumer from "channels/consumer"
 
 /*
-consumer.subscriptions.create({ channel: "LinkChannel", id: 1 }, {
+consumer.subscriptions.create({ channel: "LinkChannel", id: 5 }, {
   connected() {
     console.log('made it')
   },

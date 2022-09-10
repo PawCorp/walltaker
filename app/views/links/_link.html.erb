@@ -16,7 +16,7 @@
 
     <div class="link--presence">
       <% if link.last_ping %>
-        <% if link.last_ping.after? (Time.now.utc - 1.minute) %>
+        <% if link.is_online? %>
           <strong class="online">Online</strong>
         <% else %>
           <strong class="offline"><abbr title=">1 minute since last ping">Offline</abbr></strong>

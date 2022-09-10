@@ -18,7 +18,7 @@ class LinksController < ApplicationController
     # FUCK YOU, I join what I want, get ready for the query from hell
     @links = Link.all
                  .where(friends_only: false)
-                 .where('last_ping > ?', Time.now - 1.minute)
+                 .is_online
                  .and(
                    Link.all.where('expires > ?', Time.now).or(Link.all.where(never_expires: true))
                  )

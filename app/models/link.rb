@@ -9,6 +9,14 @@ class Link < ApplicationRecord
   validates :min_score, comparison: { greater_than: -1, less_than: 301 }
   visitable :ahoy_visit
 
+  scope :is_online, -> { where('last_ping > ?', Time.now - 1.minute).or(where('live_client_started_at > ?', Time.now - 7.days)) }
+
+  def is_online?
+    last_ping_online = last_ping > Time.now - 1.minute
+    live_client_online = live_client_started_at && (live_client_started_at > Time.now - 7.days)
+    last_ping_online || live_client_online
+  end
+
   # @return [User | nil]
   def get_set_by_user
     return User.find(self.set_by_id) if self.set_by_id
@@ -16,7 +24,7 @@ class Link < ApplicationRecord
   end
 
   after_update_commit do
-    if blacklist_previously_changed? || terms_previously_changed? || theme_previously_changed? || response_text_previously_changed? || last_ping_user_agent_previously_changed? || expires_previously_changed? || never_expires_previously_changed? || friends_only_previously_changed? || post_url_previously_changed?
+    if blacklist_previously_changed? || terms_previously_changed? || theme_previously_changed? || response_text_previously_changed? || last_ping_user_agent_previously_changed? || live_client_started_at_previously_changed? || expires_previously_changed? || never_expires_previously_changed? || friends_only_previously_changed? || post_url_previously_changed?
       broadcast_update
 
       begin

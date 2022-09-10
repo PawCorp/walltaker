@@ -53,8 +53,8 @@ class ApiController < ApplicationController
 
     @user = User.find_by(username: params[:username])
     @has_friendship = Friendship.find_friendship(current_user_or_api_user, @user).exists? if current_user_or_api_user
-    online_links = @user.link.where(friends_only: false).and(@user.link.where('expires > ?', Time.now).or(@user.link.where(never_expires: true))).and(@user.link.where('last_ping > ?', Time.now - 1.minute)) unless @has_friendship
-    online_links = @user.link.where('expires > ?', Time.now).or(@user.link.where(never_expires: true)).and(@user.link.where('last_ping > ?', Time.now - 1.minute)) if @has_friendship
+    online_links = @user.link.where(friends_only: false).and(@user.link.where('expires > ?', Time.now).or(@user.link.where(never_expires: true))).and(@user.link.is_online) unless @has_friendship
+    online_links = @user.link.where('expires > ?', Time.now).or(@user.link.where(never_expires: true)).and(@user.link.is_online) if @has_friendship
 
     @is_self = @user.id == current_user_or_api_user.id if current_user_or_api_user
     @is_self = false unless current_user_or_api_user
