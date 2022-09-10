@@ -12,6 +12,9 @@ class LinkChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
+    if connection&.watched_link
+      connection.watched_link.live_client_started_at = nil
+      connection.watched_link.save
+    end
   end
 end
