@@ -108,6 +108,10 @@ a:hover > .link {
 strong.online {
     color: var(--success);
 }
+strong.online ion-icon {
+    transform: translateY(2px);
+    font-size: 1.1em;
+}
 
 strong.online::after {
     content: '';
