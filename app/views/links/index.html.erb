@@ -13,9 +13,9 @@
 
 <div id="links">
   <% @links.each do |link| %>
-    <a href="<%= link_url(link) %>" class="clean">
+    <div data-controller="go" data-go-to-value="<%= link_url(link) %>">
       <%= render link %>
-    </a>
+    </div>
   <% end %>
 
   <% if @links.count == 0 %>

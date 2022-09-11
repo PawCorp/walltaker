@@ -7,22 +7,24 @@
 </div>
 
 <h2>
-  <ion-icon role="presentation" name="documents" class="big"></ion-icon> Browse Links
+  <ion-icon role="presentation" name="documents" class="big"></ion-icon>
+  Browse Links
   <small>All public online links ordered by who needs the most attention at the top.</small>
 </h2>
 
 <div id="links">
   <% @links.each do |link| %>
     <%= turbo_stream_from link %>
-    <a href="<%= link_url(link) %>" class="clean">
+    <div data-controller="go" data-go-to-value="<%= link_url(link) %>">
       <%= render link %>
-    </a>
+    </div>
   <% end %>
 
   <% if @links.count == 0 %>
     <h4>No one is online!</h4>
     <p>
-      No links are currently being used. Maybe you should use your own? Click <strong>Links</strong> in the navigation bar to get started.
+      No links are currently being used. Maybe you should use your own? Click <strong>Links</strong> in the navigation
+      bar to get started.
     </p>
   <% end %>
 </div>

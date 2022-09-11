@@ -4,6 +4,10 @@
     --success: #30AA65;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 button.secondary,
 input[type=submit].secondary {
     background: var(--bg);
