@@ -111,9 +111,9 @@
 
 <% if @links.count.positive? %>
   <% @links.each do |link| %>
-    <a href="<%= link_url(link) %>" class="clean">
+    <div data-controller="go" data-go-to-value="<%= link_url(link) %>">
       <%= render link %>
-    </a>
+    </div>
   <% end %>
 <% else %>
   <h4>This user has no links</h4>
