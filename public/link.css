@@ -2,7 +2,7 @@
     display: grid;
     position: relative;
     grid-template-columns: 1fr 130px;
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto auto 1fr auto;
     gap: 10px;
     padding: 10px 15px;
     border: 1px solid #66666639;
@@ -34,6 +34,14 @@
 
     .link--theme > strong {
         display: inline-flex !important;
+    }
+
+    .link--terms {
+        min-height: 27ch !important;
+    }
+
+    .link--terms blockquote {
+        padding-top: 0 !important;
     }
 }
 
@@ -184,6 +192,8 @@ strong.offline {
 
 .link--terms {
     grid-area: terms;
+    position: relative;
+    min-height: 12ch;
 }
 
 .link--terms blockquote p {
@@ -191,9 +201,17 @@ strong.offline {
 }
 
 .link--terms blockquote {
-    max-height: 18ch;
     overflow-y: scroll;
     margin: 0 0 0 4px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    font-style: normal;
+    border-left: 0;
+    padding-left: 0;
 }
 
 .link--status-bar {
