@@ -1,7 +1,7 @@
 <% content_for(:html_title) { "Walltaker ##{@link.id} for #{@link.user.username}" } %>
 
 <% if @is_current_user %>
-  <div class="task-tools" data-controller="link">
+  <div class="task-tools" data-controller="link" data-link-id-value="<%= @link.id %>">
     <dialog class="modal" data-link-target="modal">
       <h4>Confirm Delete</h4>
       <p>Are you sure you want to delete this link?</p>
