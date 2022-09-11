@@ -1,0 +1,16 @@
+<% target = "link_viewing_users_#{link.id}" %>
+<%= turbo_frame_tag target do %>
+  <% if link.viewing_users.count > 1 %>
+    <div class="accent-block">
+      <div class="accent-block__charm">
+        <ion-icon name="eye"></ion-icon>
+        Who's here right now
+      </div>
+      <div class="viewing-users__users">
+        <% link.viewing_users.each do |user| %>
+          <a href="<%= user_path user.username %>" target="_top" data-controller="user-reference"><%= user.username %></a>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

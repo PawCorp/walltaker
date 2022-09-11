@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_secure_password
   has_many :link
   has_many :notifications
-  has_one :viewing_link, foreign_key: :id, class_name: 'Link'
+  belongs_to :viewing_link, foreign_key: :id, class_name: 'Link', optional: true
 
   validates_uniqueness_of :email, :username
 
@@ -25,5 +25,17 @@ class User < ApplicationRecord
   def leave_link
     self.viewing_link_id = nil
     save
+  end
+
+  after_commit do
+    if viewing_link_id
+      viewed_link = Link.find(viewing_link_id)
+    elsif viewing_link_id_before_last_save
+      viewed_link = Link.find(viewing_link_id_before_last_save)
+    end
+
+    if viewed_link
+      broadcast_replace_to "link_viewing_users_#{viewed_link.id}", target: "link_viewing_users_#{viewed_link.id}", partial: 'links/viewing_users', locals: { link: viewed_link }
+    end
   end
 end

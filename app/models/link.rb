@@ -1,5 +1,6 @@
 class Link < ApplicationRecord
   belongs_to :user
+  has_many :viewing_users, foreign_key: :viewing_link_id, class_name: 'User'
   has_many :past_links
   has_many :comments, dependent: :destroy
   enum response_type: %i[horny came disgust]

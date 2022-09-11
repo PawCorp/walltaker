@@ -1,7 +1,9 @@
 <% content_for(:html_title) { "Walltaker ##{@link.id} for #{@link.user.username}" } %>
 
+<div data-controller="presence" data-presence-id-value="<%= @link.id %>"></div>
+
 <% if @is_current_user %>
-  <div class="task-tools" data-controller="link" data-link-id-value="<%= @link.id %>">
+  <div class="task-tools" data-controller="link">
     <dialog class="modal" data-link-target="modal">
       <h4>Confirm Delete</h4>
       <p>Are you sure you want to delete this link?</p>
@@ -169,3 +171,6 @@
   </div>
 
 </div>
+
+<%= turbo_stream_from "link_viewing_users_#{@link.id}" %>
+<%= render 'viewing_users', link: @link %>

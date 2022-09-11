@@ -746,3 +746,14 @@ aside.comments-sidebar > button .toggle-badge[data-hidden=true] {
         color: var(--text);
     }
 }
+
+.viewing-users__users {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+.viewing-users__users a {
+    color: var(--border);
+}
