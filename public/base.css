@@ -97,6 +97,10 @@ header .user-tools {
     justify-content: flex-end;
 }
 
+header .user-tools > a {
+    white-space: nowrap;
+}
+
 header .user-tools > * + * {
     margin-left: 20px;
 }
