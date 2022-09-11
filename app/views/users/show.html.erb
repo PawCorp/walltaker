@@ -34,6 +34,12 @@
     Last online
     <%= @most_recent_pinged_link && @most_recent_pinged_link[0].last_ping ? time_tag(@most_recent_pinged_link[0].last_ping, (time_ago_in_words @most_recent_pinged_link[0].last_ping) + ' ago') : 'never' %>
   </small>
+  <% if @user.viewing_link %>
+    <small>
+      Currently viewing
+      <%= link_to "#{@user.viewing_link.user.username}'s link", @user.viewing_link %>
+    </small>
+  <% end %>
 
   <% if @total_orgasms_by_day %>
     <%= area_chart @total_orgasms_by_day, colors: ["#606575"], legend: false, height: "60px", suffix: '💦', library: {

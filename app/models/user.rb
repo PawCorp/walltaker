@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_secure_password
   has_many :link
   has_many :notifications
-  belongs_to :viewing_link, foreign_key: :id, class_name: 'Link', optional: true
+  belongs_to :viewing_link, foreign_key: :viewing_link_id, class_name: 'Link', optional: true
 
   validates_uniqueness_of :email, :username
 
