@@ -56,10 +56,16 @@ class LinksController < ApplicationController
 
     if params[:commit] == 'Update and Test'
       post_count = get_possible_post_count @link
+      if post_count.nil?
+        redirect_to edit_link_path(@link), alert: "E621 may be down. You can save your link for now, though we can't verify that posts match your filter criteria at the moment."
+        return
+      end
       if post_count > 99
         redirect_to edit_link_path(@link), notice: "Many posts are selectable with these settings."
-      elsif post_count > 0
+      elsif post_count > 30
         redirect_to edit_link_path(@link), notice: "Only #{post_count} #{'post'.pluralize post_count} can be selected with these settings. You may not get many wallpapers."
+      elsif post_count > 0
+        redirect_to edit_link_path(@link), alert: "Only #{post_count} #{'post'.pluralize post_count} can be selected with these settings. You may not get many wallpapers."
       else
         redirect_to edit_link_path(@link), alert: "No posts are selectable with these settings! Check if your theme tag is an aliased tag, or if your blacklist is impossible."
       end
@@ -87,34 +93,22 @@ class LinksController < ApplicationController
       return
     end
 
-    e621_post = request_post(params['link'][:post_id]) unless params['link'][:post_id].nil?
-    blacklist = @link.blacklist.downcase.gsub(/[^\w\s_()]/, '').split(' ') unless @link.blacklist.nil?
+    e621_post = get_post(params['link'][:post_id], @link) unless params['link'][:post_id].nil?
 
     if e621_post.nil? && params['link'][:post_id]
-      redirect_to link_url(@link), alert: 'Post could not be found.'
+      redirect_to link_url(@link), alert: 'Post could not be found or was blacklisted.'
+      track :nefarious, :user_blacklisted, attempted_post_id: params['link'][:post_id]
       return
     end
 
-    if !e621_post.nil? && e621_post['post']['file']['url'].nil?
+    if !e621_post.nil? && e621_post['file']['url'].nil?
       redirect_to link_url(@link), alert: 'Post was blacklisted or removed by E621.'
       track :nefarious, :e621_blacklisted, attempted_post_id: params['link'][:post_id]
       return
     end
 
-    if !e621_post.nil? && !(%w[png jpg bmp webp].include? e621_post['post']['file']['ext'])
+    if !e621_post.nil? && !(%w[png jpg bmp webp].include? e621_post['file']['ext'])
       redirect_to link_url(@link), alert: 'Post is not a non-animated image.'
-      return
-    end
-
-    if !blacklist.nil? && !e621_post.nil? && post_blacklisted?(blacklist, @link.theme, e621_post)
-      redirect_to link_url(@link), alert: 'Post was blacklisted.'
-      track :nefarious, :user_blacklisted, attempted_post_id: params['link'][:post_id]
-      return
-    end
-
-    if !@link.min_score.nil? && @link.min_score != 0 && !e621_post.nil? && e621_post['post']['score']['total'] < @link.min_score
-      redirect_to link_url(@link), alert: 'Post was too low-rated.'
-      track :nefarious, :low_post_rating, attempted_post_id: params['link'][:post_id], score_at_the_time: e621_post['post']['score']['total']
       return
     end
 
@@ -133,9 +127,9 @@ class LinksController < ApplicationController
                @link.update(
                  HashWithIndifferentAccess.new(
                    {
-                     post_url: e621_post['post']['file']['url'],
-                     post_thumbnail_url: e621_post['post']['preview']['url'],
-                     post_description: e621_post['post']['description'],
+                     post_url: e621_post['file']['url'],
+                     post_thumbnail_url: e621_post['preview']['url'],
+                     post_description: e621_post['description'],
                      set_by_id: current_user.nil? ? nil : current_user.id,
                      response_type: nil,
                      response_text: nil
@@ -153,12 +147,18 @@ class LinksController < ApplicationController
 
     if params[:commit] == 'Update and Test'
       post_count = get_possible_post_count @link
+      if post_count.nil?
+        redirect_to edit_link_path(@link), alert: "E621 may be down. You can save your link for now, though we can't verify that posts match your filter criteria at the moment."
+        return
+      end
       if post_count > 99
-        redirect_back fallback_location: edit_link_path(@link), notice: "Many posts are selectable with these settings."
+        redirect_to edit_link_path(@link), notice: "Many posts are selectable with these settings."
+      elsif post_count > 30
+        redirect_to edit_link_path(@link), notice: "Only #{post_count} #{'post'.pluralize post_count} can be selected with these settings. You may not get many wallpapers."
       elsif post_count > 0
-        redirect_back fallback_location: edit_link_path(@link), notice: "Only #{post_count} #{'post'.pluralize post_count} can be selected with these settings. You may not get many wallpapers."
+        redirect_to edit_link_path(@link), alert: "Only #{post_count} #{'post'.pluralize post_count} can be selected with these settings. You may not get many wallpapers."
       else
-        redirect_back fallback_location: edit_link_path(@link), alert: "No posts are selectable with these settings! Check if your theme tag is an aliased tag, or if your blacklist is impossible."
+        redirect_to edit_link_path(@link), alert: "No posts are selectable with these settings! Check if your blacklist is impossible to fulfil, or if your theme tag has a typo."
       end
       return
     end
@@ -211,27 +211,6 @@ class LinksController < ApplicationController
     params.require(:link).permit(:expires, :terms, :blacklist, :friends_only, :never_expires, :theme, :min_score, :response_text, :response_type)
   end
 
-  def post_blacklisted?(blacklist, theme, e621_post)
-    incorrect_theme = if theme.nil? || theme.empty?
-                        false
-                      else
-                        lowercase_theme = theme.downcase
-                        ([lowercase_theme] & e621_post['post']['tags']['general']).empty? &&
-                          ([lowercase_theme] & e621_post['post']['tags']['species']).empty? &&
-                          ([lowercase_theme] & e621_post['post']['tags']['artist']).empty? &&
-                          ([lowercase_theme] & e621_post['post']['tags']['character']).empty? &&
-                          ([lowercase_theme] & e621_post['post']['tags']['copyright']).empty? &&
-                          ([lowercase_theme] & e621_post['post']['tags']['lore']).empty?
-                      end
-    blacklisted_in_general_tags = (blacklist & e621_post['post']['tags']['general']).any?
-    blacklisted_in_species_tags = (blacklist & e621_post['post']['tags']['species']).any?
-    blacklisted_in_artist_tags = (blacklist & e621_post['post']['tags']['artist']).any?
-    blacklisted_in_character_tags = (blacklist & e621_post['post']['tags']['character']).any?
-    blacklisted_in_copyright_tags = (blacklist & e621_post['post']['tags']['copyright']).any?
-    blacklisted_in_lore_tags = (blacklist & e621_post['post']['tags']['lore']).any?
-    blacklisted_in_general_tags || blacklisted_in_species_tags || blacklisted_in_artist_tags || blacklisted_in_character_tags || blacklisted_in_copyright_tags || blacklisted_in_lore_tags || incorrect_theme
-  end
-
   def log_presence
     log_link_presence(@link)
   end
@@ -240,19 +219,6 @@ class LinksController < ApplicationController
     user_trying_to_update_others_link_restricted_values = (current_user && ((current_user.id != @link.user.id) && !link_params.empty?))
     unauthed_user_trying_to_update_others_link_restricted_values = (current_user.nil? && !link_params.empty?)
     user_trying_to_update_others_link_restricted_values || unauthed_user_trying_to_update_others_link_restricted_values
-  end
-
-  def request_post(post_id)
-    response = Excon.get(
-      "https://e621.net/posts/#{post_id.to_i}.json",
-      headers: { 'User-Agent': 'walltaker.joi.how (by ailurus on e621)' }
-    )
-    if response.status != 200
-      track :error, :e621_post_api_fail, response: response, post_id: post_id.to_i
-      return nil
-    end
-
-    JSON.parse(response.body)
   end
 
   def protect_friends_only_links

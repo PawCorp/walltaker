@@ -2,7 +2,10 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def get_tag_results(tag_string, after, before, append_to_tags, limit = 15)
+  def get_tag_results(tag_string, after, before, link, limit = 15)
+    sanitized_blacklist = make_blacklist(link)
+    append_to_tags = make_tag_suffix(link, sanitized_blacklist)
+
     padded_tag_string = tag_string + ' -animated'
     unless append_to_tags.nil? || append_to_tags.empty?
       padded_tag_string = "#{padded_tag_string} #{append_to_tags.to_s}"
@@ -34,9 +37,7 @@ class ApplicationController < ActionController::Base
   helper_method :get_tag_results
 
   def get_possible_post_count(link)
-    sanitized_blacklist = make_blacklist(link)
-    append_to_tags = make_tag_suffix(link, sanitized_blacklist)
-    (get_tag_results '', nil, nil, append_to_tags, 100).count
+    (get_tag_results '', nil, nil, link, 150)&.count
   end
 
   helper_method :get_possible_post_count
@@ -52,10 +53,17 @@ class ApplicationController < ActionController::Base
   helper_method :make_tag_suffix
 
   def make_blacklist(link)
-    sanitized_blacklist = link.blacklist.downcase.gsub(/[^a-z_\(\)\d ]/, '')
+    link.blacklist.downcase.gsub(/[^a-z_\(\)\d\: ]/, '')
   end
 
   helper_method :make_blacklist
+
+  def get_post(id, link)
+    result = get_tag_results "id:#{id}", nil, nil, link, 1
+    result&.count&.positive? ? result[0] : nil
+  end
+
+  helper_method :get_post
 
   # @param [Symbol<:regular, :nefarious, :visit>] level
   # @param [Symbol, String] id
