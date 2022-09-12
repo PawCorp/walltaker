@@ -50,13 +50,9 @@ class ApplicationController < ActionController::Base
     append_to_tags
   end
 
-  helper_method :make_tag_suffix
-
   def make_blacklist(link)
     link.blacklist.downcase.gsub(/[^a-z_\(\)\d\: ]/, '')
   end
-
-  helper_method :make_blacklist
 
   def get_post(id, link)
     result = get_tag_results "id:#{id}", nil, nil, link, 1

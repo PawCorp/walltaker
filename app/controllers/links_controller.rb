@@ -168,6 +168,30 @@ class LinksController < ApplicationController
 
   private
 
+  # Guards
+
+  def log_presence
+    log_link_presence(@link)
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_link
+    @link = Link.find(params[:id])
+  end
+
+  # Helpers
+
+  def link_params
+    params.require(:link).permit(:expires, :terms, :blacklist, :friends_only, :never_expires, :theme, :min_score, :response_text, :response_type)
+  end
+
+  def prevent_public_expired
+    @is_expired = @link.never_expires ? false : @link.expires <= Time.now.utc
+    current_user_is_not_owner = current_user && current_user.id != @link.user.id
+    not_logged_in = current_user.nil?
+    redirect_to root_url, alert: 'That link was expired!' if @is_expired && (current_user_is_not_owner || not_logged_in)
+  end
+
   def do_link_request_test
     post_count = get_possible_post_count @link
     if post_count.nil?
@@ -182,27 +206,6 @@ class LinksController < ApplicationController
     else
       redirect_to edit_link_path(@link), alert: "No posts are selectable with these settings! Check if your theme tag is an aliased tag, or if your blacklist is impossible."
     end
-  end
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_link
-    @link = Link.find(params[:id])
-  end
-
-  def prevent_public_expired
-    @is_expired = @link.never_expires ? false : @link.expires <= Time.now.utc
-    current_user_is_not_owner = current_user && current_user.id != @link.user.id
-    not_logged_in = current_user.nil?
-    redirect_to root_url, alert: 'That link was expired!' if @is_expired && (current_user_is_not_owner || not_logged_in)
-  end
-
-  # Only allow a list of trusted parameters through.
-  def link_params
-    params.require(:link).permit(:expires, :terms, :blacklist, :friends_only, :never_expires, :theme, :min_score, :response_text, :response_type)
-  end
-
-  def log_presence
-    log_link_presence(@link)
   end
 
   def update_request_unsafe?
