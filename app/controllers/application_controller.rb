@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
 
     if results.present? && results.class == Array
       results.filter do |post|
-        post['file']['ext'] == 'png' || post['file']['ext'] == 'jpg' if post['file'] && post['file']['ext']
+        %w[png jpg bmp webp].include? post['file']['ext']
       end
     else
       []

@@ -1,12 +1,24 @@
 # frozen_string_literal: true
 
 class LinksController < ApplicationController
+  ######
+  # WELCOME TO HELL
+  ######
+
+  # 1. force auth for protected routes
   before_action :authorize, only: %i[index new edit create destroy]
-  after_action :track_visit, only: %i[index browse new show edit]
+
+  # 2. set @link instance var, since a lot of action filters use it
   before_action :set_link, only: %i[show edit update destroy export]
+
+  # 3. protect link-specific buisness rules
   before_action :prevent_public_expired, only: %i[show update]
   before_action :protect_friends_only_links, only: %i[show update]
+  before_action :skip_unauthorized_requests, only: %i[update], if: -> { update_request_unsafe? }
+
+  # 4. save presence + analytics
   after_action :log_presence, only: %i[show]
+  after_action :track_visit, only: %i[index browse new show edit]
 
   # GET /links or /links.json (only your links)
   def index
@@ -74,12 +86,6 @@ class LinksController < ApplicationController
 
   # PATCH/PUT /links/1 or /links/1.json
   def update
-    if update_request_unsafe?
-      redirect_to link_url(@link), alert: 'Not authorized.'
-      track :nefarious, :edit_others_link
-      return
-    end
-
     e621_post = get_post(params['link'][:post_id], @link) unless params['link'][:post_id].nil?
 
     if e621_post.nil? && params['link'][:post_id]
@@ -89,17 +95,12 @@ class LinksController < ApplicationController
     end
 
     if !e621_post.nil? && e621_post['file']['url'].nil?
-      redirect_to link_url(@link), alert: 'Post was blacklisted or removed by E621.'
+      redirect_to link_url(@link), alert: 'Post was blacklisted by E621.'
       track :nefarious, :e621_blacklisted, attempted_post_id: params['link'][:post_id]
       return
     end
 
-    if !e621_post.nil? && !(%w[png jpg bmp webp].include? e621_post['file']['ext'])
-      redirect_to link_url(@link), alert: 'Post is not a non-animated image.'
-      return
-    end
-
-    result = if e621_post.nil?
+    result_of_link_model_save = if e621_post.nil?
                @link.assign_attributes(link_params)
 
                unless link_params['response_type'].nil?
@@ -111,25 +112,7 @@ class LinksController < ApplicationController
                track :regular, :update_link_details
                did_save_successfully
              else
-               @link.update(
-                 HashWithIndifferentAccess.new(
-                   {
-                     post_url: e621_post['file']['url'],
-                     post_thumbnail_url: e621_post['preview']['url'],
-                     post_description: e621_post['description'],
-                     set_by_id: current_user.nil? ? nil : current_user.id,
-                     response_type: nil,
-                     response_text: nil
-                   }
-                 )
-               )
-               track :regular, :update_set_count, current_user_id: current_user&.id, link_owner_id: @link.user.id, current_user_set_count_before_inc: current_user&.set_count
-               if current_user.present? && (@link.user.id != current_user.id)
-                 current_user.set_count = current_user.set_count.to_i + 1
-                 current_user.save
-               end
-               track :regular, :update_link_post, attempted_post_id: params['link'][:post_id]
-               PastLink.log_link(@link).save
+               assign_e621_post_to_self e621_post
              end
 
     if params[:commit] == 'Update and Test'
@@ -138,7 +121,7 @@ class LinksController < ApplicationController
     end
 
     respond_to do |format|
-      if result
+      if result_of_link_model_save
         format.html { redirect_to link_url(@link), notice: 'Link was successfully updated.' }
         format.json { render :show, status: :ok, location: @link }
       else
@@ -170,6 +153,25 @@ class LinksController < ApplicationController
 
   # Guards
 
+  def update_request_unsafe?
+    user_trying_to_update_others_link_restricted_values = (current_user && ((current_user.id != @link.user.id) && !link_params.empty?))
+    unauthed_user_trying_to_update_others_link_restricted_values = (current_user.nil? && !link_params.empty?)
+    user_trying_to_update_others_link_restricted_values || unauthed_user_trying_to_update_others_link_restricted_values
+  end
+
+  def protect_friends_only_links
+    unless request.format == :json
+      authorize if @link.friends_only
+
+      unless current_user.nil?
+        friendship_exists = Friendship.find_friendship(@link.user, current_user).exists?
+        if @link.friends_only && !friendship_exists && (current_user.id != @link.user.id)
+          return redirect_to root_url, alert: 'Not Authorized'
+        end
+      end
+    end
+  end
+
   def log_presence
     log_link_presence(@link)
   end
@@ -177,6 +179,11 @@ class LinksController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_link
     @link = Link.find(params[:id])
+  end
+
+  def skip_unauthorized_requests
+    track :nefarious, :edit_others_link
+    redirect_to link_url(@link), alert: 'Not authorized.'
   end
 
   # Helpers
@@ -208,22 +215,25 @@ class LinksController < ApplicationController
     end
   end
 
-  def update_request_unsafe?
-    user_trying_to_update_others_link_restricted_values = (current_user && ((current_user.id != @link.user.id) && !link_params.empty?))
-    unauthed_user_trying_to_update_others_link_restricted_values = (current_user.nil? && !link_params.empty?)
-    user_trying_to_update_others_link_restricted_values || unauthed_user_trying_to_update_others_link_restricted_values
-  end
-
-  def protect_friends_only_links
-    unless request.format == :json
-      authorize if @link.friends_only
-
-      unless current_user.nil?
-        friendship_exists = Friendship.find_friendship(@link.user, current_user).exists?
-        if @link.friends_only && !friendship_exists && (current_user.id != @link.user.id)
-          return redirect_to root_url, alert: 'Not Authorized'
-        end
-      end
+  def assign_e621_post_to_self(e621_post)
+    @link.update(
+      HashWithIndifferentAccess.new(
+        {
+          post_url: e621_post['file']['url'],
+          post_thumbnail_url: e621_post['preview']['url'],
+          post_description: e621_post['description'],
+          set_by_id: current_user.nil? ? nil : current_user.id,
+          response_type: nil,
+          response_text: nil
+        }
+      )
+    )
+    track :regular, :update_set_count, current_user_id: current_user&.id, link_owner_id: @link.user.id, current_user_set_count_before_inc: current_user&.set_count
+    if current_user.present? && (@link.user.id != current_user.id)
+      current_user.set_count = current_user.set_count.to_i + 1
+      current_user.save
     end
+    track :regular, :update_link_post, attempted_post_id: params['link'][:post_id]
+    PastLink.log_link(@link).save
   end
 end
