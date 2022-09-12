@@ -55,20 +55,7 @@ class LinksController < ApplicationController
     result = @link.save
 
     if params[:commit] == 'Update and Test'
-      post_count = get_possible_post_count @link
-      if post_count.nil?
-        redirect_to edit_link_path(@link), alert: "E621 may be down. You can save your link for now, though we can't verify that posts match your filter criteria at the moment."
-        return
-      end
-      if post_count > 99
-        redirect_to edit_link_path(@link), notice: "Many posts are selectable with these settings."
-      elsif post_count > 30
-        redirect_to edit_link_path(@link), notice: "Only #{post_count} #{'post'.pluralize post_count} can be selected with these settings. You may not get many wallpapers."
-      elsif post_count > 0
-        redirect_to edit_link_path(@link), alert: "Only #{post_count} #{'post'.pluralize post_count} can be selected with these settings. You may not get many wallpapers."
-      else
-        redirect_to edit_link_path(@link), alert: "No posts are selectable with these settings! Check if your theme tag is an aliased tag, or if your blacklist is impossible."
-      end
+      do_link_request_test
       return
     end
 
@@ -146,20 +133,7 @@ class LinksController < ApplicationController
              end
 
     if params[:commit] == 'Update and Test'
-      post_count = get_possible_post_count @link
-      if post_count.nil?
-        redirect_to edit_link_path(@link), alert: "E621 may be down. You can save your link for now, though we can't verify that posts match your filter criteria at the moment."
-        return
-      end
-      if post_count > 99
-        redirect_to edit_link_path(@link), notice: "Many posts are selectable with these settings."
-      elsif post_count > 30
-        redirect_to edit_link_path(@link), notice: "Only #{post_count} #{'post'.pluralize post_count} can be selected with these settings. You may not get many wallpapers."
-      elsif post_count > 0
-        redirect_to edit_link_path(@link), alert: "Only #{post_count} #{'post'.pluralize post_count} can be selected with these settings. You may not get many wallpapers."
-      else
-        redirect_to edit_link_path(@link), alert: "No posts are selectable with these settings! Check if your blacklist is impossible to fulfil, or if your theme tag has a typo."
-      end
+      do_link_request_test
       return
     end
 
@@ -193,6 +167,22 @@ class LinksController < ApplicationController
   end
 
   private
+
+  def do_link_request_test
+    post_count = get_possible_post_count @link
+    if post_count.nil?
+      redirect_to edit_link_path(@link), alert: "E621 may be down. You can save your link for now, though we can't verify that posts match your filter criteria at the moment."
+    end
+    if post_count > 99
+      redirect_to edit_link_path(@link), notice: "Many posts are selectable with these settings."
+    elsif post_count > 30
+      redirect_to edit_link_path(@link), notice: "Only #{post_count} #{'post'.pluralize post_count} can be selected with these settings. You may not get many wallpapers."
+    elsif post_count > 0
+      redirect_to edit_link_path(@link), alert: "Only #{post_count} #{'post'.pluralize post_count} can be selected with these settings. You may not get many wallpapers."
+    else
+      redirect_to edit_link_path(@link), alert: "No posts are selectable with these settings! Check if your theme tag is an aliased tag, or if your blacklist is impossible."
+    end
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_link
