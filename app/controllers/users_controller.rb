@@ -72,6 +72,7 @@ class UsersController < ApplicationController
 
     if user && params['password'] && params['password_confirmation'] && (params['password'] == params['password_confirmation'])
       user.password = params['password']
+      user.password_confirmation = params['password_confirmation']
       user.password_reset_token = nil
       result = user.save
 
