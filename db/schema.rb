@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_12_023333) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_17_185207) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -276,6 +276,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_12_023333) do
     t.integer "set_count", default: 0, null: false
     t.bigint "viewing_link_id"
     t.integer "state"
+    t.string "password_reset_token"
     t.index ["email"], name: "unique_emails", unique: true
     t.index ["set_count"], name: "index_users_on_set_count", order: :desc
     t.index ["username"], name: "unique_usernames", unique: true

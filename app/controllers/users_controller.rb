@@ -44,6 +44,45 @@ class UsersController < ApplicationController
     end
   end
 
+  def request_password_reset
+
+  end
+  def password_reset
+    begin
+      user = User.find_by(email: params['email'])
+
+      unless user
+        throw :nefarious
+      end
+
+      PasswordResetMailer.reset_password(user).deliver
+      redirect_to login_path, notice: 'A password reset email has been sent to that user'
+    rescue
+      track :nefarious, :failed_to_reset_password, tried_email: params['email']
+      redirect_to forgor_path, alert: 'User was not found with that email'
+    end
+  end
+
+  def apply_new_password
+
+  end
+
+  def commit_apply_new_password
+    user = User.find_by(password_reset_token: params['password_reset_token'])
+
+    if user && params['password'] && params['password_confirmation'] && (params['password'] == params['password_confirmation'])
+      user.password = params['password']
+      user.password_reset_token = nil
+      result = user.save
+
+      if result
+        return redirect_to login_path, notice: 'Password reset successfully!'
+      end
+    end
+
+    redirect_to forgor_apply_path(params['password_reset_token']), alert: 'Something went wrong, try again. Ensure the password confirmation was typed correctly.'
+  end
+
   def new_api_key
     @user = User.find_by(username: params[:username])
     if (@user.id == current_user.id)
