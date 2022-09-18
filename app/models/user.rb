@@ -35,7 +35,9 @@ class User < ApplicationRecord
     end
 
     if viewed_link
+      users_viewing_links = User.where.not(viewing_link_id: nil)
       broadcast_replace_to "link_viewing_users_#{viewed_link.id}", target: "link_viewing_users_#{viewed_link.id}", partial: 'links/viewing_users', locals: { link: viewed_link }
+      broadcast_replace_to "dashboard_users_viewing_links", target: "users_viewing_links", partial: 'dashboard/users_viewing_links', locals: { users_viewing_links: }
     end
   end
 end

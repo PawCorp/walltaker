@@ -1,10 +1,15 @@
-<%= turbo_frame_tag "users_viewing_links" do %>
-  <% users_viewing_links.each do |user| %>
-    <strong>Links being viewed</strong>
-    <div class="dashboard__users-viewing-links">
-      <%= link_to link_path(user.viewing_link) do %>
-        #<%= user.viewing_link.user.id %>
+<%= turbo_frame_tag "users_viewing_links", target: "_top" do %>
+  <strong>Who's Browsing</strong>
+
+  <div class="dashboard__users-viewing-links">
+    <% if users_viewing_links.count.positive? %>
+      <% users_viewing_links.each do |user| %>
+        <%= link_to link_path(user.viewing_link) do %>
+          <%= user.username %>
+        <% end %>
       <% end %>
-    </div>
-  <% end %>
+    <% else %>
+      <em>No one currently.</em>
+    <% end %>
+  </div>
 <% end %>

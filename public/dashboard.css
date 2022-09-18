@@ -210,6 +210,13 @@
     margin: 0.5rem 0 0;
 }
 
+.dashboard__users-viewing-links em {
+    text-align: center;
+    display: block;
+    flex: 1 1 100%;
+    font-size: 0.8rem;
+}
+
 turbo-frame#users_viewing_links {
     width: 100%;
 }

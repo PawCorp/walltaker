@@ -24,6 +24,7 @@
       <% end %>
 
       <div class="dashboard__users-viewing-links">
+        <%= turbo_stream_from "dashboard_users_viewing_links" %>
         <%= render 'users_viewing_links', users_viewing_links: @users_viewing_links %>
       </div>
     </div>
