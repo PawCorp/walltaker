@@ -14,8 +14,8 @@
 
 <div id="links">
   <% @links.each do |link| %>
-    <%= turbo_stream_from link %>
     <div data-controller="go" data-go-to-value="<%= link_url(link) %>">
+      <%= turbo_stream_from link %>
       <%= render link %>
     </div>
   <% end %>
