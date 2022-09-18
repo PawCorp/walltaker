@@ -10,10 +10,21 @@ export default class GoController extends Controller {
 
     connect () {
         this.element.className = 'link--anchor-shade-container'
-        console.log('here', this.element)
         controls.href = this.toValue
-        console.log(controls, this.element)
         this.element.prepend(controls)
-        console.log('prepended', this.element)
+
+        if (this.element) {
+            if (this.element.classList) { this.element.classList.add('clickable') }
+            this.element.setAttribute('role', 'link')
+            this.element.setAttribute('tabindex', '0')
+            this.element.addEventListener('click', this.go.bind(this))
+            this.element.addEventListener('keypress', this.go.bind(this))
+        }
+    }
+
+    go(e) {
+        if (this.toValue && ((e.key === 'Enter') || (e.key === ' ') || (e.key === undefined))) {
+            window.location = this.toValue;
+        }
     }
 }
