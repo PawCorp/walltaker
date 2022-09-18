@@ -12,7 +12,6 @@
   <% content_for(:html_title) { 'Walltaker Dashboard' } %>
   <div class="dashboard">
     <div class="dashboard__recent">
-      <h2>Recent Backgrounds</h2>
       <div class="dashboard__recent__content">
         <%= turbo_stream_from "dashboard_recent_posts" %>
         <%= render 'recent_posts', recent_posts: @recent_posts %>
@@ -26,7 +25,6 @@
     </div>
     <div class="dashboard__updates">
       <h2>Changes</h2>
-      <p>There has been a total of <%= pluralize @total_wallpapers_changed_today, 'wallpaper change' %> today.</p>
 
       <div class="chart">
         <%= area_chart @total_wallpapers_changed_grouped_by_day, colors: ["#606575"], legend: false, height: "60px", library: {
@@ -44,7 +42,7 @@
         <table>
           <tr>
             <th>User</th>
-            <th>Different Wallpapers Today</th>
+            <th>Wallpapers Changes Today</th>
           </tr>
           <% @total_wallpapers_changed_today_by_user.each do |past_link| %>
             <tr>
