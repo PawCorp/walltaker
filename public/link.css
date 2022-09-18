@@ -775,3 +775,22 @@ aside.comments-sidebar > button .toggle-badge[data-hidden=true] {
 .viewing-users__users a {
     color: var(--border);
 }
+
+.link--anchor-shade {
+    height: 100%;
+    width: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.link--anchor-shade-container {
+    position: relative;
+}
+
+.link--anchor-shade-container a:not(.link--anchor-shade) {
+    position: relative;
+    z-index: 9999;
+}

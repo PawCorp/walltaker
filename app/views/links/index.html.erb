@@ -9,7 +9,10 @@
   </div>
 </div>
 
-<h2><ion-icon role="presentation" name="document" class="big"></ion-icon> Your Links</h2>
+<h2>
+  <ion-icon role="presentation" name="document" class="big"></ion-icon>
+  Your Links
+</h2>
 
 <div id="links">
   <% @links.each do |link| %>
@@ -21,7 +24,8 @@
   <% if @links.count == 0 %>
     <h4>No links?</h4>
     <p>
-      You'll need to click <span class="mock-button">New link</span> in the toolbar to set up a link that others can use to push wallpapers to your device.
+      You'll need to click <span class="mock-button">New link</span> in the toolbar to set up a link that others can use
+      to push wallpapers to your device.
     </p>
   <% end %>
 </div>
