@@ -21,6 +21,8 @@ class DashboardController < ApplicationController
                                 .and(
                                   Link.all.where('expires > ?', Time.now).or(Link.all.where(never_expires: true))
                                 ).count
+
+      @users_viewing_links = User.where.not(viewing_link_id: nil)
     end
   end
 end

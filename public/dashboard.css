@@ -202,3 +202,18 @@
     font-size: 1.4em;
     margin: 0px 0 -6px 0;
 }
+
+.dashboard__users-viewing-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 0.5rem 0 0;
+}
+
+turbo-frame#users_viewing_links {
+    width: 100%;
+}
+
+turbo-frame#users_viewing_links strong {
+    color: var(--border);
+}

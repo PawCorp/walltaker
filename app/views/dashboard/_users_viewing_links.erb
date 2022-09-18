@@ -1,0 +1,10 @@
+<%= turbo_frame_tag "users_viewing_links" do %>
+  <% users_viewing_links.each do |user| %>
+    <strong>Links being viewed</strong>
+    <div class="dashboard__users-viewing-links">
+      <%= link_to link_path(user.viewing_link) do %>
+        #<%= user.viewing_link.user.id %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

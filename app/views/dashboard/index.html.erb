@@ -22,6 +22,10 @@
       <%= link_to browse_path do %>
         <div class="dashboard__online__content"><%= @online_links_count %></div>
       <% end %>
+
+      <div class="dashboard__users-viewing-links">
+        <%= render 'users_viewing_links', users_viewing_links: @users_viewing_links %>
+      </div>
     </div>
     <div class="dashboard__updates">
       <h2>Changes</h2>
