@@ -543,6 +543,12 @@ turbo-frame#pornsearch_results .results form button {
     border-bottom-right-radius: 8px;
 }
 
+.tab form > a {
+    text-align: center;
+    display: block;
+    margin-top: 1rem;
+}
+
 .tab[data-open=false] {
     display: none;
 }

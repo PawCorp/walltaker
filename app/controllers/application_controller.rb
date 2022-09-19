@@ -54,6 +54,13 @@ class ApplicationController < ActionController::Base
     link.blacklist.downcase.gsub(/[^a-z_\(\)\d\: ]/, '')
   end
 
+  def get_search_base(link)
+    sanitized_blacklist = make_blacklist(link)
+    make_tag_suffix(link, sanitized_blacklist)
+  end
+
+  helper_method :get_search_base
+
   def get_post(id, link)
     result = get_tag_results "id:#{id}", nil, nil, link, 1
     result&.count&.positive? ? result[0] : nil

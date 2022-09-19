@@ -18,12 +18,22 @@
     <div>
       <%= form.submit %>
     </div>
-  <% end %>
 
-  <% unless (@link.theme.nil? || @link.theme.empty?) %>
-    <p class="subdued center">
-      The theme tag <strong><ion-icon role="presentation" name="pricetag-outline"></ion-icon> <%= @link.theme %></strong> must be present on post.
-    </p>
+    <% unless (@link.theme.nil? || @link.theme.empty?) %>
+      <p class="subdued center">
+        The theme tag <strong>
+        <ion-icon role="presentation" name="pricetag-outline"></ion-icon> <%= @link.theme %></strong> must be present.
+      </p>
+    <% end %>
+    <%
+      search_base = get_search_base(link)
+      e621_base = "https://e621.net/posts?tags="
+      e621_url = e621_base + CGI.escape(search_base)
+    %>
+    <%= link_to e621_url, target: '_blank', class: 'no-underline' do %>
+      Browse E621 with this blacklist
+      <ion-icon role="presentation" name="arrow-forward"></ion-icon>
+    <% end %>
   <% end %>
 
   <figure class="half-page-break">
