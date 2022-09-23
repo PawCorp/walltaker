@@ -3,6 +3,7 @@ class Link < ApplicationRecord
   has_many :viewing_users, foreign_key: :viewing_link_id, class_name: 'User'
   has_many :past_links
   has_many :comments, dependent: :destroy
+  has_many :abilities, class_name: 'LinkAbility', inverse_of: :link
   enum response_type: %i[horny came disgust]
   validates :expires, presence: true, unless: :never_expires?
   validates :theme, format: { without: /\s+/i, message: 'must be only 1 tag.' }
@@ -16,6 +17,11 @@ class Link < ApplicationRecord
     last_ping_online = last_ping > Time.now - 1.minute
     live_client_online = live_client_started_at && (live_client_started_at > Time.now - 7.days)
     last_ping_online || live_client_online
+  end
+  
+  # @param ["can_show_videos"] ability
+  def check_ability(ability)
+    abilities.any? { |edge| edge.ability == ability }
   end
 
   # @return [User | nil]

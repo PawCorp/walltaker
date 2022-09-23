@@ -10,9 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_17_185207) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_23_215811) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "ability", ["can_show_videos"]
 
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -186,6 +190,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_17_185207) do
     t.index ["sender_id"], name: "index_friendships_on_sender_id"
   end
 
+  create_table "link_abilities", force: :cascade do |t|
+    t.bigint "link_id", null: false
+    t.enum "ability", null: false, enum_type: "ability"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["link_id"], name: "index_link_abilities_on_link_id"
+  end
+
   create_table "links", force: :cascade do |t|
     t.datetime "expires"
     t.bigint "user_id", null: false
@@ -289,6 +301,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_17_185207) do
   add_foreign_key "comments", "users"
   add_foreign_key "friendships", "users", column: "receiver_id"
   add_foreign_key "friendships", "users", column: "sender_id"
+  add_foreign_key "link_abilities", "links"
   add_foreign_key "links", "users"
   add_foreign_key "links", "users", column: "set_by_id"
   add_foreign_key "notifications", "users"
