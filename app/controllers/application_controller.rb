@@ -3,12 +3,13 @@ class ApplicationController < ActionController::Base
   private
 
   def get_tag_results(tag_string, after, before, link, limit = 15)
+    link_can_show_videos = link.check_ability 'can_show_videos'
+
     sanitized_blacklist = make_blacklist(link)
     append_to_tags = make_tag_suffix(link, sanitized_blacklist)
 
-    padded_tag_string = tag_string + ' -animated'
     unless append_to_tags.nil? || append_to_tags.empty?
-      padded_tag_string = "#{padded_tag_string} #{append_to_tags.to_s}"
+      padded_tag_string = "#{tag_string} #{append_to_tags.to_s}"
     end
     tags = CGI.escape padded_tag_string
     url = "https://e621.net/posts.json?tags=#{tags}&limit=15"
@@ -26,8 +27,12 @@ class ApplicationController < ActionController::Base
     results = JSON.parse(response.body)['posts']
 
     if results.present? && results.class == Array
-      results.filter do |post|
-        %w[png jpg bmp webp].include? post['file']['ext']
+      unless link_can_show_videos
+        results.filter do |post|
+          %w[png jpg bmp webp].include? post['file']['ext']
+        end
+      else
+        results
       end
     else
       []
@@ -47,6 +52,7 @@ class ApplicationController < ActionController::Base
     append_to_tags += link.theme if (link.theme)
     append_to_tags += ' ' + ((sanitized_blacklist.split.map { |tag| "-#{tag}" }).join ' ') unless (sanitized_blacklist.empty?)
     append_to_tags += ' score:>' + link.min_score.to_s if link.min_score.present? && link.min_score != 0
+    append_to_tags += ' -animated' unless link.check_ability 'can_show_videos'
     append_to_tags
   end
 
