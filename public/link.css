@@ -800,3 +800,31 @@ aside.comments-sidebar > button .toggle-badge[data-hidden=true] {
     position: relative;
     z-index: 9999;
 }
+
+.link-form__abilities {
+    margin-top: 3rem;
+}
+
+.abilities {
+    margin: 2rem 0;
+}
+
+.abilities__ability {
+    display: flex;
+    gap: 1rem;
+}
+
+.abilities__ability__title {
+    flex: 1;
+}
+
+.abilities__ability__title > p {
+    margin: 0;
+    color: var(--border);
+}
+
+.abilities__ability__title strong ion-icon {
+    font-size: 1.2em;
+    transform: translateY(3px);
+    margin-right: 0.3rem;
+}

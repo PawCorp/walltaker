@@ -48,6 +48,7 @@ Rails.application.routes.draw do
   resources :links do
     member do
       get :walltaker, to: 'links#export'
+      post 'abilities/:ability', to: 'links#toggle_ability', as: 'toggle_link_ability'
     end
     resources :comments
   end

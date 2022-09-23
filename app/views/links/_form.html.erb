@@ -12,7 +12,7 @@
   <div data-controller="expiry-form">
     <div>
       <%= form.label :expires, style: "display: block" %>
-      <%= form.datetime_field :expires, class: 'flatpickr', "data-expiry-form-target": "input"  %>
+      <%= form.datetime_field :expires, class: 'flatpickr', "data-expiry-form-target": "input" %>
     </div>
 
     <div class="link--form--checkbox-row">
@@ -70,10 +70,53 @@
   </div>
 <% end %>
 
+<div class="link-form__abilities">
+  <h3>
+    <ion-icon name="sparkles"></ion-icon>
+    Abilities
+  </h3>
+  <p>
+    Some clients support special features that aren't required to be possible on every client. You can toggle those
+    here, but they make break compatibility with some clients that don't support them.
+  </p>
+
+  <%= turbo_frame_tag 'link_form_abilities' do %>
+    <div class="abilities">
+      <div class="abilities__ability">
+        <% can_show_videos = @link.check_ability 'can_show_videos' %>
+
+        <div class="abilities__ability__title">
+          <strong>
+            <% if can_show_videos %>
+              <ion-icon name="videocam"></ion-icon>
+            <% else %>
+              <ion-icon name="videocam-off"></ion-icon>
+            <% end %>
+            <%= can_show_videos ? 'Allowing' : 'Disallowing' %> videos
+          </strong>
+          <p>
+            <% if can_show_videos %>
+              Videos and GIFs can be selected, not just images.
+            <% else %>
+              Videos and GIFs cannot be selected, only images are selectable. (Default)
+            <% end %>
+          </p>
+        </div>
+        <div class="abilities__ability__controls">
+          <%= button_to toggle_link_ability_link_path(ability: :can_show_videos), method: :post, class: can_show_videos ? 'enabled' : 'disabled' do %>
+            <%= can_show_videos ? 'Disable videos' : 'Enable videos' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
 <div class="accent-block">
   <div class="accent-block__charm">
     <ion-icon role="presentation" name="information-circle"></ion-icon>
     Need help?
   </div>
-  There's a concise explanation of every single one of these options on the <a href="<%= help_path %>#getting-started-make-a-link">help page.</a>
+  There's a concise explanation of every single one of these options on the
+  <a href="<%= help_path %>#getting-started-make-a-link">help page.</a>
 </div>

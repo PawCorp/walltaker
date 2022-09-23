@@ -9,12 +9,12 @@ class LinksController < ApplicationController
   before_action :authorize, only: %i[index new edit create destroy]
 
   # 2. set @link instance var, since a lot of action filters use it
-  before_action :set_link, only: %i[show edit update destroy export]
+  before_action :set_link, only: %i[show edit update destroy export toggle_ability]
 
   # 3. protect link-specific buisness rules
   before_action :prevent_public_expired, only: %i[show update]
   before_action :protect_friends_only_links, only: %i[show update]
-  before_action :skip_unauthorized_requests, only: %i[update], if: -> { update_request_unsafe? }
+  before_action :skip_unauthorized_requests, only: %i[update toggle_ability], if: -> { update_request_unsafe? }
 
   # 4. save presence + analytics
   after_action :log_presence, only: %i[show]
@@ -101,19 +101,19 @@ class LinksController < ApplicationController
     end
 
     result_of_link_model_save = if e621_post.nil?
-               @link.assign_attributes(link_params)
+                                  @link.assign_attributes(link_params)
 
-               unless link_params['response_type'].nil?
-                 @link = on_link_react(@link)
-               end
+                                  unless link_params['response_type'].nil?
+                                    @link = on_link_react(@link)
+                                  end
 
-               did_save_successfully = @link.save
+                                  did_save_successfully = @link.save
 
-               track :regular, :update_link_details
-               did_save_successfully
-             else
-               assign_e621_post_to_self e621_post
-             end
+                                  track :regular, :update_link_details
+                                  did_save_successfully
+                                else
+                                  assign_e621_post_to_self e621_post
+                                end
 
     if params[:commit] == 'Update and Test'
       do_link_request_test
@@ -147,6 +147,18 @@ class LinksController < ApplicationController
   def export
     track :regular, :export_link
     render layout: nil, content_type: 'application/toml'
+  end
+
+  def toggle_ability
+    able_to = @link.check_ability params['ability']
+    if able_to
+      track :regular, :disabled_ability, ability_name: params['ability']
+      @link.abilities.delete_by ability: params['ability']
+    else
+      track :regular, :enabled_ability, ability_name: params['ability']
+      @link.abilities.create ability: params['ability']
+    end
+    redirect_to edit_link_path @link
   end
 
   private
