@@ -8,8 +8,10 @@ class ApplicationController < ActionController::Base
     sanitized_blacklist = make_blacklist(link)
     append_to_tags = make_tag_suffix(link, sanitized_blacklist)
 
+    padded_tag_string = tag_string
+
     unless append_to_tags.nil? || append_to_tags.empty?
-      padded_tag_string = "#{tag_string} #{append_to_tags.to_s}"
+      padded_tag_string += " #{append_to_tags.to_s}"
     end
     tags = CGI.escape padded_tag_string
     url = "https://e621.net/posts.json?tags=#{tags}&limit=15"
