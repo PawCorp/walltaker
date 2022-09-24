@@ -29,6 +29,10 @@
         column-count: 2;
     }
 
+    #links > * {
+        white-space: nowrap;
+    }
+
     #links > *:first-child .link {
         margin-top: 0;
     }
