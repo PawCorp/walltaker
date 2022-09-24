@@ -12,7 +12,7 @@
   <small>All public online links ordered by who needs the most attention at the top.</small>
 </h2>
 
-<div id="links">
+<div id="links" class="browse-links">
   <% @links.each do |link| %>
     <div data-controller="go" data-go-to-value="<%= link_url(link) %>">
       <%= turbo_stream_from link %>

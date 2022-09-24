@@ -18,7 +18,7 @@
 
 /* browse page links list */
 @media screen and (min-width: 1220px) {
-    #links {
+    #links.browse-links {
         width: 100vw;
         position: relative;
         left: 50%;
@@ -29,18 +29,18 @@
         column-count: 2;
     }
 
-    #links > * {
+    #links.browse-links > * {
         page-break-inside: avoid;
         break-inside: avoid-column;
     }
 
-    #links > *:first-child .link {
+    #links.browse-links > *:first-child .link {
         margin-top: 0;
     }
 }
 
 @media screen and (min-width: 1620px) {
-    #links {
+    #links.browse-links {
         column-count: 3;
     }
 }
