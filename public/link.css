@@ -30,11 +30,8 @@
     }
 
     #links > * {
-        white-space: nowrap;
-    }
-
-    #links > * blockquote {
-        white-space: normal;
+        page-break-inside: avoid;
+        break-inside: avoid-column;
     }
 
     #links > *:first-child .link {
