@@ -33,6 +33,10 @@
         white-space: nowrap;
     }
 
+    #links > * blockquote {
+        white-space: normal;
+    }
+
     #links > *:first-child .link {
         margin-top: 0;
     }
