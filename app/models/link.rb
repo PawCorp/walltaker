@@ -4,6 +4,7 @@ class Link < ApplicationRecord
   has_many :past_links
   has_many :comments, dependent: :destroy
   has_many :abilities, class_name: 'LinkAbility', inverse_of: :link, dependent: :destroy
+  has_many :users_viewing, class_name: 'User', foreign_key: :viewing_link_id, inverse_of: :viewing_link, dependent: :nullify
   enum response_type: %i[horny came disgust]
   validates :expires, presence: true, unless: :never_expires?
   validates :theme, format: { without: /\s+/i, message: 'must be only 1 tag.' }
