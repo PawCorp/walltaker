@@ -152,13 +152,26 @@
       Enter some e621 tags, click search, then click any post to
       set <%= @link.user.username %>'s wallpaper.
     </p>
-    <% unless (@link.theme.nil? || @link.theme.empty?) %>
+
+    <% unless @link.theme.nil? || @link.theme&.empty? %>
       <p class="subdued">
         The theme tag <strong>
         <ion-icon role="presentation" name="pricetag-outline"></ion-icon> <%= @link.theme %></strong> is being
         automatically applied.
       </p>
     <% end %>
+
+    <% if @link.check_ability 'can_show_videos' %>
+      <p class="subdued">
+        You can select
+        <strong>
+          <ion-icon class="video-icon" role="presentation" name="videocam"></ion-icon>
+          videos
+        </strong>
+        on this link.
+      </p>
+    <% end %>
+
     <%= turbo_frame_tag "pornsearch", src: porn_search_index_path({ link: @link.id }) do %>
       <div>
         Loading

@@ -1,7 +1,7 @@
 .link {
     display: grid;
     position: relative;
-    grid-template-columns: 1fr 130px;
+    grid-template-columns: 1fr 150px;
     grid-template-rows: auto auto 1fr auto;
     gap: 10px;
     padding: 10px 15px;
@@ -10,6 +10,7 @@
     border-radius: 8px;
     grid-template-areas: 'expires      presence'
                          'terms        theme'
+                         'terms        abilities'
                          'terms        blacklist'
                          'friends-only friends-only';
     overflow: hidden;
@@ -17,22 +18,29 @@
 
 @media screen and (max-width: 512px) {
     .link {
+        grid-template-columns: auto auto !important;
         grid-template-areas:
                 'expires      presence'
-                'theme        theme'
+                'theme        abilities'
                 'terms        terms'
                 'blacklist    blacklist'
                 'friends-only friends-only';
     }
 
-    .link--theme {
+    .link--theme,
+    .link--abilities {
         display: flex !important;
         gap: 0.5rem;
         font-size: 0.8rem !important;
         font-weight: bold !important;
     }
 
-    .link--theme > strong {
+    .link--abilities {
+        justify-content: flex-end;
+    }
+
+    .link--theme > strong,
+    .link--abilities > strong {
         display: inline-flex !important;
     }
 
@@ -144,11 +152,27 @@ strong.offline {
     color: var(--accent);
 }
 
-.link--theme span {
+.link--abilities {
+    grid-area: abilities;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 0.8em;
+    color: var(--accent);
+}
+
+
+.link--abilities span > ion-icon {
+    font-size: 1.5rem;
+}
+
+.link--theme span,
+.link--abilities span{
     white-space: initial;
 }
 
-.link--theme ion-icon {
+.link--theme ion-icon,
+.link--abilities ion-icon{
     transform: translateY(0.1em);
 }
 
@@ -170,7 +194,8 @@ strong.offline {
 }
 
 .link--blacklist > strong,
-.link--theme > strong {
+.link--theme > strong,
+.link--abilities > strong {
     display: flex;
     align-items: center;
     gap: 0.2rem;
@@ -181,7 +206,8 @@ strong.offline {
 }
 
 .link--blacklist > strong > ion-icon,
-.link--theme > strong > ion-icon {
+.link--theme > strong > ion-icon,
+.link--abilities > strong > ion-icon {
     font-size: 1rem;
     width: 1rem;
 }
@@ -827,4 +853,9 @@ aside.comments-sidebar > button .toggle-badge[data-hidden=true] {
     font-size: 1.2em;
     transform: translateY(3px);
     margin-right: 0.3rem;
+}
+
+.video-icon {
+    transform: translateY(2px);
+    margin: 0 0.1rem 0 0.2rem;
 }

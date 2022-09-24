@@ -60,6 +60,23 @@
       </div>
     <% end %>
 
+    <% if link.abilities.count > 0 %>
+      <div class="link--abilities">
+        <strong>
+          <ion-icon role="presentation" name="sparkles"></ion-icon>
+          Abilities
+        </strong>
+        <% link.abilities.each do |edge| %>
+          <span>
+            <% case edge.ability %>
+            <% when 'can_show_videos' %>
+              <ion-icon name="videocam-outline"></ion-icon>
+            <% end %>
+          </span>
+        <% end %>
+      </div>
+    <% end %>
+
     <div class="link--blacklist">
       <strong>
         <ion-icon role="presentation" name="cut"></ion-icon>
