@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   def get_tag_results(tag_string, after, before, link, limit = 15)
     if link.nil?
       append_to_tags = ''
-      padded_tag_string = ''
+      padded_tag_string = tag_string
       link_can_show_videos = true
     else
       link_can_show_videos = link.check_ability 'can_show_videos'
