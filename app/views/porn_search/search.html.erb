@@ -33,7 +33,7 @@
           <% elsif @message_thread %>
             <!-- MESSAGE THREAD -->
             <% body = { message: post['file']['url'], return_to_path: porn_search_search_path(page_number: @page_number, message_thread: @message_thread.id, tags: @tags, after: @after, before: @before) } %>
-            <%= button_to porn_search_send_message_and_return_path(message_thread: @message_thread.id), method: :get, params: body, data: {
+            <%= button_to porn_search_send_message_and_return_path(message_thread: @message_thread.id), method: :post, params: body, data: {
               turbo_frame: '_self'
             } do %>
               <img src="<%= post['preview']['url'] %>"/>
