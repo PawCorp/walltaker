@@ -35,6 +35,9 @@ Rails.application.routes.draw do
       post 'users/:user_id', to: 'message_thread#add_user', as: 'add_user'
       delete 'users/:user_id', to: 'message_thread#remove_user', as: 'remove_user'
     end
+    collection do
+      get 'resolve_thread_with/:user_id', to: 'message_thread#resolve', as: 'resolve'
+    end
   end
   resources :friendships do
     collection do

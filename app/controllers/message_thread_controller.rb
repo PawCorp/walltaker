@@ -1,4 +1,5 @@
 class MessageThreadController < ApplicationController
+  before_action :authorize, only: %i[index show send_message new create destroy edit remove_user add_user update resolve]
   before_action :set_message_thread, only: %i[show send_message edit update remove_user add_user]
 
   def index
@@ -83,6 +84,30 @@ class MessageThreadController < ApplicationController
     end
     @message_thread.save
     redirect_to edit_message_thread_path @message_thread
+  end
+
+  def resolve
+    begin
+      user = User.find params['user_id']
+      friendship = Friendship.find_friendship current_user, user
+      if friendship
+        first_common_thread = MessageThread.find_common_thread current_user, user
+        if first_common_thread
+          redirect_to message_thread_path(first_common_thread)
+        else
+          new_thread = MessageThread.new
+          new_thread.users << current_user
+          new_thread.users << user
+          new_thread.save
+          redirect_to message_thread_path(new_thread)
+        end
+      else
+        redirect_back fallback_location: root_url, alert: 'Friendship not found.'
+      end
+    rescue
+      track :error, :message_tread_participant_not_resolving, tried_to_find: params['user_id']
+      redirect_back fallback_location: root_url, alert: 'Something went wrong, does that user exist?'
+    end
   end
 
   private
