@@ -31,7 +31,7 @@
 
         <% next_message = messages[index - 1] %> <!-- Remember, the list is reversed -->
         <% if (next_message && next_message.from_user.username != message.from_user.username) || index == 0 %>
-          <strong><%= message.from_user.username %></strong>
+          <strong><%= message.from_user.username %> - <%= time_ago_in_words message.created_at %> ago</strong>
         <% end %>
       </div>
     </div>
