@@ -32,3 +32,16 @@
     <% end %>
   <% end %>
 <% end %>
+
+
+<div class="accent-block spaced">
+  <div class="accent-block__charm">
+    <ion-icon name="image"></ion-icon>
+    Attach porn from e621
+  </div>
+  <%= turbo_frame_tag "pornsearch", src: porn_search_index_path({ message_thread: @message_thread.id }) do %>
+    <div>
+      Loading
+    </div>
+  <% end %>
+</div>

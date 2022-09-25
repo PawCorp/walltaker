@@ -39,6 +39,10 @@
     text-align: right;
 }
 
+.messages__message p {
+    display: inline-block;
+}
+
 .messages__message img,
 .messages__message video {
     max-width: 80%;

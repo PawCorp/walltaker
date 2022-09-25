@@ -3,12 +3,18 @@ class ApplicationController < ActionController::Base
   private
 
   def get_tag_results(tag_string, after, before, link, limit = 15)
-    link_can_show_videos = link.check_ability 'can_show_videos'
+    if link.nil?
+      append_to_tags = ''
+      padded_tag_string = ''
+      link_can_show_videos = true
+    else
+      link_can_show_videos = link.check_ability 'can_show_videos'
 
-    sanitized_blacklist = make_blacklist(link)
-    append_to_tags = make_tag_suffix(link, sanitized_blacklist)
+      sanitized_blacklist = make_blacklist(link)
+      append_to_tags = make_tag_suffix(link, sanitized_blacklist)
 
-    padded_tag_string = tag_string
+      padded_tag_string = tag_string
+    end
 
     unless append_to_tags.nil? || append_to_tags.empty?
       padded_tag_string += " #{append_to_tags.to_s}"

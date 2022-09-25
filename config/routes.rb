@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   delete 'notification', to: 'notification#delete_all', as: 'clear_notifications'
   get 'porn_search/index'
   get 'porn_search/search'
+  get 'porn_search/send_message_and_return/:message_thread', to: 'porn_search#send_message_and_return', as: 'porn_search_send_message_and_return'
   root 'dashboard#index'
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'session#new', as: 'login'

@@ -1,20 +1,43 @@
 <%= turbo_frame_tag "pornsearch_results" do %>
-  <% unless @posts.empty? || @link.id.nil? %>
+  <% unless @posts.empty? %>
     <div class="pornsearch_results__buttons">
-      <%= link_to 'back', url_for({ tags: @last_tags, before: @posts.first['id'], page_number: @page_number - 1, link: @link.id }), disabled: @page_number <= 1 %>
+      <% if @link %>
+        <!-- LINK -->
+        <%= link_to 'back', url_for({ tags: @last_tags, before: @posts.first['id'], page_number: @page_number - 1, link: @link.id }), disabled: @page_number <= 1 %>
+      <% elsif @message_thread %>
+        <!-- MESSAGE THREAD -->
+        <%= link_to 'back', url_for({ tags: @last_tags, before: @posts.first['id'], page_number: @page_number - 1, message_thread: @message_thread.id }), disabled: @page_number <= 1 %>
+      <% end %>
       <span><%= @page_number %></span>
-      <%= link_to 'next', url_for({ tags: @last_tags, after: @posts.last['id'], page_number: @page_number + 1, link: @link.id }) %>
+      <% if @link %>
+        <!-- LINK -->
+        <%= link_to 'next', url_for({ tags: @last_tags, after: @posts.last['id'], page_number: @page_number + 1, link: @link.id }) %>
+      <% elsif @message_thread %>
+        <!-- MESSAGE THREAD -->
+        <%= link_to 'next', url_for({ tags: @last_tags, after: @posts.last['id'], page_number: @page_number + 1, message_thread: @message_thread.id }) %>
+      <% end %>
     </div>
     <div class="results">
       <% @posts.each do |post| %>
         <% if post['preview']['url'] %>
-          <% new_link = { id: @link.id, post_id: post['id'] } %>
-          <%= button_to url_for(controller: :links, action: :update, id: @link.id, link: new_link), method: :patch, data: {
-            turbo_frame: '_top',
-            'porn-search-target': 'thumbnail',
-            action: 'click->porn-search#click_thumbnail'
-          } do %>
-            <img src="<%= post['preview']['url'] %>"/>
+          <% if @link %>
+            <!-- LINK -->
+            <% new_link = { id: @link.id, post_id: post['id'] } %>
+            <%= button_to url_for(controller: :links, action: :update, id: @link.id, link: new_link), method: :patch, data: {
+              turbo_frame: '_top',
+              'porn-search-target': 'thumbnail',
+              action: 'click->porn-search#click_thumbnail'
+            } do %>
+              <img src="<%= post['preview']['url'] %>"/>
+            <% end %>
+          <% elsif @message_thread %>
+            <!-- MESSAGE THREAD -->
+            <% body = { message: post['file']['url'], return_to_path: porn_search_search_path(page_number: @page_number, message_thread: @message_thread.id, tags: @tags, after: @after, before: @before) } %>
+            <%= button_to porn_search_send_message_and_return_path(message_thread: @message_thread.id), method: :get, params: body, data: {
+              turbo_frame: '_self'
+            } do %>
+              <img src="<%= post['preview']['url'] %>"/>
+            <% end %>
           <% end %>
         <% else %>
           <strong>Blacklisted</strong>
@@ -25,7 +48,7 @@
   <% if @posts.empty? %>
     <p>
       <strong>Sorry</strong>
-      <% if @link.theme.nil? || @link.theme.empty? %>
+      <% if @link && (@link.theme.nil? || @link.theme.empty?) %>
         that search returned nothing. This search obeys the e621 global blacklist, and also has
         some light filtering to prevent easy abuse.
       <% else %>
