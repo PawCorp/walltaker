@@ -4,9 +4,9 @@
   <% messages.each_with_index do |message, index| %>
     <%
       content = convert_all_e621_links_to_source_links message.content
-      images_source = content.scan(/(https:\/\/static\d*\.e621.net\/data\/\w\w\/\w\w\/)(\w*)\.(jpg|png)/)
+      images_source = content.scan(/(https:\/\/static\d*\.e621.net\/data\/\w\w\/\w\w\/)(\w*)\.(jpg|png|gif)/)
       videos_source = content.scan(/(https:\/\/static\d*\.e621.net\/data\/\w\w\/\w\w\/)(\w*)\.(webm)/)
-      filtered_content = content.gsub(/https:\/\/static\d*\.e621.net\/data\/\w\w\/\w\w\/\w*\.(jpg|png|webm)/, '')
+      filtered_content = content.gsub(/https:\/\/static\d*\.e621.net\/data\/\w\w\/\w\w\/\w*\.(jpg|png|webm|gif)/, '')
 
       # DO NOT TRUST `images`! It's coming from users, and we need to filter EVERYTHING thru CGI.escape if it's not
       # heavily scoped by our Regex.
