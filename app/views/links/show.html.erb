@@ -3,7 +3,7 @@
 <div data-controller="presence" data-presence-id-value="<%= @link.id %>"></div>
 
 <% if @is_current_user %>
-  <div class="task-tools" data-controller="link" data-link-id-value="<%= @link.id %>">
+  <div class="task-tools" data-controller="link" data-link-id-value="<%= @link.custom_url || @link.id %>">
     <dialog class="modal" data-link-target="modal">
       <h4>Confirm Delete</h4>
       <p>Are you sure you want to delete this link?</p>

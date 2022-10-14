@@ -20,7 +20,7 @@ function copy(str) {
 class LinkController extends Controller {
     static targets = ['cancel', 'copy', 'shareIcon', 'checkmarkIcon']
     static values = {
-        id: Number
+        id: String
     }
 
     connect() {
