@@ -64,6 +64,7 @@ class LinksController < ApplicationController
   def create
     @link = Link.new(link_params)
     @link.user_id = current_user.id
+    @link.custom_url = nil if @link.user.set_count < 300
     result = @link.save
 
     if params[:commit] == 'Update and Test'
@@ -102,6 +103,9 @@ class LinksController < ApplicationController
 
     result_of_link_model_save = if e621_post.nil?
                                   @link.assign_attributes(link_params)
+
+                                  @link.custom_url = nil if @link.custom_url == ''
+                                  @link.custom_url = nil if @link.user.set_count < 300
 
                                   unless link_params['response_type'].nil?
                                     @link = on_link_react(@link)
@@ -190,7 +194,11 @@ class LinksController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_link
-    @link = Link.find(params[:id])
+    if params[:id].match? /\D+/
+      @link = Link.find_by(custom_url: params[:id])
+    else
+      @link = Link.find(params[:id])
+    end
   end
 
   def skip_unauthorized_requests
@@ -201,7 +209,7 @@ class LinksController < ApplicationController
   # Helpers
 
   def link_params
-    params.require(:link).permit(:expires, :terms, :blacklist, :friends_only, :never_expires, :theme, :min_score, :response_text, :response_type)
+    params.require(:link).permit(:expires, :terms, :blacklist, :friends_only, :never_expires, :theme, :min_score, :response_text, :response_type, :custom_url)
   end
 
   def prevent_public_expired

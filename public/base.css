@@ -459,6 +459,10 @@ button.no-underline {
     padding: 0.4rem 0.7rem;
 }
 
+.no-margin {
+    margin: 0;
+}
+
 button.secondary {
     background: var(--text);
     color: var(--bg);

@@ -64,6 +64,29 @@
     </div>
   </div>
 
+  <div class="accent-block spaced">
+    <div class="accent-block__charm">
+      <ion-icon role="presentation" name="trophy-sharp"></ion-icon>
+      Requires the silver trophy (set >300 wallpapers for others)
+    </div>
+
+    <div data-controller="theme-form" class="link--form--theme">
+      <%= form.label :custom_url, class: 'no-margin' do %>
+        <ion-icon role="presentation" name="document-attach-outline"></ion-icon>
+        Custom URL
+        <%= form.check_box :custom_url_checkbox, disabled: current_user.set_count < 300, data: { 'theme-form-target': 'switch', action: 'click->theme-form#toggle' } %>
+      <% end %>
+      <div data-theme-form-target="container">
+        walltaker.joi.how/links/ <%= form.text_field :custom_url, placeholder: 'horny-deer-please', 'data-theme-form-target': 'input' %>
+      </div>
+
+      <p>
+        In addition to your regular walltaker link URL (https://walltaker.joi.how/links/1), you can provide your own text for a custom url. It will be accessible as <strong>https://walltaker.joi.how/links/ <mark>your-text-here</mark></strong>
+      </p>
+    </div>
+  </div>
+
+
   <div>
     <%= form.submit %>
     <%= form.submit 'Update and Test', class: 'secondary' %>
