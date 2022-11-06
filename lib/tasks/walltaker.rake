@@ -1,6 +1,3 @@
-require "#{Rails.root}/app/helpers/application_helper"
-include ApplicationHelper
-
 namespace :walltaker do
   task porn_bot_round: :environment do
     pornbot = User.find_by(username: 'PornBot')
