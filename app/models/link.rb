@@ -10,11 +10,12 @@ class Link < ApplicationRecord
   validates :theme, format: { without: /\s+/i, message: 'must be only 1 tag.' }
   validates :theme, format: { without: /\:/, message: 'must not contain filter or sort tags. (like score:>30) Use the Minimum Score setting instead.' }
   validates :min_score, comparison: { greater_than: -1, less_than: 301 }
-  validates :custom_url, format: { with: /\A[a-zA-Z-_]*\z/, message: 'must be a valid in a url, with no spaces or special characters' }
+  validates :custom_url, format: { with: /\A[a-zA-Z\-_]*\z/, message: 'must be a valid in a url, with no spaces or special characters' }
   validates_uniqueness_of :custom_url, allow_nil: true, unless: ->(l) { l.custom_url.blank? }
   visitable :ahoy_visit
 
   scope :is_online, -> { where('last_ping > ?', Time.now - 1.minute).or(where('live_client_started_at > ?', Time.now - 7.days)) }
+  scope :with_ability_to, ->(ability_name) { joins(:abilities).where('link_abilities.ability': ability_name) }
 
   def is_online?
     last_ping_online = last_ping > Time.now - 1.minute

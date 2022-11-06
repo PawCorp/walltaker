@@ -1,7 +1,4 @@
 class ApplicationController < ActionController::Base
-
-  private
-
   def get_tag_results(tag_string, after, before, link, limit = 15)
     if link.nil?
       append_to_tags = ''
@@ -48,6 +45,8 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :get_tag_results
+
+  private
 
   def get_possible_post_count(link)
     (get_tag_results '', nil, nil, link, 150)&.count
