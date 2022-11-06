@@ -869,6 +869,18 @@ aside.comments-sidebar > button .toggle-badge[data-hidden=true] {
     gap: 1rem;
 }
 
+.abilities__ability__controls button.enabled {
+    background: var(--bg);
+    color: var(--accent);
+    border-width: 1px;
+    border-color: var(--accent);
+    border-style: solid;
+}
+
+.abilities__ability + .abilities__ability {
+    margin-top: 1rem;
+}
+
 .abilities__ability__title {
     flex: 1;
 }
@@ -876,6 +888,7 @@ aside.comments-sidebar > button .toggle-badge[data-hidden=true] {
 .abilities__ability__title > p {
     margin: 0;
     color: var(--border);
+    line-height: 1.4rem;
 }
 
 .abilities__ability__title strong ion-icon {
