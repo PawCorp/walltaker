@@ -47,6 +47,16 @@ h2 > span > .text-charm__medal:hover {
 
 .details__container blockquote {
     margin: 1rem 1rem;
+    font-style: normal;
+}
+
+.details__container blockquote > h1,
+.details__container blockquote > h2,
+.details__container blockquote > h3,
+.details__container blockquote > h4,
+.details__container blockquote > h5,
+.details__container blockquote > h6{
+    margin-top: 0;
 }
 
 .see-all-past-wallpapers {

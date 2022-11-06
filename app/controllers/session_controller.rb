@@ -5,12 +5,24 @@ class SessionController < ApplicationController
 
   def create
     user = User.find_by_email(login_params[:email])
-    if !user.nil? && user.authenticate(login_params[:password])
-      session[:user_id] = user.id unless params[:keep_me_logged_in]
-      cookies.signed[:permanent_session_id] = { value: user.id, expires: 14.days.from_now } if params[:keep_me_logged_in]
-      ahoy.authenticate(user)
-      track :regular, :logged_in
-      redirect_to url_for(controller: :dashboard, action: :index), notice: 'Logged in!'
+    if !user.nil?
+      if user.username == 'PornBot'
+        @error = 'You don\'t look like a robot... Your IP address has been flagged.'
+        track :nefarious, :tried_to_log_in_as_porn_bot
+        render 'new', status: :unprocessable_entity
+      else
+        if user.authenticate(login_params[:password])
+          session[:user_id] = user.id unless params[:keep_me_logged_in]
+          cookies.signed[:permanent_session_id] = { value: user.id, expires: 14.days.from_now } if params[:keep_me_logged_in]
+          ahoy.authenticate(user)
+          track :regular, :logged_in
+          redirect_to url_for(controller: :dashboard, action: :index), notice: 'Logged in!'
+        else
+          @error = 'Wrong email or password.'
+          track :nefarious, :failed_to_log_in, email: login_params[:email]
+          render 'new', status: :unprocessable_entity
+        end
+      end
     else
       @error = 'Wrong email or password.'
       track :nefarious, :failed_to_log_in, email: login_params[:email]
