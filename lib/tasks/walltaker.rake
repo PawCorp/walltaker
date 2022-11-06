@@ -11,7 +11,7 @@ namespace :walltaker do
     end
 
     puts "PornBot has awoken"
-    links = Link.with_ability_to('can_be_set_by_porn_bot').order(Arel.sql('RANDOM()')).limit(60)
+    links = Link.with_ability_to('can_be_set_by_porn_bot').is_online.order(Arel.sql('RANDOM()')).limit(60)
 
     puts "Found #{links.count} links to set this round"
 
