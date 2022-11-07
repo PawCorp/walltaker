@@ -16,6 +16,11 @@
     overflow: hidden;
 }
 
+.text-light {
+    margin-top: 0;
+    color: var(--text-light);
+}
+
 /* browse page links list */
 @media screen and (min-width: 1220px) {
     #links.browse-links {
@@ -373,14 +378,71 @@ label {
     width: 180px;
 }
 
+.link--form__section + .link--form__section {
+    margin-top: 3.5rem;
+}
+
+.link--form__section > h3 {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.link--form__section > h3 > ion-icon {
+    margin-right: 0.3rem;
+    color: var(--accent);
+    background: var(--accent-bg);
+    padding: 0.3em;
+    border-radius: 0.3em;
+    font-size: 0.7em;
+    box-shadow: 0px 3px 0px var(--text-light);
+    border: 1px solid var(--text-light);
+    transform: translateY(-0.05em);
+}
+
+.link--form__section > p {
+    color: var(--border);
+    margin-bottom: 1.5rem;
+    margin-top: 0.75rem;
+}
+
 .link--form--theme label {
     display: flex;
     align-content: center;
+    margin-bottom: 0;
     gap: 0.4rem;
+}
+
+.link--form--theme em {
+    color: var(--text-light);
+    font-style: normal;
 }
 
 .link--form--theme label input[type=checkbox] {
     transform: translateY(-0.1em);
+}
+
+.link--form--text-row {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0 1.5rem;
+    gap: 1rem;
+}
+
+.link--form--text-row input,
+.link--form--text-row label {
+    margin: 0;
+}
+
+.link--form--submit-row {
+    display: flex;
+    gap: 1rem;
+    margin: 2.5rem 0 4rem;
+    padding: 0 3rem;
+    flex-wrap: wrap;
+}
+
+.link--form--submit-row > input {
+    flex: 1 1 120px;
 }
 
 .link--form--checkbox-row {
@@ -887,7 +949,7 @@ aside.comments-sidebar > button .toggle-badge[data-hidden=true] {
 
 .abilities__ability__title > p {
     margin: 0;
-    color: var(--border);
+    color: var(--text-light);
     line-height: 1.4rem;
 }
 

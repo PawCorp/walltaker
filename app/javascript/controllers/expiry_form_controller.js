@@ -16,6 +16,6 @@ export default class extends Controller {
     set () {
         if (!this.enabled) this.inputTarget.value = ''
         this.switchTarget.checked = !this.enabled
-        this.inputTarget.disabled = !this.enabled
+        this.inputTarget.style.display = !this.enabled ? 'none' : 'flex';
     }
 }

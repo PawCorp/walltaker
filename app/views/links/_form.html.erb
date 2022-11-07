@@ -9,92 +9,124 @@
     </div>
   <% end %>
 
-  <div data-controller="expiry-form">
+  <div class="link--form__section">
+    <h3>
+      <ion-icon name="newspaper"></ion-icon>
+      Metadata
+    </h3>
+    <p>
+      Tell people about yourself! What do you like, what do you not like? Customize your link to fit you.
+    </p>
+
     <div>
-      <%= form.label :expires, style: "display: block" %>
-      <%= form.datetime_field :expires, class: 'flatpickr', "data-expiry-form-target": "input" %>
+      <%= form.label :terms, 'Description (Basic HTML supported)', style: "display: block" %>
+      <%= form.text_area :terms, size: '70x5' %>
+    </div>
+
+    <div class="accent-block spaced">
+      <div class="accent-block__charm">
+        <ion-icon role="presentation" name="trophy-sharp"></ion-icon>
+        Requires the silver trophy (set >300 wallpapers for others)
+      </div>
+
+      <div data-controller="theme-form" class="link--form--theme">
+        <%= form.label :custom_url, class: 'no-margin' do %>
+          <ion-icon role="presentation" name="document-attach-outline"></ion-icon>
+          Custom URL
+          <%= form.check_box :custom_url_checkbox, disabled: current_user.set_count < 300, data: { 'theme-form-target': 'switch', action: 'click->theme-form#toggle' } %>
+        <% end %>
+        <div data-theme-form-target="container">
+          <p class="text-light">
+            In addition to your regular walltaker link URL (https://walltaker.joi.how/links/1), you can provide your own
+            text for a custom url. It will be accessible as <strong>https://walltaker.joi.how/links/
+            <mark>your-text-here</mark>
+          </strong>
+          </p>
+
+          walltaker.joi.how/links/ <%= form.text_field :custom_url, placeholder: 'horny-deer-please', 'data-theme-form-target': 'input' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="link--form__section">
+    <h3>
+      <ion-icon name="funnel"></ion-icon>
+      Restrictions
+    </h3>
+    <p>
+      Define when and by who your wallpaper can be set using this link.
+    </p>
+
+    <div data-controller="expiry-form">
+      <div class="link--form--checkbox-row">
+        <%= form.label :never_expires do %>
+          <ion-icon role="presentation" name="infinite"></ion-icon>
+          Never expires
+        <% end %>
+        <%= form.check_box :never_expires, "data-expiry-form-target": "switch", "data-action": "click->expiry-form#toggle" %>
+      </div>
+      <div class="link--form--text-row" data-expiry-form-target="input">
+        <%= form.label :expires, style: "display: block" %>
+        <%= form.datetime_field :expires, class: 'flatpickr' %>
+      </div>
     </div>
 
     <div class="link--form--checkbox-row">
-      <%= form.label :never_expires do %>
-        <ion-icon role="presentation" name="infinite"></ion-icon>
-        Never expires
+      <%= form.label :friends_only do %>
+        <ion-icon role="presentation" name="document-lock"></ion-icon>
+        Friends Only (No public access)
       <% end %>
-      <%= form.check_box :never_expires, "data-expiry-form-target": "switch", "data-action": "click->expiry-form#toggle" %>
+      <%= form.check_box :friends_only %>
     </div>
+
   </div>
 
-  <div class="link--form--checkbox-row">
-    <%= form.label :friends_only do %>
-      <ion-icon role="presentation" name="document-lock"></ion-icon>
-      Friends Only (No public access)
-    <% end %>
-    <%= form.check_box :friends_only %>
-  </div>
-
-  <div>
-    <%= form.label :blacklist, 'Blacklist (same format as e621.net)', style: "display: block" %>
-    <%= form.text_field :blacklist %>
-  </div>
-
-  <div>
-    <%= form.label :terms, style: "display: block" %>
-    <%= form.text_area :terms, size: '70x5' %>
-  </div>
-
-  <div class="link--form--min_score" data-controller="range">
-    <%= form.label :min_score do %>
-      <ion-icon role="presentation" name="shield-outline"></ion-icon>
-      Minimum score
-    <% end %>
-    <%= form.range_field :min_score, min: 0, max: 300, value: link.min_score || 0, data: { 'range-target': 'input', action: 'input->range#refresh' } %>
-    <output for="link_min_score" data-range-target="value"></output>
-  </div>
-
-  <div data-controller="theme-form" class="link--form--theme">
-    <%= form.label :theme do %>
-      <ion-icon role="presentation" name="pricetag-outline"></ion-icon>
-      Theme tag
-      <input type="checkbox" data-theme-form-target="switch" data-action="click->theme-form#toggle"/>
-    <% end %>
-    <div data-theme-form-target="container">
-      <em>All wallpapers selected for this link must contain this tag. You can only use 1 theme tag. Leave it blank to
-        allow all posts that are not otherwise blacklisted.</em><br/>
-      <%= form.text_field :theme, placeholder: 'loimu_(character)', 'data-theme-form-target': 'input' %>
+  <div class="link--form__section">
+    <h3>
+      <ion-icon name="receipt"></ion-icon>
+      Content
+    </h3>
+    <p>
+      Set the scope of content that users can select for this link. Pay attention to what you enter here, these are the
+      most important settings for avoiding shock content.
+    </p>
+    <div>
+      <%= form.label :blacklist, 'Blacklist (same format as e621.net)', style: "display: block" %>
+      <%= form.text_field :blacklist %>
     </div>
-  </div>
 
-  <div class="accent-block spaced">
-    <div class="accent-block__charm">
-      <ion-icon role="presentation" name="trophy-sharp"></ion-icon>
-      Requires the silver trophy (set >300 wallpapers for others)
+    <div class="link--form--min_score" data-controller="range">
+      <%= form.label :min_score do %>
+        <ion-icon role="presentation" name="shield-outline"></ion-icon>
+        Minimum score
+      <% end %>
+      <%= form.range_field :min_score, min: 0, max: 300, value: link.min_score || 0, data: { 'range-target': 'input', action: 'input->range#refresh' } %>
+      <output for="link_min_score" data-range-target="value"></output>
     </div>
 
     <div data-controller="theme-form" class="link--form--theme">
-      <%= form.label :custom_url, class: 'no-margin' do %>
-        <ion-icon role="presentation" name="document-attach-outline"></ion-icon>
-        Custom URL
-        <%= form.check_box :custom_url_checkbox, disabled: current_user.set_count < 300, data: { 'theme-form-target': 'switch', action: 'click->theme-form#toggle' } %>
+      <%= form.label :theme do %>
+        <ion-icon role="presentation" name="pricetag-outline"></ion-icon>
+        Theme tag
+        <input type="checkbox" data-theme-form-target="switch" data-action="click->theme-form#toggle"/>
       <% end %>
       <div data-theme-form-target="container">
-        walltaker.joi.how/links/ <%= form.text_field :custom_url, placeholder: 'horny-deer-please', 'data-theme-form-target': 'input' %>
+        <em>All wallpapers selected for this link must contain this tag. You can only use 1 theme tag. Leave it blank to
+          allow all posts that are not otherwise blacklisted.</em><br/>
+        <%= form.text_field :theme, placeholder: 'loimu_(character)', 'data-theme-form-target': 'input' %>
       </div>
-
-      <p>
-        In addition to your regular walltaker link URL (https://walltaker.joi.how/links/1), you can provide your own text for a custom url. It will be accessible as <strong>https://walltaker.joi.how/links/ <mark>your-text-here</mark></strong>
-      </p>
     </div>
   </div>
 
-
-  <div>
+  <div class="link--form--submit-row">
     <%= form.submit %>
     <%= form.submit 'Update and Test', class: 'secondary' %>
   </div>
 <% end %>
 
 <% unless link.new_record? %>
-  <div class="link-form__abilities">
+  <div class="link--form__section">
     <h3>
       <ion-icon name="sparkles"></ion-icon>
       Abilities
@@ -120,7 +152,7 @@
             </strong>
             <p>
               <% if can_show_videos %>
-                Videos and GIFs can be selected, not just images.
+                Videos and GIFs can be selected, not just images. Currently, only the Wallpaper Engine client supports videos.
               <% else %>
                 Videos and GIFs cannot be selected, only images are selectable. (Default)
               <% end %>
@@ -146,9 +178,11 @@
             </strong>
             <p>
               <% if can_be_set_by_porn_bot %>
-                Your wallpaper will be changed by our resident horny robot: PornBot. They (a gender-defying icon) select a highly-rated post that matches your blacklist rules.
+                Your wallpaper will be changed by our resident horny robot: PornBot. They (a gender-defying icon) select
+                a highly-rated post that matches your blacklist rules.
               <% else %>
-                Your wallpaper will not changed by our resident horny robot: PornBot. You will only get wallpapers from fleshy human-beings.
+                Your wallpaper will not changed by our resident horny robot: PornBot. You will only get wallpapers from
+                fleshy human-beings.
               <% end %>
             </p>
           </div>
