@@ -349,6 +349,38 @@ strong.offline {
     border: solid 1px var(--success);
 }
 
+.link--forked-from {
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: 0.8em;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-bg);
+    padding: 0 0.45rem 0.1rem;
+    border-bottom-left-radius: 0.4rem;
+    border-bottom-right-radius: 0.4rem;
+    max-width: 100px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.link--forked-from:hover {
+    color: var(--bg);
+    background: var(--accent);
+}
+
+.link--forked-from ion-icon {
+    transform: translateY(1px);
+    font-size: 1.3em;
+}
+
 /** Forms */
 
 input[type=checkbox] {
@@ -914,8 +946,11 @@ aside.comments-sidebar > button .toggle-badge[data-hidden=true] {
 }
 
 .link--anchor-shade-container a:not(.link--anchor-shade) {
-    position: relative;
     z-index: 9999;
+}
+
+.link--anchor-shade-container .link--terms p a:not(.link--anchor-shade) {
+    position: relative;
 }
 
 .link-form__abilities {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_06_025834) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_08_033253) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -220,6 +220,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_06_025834) do
     t.integer "min_score"
     t.datetime "live_client_started_at", precision: nil
     t.string "custom_url"
+    t.bigint "forked_from_id"
+    t.index ["forked_from_id"], name: "index_links_on_forked_from_id"
     t.index ["user_id"], name: "index_links_on_user_id"
   end
 
@@ -303,6 +305,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_06_025834) do
   add_foreign_key "friendships", "users", column: "receiver_id"
   add_foreign_key "friendships", "users", column: "sender_id"
   add_foreign_key "link_abilities", "links"
+  add_foreign_key "links", "links", column: "forked_from_id"
   add_foreign_key "links", "users"
   add_foreign_key "links", "users", column: "set_by_id"
   add_foreign_key "notifications", "users"

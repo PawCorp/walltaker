@@ -1,5 +1,7 @@
 class Link < ApplicationRecord
   belongs_to :user
+  belongs_to :forked_from, foreign_key: :forked_from_id, class_name: 'Link', inverse_of: :forks
+  has_many :forks, foreign_key: :forked_from_id, class_name: 'Link', inverse_of: :forked_from
   has_many :viewing_users, foreign_key: :viewing_link_id, class_name: 'User'
   has_many :past_links
   has_many :comments, dependent: :destroy
@@ -22,7 +24,7 @@ class Link < ApplicationRecord
     live_client_online = live_client_started_at && (live_client_started_at > Time.now - 7.days)
     last_ping_online || live_client_online
   end
-  
+
   # @param ["can_show_videos"] ability
   def check_ability(ability)
     abilities.any? { |edge| edge.ability == ability }

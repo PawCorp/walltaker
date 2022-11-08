@@ -101,6 +101,13 @@
       <% end %>
     </div>
 
+    <% if link.forked_from %>
+      <%= link_to link.forked_from, class: 'link--forked-from' do %>
+        <ion-icon role="presentation" name="git-branch"></ion-icon>
+        <%= link.forked_from.user.username %>#<%= link.forked_from.id %>
+      <% end %>
+    <% end %>
+
     <div class="link--status-bar">
       <% if link.friends_only %>
         <abbr title="This link is for friends only" class="link--friends-only">

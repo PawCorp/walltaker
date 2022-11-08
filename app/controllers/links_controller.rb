@@ -171,6 +171,7 @@ class LinksController < ApplicationController
     if source_link
       @link = source_link.dup
       @link.user_id = current_user.id
+      @link.forked_from = source_link
       result = @link.save
     end
 
