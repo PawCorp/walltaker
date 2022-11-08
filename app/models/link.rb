@@ -1,6 +1,6 @@
 class Link < ApplicationRecord
   belongs_to :user
-  belongs_to :forked_from, foreign_key: :forked_from_id, class_name: 'Link', inverse_of: :forks
+  belongs_to :forked_from, foreign_key: :forked_from_id, class_name: 'Link', inverse_of: :forks, optional: true
   has_many :forks, foreign_key: :forked_from_id, class_name: 'Link', inverse_of: :forked_from
   has_many :viewing_users, foreign_key: :viewing_link_id, class_name: 'User'
   has_many :past_links

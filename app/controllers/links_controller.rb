@@ -116,7 +116,7 @@ class LinksController < ApplicationController
                                   track :regular, :update_link_details
                                   did_save_successfully
                                 else
-                                  assign_e621_post_to_self e621_post
+                                  assign_e621_post_to_self e621_post, @link
                                 end
 
     if params[:commit] == 'Update and Test'
@@ -254,25 +254,27 @@ class LinksController < ApplicationController
     end
   end
 
-  def assign_e621_post_to_self(e621_post)
-    @link.update(
-      HashWithIndifferentAccess.new(
-        {
-          post_url: e621_post['file']['url'],
-          post_thumbnail_url: e621_post['preview']['url'],
-          post_description: e621_post['description'],
-          set_by_id: current_user.nil? ? nil : current_user.id,
-          response_type: nil,
-          response_text: nil
-        }
-      )
+  def assign_e621_post_to_self(e621_post, link)
+    link.update(
+      {
+        post_url: e621_post['file']['url'],
+        post_thumbnail_url: e621_post['preview']['url'],
+        post_description: e621_post['description'],
+        set_by_id: current_user.nil? ? nil : current_user.id,
+        response_type: nil,
+        response_text: nil
+      }
     )
-    track :regular, :update_set_count, current_user_id: current_user&.id, link_owner_id: @link.user.id, current_user_set_count_before_inc: current_user&.set_count
-    if current_user.present? && (@link.user.id != current_user.id)
+    link.forks.each do |fork|
+      result = get_post e621_post['id'], fork
+      assign_e621_post_to_self result, fork if result
+    end
+    track :regular, :update_set_count, current_user_id: current_user&.id, link_owner_id: link.user.id, current_user_set_count_before_inc: current_user&.set_count
+    if current_user.present? && (link.user.id != current_user.id)
       current_user.set_count = current_user.set_count.to_i + 1
       current_user.save
     end
     track :regular, :update_link_post, attempted_post_id: params['link'][:post_id]
-    PastLink.log_link(@link).save
+    PastLink.log_link(link).save
   end
 end
