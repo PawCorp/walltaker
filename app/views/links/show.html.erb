@@ -44,6 +44,10 @@
           <ion-icon role="presentation" name="person-add"></ion-icon>
           Send Friend Request
         </a>
+        <%= button_to fork_link_link_path, method: :post do %>
+          <ion-icon role="presentation" name="git-branch"></ion-icon>
+          Fork
+        <% end %>
       </div>
     <% end %>
   </div>

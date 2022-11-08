@@ -1,5 +1,5 @@
 <%= form_with(model: link) do |form| %>
-  <% if link.errors.any? %>
+  <% if link&.errors&.any? %>
     <div class="error">
       <ul>
         <% link.errors.full_messages.each do |message| %>

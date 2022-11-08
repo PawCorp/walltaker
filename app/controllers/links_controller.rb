@@ -165,6 +165,24 @@ class LinksController < ApplicationController
     redirect_to edit_link_path @link
   end
 
+  def fork
+    source_link = Link.find(params['id'])
+
+    if source_link
+      @link = source_link.dup
+      @link.user_id = current_user.id
+      result = @link.save
+    end
+
+    if result
+      track :regular, :link_fork, source: params['id'], clone: @link.id
+      redirect_to link_url(@link), notice: 'Link was successfully forked.'
+    else
+      track :error, :failed_to_create_new_link_fork, errors: @link.errors, source: params['id']
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   private
 
   # Guards
