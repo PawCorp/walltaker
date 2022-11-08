@@ -38,18 +38,18 @@
         <%= link_to "Back", :back %>
       </div>
     <% end %>
-    <% if !@has_friendship %>
-      <div class="right">
+    <div class="right">
+      <% if !@has_friendship %>
         <a href="<%= url_for :action => :new, :controller => :friendships, :params => { :with => @link.user.username } %>" title="Become friends" class="no-underline">
           <ion-icon role="presentation" name="person-add"></ion-icon>
           Send Friend Request
         </a>
-        <%= button_to fork_link_link_path, method: :post do %>
-          <ion-icon role="presentation" name="git-branch"></ion-icon>
-          Fork
-        <% end %>
-      </div>
-    <% end %>
+      <% end %>
+      <%= button_to fork_link_link_path, method: :post do %>
+        <ion-icon role="presentation" name="git-branch"></ion-icon>
+        Fork
+      <% end %>
+    </div>
   </div>
 <% end %>
 

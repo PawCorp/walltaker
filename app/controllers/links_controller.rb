@@ -170,8 +170,8 @@ class LinksController < ApplicationController
 
     if source_link.friends_only
       friendship = Friendship.find_friendship(current_user, source_link.user)
-      if !friendship
-        track :error, :failed_to_create_new_link_fork, errors: @link.errors, source: params['id']
+      unless friendship.present?
+        track :error, :failed_to_create_new_link_fork, source: params['id']
         render :new, status: :unprocessable_entity
         return
       end
