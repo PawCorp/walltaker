@@ -206,7 +206,8 @@ strong.offline {
 }
 
 .link--theme ion-icon,
-.link--abilities ion-icon{
+.link--abilities ion-icon,
+h4.forks-header > ion-icon {
     transform: translateY(0.1em);
 }
 
@@ -997,4 +998,10 @@ aside.comments-sidebar > button .toggle-badge[data-hidden=true] {
 .video-icon {
     transform: translateY(2px);
     margin: 0 0.1rem 0 0.2rem;
+}
+
+h4.forks-header + p {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
 }

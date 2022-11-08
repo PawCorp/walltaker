@@ -196,3 +196,17 @@
 
 <%= turbo_stream_from "link_viewing_users_#{@link.id}" %>
 <%= render 'viewing_users', link: @link %>
+
+<% if @link.forks.count.positive? %>
+  <h4 class="forks-header">
+    <ion-icon role="presentation" name="git-branch"></ion-icon>
+    <%= pluralize @link.forks.count, 'Fork' %>
+  </h4>
+  <p>
+    <% @link.forks.each do |fork| %>
+      <%= link_to fork do %>
+        <%= fork.user.username %>#<%= fork.id %>
+      <% end %>
+    <% end %>
+  </p>
+<% end %>
