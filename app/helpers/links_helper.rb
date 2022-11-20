@@ -17,6 +17,7 @@ module LinksHelper
     return :automate if link_agent.include? 'walltaker-android-automate'
     return :swift if link_agent.include? 'CFNetwork/'
     return :android_changer if link_agent.include? 'Walltaker-Changer/'
+    return :jberliner if link_agent.downcase.include? 'jberliner'
 
     :unknown
   end
