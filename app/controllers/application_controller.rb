@@ -23,7 +23,6 @@ class ApplicationController < ActionController::Base
     before_id = before.gsub(/\D/, '') if before
     url = "#{url}&page=a#{before_id}" if before_id
     url = "#{url}&limit=#{limit}" if limit
-    return nil
     response = Excon.get(url, headers: { 'User-Agent': 'walltaker.joi.how (by ailurus on e621)' })
     if response.status != 200
       track :error, :e621_posts_api_fail, response: response
