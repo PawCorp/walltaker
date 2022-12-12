@@ -83,7 +83,6 @@
     <% end %>
 
     <h3>Set up your link</h3>
-
     <p>
       You'll need a client that watches for changes to this link and sets your background for you. You can see a list of
       available clients on the <%= link_to 'homepage.', root_path(anchor: "what-do-i-need") %> Once you have a client
@@ -91,10 +90,22 @@
       manually set your feed ID to
       <strong>"<%= @link.id %>"</strong>.
     </p>
+    <br/>
 
     <a download href="<%= link_url(@link) %>/walltaker.toml">
       <ion-icon role="presentation" name="document-outline"></ion-icon>
       walltaker.toml
+    </a>
+
+    <h3>iOS Widget</h3>
+    <p>
+      We support iOS only thru a widget app. This is a workaround for Apple's draconian adult-content rules. Shhhhhh, don't tell Tim we're cumming on his devices! <strong>You will need to install <a href="https://apps.apple.com/us/app/widget-construction-set/id6444323235?platform=iphone">Widget Construction Set</a> first.</strong> When installed, click the button below and select one of the widget sizes you'd like. Then add the WCS widget to your homescreen!
+    </p>
+    <br/>
+
+    <a class="no-underline" href="widget://add_widget?url=https://walltaker.joi.how/api/links/<%= @link.id %>/widget.json">
+      <ion-icon name="copy-outline"></ion-icon>
+      Install Widget
     </a>
   </div>
 
