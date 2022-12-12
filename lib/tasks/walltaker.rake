@@ -22,7 +22,7 @@ namespace :walltaker do
           HashWithIndifferentAccess.new(
             {
               post_url: results[0]['file']['url'],
-              post_thumbnail_url: results[0]['preview']['url'],
+              post_thumbnail_url: results[0]['sample']['url'] || results[0]['preview']['url'],
               post_description: results[0]['description'],
               set_by_id: pornbot.id,
               response_type: nil,

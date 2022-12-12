@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   defaults format: :json do
     get 'api/links/:id.json', to: 'api#show_link'
+    get 'api/links/:id/widget.json', to: 'api#show_link_widget'
     post 'api/links/:id/response.json', to: 'api#set_link_response'
     get 'api/users/:username.json', to: 'api#show_user', as: 'user_status'
   end

@@ -275,7 +275,7 @@ class LinksController < ApplicationController
     link.update(
       {
         post_url: e621_post['file']['url'],
-        post_thumbnail_url: e621_post['preview']['url'],
+        post_thumbnail_url: e621_post['sample']['url'] || e621_post['preview']['url'],
         post_description: e621_post['description'],
         set_by_id: current_user.nil? ? nil : current_user.id,
         response_type: nil,

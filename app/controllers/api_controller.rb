@@ -10,6 +10,13 @@ class ApiController < ApplicationController
     render json: { message: 'This link does not exist.' }, status: 404
   end
 
+  def show_link_widget
+    @link = Link.find(params[:id])
+    @set_by = User.find(@link.set_by_id) if @link.set_by_id
+  rescue
+    render json: { message: 'This link does not exist.' }, status: 404
+  end
+
   # POST /api/links/:id/response.json
   def set_link_response
     params.permit(:type, :text)
