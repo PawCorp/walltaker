@@ -188,12 +188,13 @@ h2.one-line {
     text-overflow: ellipsis;
 }
 
-h2 span.beta-tag {
+h2 span.beta-tag,
+h3 span.beta-tag{
     background: var(--danger);
     padding: 0.25rem 0.4rem 0.3rem;
     color: #FFF;
     font-size: 0.8rem;
-    transform: translateY(-1.1rem);
+    transform: translateY(-1.1rem) translateX(0.4rem);;
     display: inline-block;
     border-radius: 0.3rem;
 }
