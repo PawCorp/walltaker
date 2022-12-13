@@ -15,6 +15,7 @@ module LinksHelper
     return :joihow if link_agent.include? 'joihow'
     return :wallpaper_engine if link_agent.include? 'Wallpaper-Engine-Client'
     return :automate if link_agent.include? 'walltaker-android-automate'
+    return :ioswidget if link_agent.include? 'widgetExtension'
     return :swift if link_agent.include? 'CFNetwork/'
     return :android_changer if link_agent.include? 'Walltaker-Changer/'
     return :jberliner if link_agent.include? 'JBerliner'
