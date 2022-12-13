@@ -1,5 +1,5 @@
 class ApiController < ApplicationController
-  after_action :log_presence, only: %i[show_link]
+  after_action :log_presence, only: %i[show_link show_link_widget]
   skip_before_action :verify_authenticity_token, only: :set_link_response
 
   # GET /api/links/:id.json
