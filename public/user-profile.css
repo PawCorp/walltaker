@@ -18,6 +18,10 @@
     flex: 0 1 auto;
 }
 
+.past-link-posts > a > img {
+    max-height: 200px;
+}
+
 h2 > small {
     color: var(--border);
     display: block;
