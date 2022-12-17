@@ -81,7 +81,7 @@
     </p>
   </div>
 
-  <div class="accent-block client-configs__wrapper accent-block__charm--accordion" data-controller="accordion">
+  <div class="accent-block client-configs__wrapper accent-block__charm--accordion" data-controller="accordion" data-accordion-expand-value="<%= !@link.last_ping && !@link.live_client_started_at %>">
     <div class="accent-block__charm accent-block__charm--accordion-header" data-action="click->accordion#toggle" tabindex="0">
       <ion-icon role="presentation" name="information-circle"></ion-icon>
       Need help getting set up?
@@ -135,6 +135,8 @@
           </dialog>
         </div>
       </div>
+
+      I also wrote up some tips about combating harassment on the <a href="<%= help_path %>#bad-wallpaper">help page.</a> that I suggest you read if you're a new user. It's very important you know how to avoid shock content! It's your responsibility.
     </div>
   </div>
 <% end %>

@@ -2,9 +2,15 @@ import {Controller} from "@hotwired/stimulus"
 
 export default class AccordionController extends Controller {
     static targets = ['content']
-    isOpen = window.location.hash === '#getting-started-make-a-link'
+    static values = {
+        expand: {
+            type: Boolean,
+            default: window.location.hash === '#getting-started-make-a-link'
+        }
+    }
 
     connect () {
+        this.isOpen = this.expandValue;
         this.tick()
     }
 
