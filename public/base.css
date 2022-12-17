@@ -4,6 +4,33 @@
     --success: #30AA65;
 }
 
+.as-link {
+    display: inline;
+    color: var(--accent);
+    cursor: pointer;
+}
+
+.as-link:hover {
+    color: var(--text);
+}
+
+.client-configs {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
+    gap: 1rem;
+}
+
+.client-configs__wrapper {
+    color: var(--text-light);
+}
+
+.client-configs__wrapper h3:nth-child(2) {
+    margin-top: 0;
+}
+
 .clickable {
     cursor: pointer;
 }
@@ -21,10 +48,12 @@ form .field.checkbox {
     gap: 0.5rem;
     margin: 1rem 0;
 }
+
 form .field.checkbox input[type=checkbox] {
     margin: 0;
     height: 100%;
 }
+
 input[type=checkbox]:checked::after {
     content: " ";
     width: .1em;
@@ -188,13 +217,15 @@ h2.one-line {
     text-overflow: ellipsis;
 }
 
+a span.beta-tag,
+.as-link span.beta-tag,
 h2 span.beta-tag,
-h3 span.beta-tag{
+h3 span.beta-tag {
     background: var(--danger);
-    padding: 0.25rem 0.4rem 0.3rem;
+    padding: 0.25em 0.4em 0.3em;
     color: #FFF;
-    font-size: 0.8rem;
-    transform: translateY(-1.1rem) translateX(0.4rem);;
+    font-size: 0.7em;
+    transform: translateY(-1.1em) translateX(0.4em);;
     display: inline-block;
     border-radius: 0.3rem;
 }
@@ -316,6 +347,7 @@ p {
     --bg: var(--bg-small-tools);
     --text: var(--text-small-tools);
 }
+
 .task-tools.small button,
 .task-tools.small input[type=submit] {
     font-size: 1em !important;
@@ -445,7 +477,8 @@ a.clean {
     color: inherit;
 }
 
-a > ion-icon {
+a > ion-icon,
+.as-link > ion-icon {
     font-size: 1.3em;
     transform: translateY(0.175em);
 }
@@ -772,6 +805,20 @@ footer small a {
     border-bottom-left-radius: 0.3rem;
     border-bottom-right-radius: 0.3rem;
     padding: 0.5rem 1rem;
+    gap: 0.5rem;
+}
+
+.modal__buttons > a {
+    border: none;
+    border-radius: 5px;
+    background: var(--bg);
+    color: var(--text);
+    padding: .5rem .9rem;
+    margin: 0.2rem 0;
+}
+
+.modal__buttons > a:hover {
+    color: var(--text-light);
 }
 
 @media screen and (max-width: 475px) {
@@ -951,18 +998,66 @@ turbo-cable-stream-source {
     text-decoration: none;
 }
 
-.text-charm__medal-driftwood { background: darkolivegreen; color: white; }
-.text-charm__medal-tin { background: dimgrey; color: white; }
-.text-charm__medal-bronze { background: saddlebrown; color: white; }
-.text-charm__medal-silver { background: silver; color: black; }
-.text-charm__medal-gold { background: goldenrod; color: black; }
-.text-charm__medal-platinum { background: lightsteelblue; color: black; }
-.text-charm__medal-uranium { background: greenyellow; color: black; }
-.text-charm__medal-ruby { background: indianred; color: white; }
-.text-charm__medal-jade { background: mediumspringgreen; color: black; }
-.text-charm__medal-regal-purple { background: rebeccapurple; color: white; }
-.text-charm__medal-green { background: green; color: white; }
-.text-charm__medal-cum { background: lightgoldenrodyellow; color: black; border: var(--border) 1px solid; }
+.text-charm__medal-driftwood {
+    background: darkolivegreen;
+    color: white;
+}
+
+.text-charm__medal-tin {
+    background: dimgrey;
+    color: white;
+}
+
+.text-charm__medal-bronze {
+    background: saddlebrown;
+    color: white;
+}
+
+.text-charm__medal-silver {
+    background: silver;
+    color: black;
+}
+
+.text-charm__medal-gold {
+    background: goldenrod;
+    color: black;
+}
+
+.text-charm__medal-platinum {
+    background: lightsteelblue;
+    color: black;
+}
+
+.text-charm__medal-uranium {
+    background: greenyellow;
+    color: black;
+}
+
+.text-charm__medal-ruby {
+    background: indianred;
+    color: white;
+}
+
+.text-charm__medal-jade {
+    background: mediumspringgreen;
+    color: black;
+}
+
+.text-charm__medal-regal-purple {
+    background: rebeccapurple;
+    color: white;
+}
+
+.text-charm__medal-green {
+    background: green;
+    color: white;
+}
+
+.text-charm__medal-cum {
+    background: lightgoldenrodyellow;
+    color: black;
+    border: var(--border) 1px solid;
+}
 
 a[data-controller=user-reference] {
     overflow: visible !important;
