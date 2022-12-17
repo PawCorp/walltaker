@@ -390,13 +390,26 @@ form.set-post-response div {
     gap: 1rem;
 }
 
+.set-post-response__description {
+    color: var(--text-light);
+    padding: 1rem 0 0;
+}
+
 form.set-post-response input,
 form.set-post-response select {
     height: 2.5rem;
 }
 
 form.set-post-response input {
+    margin: 0;
+}
+
+form.set-post-response input[type=text] {
     flex: 1 1 90%;
+}
+
+form.set-post-response input[type=submit] {
+    flex: 0 1 120px;
 }
 
 form.set-post-response select {
@@ -595,6 +608,18 @@ label ion-icon {
 
     .task-tools button {
         padding: 4px 8px;
+    }
+
+    form.set-post-response div {
+        flex-wrap: wrap;
+    }
+
+    form.set-post-response input[type=text] {
+        flex: 1 1 90%;
+    }
+
+    form.set-post-response input[type=submit] {
+        flex: 1 1 100px;
     }
 }
 
