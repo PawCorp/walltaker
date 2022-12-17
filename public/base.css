@@ -27,7 +27,7 @@
     color: var(--text-light);
 }
 
-.client-configs__wrapper div > h3 {
+.client-configs__wrapper div > p:first-child {
     margin-top: 0;
 }
 
@@ -751,6 +751,7 @@ footer small a {
 }
 
 .modal {
+    height: auto;
     opacity: 0;
     display: grid;
     color: var(--text);
