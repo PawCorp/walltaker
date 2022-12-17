@@ -81,54 +81,59 @@
     </p>
   </div>
 
-  <div class="accent-block client-configs__wrapper">
-    <div class="accent-block__charm">
+  <div class="accent-block client-configs__wrapper accent-block__charm--accordion" data-controller="accordion">
+    <div class="accent-block__charm accent-block__charm--accordion-header" data-action="click->accordion#toggle" tabindex="0">
       <ion-icon role="presentation" name="information-circle"></ion-icon>
-      Need help?
+      Need help getting set up?
+      <ion-icon class="accent-block__charm--accordion-header__indicator" name="chevron-down"></ion-icon>
     </div>
-    <h3>Setting up your link</h3>
-    <p>
-      You'll need a client that watches for changes to this link and sets your background for you. You can see a list of
-      available clients on the <%= link_to 'homepage.', root_path(anchor: "what-do-i-need") %> Once you have a client
-      set up, you should be able to either enter your Feed ID:
-      <strong>"<%= @link.id %>"</strong> or import one of the following files:
-    </p>
+    <div data-accordion-target="content">
+      <h3>Setting up your link</h3>
+      <p>
+        You'll need a client that watches for changes to this link and sets your background for you. You can see a list
+        of
+        available clients on the <%= link_to 'homepage.', root_path(anchor: "what-do-i-need") %> Once you have a client
+        set up, you should be able to either enter your Feed ID:
+        <strong>"<%= @link.id %>"</strong> or import one of the following files:
+      </p>
 
-    <div class="client-configs">
-      <a download href="<%= link_url(@link) %>/walltaker.toml">
-        <ion-icon role="presentation" name="document-outline"></ion-icon>
-        walltaker.toml
-      </a>
+      <div class="client-configs">
+        <a download href="<%= link_url(@link) %>/walltaker.toml">
+          <ion-icon role="presentation" name="document-outline"></ion-icon>
+          walltaker.toml
+        </a>
 
-      <div
-        class="as-link no-underline"
-        data-controller="widget-installer"
-      >
-        <ion-icon name="copy-outline"></ion-icon>
-        Install iOS Widget
-        <span class="beta-tag">beta</span>
+        <div
+          class="as-link no-underline"
+          data-controller="widget-installer"
+        >
+          <ion-icon name="copy-outline"></ion-icon>
+          Install iOS Widget
+          <span class="beta-tag">beta</span>
 
-        <!-- modals -->
-        <dialog class="modal" data-widget-installer-target="modal">
-          <h4>iOS Widget Installation</h4>
-          <p>
-            We support iOS only thru a widget app. This is a workaround for Apple's draconian adult-content rules.
-            <strong>You will need to install
-            <a href="https://apps.apple.com/us/app/widget-construction-set/id6444323235?platform=iphone">Widget
-              Construction Set</a> first.</strong> When installed, click the "Add Widget" button below and select one of the widget
-            sizes you'd like. Then add the WCS widget to your homescreen!
-          </p>
-          <div class="modal__buttons">
-            <%= link_to 'https://apps.apple.com/us/app/widget-construction-set/id6444323235?platform=iphone', class: 'no-underline secondary' do %>
-              <ion-icon role="presentation" name="cloud-download"></ion-icon>
-              Install WCS
-            <% end %>
-            <%= link_to "widget://add_widget?url=https://walltaker.joi.how/api/links/#{@link.id}/widget.json", class: 'no-underline secondary' do %>
-              <ion-icon role="presentation" name="duplicate"></ion-icon>
-              Add Widget
-            <% end %>
-          </div>
-        </dialog>
+          <!-- modals -->
+          <dialog class="modal" data-widget-installer-target="modal">
+            <h4>iOS Widget Installation</h4>
+            <p>
+              We support iOS only thru a widget app. This is a workaround for Apple's draconian adult-content rules.
+              <strong>You will need to install
+                <a href="https://apps.apple.com/us/app/widget-construction-set/id6444323235?platform=iphone">Widget
+                  Construction Set</a> first.</strong> When installed, click the "Add Widget" button below and select
+              one of the widget
+              sizes you'd like. Then add the WCS widget to your homescreen!
+            </p>
+            <div class="modal__buttons">
+              <%= link_to 'https://apps.apple.com/us/app/widget-construction-set/id6444323235?platform=iphone', class: 'no-underline secondary' do %>
+                <ion-icon role="presentation" name="cloud-download"></ion-icon>
+                Install WCS
+              <% end %>
+              <%= link_to "widget://add_widget?url=https://walltaker.joi.how/api/links/#{@link.id}/widget.json", class: 'no-underline secondary' do %>
+                <ion-icon role="presentation" name="duplicate"></ion-icon>
+                Add Widget
+              <% end %>
+            </div>
+          </dialog>
+        </div>
       </div>
     </div>
   </div>

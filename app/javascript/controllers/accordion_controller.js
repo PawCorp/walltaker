@@ -16,7 +16,11 @@ export default class AccordionController extends Controller {
     tick () {
         if (this.contentTarget) {
             this.contentTarget.style.display = this.isOpen ? 'block' : 'none';
-            this.contentTarget.ariaExpanded = this.isOpen
+            this.contentTarget.setAttribute('aria-visible', this.isOpen);
+        }
+
+        if (this.element) {
+            this.element.setAttribute('aria-expanded', this.isOpen);
         }
     }
 }
