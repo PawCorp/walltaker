@@ -1005,3 +1005,25 @@ h4.forks-header + p {
     gap: 1rem;
     flex-wrap: wrap;
 }
+
+.forks-list {
+    display: grid;
+    gap: 1rem 0.5rem;
+    grid-template-columns: repeat(4, auto);
+}
+
+.forks-list a {
+    text-align: center;
+}
+
+@media screen and (max-width: 760px) {
+    .forks-list {
+        grid-template-columns: repeat(2, auto);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .forks-list {
+        grid-template-columns: repeat(1, auto);
+    }
+}

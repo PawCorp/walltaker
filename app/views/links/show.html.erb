@@ -135,7 +135,9 @@
         </div>
       </div>
 
-      I also wrote up some tips about combating harassment on the <a href="<%= help_path %>#bad-wallpaper">help page.</a> that I suggest you read if you're a new user. It's very important you know how to avoid shock content! It's your responsibility.
+      I also wrote up some tips about combating harassment on the
+      <a href="<%= help_path %>#bad-wallpaper">help page.</a> that I suggest you read if you're a new user. It's very
+      important you know how to avoid shock content! It's your responsibility.
     </div>
   </div>
 <% end %>
@@ -234,15 +236,23 @@
 <%= render 'viewing_users', link: @link %>
 
 <% if @link.forks.count.positive? %>
-  <h4 class="forks-header">
-    <ion-icon role="presentation" name="git-branch"></ion-icon>
-    <%= pluralize @link.forks.count, 'Fork' %>
-  </h4>
-  <p>
-    <% @link.forks.each do |fork| %>
-      <%= link_to fork do %>
-        <%= fork.user.username %>#<%= fork.id %>
-      <% end %>
-    <% end %>
-  </p>
+  <div class="accent-block accent-block__charm--accordion" data-controller="accordion">
+    <div class="accent-block__charm accent-block__charm--accordion-header" data-action="click->accordion#toggle" tabindex="0">
+      <ion-icon role="presentation" name="git-branch"></ion-icon>
+      <%= pluralize @link.forks.count, 'fork' %> will also be changed
+      <ion-icon class="accent-block__charm--accordion-header__indicator" name="chevron-down"></ion-icon>
+    </div>
+    <div data-accordion-target="content">
+      <p>
+        Links that are forks of this link will receive wallpaper changes that are set here; but only if their separete blacklists allow it. You may receive responses from anyone of the following:
+      </p>
+      <div class="forks-list">
+        <% @link.forks.each do |fork| %>
+          <%= link_to fork do %>
+            <%= fork.user.username %>#<%= fork.id %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 <% end %>

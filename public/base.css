@@ -721,6 +721,15 @@ a.small:hover {
     height: 55px;
 }
 
+.accent-block__charm--accordion {
+    color: var(--text-light);
+}
+
+.accent-block__charm--accordion > div > p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
 .accent-block__charm--accordion[aria-expanded=false] {
     padding-bottom: 0;
 }
