@@ -38,10 +38,11 @@
           Never expires
         </em>
       <% else %>
-        <strong>Expires:</strong>
         <% if link.expires <= Time.now.utc %>
-          <%= link.expires.strftime '%A %e %b at %I:%M%p' %> ⚠️ Expired
+          <strong>Expired:</strong>
+          <%= link.expires.strftime '%A %e %b at %I:%M%p' %>
         <% else %>
+          <strong>Expires:</strong>
           in <%= time_ago_in_words link.expires %>
         <% end %>
       <% end %>
