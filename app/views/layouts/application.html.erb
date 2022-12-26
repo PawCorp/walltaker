@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
   <meta name="rating" content="adult"/>
   <link rel="stylesheet" href="/simple.min.css">
-  <link rel="stylesheet" href="/base.css?x={{--buildnumber--}}"/>
-  <link rel="stylesheet" href="/link.css?x={{--buildnumber--}}"/>
-  <link rel="stylesheet" href="/dashboard.css?x={{--buildnumber--}}"/>
-  <link rel="stylesheet" href="/user-profile.css?x={{--buildnumber--}}"/>
-  <link rel="stylesheet" href="/member-editor.css?x={{--buildnumber--}}"/>
-  <link rel="stylesheet" href="/messages.css?x={{--buildnumber--}}"/>
+  <link rel="stylesheet" href="/base.css?x=<%= ENV['COMMIT_HASH'] %>"/>
+  <link rel="stylesheet" href="/link.css?x=<%= ENV['COMMIT_HASH'] %>"/>
+  <link rel="stylesheet" href="/dashboard.css?x=<%= ENV['COMMIT_HASH'] %>"/>
+  <link rel="stylesheet" href="/user-profile.css?x=<%= ENV['COMMIT_HASH'] %>"/>
+  <link rel="stylesheet" href="/member-editor.css?x=<%= ENV['COMMIT_HASH'] %>"/>
+  <link rel="stylesheet" href="/messages.css?x=<%= ENV['COMMIT_HASH'] %>"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
