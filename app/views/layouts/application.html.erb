@@ -81,7 +81,7 @@
     <%= link_to 'Need help with Walltaker?', help_path %>
   </p>
   <small>
-    © joi.how 2022 / Commit #<%= ENV['COMMIT_HASH'] != '' ? ENV['COMMIT_HASH'] : '' %>
+    © joi.how 2022 / Commit <a href="https://github.com/pupgray/walltaker/commit/<%= ENV['COMMIT_HASH'] %>">#<%= ENV['COMMIT_HASH'] != '' ? ENV['COMMIT_HASH'] : '' %></a>
     <% if current_user && current_user.admin %>
       <%= link_to blazer_path do %>
         <ion-icon role="presentation" name="stats-chart"></ion-icon>
