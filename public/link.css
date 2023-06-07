@@ -969,9 +969,33 @@ aside.comments-sidebar > button .toggle-badge[data-hidden=true] {
 
 .abilities__ability {
     display: flex;
-    gap: 1rem;
+    gap: 0.4rem 1rem;
 }
 
+.abilities__ability--disabled {
+    pointer-events: none;
+    position: relative;
+    flex-wrap: wrap;
+    background: var(--accent-bg);
+    outline: var(--accent-bg) 12px solid;
+    margin-top: calc(1rem + 10px) !important;
+}
+
+.abilities__ability--disabled::before {
+    content: 'Coming Soon';
+    display: block;
+    padding: 0.2rem 10px;
+    margin: -10px -10px 0.3rem -10px;
+    position: relative;
+    z-index: 99;
+    flex: 1 1 100%;
+    font-weight: bold;
+    background-image: linear-gradient(45deg, #ffb300 25%, #ab8118 25%, #ab8118 50%, #ffb300 50%, #ffb300 75%, #ab8118 75%, #ab8118 100%);
+    background-size: 56.57px 56.57px;
+    color: var(--bg);
+}
+
+.abilities__ability--disabled button,
 .abilities__ability__controls button.enabled {
     background: var(--bg);
     color: var(--accent);

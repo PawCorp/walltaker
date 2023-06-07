@@ -164,7 +164,7 @@
             <% end %>
           </div>
         </div>
-        <div class="abilities__ability">
+        <div class="abilities__ability abilities__ability--disabled">
           <% can_be_set_by_porn_bot = link.check_ability 'can_be_set_by_porn_bot' %>
 
           <div class="abilities__ability__title">
@@ -186,11 +186,11 @@
               <% end %>
             </p>
           </div>
-          <div class="abilities__ability__controls">
+          <!--div class="abilities__ability__controls">
             <%= button_to toggle_link_ability_link_path(ability: :can_be_set_by_porn_bot), method: :post, class: can_be_set_by_porn_bot ? 'enabled' : 'disabled' do %>
               <%= can_be_set_by_porn_bot ? 'Disallow PornBot' : 'Allow PornBot' %>
             <% end %>
-          </div>
+          </div-->
         </div>
       </div>
     <% end %>
