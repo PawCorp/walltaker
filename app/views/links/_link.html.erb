@@ -1,73 +1,74 @@
-<div id="<%= dom_id link %>">
-  <% if !link.never_expires && link.expires <= Time.now.utc %>
-    <div class="accent-block accent-block--link">
-      <div class="accent-block__charm">
-        <ion-icon role="presentation" name="eye-off"></ion-icon>
-        Only you see this because it's expired
-      </div>
-  <% end %>
-  <div class="link" data-feed-number="<%= link_id_for_decoration link.id %>">
-
-    <% unless link.post_thumbnail_url.nil? %>
-      <div class="link--backdrop">
-        <%= image_tag link.post_thumbnail_url %>
-      </div>
+<% cache link do %>
+  <div id="<%= dom_id link %>">
+    <% if !link.never_expires && link.expires <= Time.now.utc %>
+      <div class="accent-block accent-block--link">
+        <div class="accent-block__charm">
+          <ion-icon role="presentation" name="eye-off"></ion-icon>
+          Only you see this because it's expired
+        </div>
     <% end %>
+    <div class="link" data-feed-number="<%= link_id_for_decoration link.id %>">
 
-    <div class="link--presence">
-      <% if link.last_ping || link.live_client_started_at %>
-        <% if link.is_online? %>
-          <strong class="online">
-            Online
-            <% if link.live_client_started_at %>
-              <ion-icon name="pulse-sharp"></ion-icon>
-            <% end %>
+      <% unless link.post_thumbnail_url.nil? %>
+        <div class="link--backdrop">
+          <%= image_tag link.post_thumbnail_url %>
+        </div>
+      <% end %>
+
+      <div class="link--presence">
+        <% if link.last_ping || link.live_client_started_at %>
+          <% if link.is_online? %>
+            <strong class="online">
+              Online
+              <% if link.live_client_started_at %>
+                <ion-icon name="pulse-sharp"></ion-icon>
+              <% end %>
+            </strong>
+          <% else %>
+            <strong class="offline"><abbr title=">1 minute since last ping">Offline</abbr></strong>
+          <% end %>
+        <% else %>
+          <strong class="offline"><abbr title="New link with nothing currently connected">New</abbr></strong>
+        <% end %>
+      </div>
+
+      <div class="link--expires">
+        <% if link.never_expires %>
+          <em>
+            <ion-icon role="presentation" name="infinite"></ion-icon>
+            Never expires
+          </em>
+        <% else %>
+          <% if link.expires <= Time.now.utc %>
+            <strong>Expired:</strong>
+            <%= link.expires.strftime '%A %e %b at %I:%M%p' %>
+          <% else %>
+            <strong>Expires:</strong>
+            in <%= time_ago_in_words link.expires %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <% unless (link.theme.nil? || link.theme.empty?) && (link.min_score.nil? || link.min_score === 0) %>
+        <div class="link--theme">
+          <strong>
+            <ion-icon role="presentation" name="pricetag-outline"></ion-icon>
+            Theme
           </strong>
-        <% else %>
-          <strong class="offline"><abbr title=">1 minute since last ping">Offline</abbr></strong>
-        <% end %>
-      <% else %>
-        <strong class="offline"><abbr title="New link with nothing currently connected">New</abbr></strong>
-      <% end %>
-    </div>
-
-    <div class="link--expires">
-      <% if link.never_expires %>
-        <em>
-          <ion-icon role="presentation" name="infinite"></ion-icon>
-          Never expires
-        </em>
-      <% else %>
-        <% if link.expires <= Time.now.utc %>
-          <strong>Expired:</strong>
-          <%= link.expires.strftime '%A %e %b at %I:%M%p' %>
-        <% else %>
-          <strong>Expires:</strong>
-          in <%= time_ago_in_words link.expires %>
-        <% end %>
-      <% end %>
-    </div>
-
-    <% unless (link.theme.nil? || link.theme.empty?) && (link.min_score.nil? || link.min_score === 0) %>
-      <div class="link--theme">
-        <strong>
-          <ion-icon role="presentation" name="pricetag-outline"></ion-icon>
-          Theme
-        </strong>
-        <span>
+          <span>
           <%= link.theme %>
-          <%= 'score:>' + link.min_score.to_s if link.min_score.present? && link.min_score > 0 %>
+            <%= 'score:>' + link.min_score.to_s if link.min_score.present? && link.min_score > 0 %>
         </span>
-      </div>
-    <% end %>
+        </div>
+      <% end %>
 
-    <% if link.abilities.count > 0 %>
-      <div class="link--abilities">
-        <strong>
-          <ion-icon role="presentation" name="sparkles"></ion-icon>
-          Abilities
-        </strong>
-        <% link.abilities.each do |edge| %>
+      <% if link.abilities.count > 0 %>
+        <div class="link--abilities">
+          <strong>
+            <ion-icon role="presentation" name="sparkles"></ion-icon>
+            Abilities
+          </strong>
+          <% link.abilities.each do |edge| %>
           <span>
             <% case edge.ability %>
             <% when 'can_show_videos' %>
@@ -76,102 +77,103 @@
               <ion-icon name="dice-outline"></ion-icon>
             <% end %>
           </span>
-        <% end %>
-      </div>
-    <% end %>
-
-    <div class="link--blacklist">
-      <strong>
-        <ion-icon role="presentation" name="cut"></ion-icon>
-        Blacklist</strong>
-      <div>
-        <%= 'No Blacklisted Tags' if link.blacklist == '' %>
-        <% if link.blacklist != '' %>
-          <% link.blacklist.split(/(\s|,)/).filter { |tag| tag.length > 1 }.map { |tag| tag.gsub(/^-/, '') }.each do |tag| %>
-            <span><%= tag %></span>
           <% end %>
+        </div>
+      <% end %>
+
+      <div class="link--blacklist">
+        <strong>
+          <ion-icon role="presentation" name="cut"></ion-icon>
+          Blacklist</strong>
+        <div>
+          <%= 'No Blacklisted Tags' if link.blacklist == '' %>
+          <% if link.blacklist != '' %>
+            <% link.blacklist.split(/(\s|,)/).filter { |tag| tag.length > 1 }.map { |tag| tag.gsub(/^-/, '') }.each do |tag| %>
+              <span><%= tag %></span>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="link--terms">
+        <% if link.terms != '' %>
+          <blockquote>
+            <%= simple_format link.terms %>
+          </blockquote>
         <% end %>
       </div>
+
+      <% if link.forked_from %>
+        <%= link_to link.forked_from, class: 'link--forked-from' do %>
+          <ion-icon role="presentation" name="git-branch"></ion-icon>
+          <%= link.forked_from.user.username %>#<%= link.forked_from.id %>
+        <% end %>
+      <% end %>
+
+      <div class="link--status-bar">
+        <% if link.friends_only %>
+          <abbr title="This link is for friends only" class="link--friends-only">
+            <ion-icon role="presentation" name="document-lock"></ion-icon>
+          </abbr>
+        <% end %>
+
+        <em><%= link.user.username %></em>
+
+        <div class="link--device-in-use">
+          <% case link_agent_to_icon link.last_ping_user_agent %>
+          <% when :desktop %>
+            <span>Pawcorp Desktop</span>
+            <ion-icon role="presentation" name="laptop-outline"></ion-icon>
+          <% when :android %>
+            <span>Pawcorp Android</span>
+            <ion-icon role="presentation" name="phone-portrait-outline"></ion-icon>
+          <% when :joihow %>
+            <span>JOI.how</span>
+            <ion-icon role="presentation" name="earth-outline"></ion-icon>
+          <% when :automate %>
+            <span>Deans' Client</span>
+            <svg height="28" width="28">
+              <use xlink:href="/icon-automate.svg#Calque_1"></use>
+            </svg>
+          <% when :wallpaper_engine %>
+            <span>Lycaon's Wallpaper Engine</span>
+            <ion-icon role="presentation" name="cog"></ion-icon>
+          <% when :ioswidget %>
+            <span>iOS Widget</span>
+            <ion-icon role="presentation" class="apple-icon" name="logo-apple"></ion-icon>
+          <% when :swift %>
+            <span>Mac Client</span>
+            <ion-icon role="presentation" class="apple-icon" name="logo-apple"></ion-icon>
+          <% when :android_changer %>
+            <span>Gios Changer</span>
+            <ion-icon name="logo-octocat"></ion-icon>
+          <% when :jberliner %>
+            <span>JBerliner's Walltaker.sh</span>
+            <ion-icon name="pint"></ion-icon>
+          <% when :unknown %>
+            <ion-icon role="presentation" name="help-circle-outline"></ion-icon>
+          <% end %>
+        </div>
+      </div>
+
     </div>
 
-    <div class="link--terms">
-      <% if link.terms != '' %>
-        <blockquote>
-          <%= simple_format link.terms %>
-        </blockquote>
-      <% end %>
-    </div>
-
-    <% if link.forked_from %>
-      <%= link_to link.forked_from, class: 'link--forked-from' do %>
-        <ion-icon role="presentation" name="git-branch"></ion-icon>
-        <%= link.forked_from.user.username %>#<%= link.forked_from.id %>
-      <% end %>
+    <% if link.response_text && !link.disgust? %>
+      <div class="link--response">
+        <strong>
+          <%= link.user.username %>
+          <% if link.horny? %>
+            😍:
+          <% elsif link.came? %>
+            💦 said while cumming:
+          <% end %>
+        </strong>
+        <%= link.response_text %>
+      </div>
     <% end %>
 
-    <div class="link--status-bar">
-      <% if link.friends_only %>
-        <abbr title="This link is for friends only" class="link--friends-only">
-          <ion-icon role="presentation" name="document-lock"></ion-icon>
-        </abbr>
-      <% end %>
-
-      <em><%= link.user.username %></em>
-
-      <div class="link--device-in-use">
-        <% case link_agent_to_icon link.last_ping_user_agent %>
-        <% when :desktop %>
-          <span>Pawcorp Desktop</span>
-          <ion-icon role="presentation" name="laptop-outline"></ion-icon>
-        <% when :android %>
-          <span>Pawcorp Android</span>
-          <ion-icon role="presentation" name="phone-portrait-outline"></ion-icon>
-        <% when :joihow %>
-          <span>JOI.how</span>
-          <ion-icon role="presentation" name="earth-outline"></ion-icon>
-        <% when :automate %>
-          <span>Deans' Client</span>
-          <svg height="28" width="28">
-            <use xlink:href="/icon-automate.svg#Calque_1"></use>
-          </svg>
-        <% when :wallpaper_engine %>
-          <span>Lycaon's Wallpaper Engine</span>
-          <ion-icon role="presentation" name="cog"></ion-icon>
-        <% when :ioswidget %>
-          <span>iOS Widget</span>
-          <ion-icon role="presentation" class="apple-icon" name="logo-apple"></ion-icon>
-        <% when :swift %>
-          <span>Mac Client</span>
-          <ion-icon role="presentation" class="apple-icon" name="logo-apple"></ion-icon>
-        <% when :android_changer %>
-          <span>Gios Changer</span>
-          <ion-icon name="logo-octocat"></ion-icon>
-        <% when :jberliner %>
-          <span>JBerliner's Walltaker.sh</span>
-          <ion-icon name="pint"></ion-icon>
-        <% when :unknown %>
-          <ion-icon role="presentation" name="help-circle-outline"></ion-icon>
-        <% end %>
+    <% if !link.never_expires && link.expires <= Time.now.utc %>
       </div>
-    </div>
-
+    <% end %>
   </div>
-
-  <% if link.response_text && !link.disgust? %>
-    <div class="link--response">
-      <strong>
-        <%= link.user.username %>
-        <% if link.horny? %>
-          😍:
-        <% elsif link.came? %>
-          💦 said while cumming:
-        <% end %>
-      </strong>
-      <%= link.response_text %>
-    </div>
-  <% end %>
-
-  <% if !link.never_expires && link.expires <= Time.now.utc %>
-    </div>
-  <% end %>
-</div>
+<% end %>
