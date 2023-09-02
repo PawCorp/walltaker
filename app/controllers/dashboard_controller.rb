@@ -10,6 +10,7 @@ class DashboardController < ApplicationController
                                                         .select('COUNT(DISTINCT past_links.id) as total, users.username')
                                                         .group('users.username')
                                                         .order(total: :desc)
+                                                        .limit(20)
       @total_wallpapers_changed_today = wallpapers_changed_today.count
       @total_wallpapers_changed_all = PastLink.count
       @your_total_wallpapers_changed_all = PastLink.where(user_id: current_user.id).count if current_user
