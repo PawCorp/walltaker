@@ -2,7 +2,7 @@
 
 data_sources:
   main:
-    url: postgres://postgres:<%= ENV['POSTGRES_PASSWORD'] %>@database:5432/walltaker
+    url: <%= ENV['DATABASE_URL'] %>
 
     # statement timeout, in seconds
     # none by default
