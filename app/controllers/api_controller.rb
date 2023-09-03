@@ -10,6 +10,10 @@ class ApiController < ApplicationController
     render json: { message: 'This link does not exist.' }, status: 404
   end
 
+  def all_links
+    @links = Link.all.where(friends_only: false).and(Link.where('expires > ?', Time.now).or(Link.where(never_expires: true)))
+  end
+
   def show_link_widget
     @link = Link.find(params[:id])
     @set_by = User.find(@link.set_by_id) if @link.set_by_id
