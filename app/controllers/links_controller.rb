@@ -28,21 +28,25 @@ class LinksController < ApplicationController
   # GET /browse (all online links)
   def browse
     # FUCK YOU, I join what I want, get ready for the query from hell
-    @links = Link.all
-                 .where(friends_only: false)
-                 .is_online
-                 .and(
-                   Link.all.where('expires > ?', Time.now).or(Link.all.where(never_expires: true))
-                 )
-                 .joins(:user)
-                 .joins(:past_links)
-                 .where('past_links.created_at = (SELECT MAX(created_at) FROM past_links WHERE past_links.link_id = links.id)')
-                 .order(Arel.sql(%q{
+    link_ids = Rails.cache.fetch("v1/browselinks", expires_in: 4.minutes) do
+      Link.all
+          .where(friends_only: false)
+          .is_online
+          .and(
+            Link.all.where('expires > ?', Time.now).or(Link.all.where(never_expires: true))
+          )
+          .joins(:user)
+          .joins(:past_links)
+          .where('past_links.created_at = (SELECT MAX(created_at) FROM past_links WHERE past_links.link_id = links.id)')
+          .order(Arel.sql(%q{
                     CASE WHEN users.created_at > now() - interval '8 hours' THEN 1 ELSE 0 END DESC,
                     past_links.created_at - make_interval(secs := users.set_count * 6) ASC
                  }))
-                 .limit(50)
+          .limit(50)
+          .pluck(:id)
+    end
 
+    @links = Link.where(id: link_ids)
   end
 
   # GET /links/1 or /links/1.json
