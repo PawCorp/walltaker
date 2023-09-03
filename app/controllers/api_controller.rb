@@ -11,9 +11,9 @@ class ApiController < ApplicationController
   end
 
   def all_links
-    force_online = params.has_key? :online
-    @links = Link.all.where(friends_only: false).and(Link.where('expires > ?', Time.now).or(Link.where(never_expires: true))) unless force_online
-    @link = Link.all.where(friends_only: false).is_online.and(Link.where('expires > ?', Time.now).or(Link.where(never_expires: true))) if force_online
+    @force_online = params.has_key? :online
+    @links = Link.all.where(friends_only: false).and(Link.where('expires > ?', Time.now).or(Link.where(never_expires: true))) unless @force_online
+    @links = Link.all.where(friends_only: false).is_online.and(Link.where('expires > ?', Time.now).or(Link.where(never_expires: true))) if @force_online
   end
 
   def show_link_widget
