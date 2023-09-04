@@ -1,0 +1,14 @@
+<%= turbo_frame_tag :link_search_results do %>
+  <strong class="search-heading">Found <%= pluralize @total, 'result' %></strong>
+  <% @links.each do |link| %>
+    <div data-controller="go" data-go-to-value="<%= link_url(link) %>">
+      <%= render link %>
+    </div>
+  <% end %>
+
+  <div class="linksearch_results__buttons">
+    <%= link_to 'Prev', results_path(q: @query, page: @page - 1), disabled: @page <= 1 %>
+    <span><%= @page %></span>
+    <%= link_to 'Next', results_path(q: @query, page: @page + 1), disabled: !@has_next_page %>
+  </div>
+<% end %>

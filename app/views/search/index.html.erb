@@ -1,0 +1,24 @@
+<div class="task-tools">
+  <div class="left">
+    <%= link_to "Back to browse", browse_path %>
+  </div>
+</div>
+
+<h1 class="woogle">Woogle</h1>
+
+<%= form_with url: results_url, method: 'get', class: 'link-search', data: { 'turbo-frame': :link_search_results } do |f| %>
+  <%= f.text_field :q  %>
+  <%= f.submit 'Search Links', name: nil %>
+<% end %>
+
+<%= turbo_frame_tag :link_search_results do %>
+  <div class="accent-block spaced">
+    <div class="accent-block__charm">
+      <ion-icon role="presentation" name="sparkles-sharp"></ion-icon>
+      Tip
+    </div>
+    <p>
+      Woogle searches for links, but will look at the user's bio and username as well. <strong>This means you may see links that don't seem to contain your search term.</strong> This just means the word appeared in their user profile.
+    </p>
+  </div>
+<% end %>
