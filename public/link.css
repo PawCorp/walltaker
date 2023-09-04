@@ -44,6 +44,20 @@ strong.search-heading {
     gap: 1rem;
     position: relative;
     min-height: 40px;
+    justify-content: flex-end;
+}
+
+.link-search label {
+    display: flex;
+    gap: 0.5rem;
+    cursor: pointer;
+    align-items: center;
+    margin: 0;
+}
+
+.link-search label input[type=checkbox] {
+    margin: 0;
+    transform: translateY(-0.1em);
 }
 
 .link-search input[type=text] {
