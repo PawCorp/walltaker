@@ -12,6 +12,27 @@
   <small>All public online links ordered by who needs the most attention at the top.</small>
 </h2>
 
+<% if @new_user_links.count != 0 %>
+  <section class="browse-links__subheading">
+    <h3>New User's Links</h3>
+    <p>User's who created their account recently get featured here for a short amount of time.</p>
+  </section>
+  <div id="new-user-links" class="browse-links">
+    <% @new_user_links.each do |link| %>
+      <div data-controller="go" data-go-to-value="<%= link_url(link) %>">
+        <%= turbo_stream_from link %>
+        <%= render link %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @new_user_links.count != 0 %>
+  <section class="browse-links__subheading">
+    <h3>The "Algorithm"</h3>
+    <p>My arbitrary algorithm that determines the order of this list.</p>
+  </section>
+<% end %>
 <div id="links" class="<%= 'browse-links' if @links.count != 0 %>">
   <% @links.each do |link| %>
     <div data-controller="go" data-go-to-value="<%= link_url(link) %>">

@@ -24,6 +24,14 @@ class Link < ApplicationRecord
 
   scope :with_ability_to, ->(ability_name) { joins(:abilities).where('link_abilities.ability': ability_name) }
 
+  scope :is_public, -> {
+    (
+      where(friends_only: false)
+    ).and(
+      where('expires > ?', Time.now).or(where(never_expires: true))
+    )
+  }
+
   def is_online?
     last_ping_online = last_ping > Time.now - 1.minute
     live_client_online = live_client_started_at && (live_client_started_at > Time.now - 7.days)
