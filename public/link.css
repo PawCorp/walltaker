@@ -2,6 +2,12 @@
     margin-bottom: 1rem;
 }
 
+strong.search-heading {
+    margin-top: 1.5rem;
+    display: block;
+    text-align: center;
+}
+
 .browse-links__subheading {
     display: flex;
     gap: 1rem;
@@ -24,6 +30,35 @@
     flex: 1 1 100px;
     color: var(--text-light);
     font-size: 0.75rem;
+}
+
+.woogle {
+    text-align: center;
+    font-size: 5rem;
+}
+
+.link-search {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    min-height: 40px;
+}
+
+.link-search input[type=text] {
+    flex: 1 1 500px;
+}
+
+.link-search input[type=submit] {
+    flex: 1 1 100px;
+    padding: 0.5rem;
+}
+
+.link-search input[type=text],
+.link-search input[type=submit] {
+    margin: 0;
+    height: 100%;
 }
 
 .link {
@@ -588,7 +623,8 @@ turbo-frame#pornsearch_results .results {
     margin: 2rem 0;
 }
 
-turbo-frame#pornsearch_results .pornsearch_results__buttons {
+turbo-frame#pornsearch_results .pornsearch_results__buttons,
+.linksearch_results__buttons {
     display: flex;
     gap: 0.5rem;
     justify-content: space-between;
@@ -598,13 +634,15 @@ turbo-frame#pornsearch_results .pornsearch_results__buttons {
     border-radius: 0.3rem;
     overflow-x: hidden;
 }
-turbo-frame#pornsearch_results .pornsearch_results__buttons a {
+turbo-frame#pornsearch_results .pornsearch_results__buttons a,
+.linksearch_results__buttons a {
     padding: 0.5rem 1rem 0.5rem;
     background: var(--accent);
     color: var(--bg);
 }
 
-turbo-frame#pornsearch_results .pornsearch_results__buttons a[disabled] {
+turbo-frame#pornsearch_results .pornsearch_results__buttons a[disabled],
+.linksearch_results__buttons a[disabled] {
     pointer-events: none;
     background: var(--border);
     color: var(--disabled);

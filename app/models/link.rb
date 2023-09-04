@@ -1,4 +1,5 @@
 class Link < ApplicationRecord
+  include PgSearch::Model
   belongs_to :user
   belongs_to :forked_from, foreign_key: :forked_from_id, class_name: 'Link', inverse_of: :forks, optional: true
   has_many :forks, foreign_key: :forked_from_id, class_name: 'Link', inverse_of: :forked_from
@@ -15,6 +16,10 @@ class Link < ApplicationRecord
   validates :custom_url, format: { with: /\A[a-zA-Z\-_]*\z/, message: 'must be a valid in a url, with no spaces or special characters' }
   validates_uniqueness_of :custom_url, allow_nil: true, unless: ->(l) { l.custom_url.blank? }
   visitable :ahoy_visit
+
+  pg_search_scope :search_positive, against: %i[terms theme custom_url response_text post_description], associated_against: {
+    user: %i[username details]
+  }, using: { tsearch: { dictionary: 'english', prefix: true } }
 
   scope :is_online, -> {
     where('last_ping > ?', Time.now - 1.minute)

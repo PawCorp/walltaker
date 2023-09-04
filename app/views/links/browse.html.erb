@@ -4,6 +4,13 @@
   <div class="left">
     <%= link_to "Back to dashboard", root_path %>
   </div>
+
+  <div class="right">
+    <%= button_to search_path, method: :get do %>
+      <ion-icon role="presentation" name="search-sharp"></ion-icon>
+      Search
+    <% end %>
+  </div>
 </div>
 
 <h2>

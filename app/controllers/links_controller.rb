@@ -38,7 +38,7 @@ class LinksController < ApplicationController
           .order(Arel.sql(%q{
                     past_links.created_at - make_interval(secs := users.set_count * 6) ASC
                  }))
-          .limit(9)
+          .limit(18)
           .pluck(:id)
     end
 

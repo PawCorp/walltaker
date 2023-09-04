@@ -83,3 +83,4 @@ gem 'ahoy_matey'
 gem "blazer"
 gem "lograge"
 gem 'nuttracker', path: 'nuttracker'
+gem "pg_search", "~> 2.3"

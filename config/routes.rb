@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'search/index'
+  get 'search/results'
   mount Nuttracker::Engine => "/nut"
   get 'help', to: 'help#index', as: 'help'
   get 'leaderboard', to: 'leaderboard#index', as: 'leaderboard'
@@ -21,6 +23,9 @@ Rails.application.routes.draw do
   get 'users/:username/history', to: 'past_links#index', as: 'past_links'
   post 'users/:username/key', to: 'users#new_api_key', as: 'user_new_api_key'
   get 'notifications/:id', to: 'notification#show', as: 'notification'
+
+  get 'search', to: 'search#index', as: 'search'
+  get 'search/query', to: 'search#results', as: 'results'
 
   defaults format: :json do
     get 'api/links/:id.json', to: 'api#show_link'
