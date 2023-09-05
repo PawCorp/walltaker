@@ -7,8 +7,8 @@
   <% end %>
 
   <div class="linksearch_results__buttons">
-    <%= link_to 'Prev', results_path(q: @query, page: @page - 1), disabled: @page <= 1 %>
+    <%= link_to 'Prev', results_path(q: @query, page: @page - 1, only_online: @only_online ? '1' : '0'), disabled: @page <= 1 %>
     <span><%= @page %></span>
-    <%= link_to 'Next', results_path(q: @query, page: @page + 1), disabled: !@has_next_page %>
+    <%= link_to 'Next', results_path(q: @query, page: @page + 1, only_online: @only_online ? '1' : '0'), disabled: !@has_next_page %>
   </div>
 <% end %>
