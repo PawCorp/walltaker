@@ -1,9 +1,12 @@
 module LinksHelper
   def link_id_for_decoration(link_id)
     return '🐇' if link_id == 69
-    return '🐺' if link_id == 666
+    return '🐺' if link_id == 666 || link_id == 343
     return '🐕' if link_id == 1
     return '🐈' if link_id == 658 || link_id == 656
+    return '🥎' if link_id == 348
+    return '⚙️' if link_id == 581
+    return '🏳️‍🌈' if link_id == 346
 
     link_id
   end
