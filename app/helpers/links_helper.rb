@@ -7,6 +7,7 @@ module LinksHelper
     return '🥎' if link_id == 348
     return '⚙️' if link_id == 581
     return '🏳️‍🌈' if link_id == 346
+    return '🦊' if link_id == 1964
 
     link_id
   end
