@@ -227,5 +227,5 @@ turbo-frame#users_viewing_links strong {
 
 .explainer_graphic {
     padding: 2rem 0 0;
-    color: var(--text);
+    color: var(--text-light);
 }
