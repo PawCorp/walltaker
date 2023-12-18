@@ -73,6 +73,10 @@ Rails.application.routes.draw do
       get '/', to: 'mod_tools#show_password_reset', as: 'index'
       post 'update', to: 'mod_tools#update_password_reset', as: 'update'
     end
-    get :user, to: 'mod_tools#show_user'
+
+    scope path: :users, as:'users' do
+      get '/', to: 'mod_tools#show_user', as: 'index'
+      post 'update', to: 'mod_tools#update_user', as: 'update'
+    end
   end
 end

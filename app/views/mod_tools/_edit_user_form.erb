@@ -1,0 +1,11 @@
+<%= turbo_frame_tag :mod_tools_edit_user_form do %>
+  <%= form_with model: user, method: :post, url: mod_tools_users_update_path do |f| %>
+    <% user.class.columns.each do |col| %>
+      <div>
+        <%= f.label col.name.to_sym %>
+        <%= f.text_field col.name.to_sym, value: user.send(col.name) %>
+      </div>
+    <% end %>
+    <%= f.submit %>
+  <% end %>
+<% end %>

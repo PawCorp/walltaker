@@ -1,2 +1,18 @@
-<h1>ModTools#show_user</h1>
-<p>Find me in app/views/mod_tools/show_user.html.erb</p>
+<div class="task-tools">
+  <div class="left">
+    <%= link_to "Cancel", mod_tools_index_path %>
+  </div>
+</div>
+
+<h2>
+  <ion-icon role="presentation" name="nuclear" class="big"></ion-icon>
+  Edit Any User
+  <small>Gray trusts you. Remember our PII rules.</small>
+</h2>
+
+<%= render 'mod_tools/pick_user_form' %>
+
+
+
+
+

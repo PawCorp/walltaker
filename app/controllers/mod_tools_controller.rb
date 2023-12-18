@@ -38,8 +38,27 @@ class ModToolsController < ApplicationController
   end
 
   def show_user
+    if params['email']
+      email = params.permit(:email)['email']
+      user = User.where('lower(email) LIKE ?', "%#{email.downcase}%").first
+
+      render partial: 'mod_tools/pick_user_form', locals: { user: }
+    end
   end
 
-  def destroy_user
+  def update_user
+    begin
+      safe_params = params.require(:user).permit(:id, :email, :username, :details, :api_key, :set_count, :viewing_link, :password_reset_token)
+      user = User.find(safe_params['id'])
+
+      if user
+        user.update(safe_params)
+        return render turbo_stream: turbo_stream.replace("mod_tools_edit_user_form", partial: 'mod_tools/edit_user_form', locals: { user: })
+      end
+    rescue
+      return render turbo_stream: turbo_stream.replace("mod_tools_edit_user_form", partial: 'mod_tools/edit_user_form', locals: { fail: 'something went wrong' })
+    end
+
+    render turbo_stream: turbo_stream.replace("mod_tools_edit_user_form", partial: 'mod_tools/edit_user_form', locals: { fail: 'that user does not exist' })
   end
 end
