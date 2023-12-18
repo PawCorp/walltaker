@@ -241,7 +241,7 @@ h2 ion-icon {
     font-size: 0.8em;
 }
 
-h2 ion-icon.big {
+ion-icon.big {
     transform: translateY(0.15em);
     font-size: 1em;
 }
@@ -679,6 +679,28 @@ a.small:hover {
     margin-top: 2.25rem;
     display: block;
     position: relative;
+}
+
+.accent-block > .scare-charm {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 110px;
+    mix-blend-mode: multiply;
+    color: #c2c2c2;
+    opacity: 0.75;
+}
+
+.accent-block--warning {
+    background-image: linear-gradient(45deg, #ffb300 25%, #d0a536 25%, #d0a536 50%, #ffb300 50%, #ffb300 75%, #d0a536 75%, #d0a536 100%);
+    background-size: 56.57px 56.57px;
+    color: #212121;
+    text-shadow: 0 0 2px #ffb300;
+    font-weight: bold;
+}
+
+.accent-block--warning strong, .accent-block--warning .accent-block__charm {
+    color: inherit;
 }
 
 .accent-block > p {
@@ -1242,4 +1264,36 @@ section .then {
         grid-template-columns: 1fr;
         gap: 1rem;
     }
+}
+
+.mod_tool__result {
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.mod_tool__result--success::before {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: var(--success);
+    margin-bottom: 1rem;
+}
+
+.mod_tool__result--fail::before {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: var(--danger);
+    margin-bottom: 1rem;
+}
+
+.mod_tool__result--success ion-icon {
+    color: var(--success);
+}
+
+.mod_tool__result--fail ion-icon {
+    color: var(--danger);
 }

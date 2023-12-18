@@ -1,0 +1,49 @@
+<div class="accent-block accent-block--warning spaced">
+  <ion-icon role="presentation" name="skull" class="scare-charm"></ion-icon>
+  <div class="accent-block__charm">
+    <ion-icon role="presentation" name="warning"></ion-icon>
+    Read me
+  </div>
+  <p>
+    You can cause <strong>IRREVERSIBLE</strong> damage here. Both to the site, and our user's privacy. There are no
+    confirmations before you do an action. <strong>You need to think before you click.</strong>
+  </p>
+  <br/>
+  <p>
+    We consider the following to be PII (Personally Identifiable Information):
+  </p>
+  <ul>
+    <li>Email address</li>
+    <li>IP Addresses</li>
+    <li>Messages</li>
+  </ul>
+  <p>
+    This information should <strong>NEVER</strong> be provided to anyone. That includes,
+    <strong>NOT EVEN TELLING THE USER THEIR OWN PII INFO.</strong> Always assume someone's account is hacked and
+    <strong>that you are being manipulated.</strong> You may <strong>ONLY</strong> ask for THEM to provide it, and you
+    can confirm if it's correct or not. Provide no more information.
+  </p>
+  <br/>
+  <p>
+    If you fuck up with tools I provide to you on this panel, you will lose all access. - Gray
+  </p>
+</div>
+
+<h2>
+  <ion-icon role="presentation" name="nuclear" class="big"></ion-icon>
+  Mod Tools
+  <small>Gray trusts you. The highlighted button in each category is the most useful.</small>
+</h2>
+
+<section>
+  <h3>Authentication Issues</h3>
+  <%= button_to "They forgot their password", mod_tools_passwords_index_path, method: :get %>
+  <%= button_to "They can't log in but know their password", mod_tools_passwords_index_path, method: :get, class: 'secondary' %>
+</section>
+
+<section>
+  <h3>Moderation</h3>
+  <%= button_to "I need to ban a user with an account", mod_tools_passwords_index_path, method: :get %>
+  <%= button_to "I suspect a user is sending bad messages", mod_tools_passwords_index_path, method: :get, class: 'secondary' %>
+  <%= button_to "I need to ban an anon IP address", mod_tools_passwords_index_path, method: :get, class: 'secondary' %>
+</section>

@@ -65,4 +65,14 @@ Rails.application.routes.draw do
     resources :comments
   end
   mount Blazer::Engine, at: "blazer"
+
+  scope path: :mod_tools, as: 'mod_tools' do
+    get '/', to: 'mod_tools#index', as: 'index'
+
+    scope path: :passwords, as:'passwords' do
+      get '/', to: 'mod_tools#show_password_reset', as: 'index'
+      post 'update', to: 'mod_tools#update_password_reset', as: 'update'
+    end
+    get :user, to: 'mod_tools#show_user'
+  end
 end
