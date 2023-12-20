@@ -101,6 +101,9 @@ GEM
     chartkick (5.0.4)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
+    crono (2.0.1)
+      rails (>= 5.2.8)
+      sprockets-rails
     date (3.3.3)
     debug (1.8.0)
       irb (>= 1.5.0)
@@ -273,6 +276,7 @@ DEPENDENCIES
   bootsnap
   capybara
   chartkick
+  crono
   debug
   excon
   groupdate

@@ -52,6 +52,7 @@
     <orderEntry type="library" scope="PROVIDED" name="chartkick (v5.0.4, RVM: ruby-3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="concurrent-ruby (v1.2.2, RVM: ruby-3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="crass (v1.0.6, RVM: ruby-3.2.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="crono (v2.0.1, RVM: ruby-3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="debug (v1.8.0, RVM: ruby-3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="device_detector (v1.1.1, RVM: ruby-3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubi (v1.12.0, RVM: ruby-3.2.0) [gem]" level="application" />
@@ -139,6 +140,7 @@
         <option value="blazer:uploads" />
         <option value="channel" />
         <option value="controller" />
+        <option value="crono:install" />
         <option value="generator" />
         <option value="helper" />
         <option value="integration_test" />
@@ -178,6 +180,7 @@
         <option value="blazer:uploads" />
         <option value="channel" />
         <option value="controller" />
+        <option value="crono:install" />
         <option value="generator" />
         <option value="helper" />
         <option value="integration_test" />
@@ -387,6 +390,12 @@
             <subtasks>
               <RakeTaskImpl description="Lookup first-level dependencies for TEMPLATE (like messages/show or comments/_comment.html)" fullCommand="cache_digests:dependencies" id="dependencies" />
               <RakeTaskImpl description="Lookup nested dependencies for TEMPLATE (like messages/show or comments/_comment.html)" fullCommand="cache_digests:nested_dependencies" id="nested_dependencies" />
+            </subtasks>
+          </RakeTaskImpl>
+          <RakeTaskImpl id="crono">
+            <subtasks>
+              <RakeTaskImpl description="Check cronotab.rb syntax" fullCommand="crono:check" id="check" />
+              <RakeTaskImpl description="Clean unused job stats from DB" fullCommand="crono:clean" id="clean" />
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl id="db">

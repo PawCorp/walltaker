@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'search/index'
   get 'search/results'
   mount Nuttracker::Engine => "/nut"
+  mount Crono::Engine, at: '/pornbot'
   get 'help', to: 'help#index', as: 'help'
   get 'leaderboard', to: 'leaderboard#index', as: 'leaderboard'
   get 'notification/show'

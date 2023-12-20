@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_20_020847) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_20_050547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
-  create_enum "ability", ["can_show_videos", "can_be_set_by_porn_bot"]
+  create_enum "ability", ["can_show_videos", "can_be_set_by_porn_bot", "can_be_set_by_lizard"]
 
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -177,6 +177,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_20_020847) do
     t.datetime "updated_at", null: false
     t.index ["link_id"], name: "index_comments_on_link_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "crono_jobs", force: :cascade do |t|
+    t.string "job_id", null: false
+    t.text "log"
+    t.datetime "last_performed_at", precision: nil
+    t.boolean "healthy"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_crono_jobs_on_job_id", unique: true
   end
 
   create_table "friendships", force: :cascade do |t|

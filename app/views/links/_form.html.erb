@@ -164,7 +164,7 @@
             <% end %>
           </div>
         </div>
-        <div class="abilities__ability abilities__ability--disabled">
+        <div class="abilities__ability">
           <% can_be_set_by_porn_bot = link.check_ability 'can_be_set_by_porn_bot' %>
 
           <div class="abilities__ability__title">
@@ -179,18 +179,47 @@
             <p>
               <% if can_be_set_by_porn_bot %>
                 Your wallpaper will be changed by our resident horny robot: PornBot. They (a gender-defying icon) select
-                a highly-rated post that matches your blacklist rules.
+                a highly-rated post that matches your blacklist rules. PornBot has no preferences unlike the PornLizards.
               <% else %>
                 Your wallpaper will not changed by our resident horny robot: PornBot. You will only get wallpapers from
                 fleshy human-beings.
               <% end %>
             </p>
           </div>
-          <!--div class="abilities__ability__controls">
+          <div class="abilities__ability__controls">
             <%= button_to toggle_link_ability_link_path(ability: :can_be_set_by_porn_bot), method: :post, class: can_be_set_by_porn_bot ? 'enabled' : 'disabled' do %>
               <%= can_be_set_by_porn_bot ? 'Disallow PornBot' : 'Allow PornBot' %>
             <% end %>
-          </div-->
+          </div>
+        </div>
+        <div class="abilities__ability">
+          <%
+            can_be_set_by_lizard = link.check_ability 'can_be_set_by_lizard'
+            lizard = current_user.mascot || 'ki'
+          %>
+
+          <div class="abilities__ability__title">
+            <strong>
+              <% if can_be_set_by_lizard %>
+                <ion-icon name="thumbs-up"></ion-icon>
+              <% else %>
+                <ion-icon name="hand-left"></ion-icon>
+              <% end %>
+              <%= current_user&.pervert ? 'Perverted ' : '' %><%= lizard.capitalize %> is <%= can_be_set_by_lizard ? 'welcomed' : 'turned away' %>
+            </strong>
+            <p>
+              <% if can_be_set_by_lizard %>
+                Your wallpaper will be changed by your selected PornLizard <%= lizard.capitalize %>! <%= lizard_to_description(lizard, current_user&.pervert || false) %>
+              <% else %>
+                Your wallpaper will not changed by any of the PornLizards. It's kind of their thing, you should let at least one mess with you! I'm sure <%= lizard.capitalize %> is horny. If you'd like to pick another, choose one from the site header.
+              <% end %>
+            </p>
+          </div>
+          <div class="abilities__ability__controls">
+            <%= button_to toggle_link_ability_link_path(ability: :can_be_set_by_lizard), method: :post, class: can_be_set_by_lizard ? 'enabled' : 'disabled' do %>
+              <%= can_be_set_by_lizard ? "Disallow #{lizard.capitalize}" : "Allow #{lizard.capitalize}" %>
+            <% end %>
+          </div>
         </div>
       </div>
     <% end %>
