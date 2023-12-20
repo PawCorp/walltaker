@@ -352,7 +352,7 @@ h4.forks-header > ion-icon {
 }
 
 .link--terms blockquote {
-    overflow-y: scroll;
+    overflow-y: auto;
     margin: 0 0 0 4px;
     position: absolute;
     top: 0;
@@ -835,7 +835,7 @@ figure > a.background-sample > ion-icon.background-sample__icon--mobile {
 
 figcaption.link--description {
     max-height: 110px;
-    overflow: scroll;
+    overflow: auto;
     padding: 1rem 0.5rem;
 }
 
