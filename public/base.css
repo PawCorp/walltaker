@@ -104,12 +104,97 @@ body {
     font-size: 0.9rem;
 }
 
+main {
+    padding-top: 1rem;
+}
+
 body > header {
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.mascot {
+    opacity: 1;
+}
+
+body > header h1 span {
+    position: relative;
+}
+
+body > header h1 span > .mascot {
+    position: absolute;
+    left: 50%;
+    bottom: -50px;
+    height: 190px;
+    transform: translateX(calc(-50% - 149px));
+    z-index: 0;
+    transition: all 0.1s ease-out;
+}
+
+body > header::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--bg);
+    filter: blur(5px);
+    z-index: 9999;
+}
+
+@media screen and (max-width: 900px) {
+    body > header h1 span > .mascot {
+        left: 50%;
+        bottom: -50px;
+        height: 140px;
+        transform: translateX(calc(-50% - 120px));
+    }
+}
+
+@media screen and (max-width: 720px) and (min-width: 475px) {
+    body > header h1 a {
+        overflow: hidden;
+    }
+
+    body > header h1 span {
+        position: relative;
+        z-index: 1;
+    }
+
+    body > header h1 span > .mascot {
+        height: 165px;
+        transform: none;
+        bottom: -80px;
+        left: -61px;
+        z-index: -1;
+        opacity: 0.8;
+    }
+}
+
+@media screen and (max-width: 475px) {
+    body > header h1 {
+        padding-left: 2rem !important;
+    }
+
+    body > header h1 span > .mascot {
+        position: absolute;
+        left: -70px;
+        bottom: -50px;
+        transform: none;
+        height: 100px;
+        clip-path: inset(0 0 38px 16px);
+        z-index: -1;
+    }
 }
 
 header .header__inner {
+    position: relative;
+    z-index: 99;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -125,9 +210,18 @@ header .header__age-warning {
 }
 
 header .user-tools {
-    display: flex;
     flex: 1 1 320px;
+}
+
+header .user-tools .user-tools__nested {
+    flex: 0 1 auto;
+}
+
+header .user-tools, header .user-tools .user-tools__nested {
+    display: flex;
     justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 header .user-tools > a {
@@ -208,7 +302,7 @@ h2 {
     margin-bottom: 1rem;
     font-size: 2.2rem;
     font-weight: normal;
-    margin-top: 3.25rem;
+    margin-top: 2rem;
 }
 
 h2.one-line {
@@ -1296,4 +1390,28 @@ section .then {
 
 .mod_tool__result--fail ion-icon {
     color: var(--danger);
+}
+
+.float-right {
+    float: right;
+}
+
+.hang {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    font-size: 0.7rem;
+}
+
+.hang a {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 0.25rem;
+    text-decoration: none;
+    border: 1px solid var(--accent);
+    border-top: none;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    padding: 0.2rem 0.35rem 0.25rem;
 }

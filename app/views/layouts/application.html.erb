@@ -1,108 +1,123 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title><%= content_for?(:html_title) ? yield(:html_title) : "Walltaker" %></title>
-  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
-  <meta name="rating" content="adult"/>
-  <link rel="stylesheet" href="/simple.min.css">
-  <link rel="stylesheet" href="/base.css?x=<%= ENV['COMMIT_HASH'] %>"/>
-  <link rel="stylesheet" href="/link.css?x=<%= ENV['COMMIT_HASH'] %>"/>
-  <link rel="stylesheet" href="/dashboard.css?x=<%= ENV['COMMIT_HASH'] %>"/>
-  <link rel="stylesheet" href="/user-profile.css?x=<%= ENV['COMMIT_HASH'] %>"/>
-  <link rel="stylesheet" href="/member-editor.css?x=<%= ENV['COMMIT_HASH'] %>"/>
-  <link rel="stylesheet" href="/messages.css?x=<%= ENV['COMMIT_HASH'] %>"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <%= action_cable_meta_tag %>
+  <head>
+    <title><%= content_for?(:html_title) ? yield(:html_title) : "Walltaker" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta name="rating" content="adult"/>
+    <link rel="stylesheet" href="/simple.min.css">
+    <link rel="stylesheet" href="/base.css?x=<%= ENV['COMMIT_HASH'] %>"/>
+    <link rel="stylesheet" href="/link.css?x=<%= ENV['COMMIT_HASH'] %>"/>
+    <link rel="stylesheet" href="/dashboard.css?x=<%= ENV['COMMIT_HASH'] %>"/>
+    <link rel="stylesheet" href="/user-profile.css?x=<%= ENV['COMMIT_HASH'] %>"/>
+    <link rel="stylesheet" href="/member-editor.css?x=<%= ENV['COMMIT_HASH'] %>"/>
+    <link rel="stylesheet" href="/messages.css?x=<%= ENV['COMMIT_HASH'] %>"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= action_cable_meta_tag %>
 
-  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <%= javascript_importmap_tags %>
-</head>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
 
-<body>
-<header>
-  <div class="header__age-warning">
-    🔞 This is an app for adults over the age of 18 only.<br/>
-    ⚠️ I'm considering charging for a paid tier to offset costs. Give your thoughts on Discord! ⚠️<br/>
-    Requests? Bugs? <a href="https://discord.gg/s4z9GfwuKw" target="_blank">Gios made us a discord!</a>
-  </div>
-  <div class="header__inner">
-    <h1><a href="/">
-      <span class="show-desktop">Walltaker</span>
-      <span class="show-mobile">WT</span>
-    </a></h1>
-    <div class="user-tools">
-      <% if current_user %>
-        <a class="username" href="<%= user_path current_user.username %>">
-          <%= current_user.username %>
-        </a>
-        <a href="<%= url_for :action => :browse, :controller => :links %>">
-          <ion-icon role="presentation" name="sparkles"></ion-icon>
-          Browse
-        </a>
-        <%= link_to 'Links', links_path %>
-        <%= link_to 'Friends', friendships_path, class: has_requests? ? 'pinged' : '' %>
-        <%= link_to 'Logout', logout_path %>
+  <body>
+    <header>
+      <div class="header__age-warning">
+        🔞 This is an app for adults over the age of 18 only.<br/>
+      </div>
+      <div class="header__inner">
+        <h1>
+          <a href="/">
+            <span class="show-desktop">
+              Walltaker
 
-        <%= link_to message_thread_index_path do %>
-          <ion-icon name="chatbubbles" class="dont-hide"></ion-icon>
+              <%= image_tag 'mascot/Ki.png', alt: 'A suave little lizard welcoming you to the website.', class: 'mascot', height: 190 %>
+            </span>
+            <span class="show-mobile">
+              WT
+
+              <%= image_tag 'mascot/Ki.png', alt: 'A suave little lizard welcoming you to the website.', class: 'mascot', height: 100 %>
+            </span>
+          </a>
+        </h1>
+        <div class="user-tools">
+          <% if current_user %>
+            <a class="username" href="<%= user_path current_user.username %>">
+              <%= current_user.username %>
+            </a>
+            <a href="<%= url_for :action => :browse, :controller => :links %>">
+              <ion-icon role="presentation" name="sparkles"></ion-icon>
+              Browse
+            </a>
+            <%= link_to 'Links', links_path %>
+            <%= link_to 'Friends', friendships_path, class: has_requests? ? 'pinged' : '' %>
+            <%= link_to 'Logout', logout_path %>
+
+            <div class="user-tools__nested">
+              <%= link_to message_thread_index_path do %>
+                <ion-icon name="chatbubbles" class="dont-hide"></ion-icon>
+              <% end %>
+              <%= turbo_stream_from "header_notifications_#{current_user.id}" %>
+              <%= render partial: 'notifications' %>
+            </div>
+          <% else %>
+            <a href="<%= url_for :action => :browse, :controller => :links %>">
+              <ion-icon role="presentation" name="sparkles"></ion-icon>
+              Browse
+            </a>
+            <%= link_to 'Sign Up', signup_path %>
+            <%= link_to 'Login', login_path %>
+          <% end %>
+        </div>
+      </div>
+    </header>
+
+    <div class="flashes">
+      <% flash.each do |type, msg| %>
+        <div class="flash--<%= type == 'notice' ? 'success' : 'danger' %>">
+          <%= msg %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="hang">
+      <a href="https://discord.gg/s4z9GfwuKw" target="_blank"><ion-icon name="logo-discord"></ion-icon> Join our Discord</a>
+    </div>
+
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer>
+      <p>
+        Want more horny debauchery? Try <a href="https://joi.how">joi.how</a>.<br/>
+        <%= link_to 'Need help with Walltaker?', help_path %>
+      </p>
+      <small>
+        © joi.how 2022 / Commit
+        <a href="https://github.com/pupgray/walltaker/commit/<%= ENV['COMMIT_HASH'] %>">#<%= ENV['COMMIT_HASH'] != '' ? ENV['COMMIT_HASH'] : '' %></a>
+        <% if current_user && current_user.admin %>
+          <%= link_to blazer_path do %>
+            <ion-icon role="presentation" name="stats-chart"></ion-icon>
+            Stats
+          <% end %>
+          <%= link_to mod_tools_index_path do %>
+            <ion-icon role="presentation" name="nuclear"></ion-icon>
+            Mod Tools
+          <% end %>
         <% end %>
-        <%= turbo_stream_from "header_notifications_#{current_user.id}" %>
-        <%= render partial: 'notifications' %>
-      <% else %>
-        <a href="<%= url_for :action => :browse, :controller => :links %>">
-          <ion-icon role="presentation" name="sparkles"></ion-icon>
-          Browse
-        </a>
-        <%= link_to 'Sign Up', signup_path %>
-        <%= link_to 'Login', login_path %>
-      <% end %>
-    </div>
-  </div>
-</header>
+      </small>
+    </footer>
 
-<div class="flashes">
-  <% flash.each do |type, msg| %>
-    <div class="flash--<%= type == 'notice' ? 'success' : 'danger' %>">
-      <%= msg %>
-    </div>
-  <% end %>
-</div>
-
-<main>
-  <%= yield %>
-</main>
-
-<footer>
-  <p>
-    Want more horny debauchery? Try <a href="https://joi.how">joi.how</a>.<br/>
-    <%= link_to 'Need help with Walltaker?', help_path %>
-  </p>
-  <small>
-    © joi.how 2022 / Commit <a href="https://github.com/pupgray/walltaker/commit/<%= ENV['COMMIT_HASH'] %>">#<%= ENV['COMMIT_HASH'] != '' ? ENV['COMMIT_HASH'] : '' %></a>
-    <% if current_user && current_user.admin %>
-      <%= link_to blazer_path do %>
-        <ion-icon role="presentation" name="stats-chart"></ion-icon>
-        Stats
-      <% end %>
-      <%= link_to mod_tools_index_path do %>
-        <ion-icon role="presentation" name="nuclear"></ion-icon>
-        Mod Tools
-      <% end %>
-    <% end %>
-  </small>
-</footer>
-
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script>
-    flatpickr('.flatpickr', {
-        enableTime: true,
-        dateFormat: 'Z'
-    });
-</script>
-</body>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+        flatpickr('.flatpickr', {
+            enableTime: true,
+            dateFormat: 'Z'
+        });
+    </script>
+  </body>
 </html>
