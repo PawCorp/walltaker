@@ -1,0 +1,21 @@
+<%
+  mascot ||= 'ki'
+  pervert ||= false
+%>
+
+<%= turbo_frame_tag 'title' do %>
+  <span class="show-desktop">
+    Walltaker
+
+    <%= image_tag("mascot/Ki#{pervert ? 'Shrug' : ''}.png", alt: 'A suave little lizard welcoming you to the website.', class: 'mascot', height: 190) if mascot == 'ki' %>
+    <%= image_tag("mascot/Warren#{pervert ? 'N' : ''}SFW.png", alt: 'A suave little lizard welcoming you to the website.', class: 'mascot', height: 190) if mascot == 'warren' %>
+    <%= image_tag("mascot/Taylor#{pervert ? 'N' : ''}SFW.png", alt: 'A suave little lizard welcoming you to the website.', class: 'mascot', height: 190) if mascot == 'taylor' %>
+  </span>
+  <span class="show-mobile">
+    WT
+
+    <%= image_tag("mascot/Ki#{pervert ? 'Shrug' : ''}.png", alt: 'A suave little lizard welcoming you to the website.', class: 'mascot', height: 100) if mascot == 'ki' %>
+    <%= image_tag("mascot/Warren#{pervert ? 'N' : ''}SFW.png", alt: 'A suave little lizard welcoming you to the website.', class: 'mascot', height: 100) if mascot == 'warren' %>
+    <%= image_tag("mascot/Taylor#{pervert ? 'N' : ''}SFW.png", alt: 'A suave little lizard welcoming you to the website.', class: 'mascot', height: 100) if mascot == 'taylor' %>
+  </span>
+<% end %>

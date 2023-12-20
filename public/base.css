@@ -131,7 +131,7 @@ body > header h1 span > .mascot {
     transform: translateX(calc(-50% - 149px));
     z-index: 0;
 
-    clip-path: inset(0 0 33px 16px);
+    clip-path: inset(0 0 33px 5px);
     transition: all 0.1s ease-out;
 }
 
@@ -1057,7 +1057,7 @@ footer small a {
     display: block !important;
 }
 
-header turbo-frame {
+header .user-tools turbo-frame {
     display: block;
     position: relative;
     font-size: 1.1rem;
@@ -1386,7 +1386,8 @@ section .then {
 
 .hang {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    flex-direction: row-reverse;
     gap: 1rem;
     font-size: 0.7rem;
 }
@@ -1399,7 +1400,45 @@ section .then {
     text-decoration: none;
     border: 1px solid var(--accent);
     border-top: none;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
     padding: 0.2rem 0.35rem 0.25rem;
+}
+.hang a:hover {
+    border-color: var(--marked);
+    color: var(--marked);
+}
+
+.mascot-picker {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.mascot-picker button {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: 0;
+    font-size: 0.8rem;
+    height: 23px;
+    align-items: flex-start;
+    gap: 0.25rem;
+    text-decoration: none;
+    border: 1px solid var(--accent);
+    border-top: none;
+    border-radius: 0;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding: 0.2rem 0.35rem 0.25rem;
+    background: none;
+    color: var(--accent);
+}
+
+.mascot-picker button ion-icon {
+    font-size: 1rem;
+}
+
+.mascot-picker em {
+    display: flex;
+    align-items: center;
 }

@@ -1,6 +1,40 @@
 class ApiController < ApplicationController
   after_action :log_presence, only: %i[show_link show_link_widget]
   skip_before_action :verify_authenticity_token, only: :set_link_response
+  before_action :authorize, only: %i[update_mascot update_perviness]
+
+  def update_mascot
+    next_mascot = current_user&.mascot || 'ki'
+
+    case next_mascot
+    when 'warren'
+      next_mascot = 'taylor'
+
+    when 'taylor'
+      next_mascot = 'ki'
+
+    when 'ki'
+      next_mascot = 'warren'
+    end
+
+    current_user.mascot = next_mascot
+    current_user.save
+
+    render turbo_stream: [
+      turbo_stream.replace("title", partial: 'layouts/title', locals: { mascot: next_mascot, pervert: current_user.pervert }),
+      turbo_stream.replace("mascot_picker", partial: 'layouts/mascot_picker')
+    ]
+  end
+
+  def update_perviness
+    current_user.pervert = !current_user.pervert
+    current_user.save
+
+    render turbo_stream: [
+      turbo_stream.replace("title", partial: 'layouts/title', locals: { mascot: current_user.mascot, pervert: current_user.pervert }),
+      turbo_stream.replace("mascot_picker", partial: 'layouts/mascot_picker'),
+    ]
+  end
 
   # GET /api/links/:id.json
   def show_link

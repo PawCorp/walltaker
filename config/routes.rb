@@ -35,6 +35,9 @@ Rails.application.routes.draw do
     get 'api/users/:username.json', to: 'api#show_user', as: 'user_status'
   end
 
+  post 'api/mascot/next', to: 'api#update_mascot'
+  post 'api/pervert/toggle', to: 'api#update_perviness'
+
   resources :users
   resources :session
   resources :message_thread, path: 'messages' do
