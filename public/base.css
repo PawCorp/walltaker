@@ -112,7 +112,6 @@ body > header {
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
     position: relative;
-    overflow: hidden;
 }
 
 
@@ -131,20 +130,9 @@ body > header h1 span > .mascot {
     height: 190px;
     transform: translateX(calc(-50% - 149px));
     z-index: 0;
-    transition: all 0.1s ease-out;
-}
 
-body > header::after {
-    content: '';
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: var(--bg);
-    filter: blur(5px);
-    z-index: 9999;
+    clip-path: inset(0 0 33px 16px);
+    transition: all 0.1s ease-out;
 }
 
 @media screen and (max-width: 900px) {
