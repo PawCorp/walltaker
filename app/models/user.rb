@@ -5,10 +5,11 @@ class User < ApplicationRecord
   has_many :notifications
   belongs_to :viewing_link, foreign_key: :viewing_link_id, class_name: 'Link', optional: true
 
-  validates_uniqueness_of :email, :username
+  validates_uniqueness_of :username
 
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,
                               message: 'must be a valid email address' }
+  validates_uniqueness_of :email, :case_sensitive => false
   validates :password, confirmation: true
   validates :username, presence: true, format: { with: /\A[a-zA-Z0-9]+\Z/ }
 
