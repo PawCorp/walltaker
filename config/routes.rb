@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get 'users/:username', to: 'users#show'
   get 'users/:username/edit', to: 'users#edit'
   get 'users/:username/history', to: 'past_links#index', as: 'past_links'
+  get 'users/:username/sets', to: 'users#sets', as: 'user_sets'
   post 'users/:username/key', to: 'users#new_api_key', as: 'user_new_api_key'
   get 'notifications/:id', to: 'notification#show', as: 'notification'
 

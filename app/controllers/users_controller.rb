@@ -10,6 +10,11 @@ class UsersController < ApplicationController
     @total_orgasms_by_day = Nuttracker::Orgasm.all.where(user: @user).where('created_at > ?', 1.weeks.ago.midnight).group_by_day(:created_at, range: 1.weeks.ago.midnight..Time.now).count
   end
 
+  def sets
+    @user = User.find_by(username: params[:username])
+    @past_links = PastLink.where(set_by_id: @user.id).order(id: :desc).limit(50)
+  end
+
   def edit
     set_user_vars
     @is_editing = true

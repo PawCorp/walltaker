@@ -1,0 +1,12 @@
+<% content_for(:html_title) { "Walltaker #{@user.username} - Wallpapers Set For Others" } %>
+
+<div class="task-tools">
+  <div class="left">
+    <%= link_to "Back", user_path(@user.username) %>
+  </div>
+</div>
+
+<p>Below is a list of the last 50 wallpapers by <%= @user.username %> for others. Click any wallpaper to go to see
+  the full size image.</p>
+
+<%= render partial: 'users/past_links', locals: { past_links: @past_links } %>

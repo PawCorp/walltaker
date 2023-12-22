@@ -38,7 +38,9 @@
     <strong class="online" title="User is online"></strong>
   <% end %>
   <small>
-    Set <%= @user.set_count %> wallpapers
+    <%= link_to user_sets_path(@user.username) do %>
+      Set <%= @user.set_count %> wallpapers
+    <% end %>
   </small>
   <small>
     Last online
