@@ -4,7 +4,7 @@ class SessionController < ApplicationController
   def new; end
 
   def create
-    user = User.find_by_email(login_params[:email]&.downcase)
+    user = User.where("lower(email) = ?",login_params[:email]&.downcase).first
     if !user.nil?
       if user.username == 'PornBot'
         @error = 'You don\'t look like a robot... Your IP address has been flagged.'
