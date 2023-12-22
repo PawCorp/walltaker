@@ -29,6 +29,6 @@ class TaylorJob
 end
 
 Crono.perform(PornBotJob).every 11.minutes
-Crono.perform(KiJob).every 5.minutes
-Crono.perform(WarrenJob).every 5.minutes
-Crono.perform(TaylorJob).every 5.minutes
+Crono.perform(KiJob).every 8.minutes
+Crono.perform(WarrenJob).every 8.minutes
+Crono.perform(TaylorJob).every 8.minutes
