@@ -154,6 +154,11 @@ strong.search-heading {
         justify-content: flex-end;
     }
 
+    .link--abilities .mascot {
+        transform: translateY(2px);
+        padding-right: 3px;
+    }
+
     .link--theme > strong,
     .link--abilities > strong {
         display: inline-flex !important;
@@ -1106,6 +1111,11 @@ aside.comments-sidebar > button .toggle-badge[data-hidden=true] {
     font-size: 1.2em;
     transform: translateY(3px);
     margin-right: 0.3rem;
+}
+
+.abilities__ability__title .mascot {
+    transform: translateY(4px);
+    margin-right: 4px;
 }
 
 .video-icon {
