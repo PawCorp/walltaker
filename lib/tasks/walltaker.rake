@@ -17,27 +17,31 @@ namespace :walltaker do
     links.each do |link|
       controller = ApplicationController.new
       results = controller.get_tag_results 'order:random score:>100 -nightmare_fuel -nazi rating:e', nil, nil, link, 1
-      if results[0] && results[0]['file']['url']
-        result = link.update(
-          HashWithIndifferentAccess.new(
-            {
-              post_url: results[0]['file']['url'],
-              post_thumbnail_url: results[0]['sample']['url'] || results[0]['preview']['url'],
-              post_description: results[0]['description'],
-              set_by_id: pornbot.id,
-              response_type: nil,
-              response_text: nil
-            }
+      begin
+        if results[0] && results[0]['file']['url']
+          result = link.update(
+            HashWithIndifferentAccess.new(
+              {
+                post_url: results[0]['file']['url'],
+                post_thumbnail_url: results[0]['sample']['url'] || results[0]['preview']['url'],
+                post_description: results[0]['description'],
+                set_by_id: pornbot.id,
+                response_type: nil,
+                response_text: nil
+              }
+            )
           )
-        )
 
-        if result
-          puts "Set link_id=#{link.id} to #{results[0]['file']['url']}"
-          set_count += 1
-          PastLink.log_link(link).save
-          pornbot.set_count = pornbot.set_count.to_i + 1
-          pornbot.save
+          if result
+            puts "Set link_id=#{link.id} to #{results[0]['file']['url']}"
+            set_count += 1
+            PastLink.log_link(link).save
+            pornbot.set_count = pornbot.set_count.to_i + 1
+            pornbot.save
+          end
         end
+      rescue
+        puts "bad post selected, moving on"
       end
       sleep(1.second)
     end
@@ -68,27 +72,31 @@ namespace :walltaker do
 
       controller = ApplicationController.new
       results = controller.get_tag_results "order:random #{tags} -nightmare_fuel", nil, nil, link, 1
-      if results[0] && results[0]['file']['url']
-        result = link.update(
-          HashWithIndifferentAccess.new(
-            {
-              post_url: results[0]['file']['url'],
-              post_thumbnail_url: results[0]['sample']['url'] || results[0]['preview']['url'],
-              post_description: results[0]['description'],
-              set_by_id: pornbot.id,
-              response_type: nil,
-              response_text: nil
-            }
+      begin
+        if results[0] && results[0]['file']['url']
+          result = link.update(
+            HashWithIndifferentAccess.new(
+              {
+                post_url: results[0]['file']['url'],
+                post_thumbnail_url: results[0]['sample']['url'] || results[0]['preview']['url'],
+                post_description: results[0]['description'],
+                set_by_id: pornbot.id,
+                response_type: nil,
+                response_text: nil
+              }
+            )
           )
-        )
 
-        if result
-          puts "Set link_id=#{link.id} to #{results[0]['file']['url']}"
-          set_count += 1
-          PastLink.log_link(link).save
-          pornbot.set_count = pornbot.set_count.to_i + 1
-          pornbot.save
+          if result
+            puts "Set link_id=#{link.id} to #{results[0]['file']['url']}"
+            set_count += 1
+            PastLink.log_link(link).save
+            pornbot.set_count = pornbot.set_count.to_i + 1
+            pornbot.save
+          end
         end
+      rescue
+        puts "bad post selected, moving on"
       end
       sleep(1.second)
     end
@@ -119,27 +127,32 @@ namespace :walltaker do
 
       controller = ApplicationController.new
       results = controller.get_tag_results "order:random #{tags} -nightmare_fuel", nil, nil, link, 1
-      if results[0] && results[0]['file']['url']
-        result = link.update(
-          HashWithIndifferentAccess.new(
-            {
-              post_url: results[0]['file']['url'],
-              post_thumbnail_url: results[0]['sample']['url'] || results[0]['preview']['url'],
-              post_description: results[0]['description'],
-              set_by_id: pornbot.id,
-              response_type: nil,
-              response_text: nil
-            }
+      begin
+        if results[0] && results[0]['file']['url']
+          result = link.update(
+            HashWithIndifferentAccess.new(
+              {
+                post_url: results[0]['file']['url'],
+                post_thumbnail_url: results[0]['sample']['url'] || results[0]['preview']['url'],
+                post_description: results[0]['description'],
+                set_by_id: pornbot.id,
+                response_type: nil,
+                response_text: nil
+              }
+            )
           )
-        )
 
-        if result
-          puts "Set link_id=#{link.id} to #{results[0]['file']['url']}"
-          set_count += 1
-          PastLink.log_link(link).save
-          pornbot.set_count = pornbot.set_count.to_i + 1
-          pornbot.save
+          if result
+            puts "Set link_id=#{link.id} to #{results[0]['file']['url']}"
+            set_count += 1
+            PastLink.log_link(link).save
+            pornbot.set_count = pornbot.set_count.to_i + 1
+            pornbot.save
+          end
         end
+
+      rescue
+        puts "bad post selected, moving on"
       end
       sleep(1.second)
     end
@@ -170,27 +183,31 @@ namespace :walltaker do
 
       controller = ApplicationController.new
       results = controller.get_tag_results "order:random #{tags} -nightmare_fuel", nil, nil, link, 1
-      if results[0] && results[0]['file']['url']
-        result = link.update(
-          HashWithIndifferentAccess.new(
-            {
-              post_url: results[0]['file']['url'],
-              post_thumbnail_url: results[0]['sample']['url'] || results[0]['preview']['url'],
-              post_description: results[0]['description'],
-              set_by_id: pornbot.id,
-              response_type: nil,
-              response_text: nil
-            }
+      begin
+        if results[0] && results[0]['file']['url']
+          result = link.update(
+            HashWithIndifferentAccess.new(
+              {
+                post_url: results[0]['file']['url'],
+                post_thumbnail_url: results[0]['sample']['url'] || results[0]['preview']['url'],
+                post_description: results[0]['description'],
+                set_by_id: pornbot.id,
+                response_type: nil,
+                response_text: nil
+              }
+            )
           )
-        )
 
-        if result
-          puts "Set link_id=#{link.id} to #{results[0]['file']['url']}"
-          set_count += 1
-          PastLink.log_link(link).save
-          pornbot.set_count = pornbot.set_count.to_i + 1
-          pornbot.save
+          if result
+            puts "Set link_id=#{link.id} to #{results[0]['file']['url']}"
+            set_count += 1
+            PastLink.log_link(link).save
+            pornbot.set_count = pornbot.set_count.to_i + 1
+            pornbot.save
+          end
         end
+      rescue
+        puts "bad post selected, moving on"
       end
       sleep(1.second)
     end
