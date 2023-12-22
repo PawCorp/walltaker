@@ -1405,8 +1405,8 @@ section .then {
     padding: 0.2rem 0.35rem 0.25rem;
 }
 .hang a:hover {
-    border-color: var(--marked);
-    color: var(--marked);
+    filter: brightness(1.4);
+    cursor: pointer;
 }
 
 .mascot-picker {
