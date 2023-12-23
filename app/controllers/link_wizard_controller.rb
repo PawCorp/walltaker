@@ -57,6 +57,7 @@ class LinkWizardController < ApplicationController
       @link.blacklist += ' genderswap' if bl_genders.include? 'genderbends'
       @link.blacklist += ' penis' if bl_parts.include? 'cocks'
       @link.blacklist += ' pussy' if bl_parts.include? 'pussies'
+      @link.blacklist += ' breasts teats' if bl_parts.include? 'breasts'
       @link.blacklist += ' anus anal_penetration' if bl_parts.include? 'assholes'
       @link.blacklist += ' cloaca' if bl_parts.include? 'cloaca'
 

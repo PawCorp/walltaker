@@ -93,6 +93,11 @@
       </div>
 
       <div class="form__row">
+        <%= f.check_box :blacklisted_parts, {multiple: true}, :breasts, '' %>
+        <%= f.label :blacklisted_parts, 'Boobs' %>
+      </div>
+
+      <div class="form__row">
         <%= f.check_box :blacklisted_parts, {multiple: true}, :assholes, '' %>
         <%= f.label :blacklisted_parts, 'Assholes' %>
       </div>

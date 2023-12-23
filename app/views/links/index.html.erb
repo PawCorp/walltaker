@@ -5,6 +5,10 @@
     <%= link_to "Back to dashboard", root_path %>
   </div>
   <div class="right">
+    <a href="<%= spawn_link_links_path %>" title="Return to wizard" class="no-underline">
+      <ion-icon role="presentation" name="color-wand"></ion-icon>
+      Link Wizard
+    </a>
     <%= button_to "New link", new_link_path, method: :get %>
   </div>
 </div>

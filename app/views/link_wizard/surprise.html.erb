@@ -75,7 +75,6 @@
 
     <div class="button-grid">
       <% unless @link.blacklist.split(' ').include? 'pussy' %>
-        <%= button_to 'Tits!', apply_link_wizard_path(theme: 'breasts'), class: 'secondary' %>
         <%= button_to 'Cunt!', apply_link_wizard_path(theme: 'pussy'), class: 'secondary' %>
         <%= button_to 'Dominant Females!', apply_link_wizard_path(theme: 'dominant_female'), class: 'secondary' %>
         <%= button_to 'Presenting Pussy!', apply_link_wizard_path(theme: 'presenting_pussy'), class: 'secondary' %>
@@ -88,13 +87,11 @@
         <% if warren_thinks_youre_perverted %>
           <%= button_to 'Horse Pussy!', apply_link_wizard_path(theme: 'horse_pussy'), class: 'secondary' %>
           <%= button_to 'Canine Cookie!', apply_link_wizard_path(theme: 'canine_pussy'), class: 'secondary' %>
-          <%= button_to 'Girls Jacking Off!', apply_link_wizard_path(theme: 'sex_toy_in_pussy'), class: 'secondary' %>
         <% end %>
+      <% end %>
 
-        <% if warren_thinks_youre_really_perverted %>
-          <%= button_to 'HUGE Tits!', apply_link_wizard_path(theme: 'hyper_breasts'), class: 'secondary' %>
-          <%= button_to 'Udders!', apply_link_wizard_path(theme: 'udders'), class: 'secondary' %>
-        <% end %>
+      <% unless @link.blacklist.split(' ').include? 'female_focus' %>
+        <%= button_to 'Girls Jacking Off!', apply_link_wizard_path(theme: 'sex_toy_in_pussy'), class: 'secondary' %>
       <% end %>
 
       <% unless @link.blacklist.split(' ').include? 'penis' %>
@@ -116,13 +113,34 @@
         <% end %>
 
         <% if warren_thinks_youre_perverted %>
-          <%= button_to 'Udder Balls!', apply_link_wizard_path(theme: 'udder_balls'), class: 'secondary' %>
+          <% unless @link.blacklist.split(' ').include? 'breasts' %>
+            <%= button_to 'Udder Balls!', apply_link_wizard_path(theme: 'udder_balls'), class: 'secondary' %>
+          <% end %>
           <%= button_to 'Guys Jacking Off!', apply_link_wizard_path(theme: 'penile_masturbation'), class: 'secondary' %>
         <% end %>
 
         <% if warren_thinks_youre_really_perverted %>
           <%= button_to 'Cock and Ball Torture!', apply_link_wizard_path(theme: 'cock_and_ball_torture'), class: 'secondary' %>
           <%= button_to 'Sperm!', apply_link_wizard_path(theme: 'sperm_cell'), class: 'secondary' %>
+          <%= button_to 'Farm Fresh Milked Jizz!', apply_link_wizard_path(theme: 'penis_milking_machine '), class: 'secondary' %>
+        <% end %>
+      <% end %>
+
+      <% unless @link.blacklist.split(' ').include? 'breasts' %>
+        <%= button_to 'Tits!', apply_link_wizard_path(theme: 'breasts'), class: 'secondary' %>
+
+        <% if warren_thinks_youre_perverted %>
+          <%= button_to 'HUGE Tits!', apply_link_wizard_path(theme: 'hyper_breasts'), class: 'secondary' %>
+          <%= button_to 'Udders!', apply_link_wizard_path(theme: 'udders'), class: 'secondary' %>
+        <% end %>
+
+        <% if warren_thinks_youre_really_perverted %>
+          <%= button_to 'Lactation!', apply_link_wizard_path(theme: 'lactating'), class: 'secondary' %>
+          <%= button_to 'Milking!', apply_link_wizard_path(theme: 'breast_milking'), class: 'secondary' %>
+
+          <% unless @link.blacklist.split(' ').include?('male_focus') %>
+            <%= button_to 'Guys Leaking Milk Out Their Pecks!', apply_link_wizard_path(theme: 'male_lactation'), class: 'secondary' %>
+          <% end %>
         <% end %>
       <% end %>
 
