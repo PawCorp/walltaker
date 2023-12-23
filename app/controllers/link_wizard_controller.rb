@@ -63,6 +63,7 @@ class LinkWizardController < ApplicationController
 
       @link.blacklist += ' male/male' if bl_sex.include?('gay') && bl_genders.include?('male')
       @link.blacklist += ' female/female' if bl_sex.include?('gay') && bl_genders.include?('female')
+      @link.blacklist += ' female/female male/male' if bl_sex.include?('gay') && !bl_genders.include?('female') && !bl_genders.include?('male')
 
       @link.blacklist += ' male/female' if bl_sex.include?('straight')
 
@@ -105,6 +106,12 @@ class LinkWizardController < ApplicationController
 
   def set_link
     @link = Link.find(params['link_id'])
+
+    if current_user&.id != @link.user.id
+      redirect_to link_url(@link), alert: 'Not authorized.'
+      track :nefarious, :use_wizard_on_others_link
+      return
+    end
 
     unless @link
       redirect_to spawn_link_links_path

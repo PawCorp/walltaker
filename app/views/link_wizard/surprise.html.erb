@@ -230,6 +230,6 @@
       <%= button_to 'Loimu!', apply_link_wizard_path(theme: 'loimu_(character)'), class: 'secondary' %>
     </div>
 
-    <%= button_to 'I prefer to be surprised or will decide later.', next_wizard_path %>
+    <%= button_to 'I prefer to be surprised or will decide later.', next_wizard_path, method: :get %>
   </div>
 <% end %>
