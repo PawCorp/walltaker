@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/user-profile.css?x=<%= ENV['COMMIT_HASH'] %>"/>
     <link rel="stylesheet" href="/member-editor.css?x=<%= ENV['COMMIT_HASH'] %>"/>
     <link rel="stylesheet" href="/messages.css?x=<%= ENV['COMMIT_HASH'] %>"/>
+    <%= yield :stylesheets %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -80,6 +81,7 @@
 
     <main>
       <%= yield %>
+      <%= yield :content %>
     </main>
 
     <footer>

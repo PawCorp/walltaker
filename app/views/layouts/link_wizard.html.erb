@@ -1,0 +1,19 @@
+<% content_for :stylesheets do %>
+  <link rel="stylesheet" href="/wizard.css?x=<%= ENV['COMMIT_HASH'] %>"/>
+<% end %>
+<% content_for :content do %>
+  <div class="task-tools">
+    <div class="left">
+      <%= link_to "Come back later" %>
+    </div>
+  </div>
+
+  <h2 class="one-line">
+    <ion-icon name="color-wand" class="big"></ion-icon>
+    Wizard
+    <meter min="0" max="100" value="<%= @progress %>"></meter>
+  </h2>
+
+  <%= yield :step %>
+<% end %>
+<%= render template: 'layouts/application' %>

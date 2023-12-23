@@ -88,9 +88,9 @@
         <ion-icon role="presentation" name="cut"></ion-icon>
         Blacklist</strong>
       <div>
-        <%= 'No Blacklisted Tags' if link.blacklist == '' %>
+        <%= 'No Blacklisted Tags' if link.blacklist == '' || !link.blacklist %>
         <% if link.blacklist != '' %>
-          <% link.blacklist.split(/(\s|,)/).filter { |tag| tag.length > 1 }.map { |tag| tag.gsub(/^-/, '') }.each do |tag| %>
+          <% link.blacklist&.split(/(\s|,)/)&.filter { |tag| tag.length > 1 }&.map { |tag| tag.gsub(/^-/, '') }&.each do |tag| %>
             <span><%= tag %></span>
           <% end %>
         <% end %>

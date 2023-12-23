@@ -118,6 +118,7 @@
     <orderEntry type="library" scope="PROVIDED" name="websocket (v1.2.9, RVM: ruby-3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket-driver (v0.7.6, RVM: ruby-3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket-extensions (v0.1.5, RVM: ruby-3.2.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="wicked (v2.0.0, RVM: ruby-3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="xpath (v3.2.0, RVM: ruby-3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="zeitwerk (v2.6.11, RVM: ruby-3.2.0) [gem]" level="application" />
   </component>
@@ -658,7 +659,10 @@
           <RakeTaskImpl description="" fullCommand="tmp/sockets" id="tmp/sockets" />
           <RakeTaskImpl id="walltaker">
             <subtasks>
+              <RakeTaskImpl description="" fullCommand="walltaker:ki_round" id="ki_round" />
               <RakeTaskImpl description="" fullCommand="walltaker:porn_bot_round" id="porn_bot_round" />
+              <RakeTaskImpl description="" fullCommand="walltaker:taylor_round" id="taylor_round" />
+              <RakeTaskImpl description="" fullCommand="walltaker:warren_round" id="warren_round" />
             </subtasks>
           </RakeTaskImpl>
         </subtasks>

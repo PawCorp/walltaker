@@ -1,0 +1,187 @@
+<% warren_thinks_youre_perverted = current_user.pervert || @link.blacklist.split(' ').length < 4 %>
+<% warren_thinks_youre_really_perverted = current_user.pervert && @link.blacklist.split(' ').length < 4 %>
+<% warren_thinks_youre_really_really_perverted = current_user.pervert && @link.blacklist.split(' ').length < 2 %>
+<% warren_thinks_youre_boring = !current_user.pervert || @link.blacklist.split(' ').length > 8 %>
+<% warren_thinks_youre_really_boring = !current_user.pervert && @link.blacklist.split(' ').length > 8 %>
+<% warren_thinks_youre_really_really_boring = !current_user.pervert && @link.blacklist.split(' ').length > 15 %>
+
+<% content_for :step do %>
+  <div class="guide__container">
+    <div class="guide guide--centre">
+      <div class="thought thought--large">
+        We're almost done! You'll like this though, how much do you like surprises?
+      </div>
+      <%= image_tag 'mascot/WarrenSFW.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 160 %>
+    </div>
+
+    <div class="link-preview link-preview--static">
+      <%= render @link %>
+    </div>
+  </div>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/WarrenHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      Sometimes, you want people to just pick what they think you'll get off too. Other times, you might want to just
+      focus on a specific topic.
+    </p>
+  </blockquote>
+
+  <blockquote class="right">
+    <p>
+      It's a good question to ask yourself! You might have different links you use. Maybe one for "surprises", and
+      another one for a specific... kink... or... somethi-... Warren. <strong>Focus.</strong>
+    </p>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/WarrenHeadHorny.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      Yeah... &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I&nbsp;am.
+    </p>
+    <div><%= image_tag 'mascot/TaylorTits.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <blockquote class="right">
+    <p>
+      While he finishes up and probably cums in my face without asking for the 7th time today, I can tell you we're
+      talking about the <strong>theme tag</strong>! This limits surprises, but it's fun when you're just really
+      feeling... into something!
+    </p>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/WarrenHeadHorny.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      Like slutty lizard boobs.
+    </p>
+  </blockquote>
+
+  <blockquote class="right">
+    <p>
+      They're that good, <%= current_user.username.capitalize %>!~ It let you grope a bit, but you know... computers?
+      <strong>Are you interested in a theme tag? Warren left some suggestions for you.</strong>
+    </p>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <div class="accent-block choice">
+    <div class="accent-block__charm">
+      <ion-icon role="presentation" name="build"></ion-icon>
+      You choose!
+    </div>
+
+    <div class="button-grid">
+      <% unless @link.blacklist.split(' ').include? 'pussy' %>
+        <%= button_to 'Tits!', apply_link_wizard_path(theme: 'breasts'), class: 'secondary' %>
+        <%= button_to 'Cunt!', apply_link_wizard_path(theme: 'pussy'), class: 'secondary' %>
+        <%= button_to 'Dominant Females!', apply_link_wizard_path(theme: 'dominant_female'), class: 'secondary' %>
+        <%= button_to 'Presenting Pussy!', apply_link_wizard_path(theme: 'presenting_pussy'), class: 'secondary' %>
+
+        <% if warren_thinks_youre_boring %>
+          <%= button_to 'Panties!', apply_link_wizard_path(theme: 'panties'), class: 'secondary' %>
+          <%= button_to 'Camel Toe!', apply_link_wizard_path(theme: 'cameltoe'), class: 'secondary' %>
+        <% end %>
+
+        <% if warren_thinks_youre_perverted %>
+          <%= button_to 'Horse Pussy!', apply_link_wizard_path(theme: 'horse_pussy'), class: 'secondary' %>
+          <%= button_to 'Canine Cookie!', apply_link_wizard_path(theme: 'canine_pussy'), class: 'secondary' %>
+          <%= button_to 'Girls Jacking Off!', apply_link_wizard_path(theme: 'sex_toy_in_pussy'), class: 'secondary' %>
+        <% end %>
+
+        <% if warren_thinks_youre_really_perverted %>
+          <%= button_to 'HUGE Tits!', apply_link_wizard_path(theme: 'hyper_breasts'), class: 'secondary' %>
+          <%= button_to 'Udders!', apply_link_wizard_path(theme: 'udders'), class: 'secondary' %>
+        <% end %>
+      <% end %>
+
+      <% unless @link.blacklist.split(' ').include? 'penis' %>
+        <%= button_to 'Cocks!', apply_link_wizard_path(theme: 'penis'), class: 'secondary' %>
+        <%= button_to 'Balls!', apply_link_wizard_path(theme: 'balls'), class: 'secondary' %>
+        <%= button_to 'Horse Cock!', apply_link_wizard_path(theme: 'horsecock'), class: 'secondary' %>
+        <%= button_to 'Knotted Cock!', apply_link_wizard_path(theme: 'knot'), class: 'secondary' %>
+        <%= button_to 'Barbed Cock!', apply_link_wizard_path(theme: 'penile_spines'), class: 'secondary' %>
+        <%= button_to 'Dominant Males!', apply_link_wizard_path(theme: 'dominant_male'), class: 'secondary' %>
+
+        <% unless @link.blacklist.split(' ').include?('girly') %>
+          <%= button_to 'Femboys!', apply_link_wizard_path(theme: 'girly'), class: 'secondary' %>
+        <% end %>
+
+        <% if warren_thinks_youre_boring %>
+          <%= button_to 'Blowjobs!', apply_link_wizard_path(theme: 'fellatio'), class: 'secondary' %>
+          <%= button_to 'Frotting!', apply_link_wizard_path(theme: 'frottage'), class: 'secondary' %>
+          <%= button_to 'Jockstraps!', apply_link_wizard_path(theme: 'jockstrap'), class: 'secondary' %>
+        <% end %>
+
+        <% if warren_thinks_youre_perverted %>
+          <%= button_to 'Udder Balls!', apply_link_wizard_path(theme: 'udder_balls'), class: 'secondary' %>
+          <%= button_to 'Guys Jacking Off!', apply_link_wizard_path(theme: 'penile_masturbation'), class: 'secondary' %>
+        <% end %>
+
+        <% if warren_thinks_youre_really_perverted %>
+          <%= button_to 'Cock and Ball Torture!', apply_link_wizard_path(theme: 'cock_and_ball_torture'), class: 'secondary' %>
+          <%= button_to 'Sperm!', apply_link_wizard_path(theme: 'sperm_cell'), class: 'secondary' %>
+        <% end %>
+      <% end %>
+
+      <% unless @link.blacklist.split(' ').include? 'anus' %>
+        <%= button_to 'Assholes!', apply_link_wizard_path(theme: 'anus'), class: 'secondary' %>
+        <%= button_to 'Butts!', apply_link_wizard_path(theme: 'butt'), class: 'secondary' %>
+
+        <% if warren_thinks_youre_really_really_perverted %>
+          <%= button_to 'Shit!', apply_link_wizard_path(theme: 'scat'), class: 'secondary' %>
+        <% end %>
+      <% end %>
+
+      <% unless @link.blacklist.split(' ').include? 'cloaca' %>
+        <%= button_to 'Bird Hole!', apply_link_wizard_path(theme: 'cloaca'), class: 'secondary' %>
+      <% end %>
+
+      <%= button_to 'Facesitting!', apply_link_wizard_path(theme: 'facesitting'), class: 'secondary' %>
+      <%= button_to 'Leather!', apply_link_wizard_path(theme: 'leather'), class: 'secondary' %>
+      <%= button_to 'Flashing!', apply_link_wizard_path(theme: 'flashing'), class: 'secondary' %>
+      <%= button_to 'Feet!', apply_link_wizard_path(theme: 'feet'), class: 'secondary' %>
+
+      <% if warren_thinks_youre_perverted %>
+        <%= button_to 'Paws!', apply_link_wizard_path(theme: 'paws'), class: 'secondary' %>
+        <%= button_to 'Hyper!', apply_link_wizard_path(theme: 'hyper'), class: 'secondary' %>
+        <%= button_to 'Cum by the Gallon!', apply_link_wizard_path(theme: 'excessive_cum'), class: 'secondary' %>
+        <%= button_to 'Baby Making!', apply_link_wizard_path(theme: 'impregnation'), class: 'secondary' %>
+        <%= button_to 'Latex!', apply_link_wizard_path(theme: 'latex'), class: 'secondary' %>
+        <%= button_to 'Slime!', apply_link_wizard_path(theme: 'slime'), class: 'secondary' %>
+      <% end %>
+
+      <% if warren_thinks_youre_really_perverted %>
+        <%= button_to 'Diapers!', apply_link_wizard_path(theme: 'diapers'), class: 'secondary' %>
+        <%= button_to 'Piss!', apply_link_wizard_path(theme: 'urine'), class: 'secondary' %>
+        <%= button_to 'Vore!', apply_link_wizard_path(theme: 'vore'), class: 'secondary' %>
+        <%= button_to 'Feral!', apply_link_wizard_path(theme: 'feral'), class: 'secondary' %>
+      <% end %>
+
+      <% if warren_thinks_youre_really_really_perverted %>
+        <%= button_to 'Non Consensual!', apply_link_wizard_path(theme: 'rape'), class: 'secondary' %>
+        <%= button_to 'Gore!', apply_link_wizard_path(theme: 'gore'), class: 'secondary' %>
+      <% end %>
+
+      <% if warren_thinks_youre_boring %>
+        <%= button_to 'Pinups!', apply_link_wizard_path(theme: 'pinup'), class: 'secondary' %>
+        <%= button_to 'Tickling!', apply_link_wizard_path(theme: 'tickling'), class: 'secondary' %>
+      <% end %>
+
+      <% if warren_thinks_youre_really_boring %>
+        <%= button_to 'Romantic!', apply_link_wizard_path(theme: 'romantic'), class: 'secondary' %>
+        <%= button_to 'Teasing!', apply_link_wizard_path(theme: 'rating:q'), class: 'secondary' %>
+      <% end %>
+
+      <% if warren_thinks_youre_really_really_boring %>
+        <%= button_to 'Non Sexual!', apply_link_wizard_path(theme: 'rating:s'), class: 'secondary' %>
+      <% end %>
+
+      <%= button_to 'Loimu!', apply_link_wizard_path(theme: 'loimu_(character)'), class: 'secondary' %>
+    </div>
+
+    <%= button_to 'I prefer to be surprised or will decide later.', next_wizard_path %>
+  </div>
+<% end %>

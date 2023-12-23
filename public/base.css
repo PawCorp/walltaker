@@ -1384,6 +1384,10 @@ section .then {
     float: right;
 }
 
+.float-left {
+    float: left;
+}
+
 .hang {
     display: flex;
     justify-content: space-between;

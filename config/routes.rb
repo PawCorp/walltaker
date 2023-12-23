@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get 'search', to: 'search#index', as: 'search'
   get 'search/query', to: 'search#results', as: 'results'
 
+
   defaults format: :json do
     get 'api/links/:id.json', to: 'api#show_link'
     get 'api/links.json', to: 'api#all_links'
@@ -61,13 +62,24 @@ Rails.application.routes.draw do
       put :accept, to: 'friendships#accept'
     end
   end
+
   resources :links do
+    collection do
+      get 'wizard', to: 'link_wizard#spawn_link', as: :spawn_link
+    end
+
     member do
       get :walltaker, to: 'links#export'
       post 'abilities/:ability', to: 'links#toggle_ability', as: 'toggle_link_ability'
       post 'fork', to: 'links#fork', as: 'fork_link'
     end
+
     resources :comments
+    resources :link_wizard, controller: 'link_wizard', path: :wizard, as: :wizard do
+      member do
+        post :apply, to: 'link_wizard#apply', as: 'apply'
+      end
+    end
   end
   mount Blazer::Engine, at: "blazer"
 

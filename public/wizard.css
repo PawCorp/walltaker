@@ -1,0 +1,230 @@
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+@keyframes sparkle {
+    0% {
+        transform: translate(-5px, 2px) rotate(1deg);
+    }
+    20% {
+        transform: translate(5px, -4px) rotate(-1deg);
+    }
+    40% {
+        transform: translate(-7px, 6px) rotate(-2deg);
+    }
+    60% {
+        transform: translate(5px, -6px) rotate(3deg);
+    }
+    80% {
+        transform: translate(-8px, -5px) rotate(-2deg);
+    }
+    100% {
+        transform: translate(5px, -4px) rotate(-3deg);
+    }
+}
+
+@keyframes enter {
+    0% {
+        transform: scale(2.2) translateY(570px);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(0.7) translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideup {
+    0% {
+        transform: scale(0.5) translateY(170px);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+.link-preview {
+    padding: 0.5rem 0 2rem 0;
+    opacity: 0;
+    animation: 2s 3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards enter;
+}
+
+.link-preview--static, .link-preview--static > *, .link-preview--done, .link-preview--done > * {
+    opacity: 1;
+    transform: none;
+    animation: none !important;
+}
+
+.link-preview--static > * {
+    transform: perspective(800px) scale(0.9) rotate3d(0.2, 0, 0, 45deg) !important;
+}
+
+.link-preview--done {
+    position: relative;
+}
+
+.link-preview--done::before, .link-preview--done::after {
+    content: '✨';
+    display: block;
+    font-size: 9rem;
+    position: absolute;
+    mix-blend-mode: difference;
+}
+
+.link-preview--done::before {
+    top: -20px;
+    right: -20px;
+    animation: 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite alternate-reverse sparkle;
+}
+
+.link-preview--done::after {
+    bottom: -20px;
+    left: -20px;
+    animation: 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite alternate sparkle;
+}
+
+.link-preview > * {
+    animation: 2s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite alternate sparkle;
+    position: relative;
+}
+
+.link-preview > *::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    box-shadow: 0 0 45px var(--text);
+    border-radius: 3px;
+    opacity: 0.3;
+}
+
+.intro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.thought {
+    display: flex;
+    background-color: var(--text);
+    padding: 20px;
+    border-radius: 30px;
+    min-width: 40px;
+    max-width: 220px;
+    min-height: 40px;
+    margin: 20px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--bg);
+    opacity: 0;
+
+    animation: 2s 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards slideup;
+}
+
+.thought--small {
+    max-width: 190px;
+}
+.thought--large {
+    max-width: 320px;
+}
+
+.thought:before,
+.thought:after {
+    content: "";
+    background-color: var(--text);
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    z-index: -1;
+}
+
+.thought:before {
+    width: 44px;
+    height: 44px;
+    top: -12px;
+    left: 28px;
+    box-shadow: -50px 30px 0 -12px var(--text);
+}
+
+.thought:after {
+    bottom: -10px;
+    right: 26px;
+    width: 30px;
+    height: 30px;
+    box-shadow: 40px -34px 0 0 var(--text),
+    -28px -6px 0 -2px var(--text),
+    -24px 17px 0 -6px var(--text),
+    -5px 25px 0 -10px var(--text);
+}
+
+.choice {
+    display: flex;
+    gap: 0.25rem;
+    flex-direction: column;
+    align-items: center;
+}
+
+.choice h3 {
+    color: var(--accent);
+}
+
+.choice .form__row {
+    max-width: 320px;
+    align-self: center;
+    margin: 6px 0;
+}
+
+.choice > .accent-block__charm {
+    align-self: flex-start;
+}
+
+.choice form.full-width {
+    width: 100%;
+    display: contents;
+}
+
+.choice form textarea {
+    width: 100%;
+    height: 25ex;
+}
+
+.guide__container {
+    position: relative;
+    padding-top: 130px;
+}
+
+.guide {
+    position: absolute;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.guide--theme { top: -30px }
+.guide--blacklist { bottom: 65px; right: 90px }
+.guide--centre { top: calc(50% - 40px); left: 50%; transform: translate(-50%, -50%) }
+
+main > blockquote {
+    display: flex;
+    gap: 1rem;
+    border-left: none;
+    margin: 0.25rem 0.5rem;
+    color: var(--text);
+    font-style: normal;
+}
+
+main > blockquote.right {
+    text-align: right;
+}
+
+main > blockquote > p, span {
+    flex: 1 1 100%;
+    display: block;
+}

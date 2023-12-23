@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_20_050547) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_22_192205) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -231,6 +231,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_20_050547) do
     t.datetime "live_client_started_at", precision: nil
     t.string "custom_url"
     t.bigint "forked_from_id"
+    t.boolean "unfinished", default: false
     t.index ["forked_from_id"], name: "index_links_on_forked_from_id"
     t.index ["user_id"], name: "index_links_on_user_id"
   end
