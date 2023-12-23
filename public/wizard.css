@@ -3,6 +3,11 @@ body {
     overflow-x: hidden;
 }
 
+h2.one-line {
+    display: flex;
+    justify-content: space-between;
+}
+
 @keyframes sparkle {
     0% {
         transform: translate(-5px, 2px) rotate(1deg);
@@ -60,6 +65,11 @@ body {
 
 .link-preview--static > * {
     transform: perspective(800px) scale(0.9) rotate3d(0.2, 0, 0, 45deg) !important;
+}
+
+.link-preview--static .link--blacklist {
+    max-height: 120px;
+    overflow-y: auto;
 }
 
 .link-preview--done {

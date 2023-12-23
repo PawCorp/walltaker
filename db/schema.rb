@@ -231,7 +231,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_22_192205) do
     t.datetime "live_client_started_at", precision: nil
     t.string "custom_url"
     t.bigint "forked_from_id"
-    t.boolean "unfinished", default: false
+    t.string "wizard_page"
     t.index ["forked_from_id"], name: "index_links_on_forked_from_id"
     t.index ["user_id"], name: "index_links_on_user_id"
   end

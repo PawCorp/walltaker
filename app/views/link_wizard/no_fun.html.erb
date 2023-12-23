@@ -73,6 +73,6 @@
     </div>
 
     <%= button_to 'Limit to just friends, please!', apply_link_wizard_path(friends_only: true), class: 'secondary' %>
-    <%= button_to 'Anons on the internet for me, please!', next_wizard_path, method: :get %>
+    <%= button_to 'Anons on the internet for me, please!', apply_link_wizard_path(friends_only: false) %>
   </div>
 <% end %>

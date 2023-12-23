@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
   end
 
   def make_blacklist(link)
-    link.blacklist.downcase.gsub(/[^a-z_\(\)\d\: ]/, '')
+    link&.blacklist&.downcase&.gsub(/[^a-z_\(\)\d\: ]/, '') || ''
   end
 
   def get_search_base(link)

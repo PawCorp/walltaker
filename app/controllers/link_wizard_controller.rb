@@ -72,6 +72,9 @@ class LinkWizardController < ApplicationController
       @link.friends_only = params[:friends_only] == 'true'
     end
 
+    @link.wizard_page = next_step unless step === :no_fun
+    @link.wizard_page = nil if step === :no_fun
+
     @link.save
     redirect_to next_wizard_path
   end
@@ -79,7 +82,7 @@ class LinkWizardController < ApplicationController
   def spawn_link
     link = Link.new
     link.user = current_user
-    link.unfinished = true
+    link.wizard_page = :intro
     link.never_expires = true
     link.min_score = 0
     link.save

@@ -22,12 +22,18 @@
       <a href="#" class="no-underline">
         <ion-icon data-link-target="shareIcon" role="presentation" name="share-outline"></ion-icon>
         <ion-icon data-link-target="checkmarkIcon" role="presentation" name="checkmark" style="display: none"></ion-icon>
-        <span data-link-target="copy">Copy URL</span>
+        <span data-link-target="copy">Copy</span>
       </a>
       <a href="<%= edit_link_path(@link) %>" title="Edit this link" class="no-underline">
         <ion-icon role="presentation" name="build"></ion-icon>
         Edit
       </a>
+      <% if @link.wizard_page != nil %>
+        <a href="<%= link_wizard_path(id: @link.wizard_page, link_id: @link.id) %>" title="Return to wizard" class="no-underline">
+          <ion-icon role="presentation" name="color-wand"></ion-icon>
+          Finish Wizard
+        </a>
+      <% end %>
       <%= button_tag "Delete", data: { action: 'click->link#confirm' } %>
     </div>
   </div>
@@ -244,7 +250,8 @@
     </div>
     <div data-accordion-target="content">
       <p>
-        Links that are forks of this link will receive wallpaper changes that are set here; but only if their separete blacklists allow it. You may receive responses from anyone of the following:
+        Links that are forks of this link will receive wallpaper changes that are set here; but only if their separete
+        blacklists allow it. You may receive responses from anyone of the following:
       </p>
       <div class="forks-list">
         <% @link.forks.each do |fork| %>

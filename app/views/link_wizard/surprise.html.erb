@@ -179,6 +179,36 @@
         <%= button_to 'Non Sexual!', apply_link_wizard_path(theme: 'rating:s'), class: 'secondary' %>
       <% end %>
 
+      <% if @link.terms.downcase.include? 'goon' %>
+        <%= button_to 'Gooning!', apply_link_wizard_path(theme: 'gooning'), class: 'secondary' %>
+        <%= button_to 'Group Masturbation!', apply_link_wizard_path(theme: 'group_masturbation'), class: 'secondary' %>
+        <%= button_to 'Hypno Eyes!', apply_link_wizard_path(theme: 'hypnotic_eyes'), class: 'secondary' %>
+      <% end %>
+
+      <% if @link.terms.downcase.include?('fox') || current_user.username.downcase.include?('fox') %>
+        <%= button_to 'Foxes!', apply_link_wizard_path(theme: 'fox'), class: 'secondary' %>
+      <% end %>
+
+      <% if @link.terms.downcase.include?('dog') || current_user.username.downcase.include?('dog') || @link.terms.downcase.include?('pup') || current_user.username.downcase.include?('pup') %>
+        <%= button_to 'Dogs!', apply_link_wizard_path(theme: 'canine'), class: 'secondary' %>
+      <% end %>
+
+      <% if @link.terms.downcase.include?('cat') || current_user.username.downcase.include?('cat') || @link.terms.downcase.include?('kitty') || current_user.username.downcase.include?('kitty') %>
+        <%= button_to 'Cats!', apply_link_wizard_path(theme: 'feline'), class: 'secondary' %>
+      <% end %>
+
+      <% if @link.terms.downcase.include?('horse') || current_user.username.downcase.include?('horse') || @link.terms.downcase.include?('stud') || current_user.username.downcase.include?('stud') %>
+        <%= button_to 'Horses!', apply_link_wizard_path(theme: 'equine'), class: 'secondary' %>
+      <% end %>
+
+      <% if @link.terms.downcase.include?('wolf') || current_user.username.downcase.include?('wolf') %>
+        <%= button_to 'Wolves!', apply_link_wizard_path(theme: 'wolf'), class: 'secondary' %>
+      <% end %>
+
+      <% if @link.terms.downcase.include?('slut') || current_user.username.downcase.include?('slut') %>
+        <%= button_to 'Public Use!', apply_link_wizard_path(theme: 'public_use'), class: 'secondary' %>
+      <% end %>
+
       <%= button_to 'Loimu!', apply_link_wizard_path(theme: 'loimu_(character)'), class: 'secondary' %>
     </div>
 
