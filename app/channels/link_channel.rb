@@ -33,8 +33,6 @@ class LinkChannel < ApplicationCable::Channel
         connection.watched_link = link
         link.live_client_started_at = Time.now
         link.save
-
-        link
       end
     end
   end
