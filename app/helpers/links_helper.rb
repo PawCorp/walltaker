@@ -24,6 +24,7 @@ module LinksHelper
     return :swift if link_agent.include? 'CFNetwork/'
     return :android_changer if link_agent.include? 'Walltaker-Changer/'
     return :jberliner if link_agent.include? 'JBerliner'
+    return :chewtoy if link_agent.include? 'WalltakerEngine-chewtoy/'
 
     :unknown
   end
