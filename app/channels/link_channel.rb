@@ -38,4 +38,20 @@ class LinkChannel < ApplicationCable::Channel
       end
     end
   end
+
+  def announce_client
+    if params[:id].present? && params[:client].present?
+      link = Link.find(params[:id])
+      if link
+        begin
+        link.last_ping_user_agent = params[:client]
+        link.save
+
+        link
+        rescue
+          {success: false, why: 'bad client name'}
+        end
+      end
+    end
+  end
 end

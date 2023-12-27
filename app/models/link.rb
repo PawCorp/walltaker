@@ -38,7 +38,7 @@ class Link < ApplicationRecord
   }
 
   def is_online?
-    is_ios = last_ping_user_agent.match(/widgetExtension/)
+    is_ios = last_ping_user_agent&.match(/widgetExtension/) || false
 
     last_ping_online = last_ping > Time.now - 20.minutes if is_ios
     last_ping_online = last_ping > Time.now - 1.minute unless is_ios
