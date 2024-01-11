@@ -815,6 +815,10 @@ a.small:hover {
     margin-bottom: 1rem;
 }
 
+.accent-block.only_charm {
+    padding: 1.8rem 1.5rem;
+}
+
 .accent-block__charm {
     color: var(--border);
     display: flex;

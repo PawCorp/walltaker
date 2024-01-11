@@ -172,4 +172,11 @@ class ApplicationController < ActionController::Base
   def authorize_with_admin
     redirect_to '/', alert: 'Not authorized' unless current_user && current_user.admin
   end
+
+  def authorize_with_admin_or_lizard
+    redirect_to '/', alert: 'Not authorized' unless current_user
+
+    is_lizard = %w[PornLizardWarren PornLizardKi PornLizardTaylor].include?(current_user.username)
+    redirect_to '/', alert: 'Not authorized' unless current_user && (current_user.admin || is_lizard)
+  end
 end

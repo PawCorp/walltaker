@@ -29,7 +29,6 @@ Rails.application.routes.draw do
   get 'search', to: 'search#index', as: 'search'
   get 'search/query', to: 'search#results', as: 'results'
 
-
   defaults format: :json do
     get 'api/links/:id.json', to: 'api#show_link'
     get 'api/links.json', to: 'api#all_links'
@@ -86,14 +85,21 @@ Rails.application.routes.draw do
   scope path: :mod_tools, as: 'mod_tools' do
     get '/', to: 'mod_tools#index', as: 'index'
 
-    scope path: :passwords, as:'passwords' do
+    scope path: :passwords, as: 'passwords' do
       get '/', to: 'mod_tools#show_password_reset', as: 'index'
       post 'update', to: 'mod_tools#update_password_reset', as: 'update'
     end
 
-    scope path: :users, as:'users' do
+    scope path: :users, as: 'users' do
       get '/', to: 'mod_tools#show_user', as: 'index'
       post 'update', to: 'mod_tools#update_user', as: 'update'
     end
+  end
+
+  scope path: :lizard_tools, as: 'lizard_tools', controller: 'lizard_tools' do
+    get '/', action: 'index', as: 'index'
+    get 'warren', as: 'warren'
+    get 'ki', as: 'ki'
+    get 'talyor', as: 'taylor'
   end
 end
