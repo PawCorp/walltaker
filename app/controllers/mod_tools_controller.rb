@@ -15,10 +15,15 @@ class ModToolsController < ApplicationController
     end
 
     # Prepared statement, rails escapes and wraps template var here.
-    matches = User.where('lower(email) LIKE ?', "%#{email.downcase}%").all
+    matches = User.where('lower(email) LIKE ?', "%#{email.downcase}%").all if params['commit'] == 'Try to generate a reset link (case insensitive)'
+    matches = User.where('email LIKE ?', "%#{email}%").all if params['commit'] == 'Try to generate a reset link (case sensitive)'
 
     if matches.length > 1
-      return redirect_to mod_tools_passwords_index_path(fail: 'Matches more than 1 account, can they be more specific?', email:)
+      if matches.length == 2 && (matches[0].email.downcase === matches[1].email.downcase)
+        return redirect_to mod_tools_passwords_index_path(fail: "Found 2 accounts only differing by capitalization, #{matches[0].email} and #{matches[1].email}. Use case sensitive search.", email:)
+      else
+        return redirect_to mod_tools_passwords_index_path(fail: 'Matches more than 1 account, can they be more specific?', email:)
+      end
     end
 
     if !matches || matches.length == 0
