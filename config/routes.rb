@@ -106,6 +106,6 @@ Rails.application.routes.draw do
     get '/', action: 'index', as: 'index'
     get 'warren', as: 'warren'
     get 'ki', as: 'ki'
-    get 'talyor', as: 'taylor'
+    get 'taylor', as: 'taylor'
   end
 end

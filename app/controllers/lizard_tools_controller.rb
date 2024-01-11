@@ -15,7 +15,7 @@ class LizardToolsController < ApplicationController
     render 'lizard_browse'
   end
 
-  def talyor
+  def taylor
     @links = Link.is_online.joins(:user).where(user: {mascot: 'taylor'}).group_by {|link| !!link.user.pervert}
     @name = 'Taylor'
     render 'lizard_browse'
