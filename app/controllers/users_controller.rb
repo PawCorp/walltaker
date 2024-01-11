@@ -42,6 +42,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       track :regular, :signed_up_and_first_log_in
+      ahoy.authenticate(@user)
       redirect_to url_for(controller: :links, action: :index), notice: 'Thank you for signing up!'
     else
       track :error, :failed_to_sign_up, errors: @user.errors
