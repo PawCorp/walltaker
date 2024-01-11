@@ -94,6 +94,12 @@ Rails.application.routes.draw do
       get '/', to: 'mod_tools#show_user', as: 'index'
       post 'update', to: 'mod_tools#update_user', as: 'update'
     end
+
+    scope path: :quarantine, as: 'quarantine' do
+      get '/', to: 'mod_tools#show_quarantine', as: 'index'
+      post 'update/:user', to: 'mod_tools#update_quarantine', as: 'update'
+      post 'ban/:user', to: 'mod_tools#update_ipban', as: 'ipban'
+    end
   end
 
   scope path: :lizard_tools, as: 'lizard_tools', controller: 'lizard_tools' do

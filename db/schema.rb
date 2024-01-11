@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_22_192205) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_11_063054) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -104,6 +104,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_22_192205) do
     t.datetime "started_at"
     t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
     t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
+  end
+
+  create_table "banned_ips", force: :cascade do |t|
+    t.string "ip_address"
+    t.bigint "banned_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ip_address"], name: "index_banned_ips_on_ip_address"
   end
 
   create_table "blazer_audits", force: :cascade do |t|
@@ -304,6 +312,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_22_192205) do
     t.string "password_reset_token"
     t.string "mascot"
     t.boolean "pervert"
+    t.boolean "quarantined", default: false
     t.index ["email"], name: "unique_emails", unique: true
     t.index ["set_count"], name: "index_users_on_set_count", order: :desc
     t.index ["username"], name: "unique_usernames", unique: true
@@ -312,6 +321,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_22_192205) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "banned_ips", "users", column: "banned_by_id"
   add_foreign_key "comments", "links"
   add_foreign_key "comments", "users"
   add_foreign_key "friendships", "users", column: "receiver_id"

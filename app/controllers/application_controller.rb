@@ -167,6 +167,8 @@ class ApplicationController < ActionController::Base
 
   def authorize
     redirect_to new_session_url, alert: 'Not authorized' if current_user.nil?
+
+    redirect_to new_session_url, alert: 'Error 500, service/E621 down?' if current_visit&.banned_ip.present?
   end
 
   def authorize_with_admin

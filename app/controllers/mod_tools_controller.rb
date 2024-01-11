@@ -47,13 +47,13 @@ class ModToolsController < ApplicationController
       email = params.permit(:email)['email']
       user = User.where('lower(email) LIKE ?', "%#{email.downcase}%").first
 
-      render partial: 'mod_tools/pick_user_form', locals: { user: }
+      render 'show_user', locals: { user: }
     end
   end
 
   def update_user
     begin
-      safe_params = params.require(:user).permit(:id, :email, :username, :details, :api_key, :set_count, :viewing_link, :password_reset_token)
+      safe_params = params.require(:user).permit(:id, :email, :username, :details, :api_key, :set_count, :viewing_link, :password_reset_token, :quarantined, :pervert, :mascot)
       user = User.find(safe_params['id'])
 
       if user
@@ -65,5 +65,39 @@ class ModToolsController < ApplicationController
     end
 
     render turbo_stream: turbo_stream.replace("mod_tools_edit_user_form", partial: 'mod_tools/edit_user_form', locals: { fail: 'that user does not exist' })
+  end
+
+  def show_quarantine
+    @users = User.where(admin: false).order(id: :desc).limit 100
+  end
+
+  def update_quarantine
+    user = User.find(params['user'])
+
+    unless user
+      redirect_to mod_tools_quarantine_index_path, alert: 'Failed to find that user.'
+      return
+    end
+
+    user.quarantined = user.quarantined ? false : true
+    result = user.save
+
+    redirect_to mod_tools_quarantine_index_path(anchor: helpers.dom_id(user))
+  end
+
+  def update_ipban
+    user = User.find(params['user'])
+
+    unless user
+      redirect_to mod_tools_quarantine_index_path, alert: 'Failed to find that user.'
+      return
+    end
+
+    ips = user.ahoy_visits.all.map {|visit| visit.ip}
+    ips.each do |ip|
+      BannedIp.create(ip_address: ip, banned_by: current_user)
+    end
+
+    redirect_to mod_tools_quarantine_index_path(anchor: helpers.dom_id(user))
   end
 end

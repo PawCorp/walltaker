@@ -118,6 +118,10 @@ class LinksController < ApplicationController
                                   track :regular, :update_link_details
                                   did_save_successfully
                                 else
+                                  if current_user&.quarantined || current_visit&.banned_ip.present?
+                                    redirect_to new_session_url, alert: 'Error 500, service/E621 down?'
+                                    return
+                                  end
                                   assign_e621_post_to_self e621_post, @link
                                 end
 

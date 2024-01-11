@@ -4,6 +4,10 @@ class PornSearchController < ApplicationController
   end
 
   def search
+    if current_visit&.banned_ip.present?
+      return
+    end
+
     @page_number = porn_search_params[:page_number].to_i
     @page_number = 1 if @page_number == 0
 

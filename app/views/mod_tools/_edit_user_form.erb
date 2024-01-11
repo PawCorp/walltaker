@@ -3,7 +3,11 @@
     <% user.class.columns.each do |col| %>
       <div>
         <%= f.label col.name.to_sym %>
-        <%= f.text_field col.name.to_sym, value: user.send(col.name) %>
+        <% if user.send(col.name).is_a?(TrueClass) || user.send(col.name).is_a?(FalseClass) %>
+          <%= f.check_box col.name.to_sym, value: user.send(col.name) %>
+        <% else %>
+          <%= f.text_field col.name.to_sym, value: user.send(col.name) %>
+        <% end %>
       </div>
     <% end %>
     <%= f.submit %>

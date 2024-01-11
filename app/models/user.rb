@@ -2,7 +2,9 @@ class User < ApplicationRecord
   include ActiveModel::SecurePassword
   has_secure_password
   has_many :link
+  has_many :past_links, foreign_key: :set_by_id
   has_many :notifications
+  has_many :ahoy_visits, :class_name => 'Ahoy::Visit'
   belongs_to :viewing_link, foreign_key: :viewing_link_id, class_name: 'Link', optional: true
 
   validates_uniqueness_of :username
