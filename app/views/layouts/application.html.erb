@@ -74,12 +74,14 @@
   <% end %>
 </div>
 
-<div class="hang">
-  <a href="https://discord.gg/s4z9GfwuKw" target="_blank">
-    <ion-icon name="logo-discord"></ion-icon>
-    Join our Discord</a>
-  <%= render 'layouts/mascot_picker' if current_user %>
-</div>
+<% if current_user %>
+  <div class="hang">
+    <a href="https://discord.gg/s4z9GfwuKw" target="_blank">
+      <ion-icon name="logo-discord"></ion-icon>
+      Join our Discord</a>
+    <%= render 'layouts/mascot_picker' if current_user %>
+  </div>
+<% end %>
 
 <main>
   <%= yield %>
