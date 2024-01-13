@@ -1,5 +1,5 @@
 import {Controller} from "@hotwired/stimulus"
-import {WithModal} from '../modules/Modal.js'
+import {WithModal} from 'modules/Modal.js'
 
 function copy(str) {
     if (navigator?.clipboard?.writeText) {

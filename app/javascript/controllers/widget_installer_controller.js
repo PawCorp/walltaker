@@ -1,5 +1,5 @@
 import {Controller} from "@hotwired/stimulus"
-import {WithModal} from '../modules/Modal.js'
+import {WithModal} from 'modules/Modal.js'
 
 class WidgetInstallerController extends Controller {
     connect () {
