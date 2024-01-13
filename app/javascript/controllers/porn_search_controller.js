@@ -1,5 +1,5 @@
 import {Controller} from "@hotwired/stimulus"
-import {WithModal} from '../modules/Modal'
+import {WithModal} from '../modules/Modal.js'
 
 class PornSearchController extends Controller {
     static targets = ['thumbnail']
