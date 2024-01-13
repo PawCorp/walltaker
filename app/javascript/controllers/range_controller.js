@@ -1,5 +1,5 @@
 import {Controller} from "@hotwired/stimulus"
-import {WithModal} from 'modules/Modal.js'
+import {WithModal} from 'modules/modal'
 
 export default class RangeController extends Controller {
     static targets = ['input', 'value']
