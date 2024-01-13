@@ -22,6 +22,7 @@ module Walltaker
     Rails.application.config.hosts << "walltaker.joi.how"
     Rails.application.config.hosts << "10.244.14.67"
     Rails.application.config.hosts << "walltaker-master-39nrv.ondigitalocean.app"
+    Rails.application.config.hosts << "walltaker-7e4cf22c7c3d.herokuapp.com"
 
   end
 end
