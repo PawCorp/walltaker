@@ -1,29 +1,31 @@
 class ApplicationController < ActionController::Base
   def get_tag_results(tag_string, after, before, link, limit = 15)
-    Rails.cache.fetch("v1/tagresults/#{tag_string}", expires_in: 45.minutes) do
-      if link.nil?
-        append_to_tags = ''
-        padded_tag_string = tag_string
-        link_can_show_videos = true
-      else
-        link_can_show_videos = link.check_ability 'can_show_videos'
+    if link.nil?
+      append_to_tags = ''
+      padded_tag_string = tag_string
+      link_can_show_videos = true
+    else
+      link_can_show_videos = link.check_ability 'can_show_videos'
 
-        sanitized_blacklist = make_blacklist(link)
-        append_to_tags = make_tag_suffix(link, sanitized_blacklist)
+      sanitized_blacklist = make_blacklist(link)
+      append_to_tags = make_tag_suffix(link, sanitized_blacklist)
 
-        padded_tag_string = tag_string
-      end
+      padded_tag_string = tag_string
+    end
 
-      unless append_to_tags.nil? || append_to_tags.empty?
-        padded_tag_string += " #{append_to_tags.to_s}"
-      end
-      tags = CGI.escape padded_tag_string
-      url = "https://e621.net/posts.json?tags=#{tags}&limit=15"
+    unless append_to_tags.nil? || append_to_tags.empty?
+      padded_tag_string += " #{append_to_tags.to_s}"
+    end
+
+    tags = CGI.escape padded_tag_string
+
+    Rails.cache.fetch("v1/tagresults/#{tags}/#{after}/#{before}/#{limit}/#{link_can_show_videos}", expires_in: 45.minutes) do
+      url = "https://e621.net/posts.json?tags=#{tags}"
       after_id = after.gsub(/\D/, '') if after
       url = "#{url}&page=b#{after_id}" if after_id
       before_id = before.gsub(/\D/, '') if before
       url = "#{url}&page=a#{before_id}" if before_id
-      url = "#{url}&limit=#{limit}" if limit
+      url = "#{url}&limit=#{limit}"
       response = Excon.get(url, headers: { 'User-Agent': 'walltaker.joi.how (by ailurus on e621)' })
       if response.status != 200
         track :error, :e621_posts_api_fail, response: response
