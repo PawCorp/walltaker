@@ -214,4 +214,12 @@ namespace :walltaker do
 
     puts "Done! Set #{set_count} links in the end"
   end
+
+  task all_bots: :environment do
+    Rake::Task["walltaker:porn_bot_round"].invoke
+    Rake::Task["walltaker:ki_round"].invoke
+    Rake::Task["walltaker:warren_round"].invoke
+    Rake::Task["walltaker:taylor_round"].invoke
+  end
 end
+
