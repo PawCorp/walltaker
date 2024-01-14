@@ -240,6 +240,10 @@ GEM
       rbs (>= 1)
     rdoc (6.5.0)
       psych (>= 4.0.0)
+    redis (5.0.8)
+      redis-client (>= 0.17.0)
+    redis-client (0.19.1)
+      connection_pool
     regexp_parser (2.8.1)
     reline (0.3.8)
       io-console (~> 0.5)
@@ -322,6 +326,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 7.1.2, >= 7.0.2.2)
   rbs_rails
+  redis
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)
