@@ -1,46 +1,48 @@
 class ApplicationController < ActionController::Base
   def get_tag_results(tag_string, after, before, link, limit = 15)
-    if link.nil?
-      append_to_tags = ''
-      padded_tag_string = tag_string
-      link_can_show_videos = true
-    else
-      link_can_show_videos = link.check_ability 'can_show_videos'
+    Rails.cache.fetch("v1/tagresults/#{tag_string}", expires_in: 45.minutes) do
+      if link.nil?
+        append_to_tags = ''
+        padded_tag_string = tag_string
+        link_can_show_videos = true
+      else
+        link_can_show_videos = link.check_ability 'can_show_videos'
 
-      sanitized_blacklist = make_blacklist(link)
-      append_to_tags = make_tag_suffix(link, sanitized_blacklist)
+        sanitized_blacklist = make_blacklist(link)
+        append_to_tags = make_tag_suffix(link, sanitized_blacklist)
 
-      padded_tag_string = tag_string
-    end
+        padded_tag_string = tag_string
+      end
 
-    unless append_to_tags.nil? || append_to_tags.empty?
-      padded_tag_string += " #{append_to_tags.to_s}"
-    end
-    tags = CGI.escape padded_tag_string
-    url = "https://e621.net/posts.json?tags=#{tags}&limit=15"
-    after_id = after.gsub(/\D/, '') if after
-    url = "#{url}&page=b#{after_id}" if after_id
-    before_id = before.gsub(/\D/, '') if before
-    url = "#{url}&page=a#{before_id}" if before_id
-    url = "#{url}&limit=#{limit}" if limit
-    response = Excon.get(url, headers: { 'User-Agent': 'walltaker.joi.how (by ailurus on e621)' })
-    if response.status != 200
-      track :error, :e621_posts_api_fail, response: response
-      return nil
-    end
+      unless append_to_tags.nil? || append_to_tags.empty?
+        padded_tag_string += " #{append_to_tags.to_s}"
+      end
+      tags = CGI.escape padded_tag_string
+      url = "https://e621.net/posts.json?tags=#{tags}&limit=15"
+      after_id = after.gsub(/\D/, '') if after
+      url = "#{url}&page=b#{after_id}" if after_id
+      before_id = before.gsub(/\D/, '') if before
+      url = "#{url}&page=a#{before_id}" if before_id
+      url = "#{url}&limit=#{limit}" if limit
+      response = Excon.get(url, headers: { 'User-Agent': 'walltaker.joi.how (by ailurus on e621)' })
+      if response.status != 200
+        track :error, :e621_posts_api_fail, response: response
+        return nil
+      end
 
-    results = JSON.parse(response.body)['posts']
+      results = JSON.parse(response.body)['posts']
 
-    if results.present? && results.class == Array
-      unless link_can_show_videos
-        results.filter do |post|
-          %w[png jpg bmp webp].include? post['file']['ext']
+      if results.present? && results.class == Array
+        unless link_can_show_videos
+          results.filter do |post|
+            %w[png jpg bmp webp].include? post['file']['ext']
+          end
+        else
+          results
         end
       else
-        results
+        []
       end
-    else
-      []
     end
   end
 
