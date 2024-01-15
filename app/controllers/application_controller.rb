@@ -20,9 +20,9 @@ class ApplicationController < ActionController::Base
     tags = CGI.escape padded_tag_string
 
     key = "v1/tagresults/#{tags}/#{after}/#{before}/#{limit}/#{link_can_show_videos}"
-    results = Rails.cache.read(key)
+    cache_hit = Rails.cache.read(key)
 
-    if results.nil?
+    if cache_hit.nil?
       url = "https://e621.net/posts.json?tags=#{tags}"
       after_id = after.gsub(/\D/, '') if after
       url = "#{url}&page=b#{after_id}" if after_id
@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
         end
         
         unless link_can_show_videos
-          results = results.filter do |post|
+          results.filter do |post|
             %w[png jpg bmp webp].include? post['file']['ext']
           end
         else
@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
         []
       end
     else
-      results
+      cache_hit
     end
   end
 
