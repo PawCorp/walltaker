@@ -22,7 +22,9 @@ class ApplicationController < ActionController::Base
     key = "v1/tagresults/#{tags}/#{after}/#{before}/#{limit}/#{link_can_show_videos}"
     cache_hit = Rails.cache.read(key)
 
-    if cache_hit.nil?
+    unless cache_hit.nil?
+      cache_hit
+    else
       url = "https://e621.net/posts.json?tags=#{tags}"
       after_id = after.gsub(/\D/, '') if after
       url = "#{url}&page=b#{after_id}" if after_id
@@ -36,7 +38,6 @@ class ApplicationController < ActionController::Base
       end
   
       results = JSON.parse(response.body)['posts']
-  
       if results.present? && results.class == Array
         if /order:random/i !~ padded_tag_string
           Rails.cache.write(key, results, expires_in: 45.minutes)
@@ -52,8 +53,6 @@ class ApplicationController < ActionController::Base
       else
         []
       end
-    else
-      cache_hit
     end
   end
 
