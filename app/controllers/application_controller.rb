@@ -38,27 +38,23 @@ class ApplicationController < ActionController::Base
       results = JSON.parse(response.body)['posts']
   
       if results.present? && results.class == Array
-        if /order:random/i !=~ padded_tag_string
-          Ruby.cache.write(key, results, expires_in: 45.minutes)
+        if /order:random/i !~ padded_tag_string
+          Rails.cache.write(key, results, expires_in: 45.minutes)
         end
         
         unless link_can_show_videos
           results = results.filter do |post|
             %w[png jpg bmp webp].include? post['file']['ext']
           end
+        else
+          results
         end
-
-        if /order:random/i !~ padded_tag_string
-          Rails.cache.write(key, results, expires_in: 45.minutes)
-        end
-
-        results
       else
         []
       end
+    else
+      results
     end
-
-    results
   end
 
   helper_method :get_tag_results
