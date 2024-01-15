@@ -57,6 +57,8 @@ class ApplicationController < ActionController::Base
         []
       end
     end
+
+    results
   end
 
   helper_method :get_tag_results
