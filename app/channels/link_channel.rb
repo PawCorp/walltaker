@@ -29,10 +29,11 @@ class LinkChannel < ApplicationCable::Channel
         if connection&.watched_link
           connection.watched_link.live_client_started_at = nil
           connection.watched_link.save
+        else
+          connection.watched_link = link
+          link.live_client_started_at = Time.now
+          link.save
         end
-        connection.watched_link = link
-        link.live_client_started_at = Time.now
-        link.save
       end
     end
   end
