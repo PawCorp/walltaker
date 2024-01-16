@@ -39,7 +39,9 @@ class ApplicationController < ActionController::Base
   
       results = JSON.parse(response.body)['posts']
       if results.present? && results.class == Array
-        if /order:random/i !~ padded_tag_string
+        if /order:random/i =~ padded_tag_string
+          Rails.cache.write(key, results, expires_in: 1.minute)
+        else
           Rails.cache.write(key, results, expires_in: 45.minutes)
         end
         
