@@ -29,7 +29,7 @@
           <%= link_to "https://e621.net/posts/#{event.properties['attempted_post_id']}", "https://e621.net/posts/#{event.properties['attempted_post_id']}", target: '_blank' %>
         <% end %>
         <% if event.properties.key? 'past_link_id' %>
-          <%= image_tag PastLink.find(event.properties['past_link_id'])&.post_thumbnail_url, width: 320 %>
+          <%= image_tag PastLink.find_by_id(event.properties['past_link_id'])&.post_thumbnail_url, width: 320 %>
         <% end %>
         <code><%= event.properties %></code>
       </td>
