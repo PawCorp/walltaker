@@ -92,6 +92,7 @@ Rails.application.routes.draw do
 
     scope path: :users, as: 'users' do
       get '/', to: 'mod_tools#show_user', as: 'index'
+      get '/assume/:user', to: 'mod_tools#assume_user', as: 'assume'
       post 'update', to: 'mod_tools#update_user', as: 'update'
     end
 

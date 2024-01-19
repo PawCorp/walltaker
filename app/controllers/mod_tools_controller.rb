@@ -51,6 +51,20 @@ class ModToolsController < ApplicationController
     end
   end
 
+  def assume_user
+    user = User.find(params['user'])
+
+    unless user
+      redirect_to mod_tools_users_index_url, alert: 'Failed to assume that user.'
+      return
+    end
+
+    session[:user_id] = user.id
+    cookies.signed[:permanent_session_id] = nil
+
+    redirect_to root_path
+  end
+
   def update_user
     begin
       safe_params = params.require(:user).permit(:id, :email, :username, :details, :api_key, :set_count, :viewing_link, :password_reset_token, :quarantined, :pervert, :mascot)

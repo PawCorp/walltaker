@@ -1,4 +1,5 @@
 <%= turbo_frame_tag :mod_tools_edit_user_form do %>
+  <%= link_to "Log in as #{user.username}", mod_tools_users_assume_path(user), target: '_top' %>
   <%= form_with model: user, method: :post, url: mod_tools_users_update_path do |f| %>
     <% user.class.columns.each do |col| %>
       <div>
