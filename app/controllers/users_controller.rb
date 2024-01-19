@@ -64,7 +64,7 @@ class UsersController < ApplicationController
       PasswordResetMailer.reset_password(user).deliver
       redirect_to login_path, notice: 'A password reset email has been sent to that user'
     rescue
-      track :nefarious, :failed_to_reset_password, tried_email: params['email']
+      track :nefarious, :failed_to_reset_password, tried_email: params['email'], exception: $!
       redirect_to forgor_path, alert: 'User was not found with that email'
     end
   end
