@@ -61,8 +61,8 @@ class UsersController < ApplicationController
         throw :nefarious
       end
 
-      #PasswordResetMailer.reset_password(user).deliver
-      redirect_to login_path, notice: 'Contact Gray! The email delivery service is down.'
+      PasswordResetMailer.reset_password(user).deliver
+      redirect_to login_path, notice: 'A password reset email has been sent to that user'
     rescue
       track :nefarious, :failed_to_reset_password, tried_email: params['email']
       redirect_to forgor_path, alert: 'User was not found with that email'
