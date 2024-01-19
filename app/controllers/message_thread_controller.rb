@@ -11,6 +11,10 @@ class MessageThreadController < ApplicationController
   end
 
   def send_message
+    if current_visit&.banned_ip.present?
+      return
+    end
+
     message = params['message']
     if @message_thread && (message['content'].class == String) && (message['content'].length > 0)
       @new_message = @message_thread.messages.new

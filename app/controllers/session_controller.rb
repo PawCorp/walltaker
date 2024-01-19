@@ -4,6 +4,10 @@ class SessionController < ApplicationController
   def new; end
 
   def create
+    if current_visit&.banned_ip.present?
+      return
+    end
+
     user = User.where("lower(email) = ?",login_params[:email]&.downcase).first
     if !user.nil?
       if user.username == 'PornBot'
