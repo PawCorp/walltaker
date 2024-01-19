@@ -55,7 +55,7 @@ class UsersController < ApplicationController
   end
   def password_reset
     begin
-      user = User.find_by(email: params['email'])
+      user = User.where("lower(email) = ?", params[:email]&.downcase).first
 
       unless user
         throw :nefarious
