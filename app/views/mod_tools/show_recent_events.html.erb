@@ -1,0 +1,41 @@
+<div class="task-tools">
+  <div class="left">
+    <%= link_to "Cancel", mod_tools_index_path %>
+  </div>
+</div>
+
+<h2>
+  <ion-icon role="presentation" name="nuclear" class="big"></ion-icon>
+  Recent Events
+  <small>Gray trusts you.</small>
+</h2>
+
+<table>
+  <% @events.each do |event| %>
+    <tr>
+      <td>
+        <div style="word-wrap: break-word; max-width: 100px"><%= event.name %></div>
+      </td>
+      <td>
+        <%= event.visit.banned_ip.present? ? "❌ IPBANNED BY #{event.visit.banned_ip.banned_by.username.upcase}" : '' %>
+        <%= event.visit.ip %><br/>
+        <% if event.user %>
+          <%= link_to "Caused by #{event.user.username}",  mod_tools_users_index_url(email: event.user.email) %>
+        <% else %>
+          <strong>Caused by ⚠️ Anon!</strong>
+        <% end %>
+        <br/>
+        <% if event.properties.key? 'attempted_post_id' %>
+          <%= link_to "https://e621.net/posts/#{event.properties['attempted_post_id']}", "https://e621.net/posts/#{event.properties['attempted_post_id']}", target: '_blank' %>
+        <% end %>
+        <% if event.properties.key? 'past_link_id' %>
+          <%= image_tag PastLink.find(event.properties['past_link_id'])&.post_thumbnail_url, width: 320 %>
+        <% end %>
+        <code><%= event.properties %></code>
+      </td>
+      <td>
+        <%= button_to 'IP Ban', mod_tools_events_ipban_path(event) %>
+      </td>
+    </tr>
+  <% end %>
+</table>

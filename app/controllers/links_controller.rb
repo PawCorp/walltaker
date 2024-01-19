@@ -297,7 +297,8 @@ class LinksController < ApplicationController
       current_user.set_count = current_user.set_count.to_i + 1
       current_user.save
     end
-    track :regular, :update_link_post, attempted_post_id: params['link'][:post_id]
-    PastLink.log_link(link).save
+    past_link = PastLink.log_link(link)
+    past_link.save
+    track :regular, :update_link_post, attempted_post_id: params['link'][:post_id], past_link_id: past_link.id
   end
 end

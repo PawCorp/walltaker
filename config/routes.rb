@@ -100,6 +100,11 @@ Rails.application.routes.draw do
       post 'update/:user', to: 'mod_tools#update_quarantine', as: 'update'
       post 'ban/:user', to: 'mod_tools#update_ipban', as: 'ipban'
     end
+
+    scope path: :events, as: 'events' do
+      get '/', to: 'mod_tools#show_recent_events', as: 'index'
+      post 'ban/:event', to: 'mod_tools#update_ipban_by_event', as: 'ipban'
+    end
   end
 
   scope path: :lizard_tools, as: 'lizard_tools', controller: 'lizard_tools' do

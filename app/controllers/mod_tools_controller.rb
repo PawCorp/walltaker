@@ -93,11 +93,31 @@ class ModToolsController < ApplicationController
       return
     end
 
-    ips = user.ahoy_visits.all.map {|visit| visit.ip}
+    ips = user.ahoy_visits.all.map { |visit| visit.ip }
     ips.each do |ip|
       BannedIp.create(ip_address: ip, banned_by: current_user)
     end
 
     redirect_to mod_tools_quarantine_index_path(anchor: helpers.dom_id(user))
+  end
+
+  def show_recent_events
+    @events = Ahoy::Event.where(name: 'regular:update_link_post')
+                         .or(Ahoy::Event.where("name like 'nefarious:%'"))
+                         .order(id: :desc)
+                         .limit 100
+  end
+
+  def update_ipban_by_event
+    event = Ahoy::Event.find(params['event'])
+
+    unless event
+      redirect_to mod_tools_events_index_url, alert: 'Failed to find that event.'
+      return
+    end
+
+    BannedIp.create(ip_address: event.visit.ip, banned_by: current_user)
+
+    redirect_to mod_tools_events_index_url, notice: "IP banned #{event.visit.ip}"
   end
 end
