@@ -60,7 +60,7 @@ class FriendshipsController < ApplicationController
                                                                }))
 
     unless @friendship.valid?
-      redirect_back_or_to root_path, alert: 'You\'re already friends, or have a pending request.'
+      redirect_back_or_to root_path, alert: @friendship.errors.first.message
       return
     end
 
