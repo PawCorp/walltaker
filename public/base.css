@@ -357,6 +357,10 @@ strong {
     margin-top: 5rem;
 }
 
+blockquote p img {
+    vertical-align: bottom;
+}
+
 blockquote > .byline {
     text-align: right;
     padding-right: 3rem;
