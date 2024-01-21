@@ -133,6 +133,10 @@ form.orgasms input[type=submit] {
     display: block;
 }
 
+.orgasms__credit_to_user {
+    width: 100%;
+}
+
 .orgasms__rating {
     display: grid;
     grid-template-columns: repeat(5, 1fr);

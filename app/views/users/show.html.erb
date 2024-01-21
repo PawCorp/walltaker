@@ -43,6 +43,9 @@
     <% end %>
   </small>
   <small>
+    Caused <%= pluralize @total_orgasms_caused, 'orgasm' %>
+  </small>
+  <small>
     Last online
     <%= @most_recent_pinged_link && @most_recent_pinged_link[0].last_ping ? time_tag(@most_recent_pinged_link[0].last_ping, (time_ago_in_words @most_recent_pinged_link[0].last_ping) + ' ago') : 'never' %>
   </small>

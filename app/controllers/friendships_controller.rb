@@ -5,17 +5,13 @@ class FriendshipsController < ApplicationController
 
   # GET /friendships or /friendships.json
   def index
-    @friendships = Friendship.all.where(sender: current_user)
-                             .or(Friendship.all.where(receiver: current_user))
-                             .where(confirmed: true)
-    @pending_friendship_requests = Friendship.all.where(sender: current_user)
-                             .where(confirmed: false)
+    @friendships = Friendship.involving(current_user).is_confirmed
+    @pending_friendship_requests = Friendship.where(sender: current_user).is_request
   end
 
   # GET /friendship/requests
   def requests
-    @friendships = Friendship.all.where(receiver: current_user)
-                             .where(confirmed: [nil, false])
+    @friendships = Friendship.where(receiver: current_user).is_request
     render :index
   end
 

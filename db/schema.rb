@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_13_205455) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_20_222849) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -281,6 +281,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_13_205455) do
     t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "caused_by_user_id"
+    t.index ["caused_by_user_id"], name: "index_nuttracker_orgasms_on_caused_by_user_id"
     t.index ["user_id"], name: "index_nuttracker_orgasms_on_user_id"
   end
 
