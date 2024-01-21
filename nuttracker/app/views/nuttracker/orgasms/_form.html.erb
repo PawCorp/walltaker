@@ -21,9 +21,10 @@
           </div>
         <% end %>
       </div>
-      <h3>Credit a user for causing this orgasm</h3>
       
-      <%= form.text_field :caused_by_username, placeholder: 'Optional' %>
+      <h3>Credit a user for causing this orgasm</h3>
+      <%= form.text_field :caused_by_username, placeholder: 'Optional', class:"orgasms__credit_to_user" %>
+      
       <h3>Satisfaction rating for this orgasm</h3>
       <div class="orgasms__rating">
         <div class="orgasms__rating__option">
