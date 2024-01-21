@@ -2,7 +2,7 @@
   <!-- modals -->
   <dialog class="modal" data-friendship-target="modal">
     <h4>Confirm Unfriend-ing</h4>
-    <p>Are you sure you want to unfriend <strong><%= friendship.other_user.username %></strong>?</p>
+    <p>Are you sure you want to unfriend <strong><%= friendship.other_user(current_user).username %></strong>?</p>
     <div class="modal__buttons">
       <%= button_tag class: 'no-underline primary', data: { 'friendship-target': 'cancel', action: 'click->friendship#cancel' } do %>
         <ion-icon role="presentation" name="close"></ion-icon>
@@ -18,7 +18,7 @@
   <!-- markup -->
   <div class="friendship__names">
     <ion-icon role="presentation" name="heart"></ion-icon>
-    <%= link_to friendship.other_user.username, user_path(friendship.other_user.username), data: { controller: "user-reference" } %>
+    <%= link_to friendship.other_user(current_user).username, user_path(friendship.other_user(current_user).username), data: { controller: "user-reference" } %>
     since
     <%= friendship.updated_at.strftime('%d/%m/%Y') %>
   </div>
