@@ -23,7 +23,7 @@ module Nuttracker
     # GET /orgasms/new
     def new
       @orgasm = Orgasm.new
-      @friends = Friendship.involving(current_user).is_confirmed.map { |f| f.other_user(current_user) }
+      @friends = Friendship.joins(:receiver, :sender).involving(current_user).is_confirmed.map { |f| f.other_user(current_user) }
       @recent_setters = PastLink.joins(:set_by).where(user: current_user).where.not(set_by: nil).select(:set_by_id).group(:set_by_id).limit(10).map { |pl| pl.set_by }
     end
 
