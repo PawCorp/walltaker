@@ -31,7 +31,15 @@ module Nuttracker
 
     # POST /orgasms
     def create
+      if params['orgasm']['caused_by_username']&.length > 0
+        caused_by_user = User.find_by username: params['orgasm']['caused_by_username']
+        if (caused_by_user.nil?)
+          redirect_to new_orgasm_path, alert: "User not found."
+          return
+        end
+      end
       @orgasm = Orgasm.new(orgasm_params)
+      @orgasm.caused_by = caused_by_user
       @orgasm.user_id = current_user&.id || nil
 
       if @orgasm.save
