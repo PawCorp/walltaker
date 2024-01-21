@@ -24,14 +24,15 @@
 
       <%
         options = grouped_options_for_select({
+                                               'Your Pornlizard': [pornlizard.username],
                                                Friends: friends.map { |u| u.username },
                                                'Recent Interactions': recent_setters.map { |u| u.username }
                                              })
       %>
 
       <h3>Credit a user for causing this orgasm</h3>
-      <%= form.label :caused_by_username, class: 'form__row' do %>
-        <%= form.select :caused_by_username, options, include_blank: "No Credit" %>
+      <%= form.label :caused_by, class: 'form__row' do %>
+        <%= form.select :caused_by, options, include_blank: "No Credit" %>
       <% end %>
 
       <h3>Satisfaction rating for this orgasm</h3>

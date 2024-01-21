@@ -21,6 +21,20 @@ class User < ApplicationRecord
     Friendship.find_friendship(other, self)
   }
 
+  # This was implemented so bad lol, should've been a relation.
+  def find_pornlizard
+    case mascot
+    when 'taylor'
+      User.find_by_username('PornLizardTaylor')
+    when 'warren'
+      User.find_by_username('PornLizardWarren')
+    when 'ki'
+      User.find_by_username('PornLizardKi')
+    else
+      User.find_by_username('PornLizardKi')
+    end
+  end
+
   def assign_new_api_key
     self.api_key = SecureRandom.base64(6).slice 0..7
     save
