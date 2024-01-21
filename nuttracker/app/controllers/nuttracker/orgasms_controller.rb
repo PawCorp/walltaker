@@ -23,9 +23,8 @@ module Nuttracker
     # GET /orgasms/new
     def new
       @orgasm = Orgasm.new
-      friends = Friendship.involving(current_user).is_confirmed.map { |f| f.other_user(current_user) }
-      recent_setters = PastLink.joins(:set_by).where(user: current_user).where.not(set_by: nil).select(:set_by_id).group(:set_by_id).limit(10).map { |pl| pl.set_by }
-      @possible_causers = (friends + recent_setters).uniq
+      @friends = Friendship.involving(current_user).is_confirmed.map { |f| f.other_user(current_user) }
+      @recent_setters = PastLink.joins(:set_by).where(user: current_user).where.not(set_by: nil).select(:set_by_id).group(:set_by_id).limit(10).map { |pl| pl.set_by }
     end
 
     # GET /orgasms/1/edit
