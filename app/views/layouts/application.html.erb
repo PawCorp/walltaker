@@ -1,9 +1,13 @@
+<% mascot = current_user&.mascot || 'ki' %>
 <!DOCTYPE html>
 <html>
 <head>
   <title><%= content_for?(:html_title) ? yield(:html_title) : "Walltaker" %></title>
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
   <meta name="rating" content="adult"/>
+  <%= favicon_link_tag 'mascot/KiHead.png' if mascot == 'ki'%>
+  <%= favicon_link_tag 'mascot/WarrenHead.png' if mascot == 'warren'%>
+  <%= favicon_link_tag 'mascot/TaylorHead.png' if mascot == 'taylor'%>
   <link rel="stylesheet" href="/simple.min.css">
   <link rel="stylesheet" href="/base.css?x=<%= ENV['COMMIT_HASH'] %>"/>
   <link rel="stylesheet" href="/link.css?x=<%= ENV['COMMIT_HASH'] %>"/>
@@ -32,7 +36,7 @@
   <div class="header__inner">
     <h1>
       <a href="/">
-        <%= render 'layouts/title', mascot: current_user&.mascot, pervert: current_user&.pervert || false %>
+        <%= render 'layouts/title', mascot: mascot, pervert: current_user&.pervert || false %>
       </a>
     </h1>
     <div class="user-tools">
