@@ -23,6 +23,7 @@ module Nuttracker
     # GET /orgasms/new
     def new
       @orgasm = Orgasm.new
+      @friends = Friendship.involving(current_user).is_confirmed
     end
 
     # GET /orgasms/1/edit

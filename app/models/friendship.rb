@@ -1,11 +1,16 @@
 class Friendship < ApplicationRecord
   belongs_to :sender, foreign_key: :sender_id, class_name: 'User'
   belongs_to :receiver, foreign_key: :receiver_id, class_name: 'User', optional: true
+
   validate :friendship_does_not_already_exist
   validates :receiver_id, comparison: { other_than: :sender_id, message: ->(friendship, data) { "You can\'t be friends with yourself, on walltaker at least." } }
 
+  scope :involving, ->(user) { where(sender_id: user.id).or(where(sender_id: user.id)) }
+  scope :is_confirmed, ->() { where(confirmed: true) }
+  scope :is_request, ->() { where(confirmed: [nil, false]) }
+
   def self.find_friendship(person_a, person_b)
-    self.find_friendship_request(person_a, person_b).where(confirmed: true)
+    self.find_friendship_request(person_a, person_b).is_confirmed
   end
 
   def self.find_friendship_request(person_a, person_b)
@@ -27,5 +32,10 @@ class Friendship < ApplicationRecord
         end
       end
     end
+  end
+
+  def other_user(user)
+    return sender if sender.id != user.id
+    receiver if receiver.id != user.id
   end
 end
