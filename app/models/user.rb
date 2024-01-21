@@ -3,6 +3,8 @@ class User < ApplicationRecord
   has_secure_password
   has_many :link
   has_many :past_links, foreign_key: :set_by_id
+  has_many :orgasms, foreign_key: :user_id, class_name: 'Nuttracker::Orgasm'
+  has_many :caused_orgasms, foreign_key: :caused_by_user_id, class_name: 'Nuttracker::Orgasm'
   has_many :notifications
   has_many :ahoy_visits, :class_name => 'Ahoy::Visit'
   belongs_to :viewing_link, foreign_key: :viewing_link_id, class_name: 'Link', optional: true
