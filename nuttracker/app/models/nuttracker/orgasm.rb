@@ -9,7 +9,7 @@ module Nuttracker
     def user_not_cumming_too_fast
       most_recent = user.orgasms.maximum(:created_at)
       if (most_recent != nil && (most_recent.after? 15.minutes.ago))
-        errors.add :base, "You're cumming too fast!"
+        errors.add :caused_by, "You're cumming too fast!"
       end
     end
   end
