@@ -5,7 +5,7 @@ class Friendship < ApplicationRecord
   validate :friendship_does_not_already_exist
   validates :receiver_id, comparison: { other_than: :sender_id, message: ->(friendship, data) { "You can\'t be friends with yourself, on walltaker at least." } }
 
-  scope :involving, ->(user) { where(sender_id: user.id).or(where(sender_id: user.id)) }
+  scope :involving, ->(user) { where(sender_id: user.id).or(where(receiver_id: user.id)) }
   scope :is_confirmed, ->() { where(confirmed: true) }
   scope :is_request, ->() { where(confirmed: [nil, false]) }
 
