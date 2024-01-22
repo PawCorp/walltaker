@@ -54,7 +54,7 @@
 
         <div class="user-tools__nested">
           <%= link_to message_thread_index_path do %>
-            <ion-icon name="chatbubbles" class="dont-hide"></ion-icon>
+            <ion-icon name="chatbubbles" class="dont-hide chat"></ion-icon>
           <% end %>
           <%= turbo_stream_from "header_notifications_#{current_user.id}" %>
           <%= render partial: 'notifications' %>

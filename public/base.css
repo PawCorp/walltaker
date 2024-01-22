@@ -267,6 +267,10 @@ header a ion-icon {
     font-size: 1em;
 }
 
+header ion-icon.chat {
+    color: var(--text);
+}
+
 header .notification-bell {
     color: var(--text);
     background: none;
