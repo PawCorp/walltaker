@@ -52,6 +52,19 @@ class Link < ApplicationRecord
     abilities.any? { |edge| edge.ability == ability }
   end
 
+  def toggle_ability(ability_name)
+    set_ability(ability_name, !check_ability(ability_name))
+  end
+
+  def set_ability(ability_name, value)
+    able_to = check_ability ability_name
+    if able_to && !value
+      abilities.delete_by ability: ability_name
+    elsif !able_to && value
+      abilities.create ability: ability_name
+    end
+  end
+
   # @return [User | nil]
   def get_set_by_user
     return User.find(self.set_by_id) if self.set_by_id

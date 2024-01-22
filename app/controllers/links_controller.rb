@@ -160,14 +160,7 @@ class LinksController < ApplicationController
   end
 
   def toggle_ability
-    able_to = @link.check_ability params['ability']
-    if able_to
-      track :regular, :disabled_ability, ability_name: params['ability']
-      @link.abilities.delete_by ability: params['ability']
-    else
-      track :regular, :enabled_ability, ability_name: params['ability']
-      @link.abilities.create ability: params['ability']
-    end
+    @link.toggle_ability params['ability']
     redirect_to edit_link_path @link
   end
 
