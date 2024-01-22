@@ -11,7 +11,7 @@
         </div>
       <% else %>
         <% notifications.each do |notification| %>
-          <%= link_to notification_path(notification.id), class: 'notification' do %>
+          <%= link_to notification_path(notification.id), class: 'notification', data: { turbo: false } do %>
             <% case notification.notification_type %>
               <% when 'friend_request_sent' %>
                 <ion-icon role="presentation" name="send"></ion-icon>
@@ -27,6 +27,8 @@
                 <ion-icon role="presentation" name="mail-unread"></ion-icon>
               <% when 'orgasm_credited_to_you' %>
                 <ion-icon role="presentation" name="ice-cream"></ion-icon>
+              <% when 'comment_on_your_link' %>
+                <ion-icon role="presentation" name="heart"></ion-icon>
             <% end %>
             <div>
               <p><%= notification.text %></p>

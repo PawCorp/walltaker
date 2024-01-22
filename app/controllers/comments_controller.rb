@@ -18,6 +18,9 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
 
     if @comment.save
+      if @link.user != current_user
+        Notification.create user: @link.user, notification_type: :comment_on_your_link, text: "#{current_user.username} said \"#{@comment.content&.truncate(100)}\"", link: link_path(@link, anchor: 'comments')
+      end
       redirect_to new_link_comment_url(@link)
     else
       render :new, status: :unprocessable_entity
@@ -25,12 +28,13 @@ class CommentsController < ApplicationController
   end
 
   private
-    def set_link
-      @link = Link.find(params[:link_id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def comment_params
-      params.require(:comment).permit(:content)
-    end
+  def set_link
+    @link = Link.find(params[:link_id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def comment_params
+    params.require(:comment).permit(:content)
+  end
 end
