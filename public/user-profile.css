@@ -180,6 +180,11 @@ form.orgasms .form__row {
     justify-content: center;
 }
 
+.form__group input[type=radio],
+.form__group input[type=checkbox]{
+    margin: 0;
+}
+
 .form__row {
     display: flex;
     gap: 0.5rem;

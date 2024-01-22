@@ -17,6 +17,8 @@ class User < ApplicationRecord
   validates :password, confirmation: true
   validates :username, presence: true, format: { with: /\A[a-zA-Z0-9]+\Z/ }
 
+  enum colour_preference: %i[auto light dark]
+
   scope :has_friendship_with, ->(other) {
     Friendship.find_friendship(other, self)
   }

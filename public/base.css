@@ -69,12 +69,6 @@ input[type=checkbox]:checked::after {
     transform: translate(-50%, -50%) rotate(45deg);
 }
 
-@media (prefers-color-scheme: light) {
-    :root {
-        --border: #5b658a;
-    }
-}
-
 h1 > a {
     text-decoration: none;
     background: var(--accent);
