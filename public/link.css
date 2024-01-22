@@ -200,14 +200,23 @@ strong.search-heading {
 }
 
 @media screen and (prefers-color-scheme: light) {
-    .link > .link--backdrop::before {
+    :root:not(.force-dark) .link > .link--backdrop::before {
         mix-blend-mode: color;
         filter: brightness(1);
     }
 
-    .link > .link--backdrop > img {
+    :root:not(.force-dark) .link > .link--backdrop > img {
         filter: contrast(0.55) brightness(1.4);
     }
+}
+
+:root.force-light .link > .link--backdrop::before {
+    mix-blend-mode: color;
+    filter: brightness(1);
+}
+
+:root.force-light .link > .link--backdrop > img {
+    filter: contrast(0.55) brightness(1.4);
 }
 
 .link em {
@@ -239,10 +248,15 @@ a:hover > .link {
 }
 
 @media (prefers-color-scheme: light) {
-    .link::after {
+    :root:not(.force-dark) .link::after {
         mix-blend-mode: darken;
         opacity: 0.2;
     }
+}
+
+:root.force-light .link::after {
+    mix-blend-mode: darken;
+    opacity: 0.2;
 }
 
 .link--presence {
