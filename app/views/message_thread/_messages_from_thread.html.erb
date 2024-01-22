@@ -1,4 +1,4 @@
-<% messages = message_thread.messages.order(updated_at: :desc).all %>
+<% messages = message_thread.messages.order(updated_at: :desc).limit(40) %>
 
 <div class="messages">
   <% messages.each_with_index do |message, index| %>
