@@ -1,0 +1,30 @@
+<%= turbo_frame_tag 'settings' do %>
+  <div class="accent-block">
+    <div class="accent-block__charm">
+      <ion-icon role="presentation" name="eye-off"></ion-icon>
+      Only you see this
+    </div>
+
+    <%= form_with url: settings_path, method: :post do |f| %>
+      <div class="form__group">
+        <%= f.label :colour, class: 'form__row' do %>
+          <ion-icon role="presentation" name="sunny"></ion-icon>
+          Light mode
+          <%= f.radio_button :colour, :light %>
+        <% end %>
+        <%= f.label :colour, class: 'form__row' do %>
+          <ion-icon role="presentation" name="moon"></ion-icon>
+          Dark mode
+          <%= f.radio_button :colour, :dark %>
+        <% end %>
+        <%= f.label :colour, class: 'form__row' do %>
+          <ion-icon role="presentation" name="sparkles"></ion-icon>
+          Automatic
+          <%= f.radio_button :colour, :auto %>
+        <% end %>
+      </div>
+
+      <%= f.submit 'Save', class: 'accent-block__button' %>
+    <% end %>
+  </div>
+<% end %>

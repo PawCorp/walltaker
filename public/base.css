@@ -789,6 +789,20 @@ a.small:hover {
     font-weight: bold;
 }
 
+.accent-block .accent-block__button {
+    width: calc(100% + 3rem) !important;
+    margin: 0 -1.5rem 0 -1.5rem !important;
+    transform: translateY(1.5rem);
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.accent-block .accent-block__button--force-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
 .accent-block--warning strong, .accent-block--warning .accent-block__charm {
     color: inherit;
 }
@@ -1344,6 +1358,10 @@ section .then {
 
 .accordion__trigger ion-icon {
     transform: translateY(2.5px);
+}
+
+.one-col {
+    margin: 1rem 0;
 }
 
 .two-col {

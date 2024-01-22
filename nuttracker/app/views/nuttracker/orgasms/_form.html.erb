@@ -4,7 +4,7 @@
       <ion-icon role="presentation" name="eye-off"></ion-icon>
       Only you see this
     </div>
-    <%= form_with(model: orgasm, class: 'orgasms') do |form| %>
+    <%= form_with(model: orgasm, class: 'orgasms orgasms-log') do |form| %>
       <h2>
         <ion-icon role="presentation" name="ice-cream" class="big"></ion-icon>
         Orgasm
@@ -74,9 +74,7 @@
         <%= form.check_box :is_ruined %>
       <% end %>
 
-      <div>
-        <%= form.submit 'Log Orgasm' %>
-      </div>
+      <%= form.submit 'Log Orgasm', class: "accent-block__button" %>
     <% end %>
   </div>
 <% end %>
