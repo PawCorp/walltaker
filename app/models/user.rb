@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :caused_orgasms, foreign_key: :caused_by_user_id, class_name: 'Nuttracker::Orgasm'
   has_many :notifications
   has_many :ahoy_visits, :class_name => 'Ahoy::Visit'
+  attribute :colour_preference, :integer
   belongs_to :viewing_link, foreign_key: :viewing_link_id, class_name: 'Link', optional: true
 
   validates_uniqueness_of :username
