@@ -1,6 +1,7 @@
 class Link < ApplicationRecord
   include PgSearch::Model
   belongs_to :user
+  belongs_to :set_by, foreign_key: :set_by_id, class_name: 'User', optional: true
   belongs_to :forked_from, foreign_key: :forked_from_id, class_name: 'Link', inverse_of: :forks, optional: true
   has_many :forks, foreign_key: :forked_from_id, class_name: 'Link', inverse_of: :forked_from
   has_many :viewing_users, foreign_key: :viewing_link_id, class_name: 'User'
@@ -49,6 +50,19 @@ class Link < ApplicationRecord
   # @param ["can_show_videos"] ability
   def check_ability(ability)
     abilities.any? { |edge| edge.ability == ability }
+  end
+
+  def toggle_ability(ability_name)
+    set_ability(ability_name, !check_ability(ability_name))
+  end
+
+  def set_ability(ability_name, value)
+    able_to = check_ability ability_name
+    if able_to && !value
+      abilities.delete_by ability: ability_name
+    elsif !able_to && value
+      abilities.create ability: ability_name
+    end
   end
 
   # @return [User | nil]

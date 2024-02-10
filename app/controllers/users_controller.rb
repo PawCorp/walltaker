@@ -7,7 +7,9 @@ class UsersController < ApplicationController
 
   def show
     set_user_vars
-    @total_orgasms_by_day = Nuttracker::Orgasm.all.where(user: @user).where('created_at > ?', 1.weeks.ago.midnight).group_by_day(:created_at, range: 1.weeks.ago.midnight..Time.now).count
+    @total_orgasms_by_day = @user.orgasms.where('created_at > ?', 1.weeks.ago.midnight).group_by_day(:created_at, range: 1.weeks.ago.midnight..Time.now).count
+    @total_orgasms_caused = @user.caused_orgasms.where('caused_by_user_id <> user_id').count unless @user.username == 'gray'
+    @total_orgasms_caused = Nuttracker::Orgasm.count if @user.username == 'gray'
   end
 
   def sets

@@ -30,6 +30,7 @@ class LinkWizardController < ApplicationController
     when :summon
       if params[:impatient] == 'true'
         @link.min_score -= 10
+        @link.set_ability :can_be_set_by_lizard, true
       end
 
     when :control
@@ -66,6 +67,16 @@ class LinkWizardController < ApplicationController
       @link.blacklist += ' female/female male/male' if bl_sex.include?('gay') && !bl_genders.include?('female') && !bl_genders.include?('male')
 
       @link.blacklist += ' male/female' if bl_sex.include?('straight')
+
+      if !bl_genders.include?('male') && bl_genders.include?('female')
+        current_user.mascot = :warren
+      elsif bl_genders.include?('male') && !bl_genders.include?('female')
+        current_user.mascot = :taylor
+      elsif bl_genders.include?('male') && bl_genders.include?('female')
+        current_user.mascot = :ki
+      end
+
+      current_user.save
 
     when :surprise
       @link.theme = params[:theme] || nil

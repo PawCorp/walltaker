@@ -69,12 +69,6 @@ input[type=checkbox]:checked::after {
     transform: translate(-50%, -50%) rotate(45deg);
 }
 
-@media (prefers-color-scheme: light) {
-    :root {
-        --border: #5b658a;
-    }
-}
-
 h1 > a {
     text-decoration: none;
     background: var(--accent);
@@ -267,6 +261,10 @@ header a ion-icon {
     font-size: 1em;
 }
 
+header ion-icon.chat {
+    color: var(--text);
+}
+
 header .notification-bell {
     color: var(--text);
     background: none;
@@ -355,6 +353,10 @@ strong {
 
 .half-page-break {
     margin-top: 5rem;
+}
+
+blockquote p img {
+    vertical-align: bottom;
 }
 
 blockquote > .byline {
@@ -779,6 +781,20 @@ a.small:hover {
     color: #212121;
     text-shadow: 0 0 2px #ffb300;
     font-weight: bold;
+}
+
+.accent-block .accent-block__button {
+    width: calc(100% + 3rem) !important;
+    margin: 0 -1.5rem 0 -1.5rem !important;
+    transform: translateY(1.5rem);
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.accent-block .accent-block__button--force-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
 .accent-block--warning strong, .accent-block--warning .accent-block__charm {
@@ -1336,6 +1352,10 @@ section .then {
 
 .accordion__trigger ion-icon {
     transform: translateY(2.5px);
+}
+
+.one-col {
+    margin: 1rem 0;
 }
 
 .two-col {

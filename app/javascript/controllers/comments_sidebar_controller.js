@@ -7,6 +7,10 @@ export default class CommentsSidebarController extends Controller {
     past_first_load = false
 
     connect() {
+        if (window.location.hash.includes('comments')) {
+            this.setHidden(false)
+        }
+
         document.body.addEventListener('click', (e) => {
             if (!this.hidden && !this.element.contains(e.target)) {
                 this.setHidden(true)
@@ -18,6 +22,7 @@ export default class CommentsSidebarController extends Controller {
                 this.setHidden(true)
             }
         })
+
         setTimeout(() => this.past_first_load = true, 500)
     }
 

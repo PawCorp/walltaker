@@ -23,6 +23,9 @@ module Nuttracker
     # GET /orgasms/new
     def new
       @orgasm = Orgasm.new
+      @pornlizard = current_user.find_pornlizard
+      @friends = Friendship.joins(:receiver, :sender).involving(current_user).is_confirmed.map { |f| f.other_user(current_user) }
+      @recent_setters = PastLink.joins(:set_by).where(user: current_user).where.not(set_by: nil).select(:set_by_id).group(:set_by_id).limit(10).map { |pl| pl.set_by }
     end
 
     # GET /orgasms/1/edit
@@ -31,10 +34,20 @@ module Nuttracker
 
     # POST /orgasms
     def create
+      if params['orgasm']['caused_by'].present?
+        caused_by = User.find_by username: params['orgasm']['caused_by']
+        if caused_by.nil?
+          redirect_to new_orgasm_path, alert: "User not found."
+          return
+        end
+      end
+
       @orgasm = Orgasm.new(orgasm_params)
-      @orgasm.user_id = current_user&.id || nil
+      @orgasm.caused_by = caused_by
+      @orgasm.user = current_user
 
       if @orgasm.save
+        Notification.create user: @orgasm.caused_by, notification_type: :orgasm_credited_to_you, text: "#{@orgasm.user.username} attributed an orgasm to you!", link: "/users/#{@orgasm.user.username}" if @orgasm.caused_by.present?
         redirect_to new_orgasm_path, notice: "Orgasm was successfully created."
       else
         redirect_to new_orgasm_path, alert: @orgasm.errors.first.full_message

@@ -70,10 +70,24 @@ h2 > span > .text-charm__medal:hover {
     text-decoration: none;
 }
 
+#api_key_form,
+.orgasms-log{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .api-key {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+}
+
+.api-key form.button_to {
+    position: relative;
+    width: 100%;
+    display: block;
 }
 
 .api-key__key {
@@ -133,6 +147,10 @@ form.orgasms input[type=submit] {
     display: block;
 }
 
+.orgasms__credit_to_user {
+    width: 100%;
+}
+
 .orgasms__rating {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -153,6 +171,18 @@ form.orgasms input[type=submit] {
 
 form.orgasms .form__row {
     justify-content: center;
+}
+
+.form__group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.form__group input[type=radio],
+.form__group input[type=checkbox]{
+    margin: 0;
 }
 
 .form__row {

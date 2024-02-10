@@ -16,6 +16,8 @@ namespace :walltaker do
 
     links.each do |link|
       controller = ApplicationController.new
+      next if link.past_links.last.present? && link.past_links.last&.created_at.after?(25.minutes.ago)
+
       results = controller.get_tag_results 'order:random score:>100 -nightmare_fuel -nazi -swf rating:e', nil, nil, link, 1
       begin
         if results[0] && results[0]['file']['url']
@@ -65,6 +67,8 @@ namespace :walltaker do
     set_count = 0
 
     links.each do |link|
+      next if link.past_links.last.present? && link.past_links.last&.created_at.after?(25.minutes.ago)
+
       is_user_perverted = link.user.pervert
 
       tags = '~massage romantic ~embrace ~cuddle ~hug ~hand_holding score:>90 -swf' unless is_user_perverted
@@ -120,6 +124,8 @@ namespace :walltaker do
     set_count = 0
 
     links.each do |link|
+      next if link.past_links.last.present? && link.past_links.last&.created_at.after?(25.minutes.ago)
+
       is_user_perverted = link.user.pervert
 
       tags = '~big_penis ~big_balls close_up ~big_breasts ~plump_labia ~crotch_shot -obese -hyper ~huge_balls score:>50 -swf' unless is_user_perverted
@@ -176,6 +182,8 @@ namespace :walltaker do
     set_count = 0
 
     links.each do |link|
+      next if link.past_links.last.present? && link.past_links.last&.created_at.after?(25.minutes.ago)
+
       is_user_perverted = link.user.pervert
 
       tags = 'public ~public_sex ~penis_milking ~public_masturbation ~free_use ~leaking_cum ~cum_on_face ~cum_on_butt ~cum_on_clothing score:>100 -swf' unless is_user_perverted

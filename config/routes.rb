@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'settings/index'
+  get 'settings/save'
   get 'search/index'
   get 'search/results'
   mount Nuttracker::Engine => "/nut"
@@ -80,6 +82,10 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get '/settings', to: 'settings#index', as: 'settings'
+  post '/settings', to: 'settings#save'
+
   mount Blazer::Engine, at: "blazer"
 
   scope path: :mod_tools, as: 'mod_tools' do

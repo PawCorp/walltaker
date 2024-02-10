@@ -3,6 +3,8 @@ class User < ApplicationRecord
   has_secure_password
   has_many :link
   has_many :past_links, foreign_key: :set_by_id
+  has_many :orgasms, foreign_key: :user_id, class_name: 'Nuttracker::Orgasm'
+  has_many :caused_orgasms, foreign_key: :caused_by_user_id, class_name: 'Nuttracker::Orgasm'
   has_many :notifications
   has_many :ahoy_visits, :class_name => 'Ahoy::Visit'
   belongs_to :viewing_link, foreign_key: :viewing_link_id, class_name: 'Link', optional: true
@@ -15,9 +17,25 @@ class User < ApplicationRecord
   validates :password, confirmation: true
   validates :username, presence: true, format: { with: /\A[a-zA-Z0-9]+\Z/ }
 
+  enum colour_preference: %i[auto light dark]
+
   scope :has_friendship_with, ->(other) {
     Friendship.find_friendship(other, self)
   }
+
+  # This was implemented so bad lol, should've been a relation.
+  def find_pornlizard
+    case mascot
+    when 'taylor'
+      User.find_by_username('PornLizardTaylor')
+    when 'warren'
+      User.find_by_username('PornLizardWarren')
+    when 'ki'
+      User.find_by_username('PornLizardKi')
+    else
+      User.find_by_username('PornLizardKi')
+    end
+  end
 
   def assign_new_api_key
     self.api_key = SecureRandom.base64(6).slice 0..7
