@@ -9,12 +9,12 @@
   <%= favicon_link_tag 'mascot/WarrenHead.png' if mascot == 'warren'%>
   <%= favicon_link_tag 'mascot/TaylorHead.png' if mascot == 'taylor'%>
   <link rel="stylesheet" href="/simple.min.css">
-  <link rel="stylesheet" href="/base.css?x=<%= ENV['COMMIT_HASH'] %>"/>
-  <link rel="stylesheet" href="/link.css?x=<%= ENV['COMMIT_HASH'] %>"/>
-  <link rel="stylesheet" href="/dashboard.css?x=<%= ENV['COMMIT_HASH'] %>"/>
-  <link rel="stylesheet" href="/user-profile.css?x=<%= ENV['COMMIT_HASH'] %>"/>
-  <link rel="stylesheet" href="/member-editor.css?x=<%= ENV['COMMIT_HASH'] %>"/>
-  <link rel="stylesheet" href="/messages.css?x=<%= ENV['COMMIT_HASH'] %>"/>
+  <link rel="stylesheet" href="/base.css?x=<%= ENV['HEROKU_SLUG_COMMIT'] %>"/>
+  <link rel="stylesheet" href="/link.css?x=<%= ENV['HEROKU_SLUG_COMMIT'] %>"/>
+  <link rel="stylesheet" href="/dashboard.css?x=<%= ENV['HEROKU_SLUG_COMMIT'] %>"/>
+  <link rel="stylesheet" href="/user-profile.css?x=<%= ENV['HEROKU_SLUG_COMMIT'] %>"/>
+  <link rel="stylesheet" href="/member-editor.css?x=<%= ENV['HEROKU_SLUG_COMMIT'] %>"/>
+  <link rel="stylesheet" href="/messages.css?x=<%= ENV['HEROKU_SLUG_COMMIT'] %>"/>
   <%= yield :stylesheets %>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
