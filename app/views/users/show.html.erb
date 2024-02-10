@@ -43,7 +43,7 @@
     <% end %>
   </small>
   <small>
-    <% if current_user.username == 'gray' %>
+    <% if @user.username == 'gray' %>
       Caused <%= pluralize @total_orgasms_caused, 'orgasm' %>, technically.
     <% else %>
       Caused <%= pluralize @total_orgasms_caused, 'orgasm' %>
