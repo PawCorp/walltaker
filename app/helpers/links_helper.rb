@@ -26,7 +26,7 @@ module LinksHelper
     return :jberliner if link_agent.include? 'JBerliner'
     return :chewtoy if link_agent.include? 'WalltakerEngine-chewtoy/'
     return :kemkem_userscript if link_agent.include? 'Walltaker for Walltaker (kemkem)'
-
+    return :xenofluff if link_agent.include? 'Walltaker_eXPerience'
     :unknown
   end
 
