@@ -19,16 +19,22 @@ class KinkController < ApplicationController
 
     kink = Kink.find_by_name kink_name
     if kink
-      current_user.kinks << kink
+      begin
+        current_user.kinks << kink
 
-      redirect_to user_kinks_path(current_user.username)
+        @kink = kink
+        render 'update'
+      rescue
+        render turbo_stream: ""
+      end
     else
       kink = current_user.kinks.build
       kink.name = kink_name
 
       begin
         if kink.save
-          redirect_to user_kinks_path(current_user.username)
+          @kink = kink
+          render 'update'
         else
           raise
         end
@@ -42,9 +48,10 @@ class KinkController < ApplicationController
     kink = Kink.find(params['id'])
 
     if kink
+      @kink = kink
       current_user.kinks.delete kink
-
-      redirect_to user_kinks_path(current_user.username)
+    else
+      redirect_to user_kinks_path(current_user.username), alert: 'Something went wrong'
     end
   end
 

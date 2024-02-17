@@ -215,7 +215,16 @@ h2.with-chart #chart-1 {
 }
 
 .kink_tools {
-    font-size: 0.9rem;
+    font-size: 0.9rem;;
+}
+
+.kink_form {
+    gap: 0 !important;
+}
+
+.kink_form input[type=text] {
+    margin: 1px 0 1px 1px;
+    width: 100px;
 }
 
 .kinks {
@@ -224,7 +233,12 @@ h2.with-chart #chart-1 {
     gap: 0.5rem;
 }
 
-.kink {
+.kinks > turbo-frame {
+    display: contents;
+}
+
+.kink,
+.kink_form {
     display: flex;
     gap: 0.25rem;
     align-items: center;
@@ -237,11 +251,31 @@ h2.with-chart #chart-1 {
     color: inherit;
     display: block;
     padding-left: 0.5rem;
+    padding-right: 0.25rem;
+}
+
+.kink > form {
+    display: contents;
 }
 
 .kink button {
+    background: var(--accent-bg);
+    color: var(--accent);
+    border: var(--accent) 2px solid;
+}
+
+.kink button:hover {
+    filter: none !important;
+    background: var(--danger);
+    color: var(--danger-text);
+}
+
+.kink button,
+.kink_form input[type=submit] {
     margin: 0;
     padding: 0 0.5rem;
+    height: 100%;
     aspect-ratio: 1 / 1;
     font-size: 1.2rem;
+    width: initial !important;
 }
