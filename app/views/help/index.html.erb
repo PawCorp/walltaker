@@ -46,114 +46,99 @@
         <%= image_tag '/help/new-link-button-location.png' %>
       </li>
       <li>
-        ...then confire your new link.
+        ...then configure your new link.
 
         <p>
-          <strong>There are 6 options</strong> to change here that affect who can set your wallpaper, and what
+          <strong>There are 8 options</strong> to change here that affect who can set your wallpaper, and what
           restrictions they have to work within. Set these as you see fit, using the key below to explain what each
           option does.
         </p>
         <%= image_tag '/help/new-link-form.png', class: 'small' %>
-
         <div class="accordion" data-controller="accordion">
           <button class="accordion__trigger" data-action="click->accordion#toggle" aria-controls="options-explanation">
             <ion-icon role="presentation" name="expand"></ion-icon>
             Toggle options explanation
           </button>
           <div class="accordion__content" data-accordion-target="content" id="options-explanation" aria-label="Explanation of options shown in Link Form">
-            <h5>#1 Expires</h5>
-            <p>
-              This is the date at which this link will not accept more wallpaper changes. Clicking
-              it will open a date picker. You could use this for example if you want to use walltaker for a full
-              weekend,
-              but
-              want it to stop on monday for work.
-            </p>
-
-            <h5>#2 Never Expires</h5>
-            <p>
-              Ensures that the link will never expire, and people you allow to set the link will be able to do so until
-              you
-              delete it.
-            </p>
-            <blockquote>
-              <strong>
-                <ion-icon role="presentation" name="checkbox-outline"></ion-icon>
-                When checked,</strong>
-              this link will never expire, and the #1 Expires option will be ignored.<br/>
-              <strong>
-                <ion-icon role="presentation" name="square-outline"></ion-icon>
-                When unchecked,</strong>
-              this link will expire at the date indicated by the #1 Expires option.
-            </blockquote>
-
-            <h5>#3 Friends Only</h5>
-            <p>
-              This restricts who can set wallpapers on this link.
-            </p>
-            <blockquote>
-              <strong>
-                <ion-icon role="presentation" name="checkbox-outline"></ion-icon>
-                When checked,</strong>
-              ONLY people you have accepted friend requests with will be able to see and set your wallpaper.<br/>
-              <strong>
-                <ion-icon role="presentation" name="square-outline"></ion-icon>
-                When unchecked,</strong>
-              ANYONE (including anon users) will be able to see and set your wallpaper.
-            </blockquote>
-
-            <h5>#4 Blacklist</h5>
-            <p>
-              A list of E621 tags that must NOT appear on wallpapers people submit.
-              <strong>Tags are separated by spaces or commas,</strong> and cannot be special tags. (such as rating:e)
-            </p>
-            <blockquote>
-              <strong>female feral feline</strong> will prevent any posts with females presenting characters, feral
-              characters, or felines.<br/>
-              <strong>male/male group_sex solo</strong> will mean you only get extremely boring, straight, 1-on-1 porn.
-              You
-              weirdo.
-            </blockquote>
-
-            <h5>#5 Terms</h5>
-            <p>
-              Your link terms are simply an area to express what you'd like to see as wallpapers more generally. Nothing
-              here
-              is enforced, it's just a text field for you to leave a note that appears on the link. I suggest you
-              outline
-              what
-              things turn you on here.
-            </p>
-
-            <h5>#6 Theme Tag</h5>
-            <p>
-              Theme tags are special! This is a way to enforce all wallpapers submitted to this link to be tagged with a
-              single, specific tag of your choosing. Use this when you're looking for something specific, like a
-              specific
-              species or sex act. You're horny, you'll come up with something fun.
-              <strong>Be careful about how you type your tag in here.</strong> If you misspell this theme tag, no one
-              will
-              be
-              able to submit anything until you remove it or correct the spelling. Confirm spelling on E621 if you have
-              to.
-            </p>
-            <blockquote>
-              <strong>
-                <ion-icon role="presentation" name="checkmark-outline"></ion-icon>
-                loimu_(character)</strong> all posts will feature Loimu 🦌. Any other characters are blocked.<br/>
-              <strong>
-                <ion-icon role="presentation" name="hand-left-outline"></ion-icon>
-                pokeemon</strong> a missspelled tag! No one will be able to submit anything.<br/>
-              <strong>
-                <ion-icon role="presentation" name="hand-left-outline"></ion-icon>
-                tits</strong> an alias tag! While this works in e621 search, the real tag is "breasts", so this is the
-              same
-              as misspelling a tag.
-            </blockquote>
-          </div>
+          <h5>#1 Terms</h5>
+          <p>
+            Your link terms are simply an area to express what you'd like to see as wallpapers more generally. Nothing
+            here is enforced, it's just a text field for you to leave a note that appears on the link. I suggest you
+            outline what things turn you on here.
+          </p>
+             <h5>#2 Custom URL</h5>
+             <p>
+             Once you have achieved the silver trophy (by having set 300 wallpapers to other users) then you will be able to set a custom URL. 
+             This means that in addition to your regular walltaker link URL (<code>https://walltaker.joi.how/links/1</code>), you can provide your own
+             text for a custom url. It will also be accessible as <strong>https://walltaker.joi.how/links/
+             <mark>your-text-here</mark>
+           </strong>
+           </p>
+             <h5>#3 Never Expires</h5>
+          <p>
+            Ensures that the link will never expire, and people you allow to set the link will be able to do so until
+            you
+            delete it.
+          </p>
+          <blockquote>
+            <strong>
+              <ion-icon role="presentation" name="checkbox-outline"></ion-icon>
+              When checked,</strong> yhis link will never expire, and the #4 Expires option will be ignored.<br/>
+            <strong>
+              <ion-icon role="presentation" name="square-outline"></ion-icon>
+              When unchecked,</strong> this link will expire at the date indicated by the #4 Expires option.
+          </blockquote>
+          <h5>#5 Friends Only</h5>
+          <p>
+            This restricts who can set wallpapers on this link.
+          </p>
+          <blockquote>
+            <strong>
+              <ion-icon role="presentation" name="checkbox-outline"></ion-icon>
+              When checked,</strong>
+            ONLY people you have accepted friend requests with will be able to see and set your wallpaper.<br/>
+            <strong>
+              <ion-icon role="presentation" name="square-outline"></ion-icon>
+              When unchecked,</strong>
+            ANYONE (including anon users) will be able to see and set your wallpaper.
+          </blockquote>
+          <h5>#6 Blacklist</h5>
+          <p>
+            A list of E621 tags that must NOT appear on wallpapers people submit.
+            <strong>Tags are separated by spaces or commas,</strong> and cannot be special tags. (such as rating:e)
+          </p>
+          <blockquote>
+            <strong>female feral feline</strong> will prevent any posts with females presenting characters, feral
+            characters, or felines.<br/>
+            <strong>male/male group_sex solo</strong> will mean you only get extremely boring, straight, 1-on-1 porn.
+            You
+            weirdo.
+          </blockquote>
+          <h5>#7 Theme Tag</h5>
+          <p>
+            Theme tags are special! This is a way to enforce all wallpapers submitted to this link to be tagged with a
+            single, specific tag of your choosing. Use this when you're looking for something specific, like a specific
+            species or sex act. You're horny, you'll come up with something fun.
+            <strong>Be careful about how you type your tag in here.</strong> If you misspell this theme tag, no one
+            will be
+            able to submit anything until you remove it or correct the spelling. Confirm spelling on E621 if you have to.
+          </p>
+          <blockquote>
+            <strong>
+              <ion-icon role="presentation" name="checkmark-outline"></ion-icon>
+              loimu_(character)</strong> all posts will feature Loimu 🦌. Any other characters are blocked.<br/>
+            <strong>
+              <ion-icon role="presentation" name="hand-left-outline"></ion-icon>
+              pokeemon</strong> a missspelled tag! No one will be able to submit anything.<br/>
+            <strong>
+              <ion-icon role="presentation" name="hand-left-outline"></ion-icon>
+              tits</strong> an alias tag! While this works in e621 search, the real tag is "breasts", so this is the
+            same as misspelling a tag.
+          </blockquote>
         </div>
-      </li>
-    </ul>
+      </div>
+    </li>
+  </ul>
 
     <div class="then">Then...</div>
 
@@ -171,42 +156,70 @@
       the wallpaper on anything. This is because, as simply a website, Walltaker can not change your wallpaper for you.
       To allow us to do this,
       <strong>we need a Walltaker Client, which is an app you can install on which ever devices you'd
-        like to get wallpaper updates on.</strong> It will silently check your link every 10 seconds, and update your
-      wallpaper if
-      there's a new one, automatically.
+      like to get wallpaper updates on.</strong> It will silently check your link every few seconds, and update your
+      wallpaper if there's someone has updated your wallpaper, automatically.
     </p>
     <p>
       You can download a client for which ever device you'd like to use. Follow the instructions for each one for how to
       install it, then return to this tutorial.
     </p>
-    <ul>
-      <li>
-        <a href="https://github.com/PawCorp/walltaker-desktop-client/releases/latest" target="_blank">Desktop
+    <table>
+      <thead>
+      <tr>
+        <th>Client</th>
+        <th>Platform</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><a href="https://github.com/Lycraon/Walltaker-for-WallpaperEngine" target="_blank">Lycraon's Wallpaper Engine
+          Client</a></td>
+        <td><a href="https://store.steampowered.com/app/431960/Wallpaper_Engine/">Wallpaper Engine for Windows</a></td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/dogkisser/walltaker-engine/releases" target="_blank">Chewtoy's Walltaker Engine</a>
+        </td>
+        <td>Windows</td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/gios2/Walltaker-Changer/releases/latest" target="_blank">Gio's Client</a></td>
+        <td>Android</td>
+      </tr>
+      <tr>
+        <td><a href="https://llamalab.com/automate/community/flows/46470" target="_blank">Arson's Automate Client</a></td>
+        <td><a href="https://llamalab.com/automate/">Automate App for Android</a></td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/Deanskond/walltaker_automate" target="_blank">Deanskond's Automate Client</a></td>
+        <td><a href="https://llamalab.com/automate/">Automate App for Android</a></td>
+      </tr>
+      <tr>
+        <td><a href="https://gitlab.com/JBerliner/walltaker-client" target="_blank">JBerliner's Walltaker.sh</a></td>
+        <td>Linux</td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/PawCorp/walltaker-macos/releases/latest" target="_blank">MacOS Client</a></td>
+        <td>macOS</td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/PawCorp/walltaker/blob/main/ios.md#ios-widget" target="_blank">iOS Widget</a></td>
+        <td>iOS</td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/PawCorp/walltaker-android-client/releases/latest" target="_blank" style="color: var(--text-light)">Android
           Client</a>
-        (Windows/Linux)
-      </li>
-      <li>
-        <a href="https://github.com/PawCorp/walltaker-android-client/releases/latest" target="_blank">Android
+          <br/><strong>Unmaintained</strong> try other clients first.</td>
+        <td>Android 12+</td>
+      </tr>
+      <tr>
+        <td><a href="https://github.com/PawCorp/walltaker-desktop-client/releases/latest" target="_blank" style="color: var(--text-light)">Desktop
           Client</a>
-        (Android 12+)
-      </li>
-      <li>
-        <a href="https://github.com/Lycraon/Walltaker-for-WallpaperEngine" target="_blank">Lycraon's Wallpaper Engine
-          Client</a>
-        (<a href="https://store.steampowered.com/app/431960/Wallpaper_Engine/">Wallpaper Engine for Windows</a>)
-      </li>
-      <li>
-        <a href="https://github.com/Deanskond/walltaker_automate" target="_blank">Deanskond's Automate Client</a>
-        (<a href="https://llamalab.com/automate/">Automate App for Android</a>)
-      </li>
-      <li>
-        <a href="https://github.com/PawCorp/walltaker-macos/releases/latest" target="_blank">MacOS Client</a>
-        (MacOS)
-      </li>
-      <li>
-        <a href="http://joi.how/" target="_blank">JOI.how</a> (Web-based)
-      </li>
-    </ul>
+          <br/><strong>Unmaintained</strong> try other clients first.
+        </td>
+        <td>Windows / Linux</td>
+      </tr>
+      </tbody>
+    </table>
 
     <div class="then">Then...</div>
 
@@ -306,7 +319,7 @@
               <li>Some phone operating systems kill background apps, this can sometimes affect clients. Refer to client
                 documentation.
               </li>
-              <li>Did you change the frequency of checks? It must be under 1minute to be
+              <li>Did you change the frequency of checks? It must be under 1 minute to be
                 <div class="mock-online">Online
                   <div class="text-charm text-charm__online"></div>
                 </div>
@@ -338,7 +351,7 @@
     <small>A:</small>
     Walltaker is an app for letting others change your wallpaper, <strong>without</strong> your
     approval. While I provide as many tools as possible to ensure you only get wallpapers you like, know that the point
-    of this app is to be <strong>out of control</strong> to some extent. Here are some tips to use walltaker's filtering
+    of this app is to be <strong>out of control</strong> to some extent. Here are some tips to use Walltaker's filtering
     features to their fullest:
   </p>
   <ul>
@@ -347,7 +360,7 @@
       friends-only links, which stops anon spam. This is by far the most effective route.
     </li>
     <li><strong>Use a theme tag.</strong> A theme tag allows you to force a tag to be present on wallpapers people pick
-      for you. This can normally be good at filtering out things like genitalia (gay) you don't want to see or forcing a
+      for you. This can normally be good at filtering out things like genitalia (penis) you don't want to see or forcing a
       specific sexuality. (male/female)
     </li>
     <li><strong>Fill out your blacklist honestly.</strong> If you don't like <em>most</em> foot-fetish art, then it
@@ -361,7 +374,7 @@
   </ul>
   <p>
     As always, if you think you're being harassed, contact an admin on the discord (See link in the header) who can
-    look into it for you, and IP ban an anon user if they're trying to be malicious.
+    look into it for you, and will IP ban an anon user if they're trying to be malicious.
   </p>
 </section>
 
@@ -369,7 +382,7 @@
   <h3><small>Q:</small> Can I make my own client?</h3>
   <p>
     <small>A:</small>
-    Yes! I have some API documentation on our <a href="https://github.com/PawCorp/walltaker" target="_blank">github.</a> You can contact
+    Yes! I have some API documentation on our <a href="https://github.com/pupgray/walltaker" target="_blank">GitHub.</a> You can contact
     an admin on discord to get it listed on the site. Here's some tips for what makes a good client:
   </p>
   <ul>
@@ -379,7 +392,7 @@
     </li>
     <li>
       <strong>Just because we're short-polling, doesn't mean you can ping us as fast as you want!</strong> Please keep
-      requests at around 1request per 10seconds. This service is hosted at my expensive, and heavy load will mean I have
+      requests at around 1 request per 10 seconds. This service is hosted at my expensive, and heavy load will mean I have
       to vertically scale up the server it lives on. Don't be an asshole.
     </li>
     <li>
