@@ -1,0 +1,10 @@
+<%# locals: (kink:) -%>
+
+<div class="kink">
+  <%= link_to '/' do %>
+    <%= kink.name %>
+  <% end %>
+  <%= button_to kink_remove_path(kink), method: :delete do %>
+    <ion-icon name="close"></ion-icon>
+  <% end %>
+</div>

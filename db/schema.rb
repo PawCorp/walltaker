@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_22_021732) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_17_194042) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -208,6 +208,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_021732) do
     t.index ["sender_id"], name: "index_friendships_on_sender_id"
   end
 
+  create_table "kink_havers", force: :cascade do |t|
+    t.bigint "kink_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["kink_id"], name: "index_kink_havers_on_kink_id"
+    t.index ["user_id"], name: "index_kink_havers_on_user_id"
+  end
+
+  create_table "kinks", force: :cascade do |t|
+    t.string "name", limit: 30, null: false
+  end
+
   create_table "link_abilities", force: :cascade do |t|
     t.bigint "link_id", null: false
     t.enum "ability", null: false, enum_type: "ability"
@@ -329,6 +342,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_22_021732) do
   add_foreign_key "comments", "users"
   add_foreign_key "friendships", "users", column: "receiver_id"
   add_foreign_key "friendships", "users", column: "sender_id"
+  add_foreign_key "kink_havers", "kinks"
+  add_foreign_key "kink_havers", "users"
   add_foreign_key "link_abilities", "links"
   add_foreign_key "links", "links", column: "forked_from_id"
   add_foreign_key "links", "users"

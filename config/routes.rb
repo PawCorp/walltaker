@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'users/:user_id/kinks', to: 'kink#users_kinks', as: 'user_kinks'
+  get 'kinks/new', to: 'kink#new', as: 'kink_new_form'
+  post 'kinks(/:id)', to: 'kink#update', as: 'kink'
+  delete 'kinks/:id', to: 'kink#remove', as: 'kink_remove'
+
   get 'settings/index'
   get 'settings/save'
   get 'search/index'

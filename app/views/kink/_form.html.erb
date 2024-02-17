@@ -1,0 +1,6 @@
+<%# locals: (kink:) -%>
+
+<%= form_with model: kink, url: kink_path(kink.id) do |f| %>
+  <%= f.text_field :name %>
+  <%= f.submit '+' %>
+<% end %>
