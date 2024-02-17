@@ -12,7 +12,8 @@ export class Modal {
         this.#tick();
     }
 
-    close() {
+    close(e) {
+        if (e) e.stopPropagation();
         this.#visible = false;
         this.#tick();
     }
@@ -22,6 +23,10 @@ export class Modal {
             this.target.dataset.open = this.#visible;
             this.target.open = this.#visible;
         }
+    }
+
+    isOpen () {
+        return this.#visible
     }
 
     #appendModalHeader() {

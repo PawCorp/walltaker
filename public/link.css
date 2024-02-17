@@ -91,6 +91,11 @@ strong.search-heading {
                          'terms        blacklist'
                          'friends-only friends-only';
     overflow: hidden;
+    /* Extreme improvement to scrolling performance in firefox, minor improvement in chrome,
+    caused by excessive, expensive re-rendering of filtered images combined with blending modes. 
+    this style forces them into their own GPU surfaces, preventing the re-rendering at the cost of 
+    blending accuracy */
+    will-change: transform;
 }
 
 .text-light {
@@ -245,6 +250,7 @@ a:hover > .link {
     z-index: -1;
     mix-blend-mode: color-dodge;
     opacity: 0.3;
+    filter: contrast(150%) saturate(200%);
 }
 
 @media (prefers-color-scheme: light) {

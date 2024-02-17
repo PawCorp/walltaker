@@ -9,12 +9,12 @@
   <%= favicon_link_tag 'mascot/WarrenHead.png' if mascot == 'warren'%>
   <%= favicon_link_tag 'mascot/TaylorHead.png' if mascot == 'taylor'%>
   <link rel="stylesheet" href="/simple.min.css">
-  <link rel="stylesheet" href="/base.css?x=<%= ENV['COMMIT_HASH'] %>"/>
-  <link rel="stylesheet" href="/link.css?x=<%= ENV['COMMIT_HASH'] %>"/>
-  <link rel="stylesheet" href="/dashboard.css?x=<%= ENV['COMMIT_HASH'] %>"/>
-  <link rel="stylesheet" href="/user-profile.css?x=<%= ENV['COMMIT_HASH'] %>"/>
-  <link rel="stylesheet" href="/member-editor.css?x=<%= ENV['COMMIT_HASH'] %>"/>
-  <link rel="stylesheet" href="/messages.css?x=<%= ENV['COMMIT_HASH'] %>"/>
+  <link rel="stylesheet" href="/base.css?x=<%= ENV['HEROKU_SLUG_COMMIT'] %>"/>
+  <link rel="stylesheet" href="/link.css?x=<%= ENV['HEROKU_SLUG_COMMIT'] %>"/>
+  <link rel="stylesheet" href="/dashboard.css?x=<%= ENV['HEROKU_SLUG_COMMIT'] %>"/>
+  <link rel="stylesheet" href="/user-profile.css?x=<%= ENV['HEROKU_SLUG_COMMIT'] %>"/>
+  <link rel="stylesheet" href="/member-editor.css?x=<%= ENV['HEROKU_SLUG_COMMIT'] %>"/>
+  <link rel="stylesheet" href="/messages.css?x=<%= ENV['HEROKU_SLUG_COMMIT'] %>"/>
   <%= yield :stylesheets %>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
@@ -81,9 +81,19 @@
 
 <% if current_user %>
   <div class="hang">
-    <a href="https://discord.gg/s4z9GfwuKw" target="_blank">
+    <div data-controller='discord-invite'>
+      <dialog class="modal" data-discord-invite-target="modal">
+        <h4>Just a note!</h4>
+        <p>To keep things organized and peaceful, we ask that you verify your walltaker account in the discord when you join. It's really quick, doesn't require anything other than your username and a link ID from your account! <strong>We also kick discord accounts newer than a week old or those without profile pictures!</strong> Try again after that period if you can't join.</p>
+        <div class="modal__buttons">
+          <%= link_to 'https://discord.gg/s4z9GfwuKw', class: 'no-underline secondary', target: '_blank' do %>
+            Let me join!
+          <% end %>
+        </div>
+      </dialog>
+
       <ion-icon name="logo-discord"></ion-icon>
-      Join our Discord</a>
+      Join our Discord</div>
     <%= render 'layouts/mascot_picker' if current_user %>
   </div>
 <% end %>

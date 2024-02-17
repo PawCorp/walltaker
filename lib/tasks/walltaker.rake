@@ -16,10 +16,9 @@ namespace :walltaker do
 
     links.each do |link|
       controller = ApplicationController.new
-
       next if link.past_links.last.present? && link.past_links.last&.created_at.after?(25.minutes.ago)
 
-      results = controller.get_tag_results 'order:random score:>100 -nightmare_fuel -nazi rating:e', nil, nil, link, 1
+      results = controller.get_tag_results 'order:random score:>100 -nightmare_fuel -nazi -swf rating:e', nil, nil, link, 1
       begin
         if results[0] && results[0]['file']['url']
           result = link.update(
@@ -72,8 +71,8 @@ namespace :walltaker do
 
       is_user_perverted = link.user.pervert
 
-      tags = '~massage romantic ~embrace ~cuddle ~hug ~hand_holding score:>90' unless is_user_perverted
-      tags = '~latex ~rubber glistening_body ~bdsm ~goo_creature ~slime score:>50' if is_user_perverted
+      tags = '~massage romantic ~embrace ~cuddle ~hug ~hand_holding score:>90 -swf' unless is_user_perverted
+      tags = '~latex ~rubber glistening_body ~bdsm ~goo_creature ~slime score:>50 -swf' if is_user_perverted
 
       controller = ApplicationController.new
       results = controller.get_tag_results "order:random #{tags} -nightmare_fuel", nil, nil, link, 1
@@ -129,8 +128,8 @@ namespace :walltaker do
 
       is_user_perverted = link.user.pervert
 
-      tags = '~big_penis ~big_balls close_up ~big_breasts ~plump_labia ~crotch_shot -obese -hyper ~huge_balls score:>50' unless is_user_perverted
-      tags = 'hyper ~huge_breasts ~huge_penis ~himbo ~bimbofication ~horsecock ~hyper_breasts ~udders -obese score:>70' if is_user_perverted
+      tags = '~big_penis ~big_balls close_up ~big_breasts ~plump_labia ~crotch_shot -obese -hyper ~huge_balls score:>50 -swf' unless is_user_perverted
+      tags = 'hyper ~huge_breasts ~huge_penis ~himbo ~bimbofication ~horsecock ~hyper_breasts ~udders -obese score:>70 -swf' if is_user_perverted
 
       controller = ApplicationController.new
       results = controller.get_tag_results "order:random #{tags} -nightmare_fuel", nil, nil, link, 1
@@ -187,8 +186,8 @@ namespace :walltaker do
 
       is_user_perverted = link.user.pervert
 
-      tags = 'public ~public_sex ~penis_milking ~public_masturbation ~free_use ~leaking_cum ~cum_on_face ~cum_on_butt ~cum_on_clothing score:>100' unless is_user_perverted
-      tags = '~impregnation ~impregnation_request excessive_cum ~presenting_hindquarters ~cum_in_pussy ~cum_in_ass ~cum_pool score:>80' if is_user_perverted
+      tags = 'public ~public_sex ~penis_milking ~public_masturbation ~free_use ~leaking_cum ~cum_on_face ~cum_on_butt ~cum_on_clothing score:>100 -swf' unless is_user_perverted
+      tags = '~impregnation ~impregnation_request excessive_cum ~presenting_hindquarters ~cum_in_pussy ~cum_in_ass ~cum_pool score:>80 -swf' if is_user_perverted
 
       controller = ApplicationController.new
       results = controller.get_tag_results "order:random #{tags} -nightmare_fuel", nil, nil, link, 1
