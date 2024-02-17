@@ -1,7 +1,7 @@
 <%= turbo_frame_tag :kink_tools do %>
   <div class="kink_tools">
     <div class="kinks">
-      <%= render 'kinks', kinks: @kinks %>
+      <%= render 'kinks', kinks: @kinks, is_current_user: @is_current_user %>
 
       <%= render 'form', kink: Kink.new if @is_current_user %>
     </div>

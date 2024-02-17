@@ -1,10 +1,13 @@
-<%# locals: (kink:) -%>
+<%# locals: (kink:, is_current_user: false) -%>
 
 <%= turbo_frame_tag kink, class: "kink" do %>
   <%= link_to '/', target: '_top' do %>
     <%= kink.name %>
   <% end %>
-  <%= button_to kink_remove_path(kink), method: :delete do %>
-    <ion-icon name="trash"></ion-icon>
+
+  <% if is_current_user %>
+    <%= button_to kink_remove_path(kink), method: :delete do %>
+      <ion-icon name="trash"></ion-icon>
+    <% end %>
   <% end %>
 <% end %>

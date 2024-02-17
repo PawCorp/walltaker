@@ -1,1 +1,1 @@
-<%= turbo_stream.append :kink_list, partial: 'kink/kink', locals: {kink: @kink} %>
+<%= turbo_stream.append :kink_list, partial: 'kink/kink', locals: {kink: @kink, is_current_user: true} %>
