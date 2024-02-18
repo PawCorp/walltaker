@@ -59,7 +59,7 @@ h2 > span > .text-charm__medal:hover {
 .details__container blockquote > h3,
 .details__container blockquote > h4,
 .details__container blockquote > h5,
-.details__container blockquote > h6{
+.details__container blockquote > h6 {
     margin-top: 0;
 }
 
@@ -71,7 +71,7 @@ h2 > span > .text-charm__medal:hover {
 }
 
 #api_key_form,
-.orgasms-log{
+.orgasms-log {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -165,6 +165,7 @@ form.orgasms input[type=submit] {
     color: var(--accent);
     font-weight: bold;
 }
+
 .orgasms__rating .orgasms__rating__option label {
     margin-bottom: 0.2rem;
 }
@@ -181,7 +182,7 @@ form.orgasms .form__row {
 }
 
 .form__group input[type=radio],
-.form__group input[type=checkbox]{
+.form__group input[type=checkbox] {
     margin: 0;
 }
 
@@ -212,4 +213,141 @@ h2.with-chart {
 
 h2.with-chart #chart-1 {
     transform: translateY(7px);
+}
+
+.kink_tools {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+.kink_form {
+    gap: 0 !important;
+}
+
+.kink_form input[type=text] {
+    margin: 1px 0 1px 1px;
+    width: 100px;
+}
+
+.kinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.kinks > turbo-frame {
+    display: contents;
+}
+
+.kink,
+.kink_form {
+    display: flex;
+    align-items: center;
+    background: var(--accent);
+    color: var(--bg);
+    border-radius: 6px;
+    min-height: 30px;
+}
+
+.kink > a {
+    color: inherit;
+    display: block;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.kink > form {
+    display: contents;
+}
+
+.kink button {
+    background: var(--accent-bg);
+    color: var(--accent);
+    border: var(--accent) 2px solid;
+}
+
+.kink button:hover {
+    filter: none !important;
+    background: var(--danger);
+    color: var(--danger-text);
+}
+
+.kink button,
+.kink_form input[type=submit] {
+    margin: 0;
+    padding: 0 0.5rem;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    font-size: 1.2rem;
+    width: initial !important;
+}
+
+.user_segments {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.user_segment {
+    display: block;
+    padding: 0.75rem 1rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    gap: 0.75rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.user_segment .wallpapers {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    animation: 120s ease-out infinite scroll-wallpapers;
+
+    column-count: 3;
+    column-gap: 0.25rem;
+}
+
+@keyframes scroll-wallpapers {
+    0% {
+        opacity: 0;
+        transform: translateY(4%);
+    }
+
+    1% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    95% {
+        opacity: 1;
+        transform: translateY(-90%);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-120%);
+    }
+}
+
+.user_segment .wallpapers img {
+    opacity: 0.2;
+    position: relative;
+    user-select: none;
+}
+
+.user_segment h3 {
+    margin: 0;
+}
+
+.user_segment .user-segement-tools {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user_segment h3 .text-charm {
+    transform: translateY(-10px);
 }

@@ -60,6 +60,8 @@
     </small>
   <% end %>
 
+  <%= turbo_frame_tag :kink_tools, src: user_kinks_path(@user.username) %>
+
   <% if @total_orgasms_by_day %>
     <%= area_chart @total_orgasms_by_day, colors: ["#606575"], legend: false, height: "60px", suffix: '💦', library: {
       scales: {

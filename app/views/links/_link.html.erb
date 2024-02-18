@@ -77,6 +77,8 @@
             <% when 'can_be_set_by_lizard' %>
               <% mascot = link.user.mascot || 'ki' %>
               <%= image_tag "mascot/#{mascot.capitalize}Head.png", class: 'mascot', height: 22, width: 22 %>
+            <% when 'is_kink_aligned' %>
+              <ion-icon name="bookmark"></ion-icon>
             <% end %>
           </span>
         <% end %>
@@ -98,11 +100,16 @@
     </div>
 
     <div class="link--terms">
-      <% if link.terms != '' %>
-        <blockquote>
-          <%= simple_format link.terms %>
-        </blockquote>
-      <% end %>
+      <blockquote>
+        <% if link.check_ability 'is_kink_aligned' %>
+          <div class="kink_tools" style="margin-bottom: 1rem">
+            <div class="kinks">
+              <%=  render 'kink/kinks', kinks: link.user.kinks, is_current_user: false %>
+            </div>
+          </div>
+        <% end %>
+        <%= simple_format link.terms %>
+      </blockquote>
     </div>
 
     <% if link.forked_from %>
