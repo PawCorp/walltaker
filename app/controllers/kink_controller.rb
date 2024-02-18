@@ -1,4 +1,5 @@
 class KinkController < ApplicationController
+  include ActionView::RecordIdentifier
   before_action :authorize, only: %i[add remove]
 
   def users_kinks
@@ -10,10 +11,20 @@ class KinkController < ApplicationController
     @is_current_user = false unless current_user
   end
 
-
   def show
     @kink = Kink.find(params['id'])
     @users = @kink.users.order(updated_at: :desc).where.not(id: current_user&.id)
+  end
+
+  def test_on_e621
+    kink = Kink.find(params['id'])
+    kink.test_on_e621 if kink
+
+    if kink.works_on_e621?
+      render turbo_stream: turbo_stream.update((dom_id(kink) + '_e621_status'), partial: 'kink/e621_status', locals: { kink: })
+    else
+      render turbo_stream: turbo_stream.update((dom_id(kink) + '_e621_status'), partial: 'kink/e621_status', locals: { kink:, failed: true })
+    end
   end
 
   def new

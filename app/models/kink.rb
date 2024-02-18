@@ -6,4 +6,20 @@ class Kink < ApplicationRecord
 
   has_many :kink_havers
   has_many :users, through: :kink_havers
+
+  def test_on_e621
+    begin
+      result = ApplicationController.new.get_tag_results(name, nil, nil, nil, 1);
+    rescue
+      result = nil
+    end
+
+    if result && result.length > 0
+      self.works_on_e621 = true
+    else
+      self.works_on_e621 = false
+    end
+
+    save
+  end
 end
