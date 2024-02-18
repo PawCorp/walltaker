@@ -7,7 +7,7 @@
 <h1 class="woogle">Woogle</h1>
 
 <%= form_with url: results_url, method: 'get', class: 'link-search', data: { 'turbo-frame': :link_search_results } do |f| %>
-  <%= f.text_field :q %>
+  <%= f.text_field :q, value: params['q'] %>
   <%= f.submit 'Search Links', name: nil %>
   <%= f.label :only_online do %>
     <strong class="online">Online</strong> Only
@@ -15,16 +15,20 @@
   <% end %>
 <% end %>
 
-<%= turbo_frame_tag :link_search_results do %>
-  <div class="accent-block spaced">
-    <div class="accent-block__charm">
-      <ion-icon role="presentation" name="sparkles-sharp"></ion-icon>
-      Tip
+<% if params['q'] %>
+  <%= turbo_frame_tag :link_search_results, src: results_url(q: params['q']) %>
+<% else %>
+  <%= turbo_frame_tag :link_search_results do %>
+    <div class="accent-block spaced">
+      <div class="accent-block__charm">
+        <ion-icon role="presentation" name="sparkles-sharp"></ion-icon>
+        Tip
+      </div>
+      <p>
+        Woogle searches for links, but will look at the user's bio and username as well.
+        <strong>This means you may see links that don't seem to contain your search term.</strong> This just means the
+        word appeared in their user profile.
+      </p>
     </div>
-    <p>
-      Woogle searches for links, but will look at the user's bio and username as well.
-      <strong>This means you may see links that don't seem to contain your search term.</strong> This just means the
-      word appeared in their user profile.
-    </p>
-  </div>
+  <% end %>
 <% end %>

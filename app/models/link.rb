@@ -20,7 +20,9 @@ class Link < ApplicationRecord
 
   pg_search_scope :search_positive, against: %i[terms theme custom_url response_text post_description], associated_against: {
     user: %i[username details]
-  }, using: { tsearch: { dictionary: 'english', prefix: true } }
+  }, using: { tsearch: { dictionary: 'english', prefix: true, any_word: true } }
+
+  pg_search_scope :search_negative, against: :blacklist, using: { tsearch: { dictionary: 'english', any_word: true } }
 
   scope :is_online, -> {
     where('last_ping > ?', Time.now - 1.minute)

@@ -10,6 +10,12 @@ class KinkController < ApplicationController
     @is_current_user = false unless current_user
   end
 
+
+  def show
+    @kink = Kink.find(params['id'])
+    @users = @kink.users.order(updated_at: :desc).where.not(id: current_user&.id)
+  end
+
   def new
     @kink = current_user.kinks.new
   end

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'users/:user_id/kinks', to: 'kink#users_kinks', as: 'user_kinks'
   get 'kinks/new', to: 'kink#new', as: 'kink_new_form'
+  get 'kinks/:id', to: 'kink#show', as: 'kink_show'
   post 'kinks(/:id)', to: 'kink#update', as: 'kink'
   delete 'kinks/:id', to: 'kink#remove', as: 'kink_remove'
 
