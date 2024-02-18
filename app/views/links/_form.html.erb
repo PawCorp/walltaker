@@ -250,11 +250,15 @@
               <% end %>
             </p>
             <% if is_kink_aligned %>
-              <div class="kink_tools">
-                <div class="kinks">
-                  <%= render 'kink/kinks', kinks: current_user&.kinks, is_current_user: false %>
+              <%= turbo_frame_tag :kink_tools do %>
+                <div class="kink_tools">
+                  <div class="kinks">
+                    <%= render 'kink/kinks', kinks: current_user&.kinks, is_current_user: true %>
+
+                    <%= render 'kink/form', kink: Kink.new %>
+                  </div>
                 </div>
-              </div>
+              <% end %>
             <% end %>
           </div>
           <div class="abilities__ability__controls">
