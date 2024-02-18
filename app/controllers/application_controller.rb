@@ -8,9 +8,12 @@ class ApplicationController < ActionController::Base
       link_can_show_videos = link.check_ability 'can_show_videos'
 
       sanitized_blacklist = make_blacklist(link)
-      append_to_tags = make_tag_suffix(link, sanitized_blacklist)
+      blacklist_tags = sanitized_blacklist.split(' ')
+      deduped_tag_string = tag_string.split(' ').filter { |tag| blacklist_tags.none? tag }.uniq.join(' ')
 
-      padded_tag_string = tag_string
+      append_to_tags = make_tag_suffix(link, sanitized_blacklist, deduped_tag_string)
+
+      padded_tag_string = deduped_tag_string
     end
 
     unless append_to_tags.nil? || append_to_tags.empty?
@@ -68,13 +71,19 @@ class ApplicationController < ActionController::Base
 
   helper_method :get_possible_post_count
 
-  def make_tag_suffix(link, sanitized_blacklist)
+  def make_tag_suffix(link, sanitized_blacklist, query)
+    kink_in_query = false
+    if link.check_ability 'is_kink_aligned'
+      kinks = link.user.kinks.pluck(:name)
+
+      kink_in_query = query.split(' ').any? { |tag| kinks.any? tag }
+    end
     append_to_tags = ''
     append_to_tags += link.theme if (link.theme)
     append_to_tags += ' ' + ((sanitized_blacklist.split.map { |tag| "-#{tag}" }).join ' ') unless (sanitized_blacklist.empty?)
     append_to_tags += ' score:>' + link.min_score.to_s if link.min_score.present? && link.min_score != 0
     append_to_tags += ' -animated' unless link.check_ability 'can_show_videos'
-    append_to_tags += ' ' + link.user.kinks.pluck(:name).map {|name| "~#{name}"}.join(' ') if link.check_ability 'is_kink_aligned'
+    append_to_tags += ' ' + link.user.kinks.pluck(:name).map {|name| "~#{name}"}.join(' ') if link.check_ability('is_kink_aligned') && !kink_in_query
     append_to_tags
   end
 
@@ -84,7 +93,7 @@ class ApplicationController < ActionController::Base
 
   def get_search_base(link)
     sanitized_blacklist = make_blacklist(link)
-    make_tag_suffix(link, sanitized_blacklist)
+    make_tag_suffix(link, sanitized_blacklist, '')
   end
 
   helper_method :get_search_base
