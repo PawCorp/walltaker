@@ -9,7 +9,7 @@ class SearchController < ApplicationController
     @only_online = params[:only_online] == '1'
     @page = (params[:page] || '1').to_i
 
-    merged_results = Rails.cache.fetch("v1/searchall/#{@query}/#{@only_online ? 'online' : 'anystate'}", expires_in: 10.minutes) {
+    merged_results = Rails.cache.fetch("v2/searchall/#{params[:q]}/#{@only_online ? 'online' : 'anystate'}", expires_in: 10.minutes) {
       kinks = params[:q].scan(/\![\w\d_\(\)]+/).map { |query| query.gsub('!', '') }
 
       all_results = Link.search_positive(@query).is_public.is_online if @only_online
