@@ -1,6 +1,6 @@
 class PornSearchController < ApplicationController
   def index
-
+    @link = Link.find(params[:link]) if params[:link]
   end
 
   def search

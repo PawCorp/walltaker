@@ -7,7 +7,8 @@ class KinkController < ApplicationController
     @kinks = user.kinks if user.present?
     @kinks = [] unless user.present?
 
-    @is_current_user = current_user.id == user.id if current_user
+    @is_current_user = false
+    @is_current_user = current_user.id == user.id if current_user && user
     @is_current_user = false unless current_user
   end
 
