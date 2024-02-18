@@ -251,7 +251,7 @@ class LinksController < ApplicationController
     @is_expired = @link.never_expires ? false : @link.expires <= Time.now.utc
     current_user_is_not_owner = current_user && current_user.id != @link.user.id
     not_logged_in = current_user.nil?
-    redirect_to root_url, alert: 'That link was expired!' if @is_expired && (current_user_is_not_owner || not_logged_in)
+    redirect_to root_url, alert: 'That link has expired!' if @is_expired && (current_user_is_not_owner || not_logged_in)
   end
 
   def do_link_request_test

@@ -76,18 +76,17 @@
            </p>
              <h5>#3 Never Expires</h5>
           <p>
-            Ensures that the link will never expire, and people you allow to set the link will be able to do so until
-            you
-            delete it.
+            Ensures that the link will never expire, and people you allow to set the link will be able to do so until you delete it.
           </p>
           <blockquote>
             <strong>
               <ion-icon role="presentation" name="checkbox-outline"></ion-icon>
-              When checked,</strong> yhis link will never expire, and the #4 Expires option will be ignored.<br/>
+              When checked,</strong> this link will never expire, and the #4 Expires option will be ignored.<br/>
             <strong>
               <ion-icon role="presentation" name="square-outline"></ion-icon>
               When unchecked,</strong> this link will expire at the date indicated by the #4 Expires option.
           </blockquote>
+          ⚠️ With an expired link, Pornbot and the Pornlizards will still be able to set your wallpaper and you will still be able to connect a client.
           <h5>#5 Friends Only</h5>
           <p>
             This restricts who can set wallpapers on this link.
@@ -95,33 +94,28 @@
           <blockquote>
             <strong>
               <ion-icon role="presentation" name="checkbox-outline"></ion-icon>
-              When checked,</strong>
-            ONLY people you have accepted friend requests with will be able to see and set your wallpaper.<br/>
+              When checked,</strong> ONLY people you have accepted friend requests with will be able to see and set your wallpaper.<br/>
             <strong>
-              <ion-icon role="presentation" name="square-outline"></ion-icon>
-              When unchecked,</strong>
-            ANYONE (including anon users) will be able to see and set your wallpaper.
+            <ion-icon role="presentation" name="square-outline"></ion-icon>
+              When unchecked,</strong> ANYONE (including anon users) will be able to see and set your wallpaper.
           </blockquote>
           <h5>#6 Blacklist</h5>
           <p>
             A list of E621 tags that must NOT appear on wallpapers people submit.
-            <strong>Tags are separated by spaces or commas,</strong> and cannot be special tags. (such as rating:e)
+            <strong>Tags are separated by spaces or commas.</strong> 
           </p>
           <blockquote>
             <strong>female feral feline</strong> will prevent any posts with females presenting characters, feral
             characters, or felines.<br/>
-            <strong>male/male group_sex solo</strong> will mean you only get extremely boring, straight, 1-on-1 porn.
-            You
-            weirdo.
+            <strong>male/male group_sex solo</strong> will mean you only get extremely boring, straight, 1-on-1 porn. You weirdo.
           </blockquote>
           <h5>#7 Theme Tag</h5>
           <p>
             Theme tags are special! This is a way to enforce all wallpapers submitted to this link to be tagged with a
             single, specific tag of your choosing. Use this when you're looking for something specific, like a specific
             species or sex act. You're horny, you'll come up with something fun.
-            <strong>Be careful about how you type your tag in here.</strong> If you misspell this theme tag, no one
-            will be
-            able to submit anything until you remove it or correct the spelling. Confirm spelling on E621 if you have to.
+            <strong>Be careful about how you type your tag in here.</strong> If you misspell this theme tag, no one will be
+            able to submit anything until you remove it or correct the spelling. Confirm spelling on E621 if you have to. Filter tags cannot be used.
           </p>
           <blockquote>
             <strong>
@@ -133,8 +127,10 @@
             <strong>
               <ion-icon role="presentation" name="hand-left-outline"></ion-icon>
               tits</strong> an alias tag! While this works in e621 search, the real tag is "breasts", so this is the
-            same as misspelling a tag.
-          </blockquote>
+            same as misspelling a tag.<br/>
+            <strong>
+            <ion-icon role="presentation" name="hand-left-outline"></ion-icon>
+            rating:e</strong> a filter tag! While this works in e621 search, filter tags are unsupported when setting a theme.
         </div>
       </div>
     </li>
@@ -154,8 +150,7 @@
     <p>
       Congratulations! You should have a fresh link ready to share with the world. However, it currently doesn't change
       the wallpaper on anything. This is because, as simply a website, Walltaker can not change your wallpaper for you.
-      To allow us to do this,
-      <strong>we need a Walltaker Client, which is an app you can install on which ever devices you'd
+      To allow us to do this, <strong>we need a Walltaker Client, which is an app you can install on which ever devices you'd
       like to get wallpaper updates on.</strong> It will silently check your link every few seconds, and update your
       wallpaper if there's someone has updated your wallpaper, automatically.
     </p>
@@ -319,7 +314,7 @@
               <li>Some phone operating systems kill background apps, this can sometimes affect clients. Refer to client
                 documentation.
               </li>
-              <li>Did you change the frequency of checks? It must be under 1 minute to be
+              <li>Did you change the frequency of checks? It must be under 1 minute to appear
                 <div class="mock-online">Online
                   <div class="text-charm text-charm__online"></div>
                 </div>
@@ -364,12 +359,10 @@
       specific sexuality. (male/female)
     </li>
     <li><strong>Fill out your blacklist honestly.</strong> If you don't like <em>most</em> foot-fetish art, then it
-      should be in your
-      blacklist, even if there's some art you do like. People don't read your link terms enough to understand nuance.
+      should be in your blacklist, even if there's some art you do like. People don't read your link terms enough to understand nuance.
     </li>
-    <li><strong>Be clear in your terms.</strong> A lot of bad wallpapers are simply mistakes. Use as few words as
-      possible to express
-      what you want.
+    <li>
+    <strong>Be clear in your terms.</strong> A lot of bad wallpapers are simply mistakes. Use as few words as possible to express what you want.
     </li>
   </ul>
   <p>
@@ -399,8 +392,7 @@
       <strong>Use native APIs to set the wallpaper if available.</strong> A good example of why this is a good idea is
       the MacOS client. It uses the Cocoa APIs to affect the wallpaper instead of using the more-universal apple-script
       solution common in apps not made with swift/obj-c. This is MUCH less buggy way to assign wallpapers, and doesn't
-      require as many permissions. Research if there's an SDK/language you should use to better take advantage of native
-      APIs.
+      require as many permissions. Research if there's an SDK/language you should use to better take advantage of native APIs.
     </li>
   </ul>
 </section>
