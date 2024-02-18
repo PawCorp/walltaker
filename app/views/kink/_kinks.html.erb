@@ -2,6 +2,6 @@
 
 <%= turbo_frame_tag :kink_list do %>
   <% kinks.each do |kink| %>
-    <%= render 'kink', kink:, is_current_user: %>
+    <%= render 'kink/kink', kink:, is_current_user: %>
   <% end %>
 <% end %>
