@@ -1,37 +1,39 @@
 <% content_for(:html_title) { "#{@user.username} settings" } %>
 
 <%if @user.username.last.downcase == 's' %>
-  <h2><%= @user.username %>' settings page</h2>
+  <h1><%= @user.username %>' settings page</h1>
 <%else%>
-  <h2><%= @user.username %>'s settings page</h2>
+  <h1><%= @user.username %>'s settings page</h3>
 <%end%>
+
+  <div class="two-col">
 
 <%= turbo_frame_tag 'settings', target: '_top' do %>
   <div class="accent-block">
-    <div class="accent-block__charm">
-      <p></p>
+    <h2>
+        <ion-icon role="img" name="color-palette"></ion-icon>
+          Theme mode selector
+        </h2>
+      <%= form_with model: @user, url: settings_path, method: :post, data: { 'turbo': 'false' } do |f| %>
+        <div class="form__group">
+          <%= f.label :colour_preference, value: :light, class: 'form__row' do %>
+            <ion-icon role="presentation" name="sunny"></ion-icon>
+            Light mode
+            <%= f.radio_button :colour_preference, :light %>
+          <% end %>
+          <%= f.label :colour_preference, value: :dark, class: 'form__row' do %>
+            <ion-icon role="presentation" name="moon"></ion-icon>
+            Dark mode
+            <%= f.radio_button :colour_preference, :dark %>
+          <% end %>
+          <%= f.label :colour_preference, value: :auto, class: 'form__row' do %>
+            <ion-icon role="presentation" name="sparkles"></ion-icon>
+            Automatic
+            <%= f.radio_button :colour_preference, :auto %>
+          <% end %>
+        </div>
+        <%= f.submit 'Save', class: 'accent-block__button' %>
+      <% end %>
     </div>
-
-    <%= form_with model: @user, url: settings_path, method: :post, data: { 'turbo': 'false' } do |f| %>
-      <div class="form__group">
-        <%= f.label :colour_preference, value: :light, class: 'form__row' do %>
-          <ion-icon role="presentation" name="sunny"></ion-icon>
-          Light mode
-          <%= f.radio_button :colour_preference, :light %>
-        <% end %>
-        <%= f.label :colour_preference, value: :dark, class: 'form__row' do %>
-          <ion-icon role="presentation" name="moon"></ion-icon>
-          Dark mode
-          <%= f.radio_button :colour_preference, :dark %>
-        <% end %>
-        <%= f.label :colour_preference, value: :auto, class: 'form__row' do %>
-          <ion-icon role="presentation" name="sparkles"></ion-icon>
-          Automatic
-          <%= f.radio_button :colour_preference, :auto %>
-        <% end %>
-      </div>
-
-      <%= f.submit 'Save', class: 'accent-block__button' %>
-    <% end %>
   </div>
 <% end %>
