@@ -1,16 +1,15 @@
 <% content_for(:html_title) { "#{@user.username} settings" } %>
 
-<%if @user.username.last != 's'%>
-  <h2><%= @user.username %>'s setting page</h2>
+<%if @user.username.last == 's' or @user.username.last == 'S' %>
+  <h2><%= @user.username %>' settings page</h2>
 <%else%>
-  <h2><%= @user.username %>' setting page</h2>
+  <h2><%= @user.username %>'s settings page</h2>
 <%end%>
 
 <%= turbo_frame_tag 'settings', target: '_top' do %>
   <div class="accent-block">
     <div class="accent-block__charm">
-      <ion-icon role="presentation" name="eye-off"></ion-icon>
-      Only you see this
+      <p></p>
     </div>
 
     <%= form_with model: @user, url: settings_path, method: :post, data: { 'turbo': 'false' } do |f| %>
