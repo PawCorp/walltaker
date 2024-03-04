@@ -1,6 +1,10 @@
 <% content_for(:html_title) { "#{@user.username} settings" } %>
 
-<h2><%= @user.username %>'s setting page</h2>
+<%if @user.username.last != 's'%>
+  <h2><%= @user.username %>'s setting page</h2>
+<%else%>
+  <h2><%= @user.username %>' setting page</h2>
+<%end%>
 
 <%= turbo_frame_tag 'settings', target: '_top' do %>
   <div class="accent-block">
