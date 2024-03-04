@@ -1,6 +1,6 @@
 <% content_for(:html_title) { "#{@user.username} settings" } %>
 
-<%if @user.username.last == 's' or @user.username.last == 'S' %>
+<%if @user.username.last.downcase == 's' %>
   <h2><%= @user.username %>' settings page</h2>
 <%else%>
   <h2><%= @user.username %>'s settings page</h2>
