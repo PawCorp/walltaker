@@ -26,6 +26,10 @@
 
   <% if current_user && current_user.id == @user.id %>
     <div class="right">
+      <%= link_to '/settings' do %>
+            <p>settings</p>
+          <% end %>
+        </div>
       <%= button_to "New link", new_link_path, method: :get %>
     </div>
   <% end %>

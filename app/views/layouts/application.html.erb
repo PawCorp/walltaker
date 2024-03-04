@@ -40,15 +40,9 @@
     </h1>
     <div class="user-tools">
       <% if current_user %>
-      <div class="user-tools__nested">
           <a class="username" href="<%= user_path current_user.username %>">
           <%= current_user.username %>
-        </a>
-        <p>&nbsp</p>
-        <%= link_to '/settings' do %>
-            <ion-icon name="cog" class="dont-hide chat"></ion-icon>
-          <% end %>
-        </div>
+        </a>        
         <a href="<%= url_for :action => :browse, :controller => :links %>">
           <ion-icon role="presentation" name="sparkles"></ion-icon>
           Browse
