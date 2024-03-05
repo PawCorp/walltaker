@@ -26,7 +26,7 @@ A client is required to set the wallpaper of a device. Here are some made by the
 | Client                                                                                        | Platforms                                                                                 |
 |-----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
 | [Deanskond's Automate Client](https://github.com/Deanskond/walltaker_automate)                | [Automate App](https://llamalab.com/automate/) (Android)                                  |
-| [Gio's Client](https://github.com/gios2/Walltaker-Changer/releases/latest)                    | Android                                                                                   |
+| [Gios' Client](https://github.com/gios2/Walltaker-Changer/releases/latest)                    | Android                                                                                   |
 | [iOS Widget](https://github.com/PawCorp/walltaker/blob/main/ios.md#ios-widget)                | iOS                                                                                       |
 
 ## API Guide
