@@ -26,6 +26,10 @@
 
   <% if current_user && current_user.id == @user.id %>
     <div class="right">
+      <%= link_to '/settings' do %>
+            <p>settings</p>
+          <% end %>
+        </div>
       <%= button_to "New link", new_link_path, method: :get %>
     </div>
   <% end %>
@@ -93,9 +97,6 @@
 
 
 <% if @is_current_user %>
-  <div class="one-col">
-    <%= turbo_frame_tag 'settings', src: settings_path %>
-  </div>
   <div class="two-col">
     <%= turbo_frame_tag 'orgasm_form', src: '/nut/orgasms/new' %>
     <%= turbo_frame_tag 'api_key_form', class: "accent-block" do %>
