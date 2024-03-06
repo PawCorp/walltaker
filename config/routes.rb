@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   mount Nuttracker::Engine => "/nut"
   mount Crono::Engine, at: '/pornbot'
   get 'help', to: 'help#index', as: 'help'
+  get 'help/faq', to: 'help#faq', as: 'faq'
   get 'leaderboard', to: 'leaderboard#index', as: 'leaderboard'
   get 'notification/show'
   delete 'notification', to: 'notification#delete_all', as: 'clear_notifications'

@@ -1,0 +1,146 @@
+<h2>
+  <ion-icon role="presentation" name="information-circle" class="big"></ion-icon>
+  FAQs
+</h2>
+
+<section id="bad-wallpapers">
+  <h4 id="Bad Wallpaper">I got a wallpaper I don't like.</h4>
+  <div class="accordion" data-controller="accordion">
+    <section id="uifix">
+      <br>
+      Walltaker is an app for letting others change your wallpaper, <strong>without</strong> your
+      approval. While I provide as many tools as possible to ensure you only get wallpapers you like, know that the
+      point
+      of this app is to be <strong>out of control</strong> to some extent. Here are some tips to use Walltaker's
+      filtering
+      features to their fullest:
+      </p>
+      <ul>
+        <li><strong>Add people you trust as friends,</strong> this allows you to use
+          <ion-icon role="presentation" name="document-lock"></ion-icon>
+          friends-only links, which stops anon spam. This is by far the most effective route.
+        </li>
+        <li><strong>Use a theme tag.</strong> A theme tag allows you to force a tag to be present on wallpapers people
+          pick
+          for you. This can normally be good at filtering out things like genitalia (penis) you don't want to see or
+          forcing a
+          specific sexuality. (male/female)
+        </li>
+        <li><strong>Fill out your blacklist honestly.</strong> If you don't like <em>most</em> foot-fetish art, then it
+          should be in your blacklist, even if there's some art you do like. People don't read your link terms enough to
+          understand nuance.
+        </li>
+        <li>
+          <strong>Be clear in your terms.</strong> A lot of bad wallpapers are simply mistakes. Use as few words as
+          possible to express what you want.
+        </li>
+      </ul>
+      <p>
+        As always, if you think you're being harassed, contact an admin on the Discord (See link in the header) who can
+        look into it for you, and will IP ban an anon user if they're trying to be malicious.
+      </p>
+    </section>
+  </div>
+</section>
+
+<section id="client-creation">
+  <h4 id="client-creation">Can I make my own client?</h4>
+  <div class="accordion" data-controller="accordion">
+    <section id="uifix">
+      <p>
+        Yes! I have some API documentation on our
+        <a href="https://github.com/pupgray/walltaker" target="_blank">GitHub.</a> You can contact
+        an admin on discord to get it listed on the site.
+        <br>
+        Here are some tips for what makes a good client:
+      </p>
+      <ul>
+        <li>
+          <strong>It doesn't just have to be wallpapers!</strong> iOS has no native APIs for setting lock screen or home
+          screen wallpapers. Maybe a good idea would be a home screen widget that could show the current wallpaper
+          instead?
+        </li>
+        <li>
+          <strong>Use native APIs to set the wallpaper if available.</strong> A good example of why this is a good idea
+          is
+          the MacOS client. It uses the Cocoa APIs to affect the wallpaper instead of using the more-universal
+          AppleScript
+          solution common in apps not made with swift/obj-c. This is a <b>FAR</b> less buggy way to assign wallpapers,
+          and doesn't
+          require as many permissions. Research if there's an SDK/language you should use to better take advantage of
+          native APIs.
+        </li>
+        <li>
+          <strong>Just because we're short-polling, doesn't mean you can ping us as fast as you want!</strong> Please
+          keep
+          requests at around 1 request per 10 seconds. This service is hosted at my expensive, and heavy load will mean
+          I have
+          to vertically scale up the server it lives on. Don't be an asshole.
+        </li>
+      </ul>
+    </section>
+  </div>
+</section>
+
+<section id="useremailchange">
+  <h4 id="useremailchange">How do I change my username / email?</h4>
+  <div class="accordion" data-controller="accordion">
+    <section id="uifix">
+      <br>
+      Please message a staff member on our Discord to change your username/email.
+      <br>
+      ⚠️<strong>Do NOT post your email address in any public channel</strong>
+      <br>
+      <li>Username change: Provide your full email address
+      <li>Email change: Provide both your old and new email addresses
+    </section>
+    <br>
+  </div>
+</section>
+
+<section id="discordkick">
+  <h4 id="discordkick">Why do I keep getting kicked from the Discord server?</h4>
+  <div class="accordion" data-controller="accordion">
+    <section id="uifix">
+      <br>
+      Ensure that your account is at least 1 week old and has a profile picture before attempting to join the server.
+    </section>
+    <br>
+  </div>
+</section>
+
+<section id="brokenclient">
+  <h4 id="brokenclient">Help! The client I am using doesn't work</h4>
+  <div class="accordion" data-controller="accordion">
+    <section id="uifix">
+      <br>
+      Check if there are any known issues with the client you are using. If you require further support, please join the
+      Discord server and use the appropriate forum to report bugs with the client.
+      Forums can be found at the bottom of the channel list.
+    </section>
+    <br>
+  </div>
+</section>
+
+<section id="accountmerge">
+  <h4 id="accountmerge">I would like to merge two accounts.</h4>
+  <div class="accordion" data-controller="accordion">
+    <section id="uifix">
+      <br>
+      Message Gray on our Discord and provide them with both email addresses and let them know which account you want to
+      keep using.
+    </section>
+    <br>
+  </div>
+</section>
+
+<section id="feedback">
+  <h4 id="Bad Wallpaper">I have feedback/suggestion</h4>
+  <div class="accordion" data-controller="accordion">
+    <section id="uifix">
+      <br>
+      Join our Discord and post your feedback/suggestion in the #walltaker-site forum.
+    </section>
+    <br>
+  </div>
+</section>
