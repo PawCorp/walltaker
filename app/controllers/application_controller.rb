@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
 
       kink_in_query = query.split(' ').any? { |tag| kinks.any? tag }
     end
-    append_to_tags = ''
+    append_to_tags = '-flash '
     append_to_tags += link.theme if (link.theme)
     append_to_tags += ' ' + ((sanitized_blacklist.split.map { |tag| "-#{tag}" }).join ' ') unless (sanitized_blacklist.empty?)
     append_to_tags += ' score:>' + link.min_score.to_s if link.min_score.present? && link.min_score != 0
