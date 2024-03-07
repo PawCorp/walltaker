@@ -11,6 +11,8 @@ module Walltaker
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    config.exceptions_app = self.routes
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -23,6 +25,5 @@ module Walltaker
     Rails.application.config.hosts << "10.244.14.67"
     Rails.application.config.hosts << "walltaker-master-39nrv.ondigitalocean.app"
     Rails.application.config.hosts << "walltaker-7e4cf22c7c3d.herokuapp.com"
-
   end
 end

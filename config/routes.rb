@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'errors/not_found'
+  get 'errors/server_error'
   get 'users/:user_id/kinks', to: 'kink#users_kinks', as: 'user_kinks'
   get 'kinks/new', to: 'kink#new', as: 'kink_new_form'
   get 'kinks/:id', to: 'kink#show', as: 'kink_show'
@@ -128,4 +130,7 @@ Rails.application.routes.draw do
     get 'ki', as: 'ki'
     get 'taylor', as: 'taylor'
   end
+
+  match "/404", to: "errors#not_found", via: :all
+  match "/500", to: "errors#server_error", via: :all
 end

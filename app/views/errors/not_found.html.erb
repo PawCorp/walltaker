@@ -1,0 +1,19 @@
+<%
+  current_user ||= current_user
+  mascot = current_user&.mascot || 'ki'
+%>
+
+<h4>
+  404: Page missing or hidden
+</h4>
+
+<p>
+  ...but you can use the links above to continue browsing the site. If you are 100% sure this is a mistake, or an error
+  has occured, you can contact <%= link_to 'Gray', users_path('gray') %> with the URL you used to get here.
+</p>
+
+<div class="center">
+  <%= image_tag 'mascot/WarrenBadEnd.png', width: 320 if mascot == 'warren' %>
+  <%= image_tag 'mascot/TaylorBadEnd.png', width: 320 if mascot == 'taylor' %>
+  <%= image_tag 'mascot/KiShrug.png', width: 320 if mascot == 'ki' %>
+</div>
