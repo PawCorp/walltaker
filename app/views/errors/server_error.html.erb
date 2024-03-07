@@ -1,5 +1,4 @@
 <%
-  current_user ||= current_user
   mascot = current_user&.mascot || 'ki'
 
   if request.env['action_dispatch.exception'].present?
