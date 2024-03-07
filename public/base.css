@@ -1485,3 +1485,13 @@ section .then {
     display: flex;
     align-items: center;
 }
+
+pre code.hljs {
+    background: transparent !important;
+}
+
+.accent-block > pre {
+    padding: 0;
+    border: 0;
+    margin: 0;
+}

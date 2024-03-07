@@ -3,4 +3,7 @@ class HelpController < ApplicationController
   end
   def faq
   end
+
+  def client_guide
+  end
 end
