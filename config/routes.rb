@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'errors/not_found'
   get 'errors/server_error'
+
   get 'users/:user_id/kinks', to: 'kink#users_kinks', as: 'user_kinks'
   get 'kinks/new', to: 'kink#new', as: 'kink_new_form'
   get 'kinks/:id', to: 'kink#show', as: 'kink_show'
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
   delete 'notification', to: 'notification#delete_all', as: 'clear_notifications'
   get 'porn_search/index'
   get 'porn_search/search'
+  get 'porn_search/search/kinks_for/:link_id', to: 'kink#search_kinks', as: 'search_kinks'
   post 'porn_search/send_message_and_return/:message_thread', to: 'porn_search#send_message_and_return', as: 'porn_search_send_message_and_return'
   root 'dashboard#index'
   get 'signup', to: 'users#new', as: 'signup'

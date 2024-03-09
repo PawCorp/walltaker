@@ -17,6 +17,15 @@ class KinkController < ApplicationController
     @users = @kink.users.order(updated_at: :desc).where.not(id: current_user&.id)
   end
 
+  def search_kinks
+    @link = Link.find(params[:link_id])
+    return redirect_to root_path unless @link
+
+    @user = @link.user
+    @kinks = @user.kinks if @user.present?
+    @kinks = [] unless @user.present?
+  end
+
   def test_on_e621
     kink = Kink.find(params['id'])
     kink.test_on_e621 if kink
