@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'kinks/new', to: 'kink#new', as: 'kink_new_form'
   get 'kinks/:id', to: 'kink#show', as: 'kink_show'
   post 'kinks(/:id)', to: 'kink#update', as: 'kink'
+  post 'kinks(/:id)/star', to: 'kink#toggle_star', as: 'kink_toggle_star'
   post 'kinks/:id/test/e621', to: 'kink#test_on_e621', as: 'kink_e621'
   delete 'kinks/:id', to: 'kink#remove', as: 'kink_remove'
 

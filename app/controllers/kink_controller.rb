@@ -1,6 +1,6 @@
 class KinkController < ApplicationController
   include ActionView::RecordIdentifier
-  before_action :authorize, only: %i[add remove]
+  before_action :authorize, only: %i[add remove toggle_star]
 
   def users_kinks
     user = User.find_by_username(params['user_id'])
@@ -68,6 +68,23 @@ class KinkController < ApplicationController
       rescue
         redirect_to user_kinks_path(current_user.username), alert: kink.errors.full_messages.first
       end
+    end
+  end
+
+  def toggle_star
+    @kink = Kink.find(params['id'])
+
+    if @kink
+      kink_haver = @kink.had_by(current_user)
+
+      if @kink.had_by(current_user)
+        kink_haver.is_starred = !kink_haver.is_starred?
+        kink_haver.save
+      else
+        redirect_to user_kinks_path(current_user.username), alert: 'Something went wrong'
+      end
+    else
+      redirect_to user_kinks_path(current_user.username), alert: 'Kink missing'
     end
   end
 

@@ -22,4 +22,15 @@ class Kink < ApplicationRecord
 
     save
   end
+
+  # @param [User] by
+  def had_by (by)
+    self.kink_havers.find_by(user_id: by.id)
+  end
+
+  # @param [User] by
+  def is_starred? (by)
+    kink_haver = had_by(by)
+    kink_haver&.is_starred? || false
+  end
 end

@@ -6,6 +6,9 @@
   <% end %>
 
   <% if is_current_user %>
+    <%= button_to kink_toggle_star_path(kink) do %>
+      <ion-icon name="<%= kink.is_starred?(current_user) ? 'star' : 'star-outline' %>"></ion-icon>
+    <% end %>
     <%= button_to kink_remove_path(kink), method: :delete do %>
       <ion-icon name="trash"></ion-icon>
     <% end %>
