@@ -4,9 +4,10 @@ class ApplicationController < ActionController::Base
   def broadcast_flash_message
     return unless request.format.turbo_stream?
     return if response.status == 301 || response.status == 302
+    return unless current_user
 
     flash.each do |type, msg|
-      Turbo::StreamsChannel.broadcast_append_to(:flashes,
+      Turbo::StreamsChannel.broadcast_append_to("#{current_user.username}-flashes",
                                                       target: 'flashes', partial: 'application/flash',
                                                       locals: { msg:, type: })
     end

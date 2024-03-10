@@ -1,4 +1,4 @@
-<%= turbo_stream_from :flashes, target: :flashes %>
+<%= turbo_stream_from "#{current_user&.username || 'anon'}-flashes", target: :flashes %>
 <%= turbo_frame_tag :flashes, class: 'flashes' do %>
   <% flash.each do |type, msg| %>
     <%= render "application/flash", type:, msg: %>
