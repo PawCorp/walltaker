@@ -944,7 +944,7 @@ aside.comments-sidebar {
     position: fixed;
     top: 0;
     right: 0;
-    height: 100vh;
+    height: 100dvh;
     background: var(--bg);
     border-left: 1px solid var(--border);
     padding: 0 1rem 1rem;
