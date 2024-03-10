@@ -104,7 +104,7 @@
         <% if link.check_ability 'is_kink_aligned' %>
           <div class="kink_tools" style="margin-bottom: 1rem">
             <div class="kinks">
-              <%=  render 'kink/kinks', kinks: link.user.kinks, is_current_user: false %>
+              <%=  render 'kink/kinks', kinks: link.user.kinks, is_current_user: false, user: link.user %>
             </div>
           </div>
         <% end %>

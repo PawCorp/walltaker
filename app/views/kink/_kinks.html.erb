@@ -1,7 +1,7 @@
-<%# locals: (kinks:, is_current_user: false) -%>
+<%# locals: (kinks:, is_current_user: false, user: nil) -%>
 
 <%= turbo_frame_tag :kink_list do %>
   <% kinks.each do |kink| %>
-    <%= render 'kink/kink', kink:, is_current_user: %>
+    <%= render 'kink/kink', kink:, is_current_user:, user: %>
   <% end %>
 <% end %>
