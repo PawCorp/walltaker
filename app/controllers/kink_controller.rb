@@ -52,7 +52,8 @@ class KinkController < ApplicationController
         @kink = kink
         render 'update'
       rescue
-        render turbo_stream: ""
+        kink.valid?
+        redirect_to user_kinks_path(current_user.username), alert: kink.errors.full_messages.first
       end
     else
       kink = current_user.kinks.build
@@ -63,7 +64,7 @@ class KinkController < ApplicationController
           @kink = kink
           render 'update'
         else
-          raise
+          redirect_to user_kinks_path(current_user.username), alert: kink.errors.full_messages.first
         end
       rescue
         redirect_to user_kinks_path(current_user.username), alert: kink.errors.full_messages.first

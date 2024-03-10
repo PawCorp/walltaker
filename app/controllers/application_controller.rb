@@ -1,4 +1,17 @@
 class ApplicationController < ActionController::Base
+  before_action :broadcast_flash_message
+
+  def broadcast_flash_message
+    return unless request.format.turbo_stream?
+    return if response.status == 301 || response.status == 302
+
+    flash.each do |type, msg|
+      Turbo::StreamsChannel.broadcast_append_to(:flashes,
+                                                      target: 'flashes', partial: 'application/flash',
+                                                      locals: { msg:, type: })
+    end
+  end
+
   def get_tag_results(tag_string, after, before, link, limit = 15)
     if link.nil?
       append_to_tags = ''

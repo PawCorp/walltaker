@@ -370,32 +370,36 @@ blockquote > .byline {
     flex-direction: column;
 }
 
-.flashes > * {
+.flashes .flash {
     background: var(--accent-bg);
     padding: 0.5rem 1rem 0.6rem;
     border: 1px solid var(--border);
     border-top: 0;
 }
 
-.flashes > .unbounded {
+.flashes .unbounded {
     border-top: 1px solid var(--border);
     margin: 0.5rem 0;
 }
 
-.flashes > .flash--success {
+.flashes .flash--success {
     color: var(--success);
 }
 
-.flashes > .flash--success::before {
+.flashes .flash--success::before {
     content: "✅"
 }
 
-.flashes > .flash--danger {
+.flashes .flash--danger {
     color: var(--danger);
 }
 
-.flashes > .flash--danger::before {
+.flashes .flash--danger::before {
     content: "🚫"
+}
+
+.flashes > turbo-frame {
+    display: contents;
 }
 
 p {

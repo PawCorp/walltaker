@@ -1,6 +1,6 @@
 <%# locals: (kink:, is_current_user: false, destination: :kink_show, link: nil) -%>
 
-<%= turbo_frame_tag kink, class: ("kink #{kink.works_on_e621? ? 'valid' : 'untested'}"), target: destination == :search ? 'pornsearch' : '_top' do %>
+<%= turbo_frame_tag kink, class: ("kink #{kink.works_on_e621? ? 'valid' : 'untested'}") do %>
   <%= link_to destination == :search ? porn_search_search_path(tags: kink.name, link:, full_rerender: true) : kink_show_path(kink), target: destination == :search ? 'pornsearch' : '_top' do %>
     <%= kink.name %>
     <% if link && kink.is_starred?(link.user) %>

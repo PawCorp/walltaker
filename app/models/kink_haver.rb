@@ -1,7 +1,7 @@
 class KinkHaver < ApplicationRecord
   MAXIMUM_STARRED_KINKS = 3
 
-  validates_uniqueness_of :kink_id, scope: :user_id
+  validates_uniqueness_of :kink_id, scope: :user_id, message: 'must only appear once'
   validate :user_has_less_than_the_maximum_number_of_starred_kinks, on: :starring
 
   belongs_to :user

@@ -1,0 +1,7 @@
+<%# locals: (type:, msg:) -%>
+
+<%= turbo_frame_tag [type, msg].map(&:parameterize).join('_') do %>
+  <%= tag.div class: "flash flash--#{type == 'notice' ? 'success' : 'danger'}" do %>
+    <%= msg %>
+  <% end %>
+<% end %>

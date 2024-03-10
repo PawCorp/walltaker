@@ -71,13 +71,7 @@
   </div>
 </header>
 
-<div class="flashes">
-  <% flash.each do |type, msg| %>
-    <div class="flash--<%= type == 'notice' ? 'success' : 'danger' %>">
-      <%= msg %>
-    </div>
-  <% end %>
-</div>
+<%= render 'application/flashes' %>
 
 <% if current_user %>
   <div class="hang">
