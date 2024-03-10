@@ -641,6 +641,16 @@ form.button_to {
     font-size: 1.2em;
 }
 
+.friendship__actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+
+    & > * {
+        word-break: keep-all;
+    }
+}
+
 label ion-icon {
     font-size: 1.1rem;
     transform: translateY(0.1rem);
@@ -822,6 +832,7 @@ a.small:hover {
 
 .accent-block.danger {
     border: 2px solid var(--danger);
+    padding-bottom: calc(1.5rem - 2px);
 }
 
 .accent-block.danger > p {
@@ -1498,4 +1509,17 @@ pre code.hljs {
     padding: 0;
     border: 0;
     margin: 0;
+}
+
+.important {
+    font-size: 1.5em;
+    text-align: center;
+    background: var(--accent);
+    padding: 1rem;
+    color: var(--bg) !important;
+    text-shadow: none !important;
+
+    strong {
+        text-decoration: underline;
+    }
 }

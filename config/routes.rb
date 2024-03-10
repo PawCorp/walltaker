@@ -97,6 +97,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :surrenders
+
   get '/settings', to: 'settings#index', as: 'settings'
   post '/settings', to: 'settings#save'
 

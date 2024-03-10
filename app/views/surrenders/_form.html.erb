@@ -1,0 +1,10 @@
+<%# locals: (surrender:, friendship_options:) -%>
+
+<%= form_with model: surrender do |f| %>
+  <%= f.label :friendship, class: 'form__row' do %>
+    Surrender To
+    <%= f.select :friendship, friendship_options %>
+  <% end %>
+
+  <%= f.submit "Give them my account for up to 24hrs", class: 'danger-button accent-block__button' %>
+<% end %>

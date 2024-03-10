@@ -104,9 +104,9 @@ h2 > span > .text-charm__medal:hover {
     margin: 0.5rem 0 1rem;
 }
 
-.api-key .danger-button {
-    background: var(--danger);
-    color: #FFF;
+.danger-button {
+    background: var(--danger) !important;
+    color: #FFF !important;
 }
 
 @media screen and (max-width: 475px) {

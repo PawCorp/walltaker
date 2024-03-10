@@ -9,9 +9,10 @@ class User < ApplicationRecord
   has_many :ahoy_visits, :class_name => 'Ahoy::Visit'
   has_many :kink_havers
   has_many :kinks, -> { order(is_starred: :desc, id: :desc) }, through: :kink_havers
-  has_many :surrenders, dependent: :destroy
   attribute :colour_preference, :integer
   belongs_to :viewing_link, foreign_key: :viewing_link_id, class_name: 'Link', optional: true
+
+  has_one :current_surrender, class_name: 'Surrender', dependent: :destroy
 
   validates_uniqueness_of :username
 
