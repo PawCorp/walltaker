@@ -78,8 +78,8 @@ class KinkController < ApplicationController
       kink_haver = @kink.had_by(current_user)
 
       if @kink.had_by(current_user)
-        kink_haver.is_starred = !kink_haver.is_starred?
-        kink_haver.save
+        result = kink_haver.toggle_star
+        redirect_to user_kinks_path(current_user.username), alert: kink_haver.errors.full_messages.join("\n") unless result
       else
         redirect_to user_kinks_path(current_user.username), alert: 'Something went wrong'
       end

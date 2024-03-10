@@ -220,6 +220,10 @@ h2.with-chart #chart-1 {
     margin-top: 1rem;
 }
 
+#kink_tools {
+    margin-top: 1rem;
+}
+
 .kink_form {
     gap: 0 !important;
 }
@@ -290,13 +294,17 @@ h2.with-chart #chart-1 {
     margin: 0;
     padding: 0 0.5rem;
     height: 100%;
-    aspect-ratio: 1 / 1;
     font-size: 1.2rem;
-    width: initial !important;
+    width: 39px !important;
+    height: 38px;
 }
 
 .kink__status {
     display: contents;
+}
+
+.kink ion-icon.star {
+    margin-left: 0.5rem;
 }
 
 .user_segments {
