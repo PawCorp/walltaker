@@ -4,14 +4,14 @@
       <ion-icon role="presentation" name="eye-off"></ion-icon>
       Only you see this
     </div>
-    <%= form_with(model: orgasm, class: 'orgasms') do |form| %>
+    <%= form_with(model: orgasm, class: 'orgasms orgasms-log') do |form| %>
       <h2>
         <ion-icon role="presentation" name="ice-cream" class="big"></ion-icon>
         Orgasm
       </h2>
 
       <p>
-        A logged orgasm is recorded on your public profile, and will benefit your ranking on the browse page! It's also just fun.
+        An orgasm will be recorded on your public profile for everyone to see! It's fun!
       </p>
 
       <div class="flashes">
@@ -21,6 +21,19 @@
           </div>
         <% end %>
       </div>
+
+      <%
+        options = grouped_options_for_select({
+                                               'Your Pornlizard': [pornlizard.username],
+                                               Friends: friends.map { |u| u.username },
+                                               'Recent Interactions': recent_setters.map { |u| u.username }
+                                             })
+      %>
+
+      <h3>Credit a user for causing this orgasm</h3>
+      <%= form.label :caused_by, class: 'form__row' do %>
+        <%= form.select :caused_by, options, include_blank: "No Credit" %>
+      <% end %>
 
       <h3>Satisfaction rating for this orgasm</h3>
       <div class="orgasms__rating">
@@ -61,9 +74,7 @@
         <%= form.check_box :is_ruined %>
       <% end %>
 
-      <div>
-        <%= form.submit 'Log Orgasm' %>
-      </div>
+      <%= form.submit 'Log Orgasm', class: "accent-block__button" %>
     <% end %>
   </div>
 <% end %>

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   after_action :track_visit, only: %i[new show edit]
+  before_action :authorize, only: %i[update]
 
   def new
     @user = User.new
@@ -7,7 +8,14 @@ class UsersController < ApplicationController
 
   def show
     set_user_vars
-    @total_orgasms_by_day = Nuttracker::Orgasm.all.where(user: @user).where('created_at > ?', 1.weeks.ago.midnight).group_by_day(:created_at, range: 1.weeks.ago.midnight..Time.now).count
+    @total_orgasms_by_day = @user.orgasms.where('created_at > ?', 1.weeks.ago.midnight).group_by_day(:created_at, range: 1.weeks.ago.midnight..Time.now).count
+    @total_orgasms_caused = @user.caused_orgasms.where('caused_by_user_id <> user_id').count unless @user.username == 'gray'
+    @total_orgasms_caused = Nuttracker::Orgasm.count if @user.username == 'gray'
+  end
+
+  def sets
+    @user = User.find_by(username: params[:username])
+    @past_links = PastLink.where(set_by_id: @user.id).order(id: :desc).limit(50)
   end
 
   def edit
@@ -25,6 +33,10 @@ class UsersController < ApplicationController
     @user.details = user_params[:details]
     if @user.save
       track :regular, :updated_details
+
+      if @user.current_surrender
+        Notification.create user: @user, notification_type: :surrender_event, link: user_path(@user.username), text: "#{@user.current_surrender.controller.username} changed a profile setting."
+      end
       redirect_to user_path(@user.username), { notice: 'Successfully updated user.' }
     else
       track :error, :updating_details_went_wrong
@@ -33,10 +45,15 @@ class UsersController < ApplicationController
   end
 
   def create
+    if current_visit&.banned_ip.present?
+      return
+    end
+
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
       track :regular, :signed_up_and_first_log_in
+      ahoy.authenticate(@user)
       redirect_to url_for(controller: :links, action: :index), notice: 'Thank you for signing up!'
     else
       track :error, :failed_to_sign_up, errors: @user.errors
@@ -49,7 +66,7 @@ class UsersController < ApplicationController
   end
   def password_reset
     begin
-      user = User.find_by(email: params['email'])
+      user = User.where("lower(email) = ?", params[:email]&.downcase).first
 
       unless user
         throw :nefarious
@@ -58,7 +75,7 @@ class UsersController < ApplicationController
       PasswordResetMailer.reset_password(user).deliver
       redirect_to login_path, notice: 'A password reset email has been sent to that user'
     rescue
-      track :nefarious, :failed_to_reset_password, tried_email: params['email']
+      track :nefarious, :failed_to_reset_password, tried_email: params['email'], exception: $!
       redirect_to forgor_path, alert: 'User was not found with that email'
     end
   end

@@ -1,0 +1,11 @@
+<%= turbo_frame_tag 'mascot_picker', class: "mascot-picker" do %>
+  <%= button_to api_mascot_next_path, data: {'turbo-frame': 'title'}, title: 'next mascot' do %>
+    <ion-icon name="caret-forward"></ion-icon>
+  <% end %>
+
+  <%= button_to api_pervert_toggle_path, data: {'turbo-frame': 'title'}, title: 'naughty toggle' do %>
+    <%= current_user&.pervert ? '>_<' : 'OwO' %>
+  <% end %>
+
+  <em><%= current_user&.mascot&.capitalize %></em>
+<% end %>

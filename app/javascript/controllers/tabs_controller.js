@@ -1,5 +1,5 @@
 import {Controller} from "@hotwired/stimulus"
-import {WithModal} from '../modules/Modal'
+import {WithModal} from 'modules/modal'
 
 export default class TabsController extends Controller {
     static targets = ['tab', 'label']

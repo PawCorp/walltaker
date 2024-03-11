@@ -1,9 +1,13 @@
 class PornSearchController < ApplicationController
   def index
-
+    @link = Link.find(params[:link]) if params[:link]
   end
 
   def search
+    if current_visit&.banned_ip.present?
+      return
+    end
+
     @page_number = porn_search_params[:page_number].to_i
     @page_number = 1 if @page_number == 0
 
@@ -18,7 +22,15 @@ class PornSearchController < ApplicationController
 
       track :regular, :search_e621_on_link, search: porn_search_params[:tags]
 
-      redirect_to :index if @posts.nil?
+      # I'm sorry lol
+      if porn_search_params[:full_rerender].present?
+        return render turbo_stream: [
+          turbo_stream.replace('pornsearch_input', partial: 'porn_search/input'),
+          turbo_stream.replace('pornsearch_results', template: 'porn_search/search')
+        ]
+      end
+
+      return render :index if @posts.nil?
 
     elsif porn_search_params[:message_thread].present?
       @message_thread = MessageThread.find(porn_search_params[:message_thread])
@@ -43,6 +55,6 @@ class PornSearchController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def porn_search_params
-    params.permit(:tags, :after, :before, :page_number, :link, :message_thread, :message, :return_to_path)
+    params.permit(:tags, :after, :before, :page_number, :link, :message_thread, :message, :return_to_path, :full_rerender)
   end
 end

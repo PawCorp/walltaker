@@ -1,0 +1,87 @@
+<% content_for :step do %>
+  <div class="guide__container">
+    <div class="guide guide--blacklist">
+      <div class="thought thought--large">
+        No problem hun!</br>
+        We should really get to work though! This fresh link is some nice work, but it's a bit boring at the moment,
+        maybe even a little dangerous!
+      </div>
+      <%= image_tag 'mascot/TaylorSFW.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 160 %>
+    </div>
+
+    <div class="link-preview link-preview--static">
+      <%= render @link %>
+    </div>
+  </div>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      Without a blacklist, someone could send you really shocking posts!
+    </p>
+  </blockquote>
+
+  <blockquote class="right">
+    <p>
+      Probably from me heheheheheheheh
+    </p>
+    <div><%= image_tag 'mascot/WarrenHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      Well, yes that sometimes does happen, where someone picks a wallpaper that they think you might like, but ends up
+      being something you'd rather not see. <strong>But there's also assholes out there that just like posting the worst E621
+      has to offer!</strong> We need to have a strong blacklist to put these dicks in their place!
+    </p>
+  </blockquote>
+
+  <blockquote class="right">
+    <p>
+      You can put my dick... You can put in place... My dick can be put in place by...
+    </p>
+    <div><%= image_tag 'mascot/WarrenHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      ...
+    </p>
+  </blockquote>
+
+  <blockquote class="right">
+    <p>
+      I want to fuck your cunt again.
+    </p>
+    <div><%= image_tag 'mascot/WarrenHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      ... you tried at least.
+    </p>
+  </blockquote>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      <strong><%= current_user.username.capitalize %>, could you choose the level of control you'd like by default?</strong> Keeping in mind people like him (<%= image_tag 'mascot/WarrenHead.png', size: '25' %>) exist. I've highlighted the one most people choose for you, but if you're new, I suggest going 1 level up.
+    </p>
+  </blockquote>
+
+  <div class="accent-block choice">
+    <div class="accent-block__charm">
+      <ion-icon role="presentation" name="build"></ion-icon>
+      You choose!
+    </div>
+
+    <%= button_to 'Maximum! I always use protection.', apply_link_wizard_path(protect: 5), class: 'secondary' %>
+    <%= button_to 'Higher! The internet scares me.', apply_link_wizard_path(protect: 4), class: 'secondary' %>
+    <%= button_to 'Normal. I know how the internet works.', apply_link_wizard_path(protect: 3) %>
+    <%= button_to 'Lower! I love how the internet works.', apply_link_wizard_path(protect: 2), class: 'secondary' %>
+    <%= button_to 'None! Shrek and nazi fan art excites me!', apply_link_wizard_path(protect: 1), class: 'secondary' %>
+  </div>
+<% end %>

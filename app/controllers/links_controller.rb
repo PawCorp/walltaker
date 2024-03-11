@@ -15,6 +15,7 @@ class LinksController < ApplicationController
   before_action :prevent_public_expired, only: %i[show update]
   before_action :protect_friends_only_links, only: %i[show update]
   before_action :skip_unauthorized_requests, only: %i[update toggle_ability], if: -> { update_request_unsafe? }
+  before_action :disallow_surrendered_accounts, only: %i[update]
 
   # 4. save presence + analytics
   after_action :log_presence, only: %i[show]
@@ -28,20 +29,22 @@ class LinksController < ApplicationController
   # GET /browse (all online links)
   def browse
     # FUCK YOU, I join what I want, get ready for the query from hell
-    @links = Link.all
-                 .where(friends_only: false)
-                 .is_online
-                 .and(
-                   Link.all.where('expires > ?', Time.now).or(Link.all.where(never_expires: true))
-                 )
-                 .joins(:user)
-                 .joins(:past_links)
-                 .where('past_links.created_at = (SELECT MAX(created_at) FROM past_links WHERE past_links.link_id = links.id)')
-                 .order(Arel.sql(%q{
-                    CASE WHEN users.created_at > now() - interval '8 hours' THEN 1 ELSE 0 END DESC,
+    science_links = Rails.cache.fetch("v2/browselinks", expires_in: 4.minutes) do
+      Link.all
+          .is_public
+          .is_online
+          .joins(:user)
+          .joins(:past_links)
+          .where('past_links.created_at = (SELECT MAX(created_at) FROM past_links WHERE past_links.link_id = links.id)')
+          .order(Arel.sql(%q{
                     past_links.created_at - make_interval(secs := users.set_count * 6) ASC
                  }))
+          .limit(18)
+          .pluck(:id)
+    end
 
+    @new_user_links = Link.joins(:user).is_public.is_online.where('users.created_at': 12.hours.ago..Time.now).order('RANDOM()').limit(3)
+    @links = Link.where(id: science_links)
   end
 
   # GET /links/1 or /links/1.json
@@ -116,6 +119,13 @@ class LinksController < ApplicationController
                                   track :regular, :update_link_details
                                   did_save_successfully
                                 else
+                                  if current_user&.quarantined || current_visit&.banned_ip.present?
+                                    redirect_to new_session_url, alert: 'Error 500, service/E621 down?'
+                                    return
+                                  end
+                                  if current_user&.current_surrender
+                                    Notification.create user: current_user, notification_type: :surrender_event, link: link_path(@link), text: "#{current_user.current_surrender.controller.username} set a new wallpaper for #{@link.user.username}"
+                                  end
                                   assign_e621_post_to_self e621_post, @link
                                 end
 
@@ -154,14 +164,7 @@ class LinksController < ApplicationController
   end
 
   def toggle_ability
-    able_to = @link.check_ability params['ability']
-    if able_to
-      track :regular, :disabled_ability, ability_name: params['ability']
-      @link.abilities.delete_by ability: params['ability']
-    else
-      track :regular, :enabled_ability, ability_name: params['ability']
-      @link.abilities.create ability: params['ability']
-    end
+    @link.toggle_ability params['ability']
     redirect_to edit_link_path @link
   end
 
@@ -252,7 +255,7 @@ class LinksController < ApplicationController
     @is_expired = @link.never_expires ? false : @link.expires <= Time.now.utc
     current_user_is_not_owner = current_user && current_user.id != @link.user.id
     not_logged_in = current_user.nil?
-    redirect_to root_url, alert: 'That link was expired!' if @is_expired && (current_user_is_not_owner || not_logged_in)
+    redirect_to root_url, alert: 'That link has expired!' if @is_expired && (current_user_is_not_owner || not_logged_in)
   end
 
   def do_link_request_test
@@ -291,7 +294,8 @@ class LinksController < ApplicationController
       current_user.set_count = current_user.set_count.to_i + 1
       current_user.save
     end
-    track :regular, :update_link_post, attempted_post_id: params['link'][:post_id]
-    PastLink.log_link(link).save
+    past_link = PastLink.log_link(link)
+    past_link.save
+    track :regular, :update_link_post, attempted_post_id: params['link'][:post_id], past_link_id: past_link.id
   end
 end

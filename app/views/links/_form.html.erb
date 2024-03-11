@@ -152,7 +152,8 @@
             </strong>
             <p>
               <% if can_show_videos %>
-                Videos and GIFs can be selected, not just images. Currently, only the Wallpaper Engine client supports videos.
+                Videos and GIFs can be selected, not just images. Currently, only the Wallpaper Engine client supports
+                videos.
               <% else %>
                 Videos and GIFs cannot be selected, only images are selectable. (Default)
               <% end %>
@@ -179,7 +180,8 @@
             <p>
               <% if can_be_set_by_porn_bot %>
                 Your wallpaper will be changed by our resident horny robot: PornBot. They (a gender-defying icon) select
-                a highly-rated post that matches your blacklist rules.
+                a highly-rated post that matches your blacklist rules. PornBot has no preferences unlike the
+                PornLizards.
               <% else %>
                 Your wallpaper will not changed by our resident horny robot: PornBot. You will only get wallpapers from
                 fleshy human-beings.
@@ -189,6 +191,79 @@
           <div class="abilities__ability__controls">
             <%= button_to toggle_link_ability_link_path(ability: :can_be_set_by_porn_bot), method: :post, class: can_be_set_by_porn_bot ? 'enabled' : 'disabled' do %>
               <%= can_be_set_by_porn_bot ? 'Disallow PornBot' : 'Allow PornBot' %>
+            <% end %>
+          </div>
+        </div>
+        <div class="abilities__ability">
+          <%
+            can_be_set_by_lizard = link.check_ability 'can_be_set_by_lizard'
+            lizard = current_user.mascot || 'ki'
+          %>
+
+          <div class="abilities__ability__title">
+            <strong>
+              <% if can_be_set_by_lizard %>
+                <%= image_tag "mascot/#{lizard.capitalize}Head.png", class: 'mascot', height: 25, width: 25 %>
+              <% else %>
+                <ion-icon name="hand-left"></ion-icon>
+              <% end %>
+              <%= current_user&.pervert ? 'Perverted ' : '' %><%= lizard.capitalize %>
+              is <%= can_be_set_by_lizard ? 'welcomed' : 'turned away' %>
+            </strong>
+            <p>
+              <% if can_be_set_by_lizard %>
+                Your wallpaper will be changed by your selected PornLizard <%= lizard.capitalize %>
+                ! <%= lizard_to_description(lizard, current_user&.pervert || false) %>
+              <% else %>
+                Your wallpaper will not changed by any of the PornLizards. It's kind of their thing, you should let at
+                least one mess with you! I'm sure <%= lizard.capitalize %> is horny. If you'd like to pick another,
+                choose one from the site header.
+              <% end %>
+            </p>
+          </div>
+          <div class="abilities__ability__controls">
+            <%= button_to toggle_link_ability_link_path(ability: :can_be_set_by_lizard), method: :post, class: can_be_set_by_lizard ? 'enabled' : 'disabled' do %>
+              <%= can_be_set_by_lizard ? "Disallow #{lizard.capitalize}" : "Allow #{lizard.capitalize}" %>
+            <% end %>
+          </div>
+        </div>
+        <div class="abilities__ability">
+          <% is_kink_aligned = link.check_ability 'is_kink_aligned' %>
+
+          <div class="abilities__ability__title">
+            <strong>
+              <% if is_kink_aligned %>
+                <ion-icon name="bookmark"></ion-icon>
+              <% else %>
+                <ion-icon name="flame"></ion-icon>
+              <% end %>
+              Profile Kinks are <%= is_kink_aligned ? 'enforced' : 'ignored' %>
+            </strong>
+            <p>
+              <% if is_kink_aligned %>
+                At least 1 of your user profile kinks will be required to appear on posts sent to this link. Be careful!
+                It's easy to make a configuration that no one can change easily! No one wants to skim massive tag lists
+                just to find something for you.
+              <% else %>
+                Your wallpaper configuration is unaffected by your user profile kinks. All the configuration relative to
+                this link is shown on this page, nothing else affects it.
+              <% end %>
+            </p>
+            <% if is_kink_aligned %>
+              <%= turbo_frame_tag :kink_tools do %>
+                <div class="kink_tools">
+                  <div class="kinks">
+                    <%= render 'kink/kinks', kinks: current_user&.kinks, is_current_user: true %>
+
+                    <%= render 'kink/form', kink: Kink.new %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="abilities__ability__controls">
+            <%= button_to toggle_link_ability_link_path(ability: :is_kink_aligned), method: :post, class: is_kink_aligned ? 'enabled' : 'disabled' do %>
+              <%= is_kink_aligned ? 'Be less strict' : 'Be strict' %>
             <% end %>
           </div>
         </div>

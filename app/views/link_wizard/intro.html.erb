@@ -1,0 +1,23 @@
+<% content_for :step do %>
+  <p>
+    OH! Hi, we were expecting you! Let me get the link-mages in here to get this on a roll! They will need a little
+    input from you, but it won't take long! I promise! There's just one little thing we need to get out of the way.
+  </p>
+  <p>
+    Could you also, like, <em>just for joke or whatever,</em> just like...
+    <strong>vocalize your undying gratitude for porn and it's unrelenting desire to overtake humanity?</strong>
+  </p>
+
+  <div class="accent-block choice">
+    <div class="accent-block__charm">
+      <ion-icon role="presentation" name="build"></ion-icon>
+      You choose!
+    </div>
+
+    <%= button_to 'FUCK YES I FUCKING LOVE LORD PORN', apply_link_wizard_path(gooner: true) %><br/>
+
+    <%= button_to 'Oh... ok? Porn is... great?', next_wizard_path(gooner: false), method: :get %><br/>
+
+    <%= button_to 'No shut up', next_wizard_path(gooner: false), method: :get %>
+  </div>
+<% end %>

@@ -1,5 +1,5 @@
 class PasswordResetMailer < ApplicationMailer
-  default :from => 'gray.pup@pawcorp.org'
+  default :from => 'mailgun@walltaker.joi.how'
   
   # @param [User] user
   def reset_password(user)

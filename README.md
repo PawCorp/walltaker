@@ -6,19 +6,29 @@ https://walltaker.joi.how
 ## What is it?
 
 Walltaker is inspired by the [WallClaimer](https://www.wallclaimer.com/) app, which allows you to set the wallpaper of
-your friends phones. This however leads to some weird cases where people post stuff that'd be on your metaphorical
+your friend's phones. This however leads to some weird cases where people post stuff that'd be on your metaphorical
 blacklist. With that in mind, I wanted it to be restricted to e621.net results, with an enforced blacklist. This keeps
 you in control, but not _too much_ control.
 
 ## Clients
 A client is required to set the wallpaper of a device. Here are some made by the awesome community!
 
-| client                                                                                        | platforms                                                                                 |
+#### Desktop
+
+| Client                                                                                        | Platforms                                                                                 |
 |-----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
-| [walltaker-desktop-client](https://github.com/PawCorp/walltaker-desktop-client)               | windows/mac/linux                                                                         |
-| [walltaker-android-client](https://github.com/PawCorp/walltaker-android-client)               | android                                                                                   |
-| [Lycraon's Wallpaper Engine Client](https://github.com/Lycraon/Walltaker-for-WallpaperEngine) | [Wallpaper Engine](https://store.steampowered.com/app/431960/Wallpaper_Engine/) (windows) |
-| [Deanskond's Automate Client](https://github.com/Deanskond/walltaker_automate)                | [Automate App](https://llamalab.com/automate/) (android)                                  |
+| [Chewtoy's Walltaker Engine](https://github.com/dogkisser/walltaker-engine/releases)          | Windows                                                                                   |
+| [JBerliner's Walltaker.sh](https://gitlab.com/JBerliner/walltaker-client)                     | Linux                                                                                     |
+| [Lycraon's Wallpaper Engine Client](https://github.com/Lycraon/Walltaker-for-WallpaperEngine) | [Wallpaper Engine](https://store.steampowered.com/app/431960/Wallpaper_Engine/) (Windows) |
+| [MacOS Client](https://github.com/PawCorp/walltaker-macos/releases/latest)                    | MacOS                                                                                     |
+
+#### Mobile
+
+| Client                                                                                        | Platforms                                                                                 |
+|-----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| [Deanskond's Automate Client](https://github.com/Deanskond/walltaker_automate)                | [Automate App](https://llamalab.com/automate/) (Android)                                  |
+| [Gios' Client](https://github.com/gios2/Walltaker-Changer/releases/latest)                    | Android                                                                                   |
+| [iOS Widget](https://github.com/PawCorp/walltaker/blob/main/ios.md#ios-widget)                | iOS                                                                                       |
 
 ## API Guide
 _Make your own client!_
@@ -41,7 +51,7 @@ Get the current post details for a given link.
   "id": 1, // The ID, you already know this
   "expires": "2025-03-05T00:00:00.000Z", // Expiry timestamp, will be inaccessible after this time
   "username": "gray", // The user this refers to, queryable at the /api/user/[username] endpoint.
-  "terms": "I'm trying out something new, break this please! :)", // Open text feild for user to describe terms of posting
+  "terms": "I'm trying out something new, break this please! :)", // Open text field for user to describe terms of posting
   "blacklist": "feet blood", // e621 style blacklist
   "post_url": "https://static1.e621.net/data/5d/87/5d87428c4839b0dc7d585b87a25af61a.png", // Full size post image
   "post_thumbnail_url": "https://static1.e621.net/data/preview/5d/87/5d87428c4839b0dc7d585b87a25af61a.jpg", // Thumnail size post image
@@ -61,7 +71,7 @@ Get the current post details for a given link.
 
 🔑 Requires user's API Key
 
-Set a reponse for a given link. There are 3 kinds of responses.
+Set a response for a given link. There are 3 kinds of responses.
 
 | `type`      | Shown In UI as | Effect                                                                                |
 |-------------|----------------|---------------------------------------------------------------------------------------|

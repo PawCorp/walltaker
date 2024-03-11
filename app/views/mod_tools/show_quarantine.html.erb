@@ -1,0 +1,89 @@
+<div class="task-tools">
+  <div class="left">
+    <%= link_to "Cancel", mod_tools_index_path %>
+  </div>
+</div>
+
+<h2>
+  <ion-icon role="presentation" name="nuclear" class="big"></ion-icon>
+  Quarantine Accounts
+  <small>Gray trusts you.</small>
+</h2>
+
+<%= turbo_frame_tag 'quarantine_table' do %>
+  <table>
+    <tr>
+      <th>User</th>
+      <th>Created at</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+    <% @users.each do |user| %>
+      <%
+        visits = user.ahoy_visits.where("started_at > ?", 3.days.ago)
+        sets = user.past_links.where("created_at > ?", 3.days.ago).order(id: :desc)
+        set_count = sets.count
+      %>
+      <tr id="<%= dom_id user %>">
+        <td>
+          <%= link_to mod_tools_quarantine_index_url(anchor: dom_id(user)), class: 'no-underline', target: '_top' do %>
+            <ion-icon name="link"></ion-icon>
+          <% end %>
+          <%= link_to mod_tools_users_index_url(email: user.email), target: '_blank' do %>
+            <%= user.username %>
+          <% end %>
+        </td>
+        <td>
+          <%= user.created_at %><br/>
+          <strong>Created <%= time_ago_in_words user.created_at %> ago</strong>
+        </td>
+        <td rowspan="2">
+          <% if user.quarantined %>
+            <strong>
+              <ion-icon name="skull"></ion-icon>
+              Quarantined</strong>
+          <% else %>
+            <ion-icon name="accessibility"></ion-icon>
+            Allowed
+          <% end %>
+        </td>
+        <td rowspan="2" width="110">
+          <% if user.quarantined %>
+            <%= button_to 'Revive', mod_tools_quarantine_update_path(user) %>
+          <% else %>
+            <%= button_to 'Quarantine', mod_tools_quarantine_update_path(user) %>
+            <%= button_to 'IP Ban', mod_tools_quarantine_ipban_path(user) if visits.count > 0 %>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+          <h3 style="margin-top: 0; font-size: 0.8rem; font-weight: bold">Recent activity:</h3>
+          <% if set_count > 1 %>
+            <% avg = ((sets.first.created_at - sets.last.created_at) / set_count).round(2) %>
+            <% if avg < 10.minutes %>
+              <ion-icon name="warning"></ion-icon>
+            <% end %>
+            <% if avg < 1.minute %>
+              <strong>REALLY LOW!!</strong> &nbsp;
+            <% end %>
+            <%= avg %> seconds between sets recently (<%= set_count %> total)
+          <% else %>
+            Set <%= pluralize set_count, 'wallpaper' %> recently.
+          <% end %><br/>
+
+          <em>Visited <%= pluralize visits.count, 'time' %> in the last 3 days</em>
+          <ol>
+            <% visits.each do |visit| %>
+              <li>
+                <%= visit.banned_ip.present? ? "❌ IPBANNED BY #{visit.banned_ip.banned_by.username.upcase}" : '' %>
+                <%= visit.ip %> <%= visit.user_agent %>,
+                <strong><%= time_ago_in_words visit.started_at %> ago</strong></li>
+            <% end %>
+          </ol>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

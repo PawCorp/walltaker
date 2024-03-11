@@ -5,13 +5,12 @@ require_relative "application"
 Rails.application.initialize!
 
 ActionMailer::Base.smtp_settings = {
-  :user_name => 'apikey', # This is the string literal 'apikey', NOT the ID of your API key
-  :password => ENV['SENDGRID_API_KEY'], # This is the secret sendgrid API key which was issued during API key creation
-  :domain => 'pawcorp.org',
-  :address => 'smtp.sendgrid.net',
-  :port => 587,
-  :authentication => :plain,
-  :enable_starttls_auto => true
+  :port => ENV['MAILGUN_SMTP_PORT'],
+  :address => ENV['MAILGUN_SMTP_SERVER'],
+  :user_name => ENV['MAILGUN_SMTP_LOGIN'],
+  :password => ENV['MAILGUN_SMTP_PASSWORD'],
+  :domain => 'walltaker.joi.how',
+  :authentication => :plain
 }
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.perform_deliveries = true

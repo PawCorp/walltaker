@@ -1,0 +1,27 @@
+<%
+  mascot = current_user&.mascot || 'ki'
+
+  if request.env['action_dispatch.exception'].present?
+    exception = request.env['action_dispatch.exception']
+    trace = Rails.backtrace_cleaner.clean(exception.backtrace)
+  end
+%>
+
+<h4>
+  500: Oopsie whoopsie
+</h4>
+
+<p>
+  The site has shit the bed in a new and unique way! Gray will want to see the error shown below. Send it to him on
+  discord please!
+</p>
+
+<code>
+  <pre><%= trace.join("\n") %></pre>
+</code>
+
+<div class="center">
+  <%= image_tag 'mascot/WarrenBadEnd.png', width: 320 if mascot == 'warren' %>
+  <%= image_tag 'mascot/TaylorBadEnd.png', width: 320 if mascot == 'taylor' %>
+  <%= image_tag 'mascot/KiShrug.png', width: 320 if mascot == 'ki' %>
+</div>

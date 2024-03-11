@@ -1,3 +1,80 @@
+#new-user-links {
+    margin-bottom: 1rem;
+}
+
+strong.search-heading {
+    margin-top: 1.5rem;
+    display: block;
+    text-align: center;
+}
+
+.browse-links__subheading {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.browse-links__subheading h3 {
+    margin: 0;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    padding: 0.8rem 1rem;
+    background: var(--disabled);
+    display: inline-block;
+    border-radius: 4px;
+}
+
+.browse-links__subheading p {
+    margin: 0;
+    flex: 1 1 100px;
+    color: var(--text-light);
+    font-size: 0.75rem;
+}
+
+.woogle {
+    text-align: center;
+    font-size: 5rem;
+}
+
+.link-search {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    min-height: 40px;
+    justify-content: flex-end;
+}
+
+.link-search label {
+    display: flex;
+    gap: 0.5rem;
+    cursor: pointer;
+    align-items: center;
+    margin: 0;
+}
+
+.link-search label input[type=checkbox] {
+    margin: 0;
+    transform: translateY(-0.1em);
+}
+
+.link-search input[type=text] {
+    flex: 1 1 500px;
+}
+
+.link-search input[type=submit] {
+    flex: 1 1 100px;
+    padding: 0.5rem;
+}
+
+.link-search input[type=text],
+.link-search input[type=submit] {
+    margin: 0;
+    height: 100%;
+}
+
 .link {
     display: grid;
     position: relative;
@@ -14,6 +91,11 @@
                          'terms        blacklist'
                          'friends-only friends-only';
     overflow: hidden;
+    /* Extreme improvement to scrolling performance in firefox, minor improvement in chrome,
+    caused by excessive, expensive re-rendering of filtered images combined with blending modes. 
+    this style forces them into their own GPU surfaces, preventing the re-rendering at the cost of 
+    blending accuracy */
+    will-change: transform;
 }
 
 .text-light {
@@ -23,7 +105,8 @@
 
 /* browse page links list */
 @media screen and (min-width: 1220px) {
-    #links.browse-links {
+    #links.browse-links,
+    #new-user-links.browse-links {
         width: 100vw;
         position: relative;
         left: 50%;
@@ -34,18 +117,21 @@
         column-count: 2;
     }
 
-    #links.browse-links > * {
+    #links.browse-links > *,
+    #new-user-links.browse-links > * {
         page-break-inside: avoid;
         break-inside: avoid-column;
     }
 
-    #links.browse-links > *:first-child .link {
+    #links.browse-links > *:first-child .link,
+    #new-user-links.browse-links > *:first-child .link {
         margin-top: 0;
     }
 }
 
 @media screen and (min-width: 1620px) {
-    #links.browse-links {
+    #links.browse-links,
+    #new-user-links.browse-links {
         column-count: 3;
     }
 }
@@ -71,6 +157,11 @@
 
     .link--abilities {
         justify-content: flex-end;
+    }
+
+    .link--abilities .mascot {
+        transform: translateY(2px);
+        padding-right: 3px;
     }
 
     .link--theme > strong,
@@ -114,14 +205,23 @@
 }
 
 @media screen and (prefers-color-scheme: light) {
-    .link > .link--backdrop::before {
+    :root:not(.force-dark) .link > .link--backdrop::before {
         mix-blend-mode: color;
         filter: brightness(1);
     }
 
-    .link > .link--backdrop > img {
+    :root:not(.force-dark) .link > .link--backdrop > img {
         filter: contrast(0.55) brightness(1.4);
     }
+}
+
+:root.force-light .link > .link--backdrop::before {
+    mix-blend-mode: color;
+    filter: brightness(1);
+}
+
+:root.force-light .link > .link--backdrop > img {
+    filter: contrast(0.55) brightness(1.4);
 }
 
 .link em {
@@ -150,13 +250,19 @@ a:hover > .link {
     z-index: -1;
     mix-blend-mode: color-dodge;
     opacity: 0.3;
+    filter: contrast(150%) saturate(200%);
 }
 
 @media (prefers-color-scheme: light) {
-    .link::after {
+    :root:not(.force-dark) .link::after {
         mix-blend-mode: darken;
         opacity: 0.2;
     }
+}
+
+:root.force-light .link::after {
+    mix-blend-mode: darken;
+    opacity: 0.2;
 }
 
 .link--presence {
@@ -271,7 +377,7 @@ h4.forks-header > ion-icon {
 }
 
 .link--terms blockquote {
-    overflow-y: scroll;
+    overflow-y: auto;
     margin: 0 0 0 4px;
     position: absolute;
     top: 0;
@@ -556,7 +662,8 @@ turbo-frame#pornsearch_results .results {
     margin: 2rem 0;
 }
 
-turbo-frame#pornsearch_results .pornsearch_results__buttons {
+turbo-frame#pornsearch_results .pornsearch_results__buttons,
+.linksearch_results__buttons {
     display: flex;
     gap: 0.5rem;
     justify-content: space-between;
@@ -566,13 +673,15 @@ turbo-frame#pornsearch_results .pornsearch_results__buttons {
     border-radius: 0.3rem;
     overflow-x: hidden;
 }
-turbo-frame#pornsearch_results .pornsearch_results__buttons a {
+turbo-frame#pornsearch_results .pornsearch_results__buttons a,
+.linksearch_results__buttons a {
     padding: 0.5rem 1rem 0.5rem;
     background: var(--accent);
     color: var(--bg);
 }
 
-turbo-frame#pornsearch_results .pornsearch_results__buttons a[disabled] {
+turbo-frame#pornsearch_results .pornsearch_results__buttons a[disabled],
+.linksearch_results__buttons a[disabled] {
     pointer-events: none;
     background: var(--border);
     color: var(--disabled);
@@ -751,7 +860,7 @@ figure > a.background-sample > ion-icon.background-sample__icon--mobile {
 
 figcaption.link--description {
     max-height: 110px;
-    overflow: scroll;
+    overflow: auto;
     padding: 1rem 0.5rem;
 }
 
@@ -835,7 +944,7 @@ aside.comments-sidebar {
     position: fixed;
     top: 0;
     right: 0;
-    height: 100vh;
+    height: 100dvh;
     background: var(--bg);
     border-left: 1px solid var(--border);
     padding: 0 1rem 1rem;
@@ -944,7 +1053,7 @@ aside.comments-sidebar > button .toggle-badge[data-hidden=true] {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 999;
+    z-index: 90;
 }
 
 .link--anchor-shade-container {
@@ -969,9 +1078,33 @@ aside.comments-sidebar > button .toggle-badge[data-hidden=true] {
 
 .abilities__ability {
     display: flex;
-    gap: 1rem;
+    gap: 0.4rem 1rem;
 }
 
+.abilities__ability--disabled {
+    pointer-events: none;
+    position: relative;
+    flex-wrap: wrap;
+    background: var(--accent-bg);
+    outline: var(--accent-bg) 12px solid;
+    margin-top: calc(1rem + 10px) !important;
+}
+
+.abilities__ability--disabled::before {
+    content: 'Coming Soon';
+    display: block;
+    padding: 0.2rem 10px;
+    margin: -10px -10px 0.3rem -10px;
+    position: relative;
+    z-index: 99;
+    flex: 1 1 100%;
+    font-weight: bold;
+    background-image: linear-gradient(45deg, #ffb300 25%, #ab8118 25%, #ab8118 50%, #ffb300 50%, #ffb300 75%, #ab8118 75%, #ab8118 100%);
+    background-size: 56.57px 56.57px;
+    color: var(--bg);
+}
+
+.abilities__ability--disabled button,
 .abilities__ability__controls button.enabled {
     background: var(--bg);
     color: var(--accent);
@@ -998,6 +1131,11 @@ aside.comments-sidebar > button .toggle-badge[data-hidden=true] {
     font-size: 1.2em;
     transform: translateY(3px);
     margin-right: 0.3rem;
+}
+
+.abilities__ability__title .mascot {
+    transform: translateY(4px);
+    margin-right: 4px;
 }
 
 .video-icon {

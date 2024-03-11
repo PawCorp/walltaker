@@ -156,7 +156,7 @@
 }
 
 .dashboard__updates__content {
-    overflow-y: scroll;
+    overflow-y: auto;
     flex: 1 1 100%;
 }
 
@@ -223,4 +223,9 @@ turbo-frame#users_viewing_links {
 
 turbo-frame#users_viewing_links strong {
     color: var(--border);
+}
+
+.explainer_graphic {
+    padding: 2rem 0 0;
+    color: var(--text-light);
 }

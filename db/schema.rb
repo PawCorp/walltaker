@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_08_033253) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_10_184219) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
-  create_enum "ability", ["can_show_videos", "can_be_set_by_porn_bot"]
+  create_enum "ability", ["can_show_videos", "can_be_set_by_porn_bot", "can_be_set_by_lizard", "is_kink_aligned"]
 
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -106,6 +106,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_033253) do
     t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
   end
 
+  create_table "banned_ips", force: :cascade do |t|
+    t.string "ip_address"
+    t.bigint "banned_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ip_address"], name: "index_banned_ips_on_ip_address"
+  end
+
   create_table "blazer_audits", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "query_id"
@@ -179,6 +187,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_033253) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "crono_jobs", force: :cascade do |t|
+    t.string "job_id", null: false
+    t.text "log"
+    t.datetime "last_performed_at", precision: nil
+    t.boolean "healthy"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_crono_jobs_on_job_id", unique: true
+  end
+
   create_table "friendships", force: :cascade do |t|
     t.bigint "sender_id", null: false
     t.bigint "receiver_id"
@@ -188,6 +206,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_033253) do
     t.index ["receiver_id"], name: "index_friendships_on_receiver_id"
     t.index ["sender_id", "receiver_id"], name: "index_friendships_on_sender_id_and_receiver_id", unique: true
     t.index ["sender_id"], name: "index_friendships_on_sender_id"
+  end
+
+  create_table "kink_havers", force: :cascade do |t|
+    t.bigint "kink_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "is_starred", default: false, null: false
+    t.index ["kink_id"], name: "index_kink_havers_on_kink_id"
+    t.index ["user_id"], name: "index_kink_havers_on_user_id"
+  end
+
+  create_table "kinks", force: :cascade do |t|
+    t.string "name", limit: 30, null: false
+    t.boolean "works_on_e621", default: false, null: false
   end
 
   create_table "link_abilities", force: :cascade do |t|
@@ -221,6 +254,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_033253) do
     t.datetime "live_client_started_at", precision: nil
     t.string "custom_url"
     t.bigint "forked_from_id"
+    t.string "wizard_page"
     t.index ["forked_from_id"], name: "index_links_on_forked_from_id"
     t.index ["user_id"], name: "index_links_on_user_id"
   end
@@ -262,6 +296,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_033253) do
     t.integer "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "caused_by_user_id"
+    t.index ["caused_by_user_id"], name: "index_nuttracker_orgasms_on_caused_by_user_id"
     t.index ["user_id"], name: "index_nuttracker_orgasms_on_user_id"
   end
 
@@ -279,6 +315,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_033253) do
     t.index ["user_id"], name: "index_past_links_on_user_id"
   end
 
+  create_table "surrenders", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "friendship_id", null: false
+    t.datetime "expires_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["friendship_id"], name: "index_surrenders_on_friendship_id"
+    t.index ["user_id"], name: "index_surrenders_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "username"
@@ -290,8 +336,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_033253) do
     t.string "api_key", limit: 8
     t.integer "set_count", default: 0, null: false
     t.bigint "viewing_link_id"
-    t.integer "state"
     t.string "password_reset_token"
+    t.string "mascot"
+    t.boolean "pervert"
+    t.boolean "quarantined", default: false
+    t.integer "colour_preference", default: 0
     t.index ["email"], name: "unique_emails", unique: true
     t.index ["set_count"], name: "index_users_on_set_count", order: :desc
     t.index ["username"], name: "unique_usernames", unique: true
@@ -300,10 +349,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_033253) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "banned_ips", "users", column: "banned_by_id"
   add_foreign_key "comments", "links"
   add_foreign_key "comments", "users"
   add_foreign_key "friendships", "users", column: "receiver_id"
   add_foreign_key "friendships", "users", column: "sender_id"
+  add_foreign_key "kink_havers", "kinks"
+  add_foreign_key "kink_havers", "users"
   add_foreign_key "link_abilities", "links"
   add_foreign_key "links", "links", column: "forked_from_id"
   add_foreign_key "links", "users"
@@ -313,5 +365,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_033253) do
   add_foreign_key "past_links", "links", on_delete: :nullify
   add_foreign_key "past_links", "users"
   add_foreign_key "past_links", "users", column: "set_by_id"
+  add_foreign_key "surrenders", "friendships"
+  add_foreign_key "surrenders", "users"
   add_foreign_key "users", "links", column: "viewing_link_id"
 end

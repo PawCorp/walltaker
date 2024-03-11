@@ -1,0 +1,21 @@
+<% content_for :step do %>
+  <div class="link-preview">
+    <%= render @link %>
+  </div>
+
+  <div class="intro">
+    <div class="thought"><div>Lorem pussydom, dickolar sit amet, bussy pussy nbussy garry bussy, nostra ici construecteura linkus <%= @link.id %>, <em>fuckus penetronis!</em></div></div>
+    <%= image_tag 'mascot/Wizards.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 300 %>
+  </div>
+
+  <div class="accent-block choice">
+    <div class="accent-block__charm">
+      <ion-icon role="presentation" name="build"></ion-icon>
+      You choose!
+    </div>
+
+    <%= button_to 'Thanks cuties!', apply_link_wizard_path(impatient: false) %>
+
+    <%= button_to 'Thanks but... can we get a move on?', apply_link_wizard_path(impatient: true) %>
+  </div>
+<% end %>

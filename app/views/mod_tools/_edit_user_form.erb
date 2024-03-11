@@ -1,0 +1,16 @@
+<%= turbo_frame_tag :mod_tools_edit_user_form do %>
+  <%= link_to "Log in as #{user.username}", mod_tools_users_assume_path(user), target: '_top' %>
+  <%= form_with model: user, method: :post, url: mod_tools_users_update_path do |f| %>
+    <% user.class.columns.each do |col| %>
+      <div>
+        <%= f.label col.name.to_sym %>
+        <% if user.send(col.name).is_a?(TrueClass) || user.send(col.name).is_a?(FalseClass) %>
+          <%= f.check_box col.name.to_sym, value: user.send(col.name) %>
+        <% else %>
+          <%= f.text_field col.name.to_sym, value: user.send(col.name) %>
+        <% end %>
+      </div>
+    <% end %>
+    <%= f.submit %>
+  <% end %>
+<% end %>

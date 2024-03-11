@@ -1,16 +1,20 @@
 <% target = "link_details_#{link.id}" %>
-<% e621_url = "https://e621.net/posts?tags=#{ CGI.escape("md5:#{ link.post_url[/\w*(?=\.(png|jpg|bmp)$)/] }") }" if link.post_url %>
+<% e621_url = "https://e621.net/posts?md5=#{ CGI.escape(link.post_url[/\w*(?=\.(png|jpg|bmp|webm|gif)$)/]) }" if link.post_url %>
 <% client = link_agent_to_icon link.last_ping_user_agent %>
 <% devices = {
   desktop: :desktop,
   android: :mobile,
   joihow: :desktop,
   automate: :mobile,
+  arson_automate: :mobile,
   wallpaper_engine: :desktop,
   ioswidget: :mobile,
   swift: :desktop,
   android_changer: :mobile,
   jberliner: :desktop,
+  chewtoy: :desktop,
+  kemkem_userscript: :desktop,
+  xenofluff: :desktop,
   unknown: :desktop
 } %>
 <% device = devices[client] %>

@@ -1,0 +1,7 @@
+<%# locals: (kinks:, link:) -%>
+
+<%= turbo_frame_tag :kink_list, target: 'pornsearch' do %>
+  <% kinks.each do |kink| %>
+    <%= render 'kink/kink', kink:, is_current_user: false, destination: :search, link: %>
+  <% end %>
+<% end %>

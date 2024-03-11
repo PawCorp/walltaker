@@ -1,0 +1,21 @@
+<%# locals: (kink:, is_current_user: false, destination: :kink_show, link: nil, user: nil) -%>
+
+<%= turbo_frame_tag kink, class: ("kink #{kink.works_on_e621? ? 'valid' : 'untested'}") do %>
+  <%= link_to destination == :search ? porn_search_search_path(tags: kink.name, link:, full_rerender: true) : kink_show_path(kink), target: destination == :search ? 'pornsearch' : '_top' do %>
+    <%= kink.name %>
+    <% unless is_current_user %>
+      <% if (link && kink.is_starred?(link.user)) || (user && kink.is_starred?(user)) %>
+        <ion-icon name="star" class="big star"></ion-icon>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% if is_current_user %>
+    <%= button_to kink_toggle_star_path(kink) do %>
+      <ion-icon name="<%= kink.is_starred?(current_user) ? 'star' : 'star-outline' %>"></ion-icon>
+    <% end %>
+    <%= button_to kink_remove_path(kink), method: :delete do %>
+      <ion-icon name="trash"></ion-icon>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,0 +1,122 @@
+<% warren_thinks_youre_perverted = current_user.pervert || @link.blacklist.split(' ').length < 4 %>
+
+<% content_for :step do %>
+  <div class="guide__container">
+    <div class="guide guide--theme">
+      <div class="thought thought--large">
+        Perfect! I've typed up some blacklist items to best fit your trust level! This space feels really empty
+        though...
+      </div>
+      <%= image_tag 'mascot/TaylorSFW.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 160 %>
+    </div>
+
+    <div class="link-preview link-preview--static">
+      <%= render @link %>
+    </div>
+  </div>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      Your link terms is the best place to let people know what you like!
+    </p>
+  </blockquote>
+
+  <blockquote class="right">
+    <p>
+      Give us all the wet, sloppy, throbbing, sticky details!
+    </p>
+    <div><%= image_tag 'mascot/WarrenHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      Exactly! Be detailed, but keep it fun! Big walls of text are rarely read unless they are absolutely dripping in
+      horny sheen.
+    </p>
+  </blockquote>
+
+  <blockquote class="right">
+    <p>
+      Great place to pick up twinks. That's why I call my terms the certified bussy magnets.
+    </p>
+    <div><%= image_tag 'mascot/WarrenHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      I'm sure you're well accredited, Dr. Bussyterms.
+    </p>
+  </blockquote>
+
+  <blockquote class="right">
+    <p>
+      I am, thank you.
+    </p>
+    <div><%= image_tag 'mascot/WarrenHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <blockquote class="right">
+    <p>
+      Is that why you asked me go to the office store to laminate a picture of my ass with your named signed on it? They
+      kicked me out and said I can't bring nudes to the Staples ever again. They didn't even have any lick-n-stick gold
+      certification seals like you said they would!
+    </p>
+    <div><%= image_tag 'mascot/KiHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <blockquote class="right">
+    <p>
+      Staples isn't ready for my resea-
+    </p>
+    <div><%= image_tag 'mascot/WarrenHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      Warren shut up.
+    </p>
+  </blockquote>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      <strong><%= current_user.username.capitalize %>, could you write up a basic terms?</strong> I've taken the liberty
+      to give you a few prompts you can fill in. Feel free to expand on them, or start new! Remember, be detailed!
+    </p>
+  </blockquote>
+
+  <% if warren_thinks_youre_perverted %>
+    <blockquote class="right">
+      <p>
+        pssst, we're both perverts here based on how you're answering this quiz, so I spiced it up a bit!
+      </p>
+      <div><%= image_tag 'mascot/WarrenHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    </blockquote>
+  <% end %>
+
+  <div class="accent-block choice">
+    <div class="accent-block__charm">
+      <ion-icon role="presentation" name="build"></ion-icon>
+      You choose!
+    </div>
+
+    <%
+      default_terms = <<~BIO
+        #{warren_thinks_youre_perverted ? "I'm a huge fucking gooner" : "Hi! Please read my blacklist carefully just in case I haven't covered everything!"}
+        #{@link.blacklist.split(' ').length > 15 ? "Please NO EXTREME CONTENT.\n" : ''}My biggest turn ons are:
+        #{warren_thinks_youre_perverted ? "My new triggers are" : "I'm learning to like:"}
+
+        #{warren_thinks_youre_perverted ? "I'll let you know if you make me CUM >:)" : "Please make sure your choices fit well on my device!"}
+      BIO
+    %>
+
+    <%= form_with url: apply_link_wizard_path, class: 'full-width' do |f| %>
+      <%= f.text_area :terms, value: default_terms %>
+      <%= f.submit "I'm done!" %>
+    <% end %>
+  </div>
+<% end %>

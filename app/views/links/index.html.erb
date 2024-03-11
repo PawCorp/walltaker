@@ -5,6 +5,10 @@
     <%= link_to "Back to dashboard", root_path %>
   </div>
   <div class="right">
+    <a href="<%= spawn_link_links_path %>" title="Return to wizard" class="no-underline">
+      <ion-icon role="presentation" name="color-wand"></ion-icon>
+      Link Wizard
+    </a>
     <%= button_to "New link", new_link_path, method: :get %>
   </div>
 </div>
@@ -14,18 +18,4 @@
   Your Links
 </h2>
 
-<div id="links">
-  <% @links.each do |link| %>
-    <div data-controller="go" data-go-to-value="<%= link_url(link) %>">
-      <%= render link %>
-    </div>
-  <% end %>
-
-  <% if @links.count == 0 %>
-    <h4>No links?</h4>
-    <p>
-      You'll need to click <span class="mock-button">New link</span> in the toolbar to set up a link that others can use
-      to push wallpapers to your device.
-    </p>
-  <% end %>
-</div>
+<%= render 'links', links: @links %>

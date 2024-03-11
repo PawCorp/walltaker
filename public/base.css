@@ -69,12 +69,6 @@ input[type=checkbox]:checked::after {
     transform: translate(-50%, -50%) rotate(45deg);
 }
 
-@media (prefers-color-scheme: light) {
-    :root {
-        --border: #5b658a;
-    }
-}
-
 h1 > a {
     text-decoration: none;
     background: var(--accent);
@@ -104,12 +98,85 @@ body {
     font-size: 0.9rem;
 }
 
+main {
+    padding-top: 1rem;
+}
+
 body > header {
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
+    position: relative;
+}
+
+
+.mascot {
+    opacity: 1;
+}
+
+body > header h1 span {
+    position: relative;
+}
+
+body > header h1 span > .mascot {
+    position: absolute;
+    left: 50%;
+    bottom: -50px;
+    height: 190px;
+    transform: translateX(calc(-50% - 149px));
+    z-index: 0;
+
+    clip-path: inset(0 0 33px 5px);
+    transition: all 0.1s ease-out;
+}
+
+@media screen and (max-width: 900px) {
+    body > header h1 span > .mascot {
+        left: 50%;
+        bottom: -50px;
+        height: 140px;
+        transform: translateX(calc(-50% - 120px));
+    }
+}
+
+@media screen and (max-width: 720px) and (min-width: 475px) {
+    body > header h1 a {
+        overflow: hidden;
+    }
+
+    body > header h1 span {
+        position: relative;
+        z-index: 1;
+    }
+
+    body > header h1 span > .mascot {
+        height: 165px;
+        transform: none;
+        bottom: -80px;
+        left: -61px;
+        z-index: -1;
+        opacity: 0.8;
+    }
+}
+
+@media screen and (max-width: 475px) {
+    body > header h1 {
+        padding-left: 2rem !important;
+    }
+
+    body > header h1 span > .mascot {
+        position: absolute;
+        left: -70px;
+        bottom: -50px;
+        transform: none;
+        height: 100px;
+        clip-path: inset(0 0 38px 16px);
+        z-index: -1;
+    }
 }
 
 header .header__inner {
+    position: relative;
+    z-index: 99;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -125,9 +192,18 @@ header .header__age-warning {
 }
 
 header .user-tools {
-    display: flex;
     flex: 1 1 320px;
+}
+
+header .user-tools .user-tools__nested {
+    flex: 0 1 auto;
+}
+
+header .user-tools, header .user-tools .user-tools__nested {
+    display: flex;
     justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 header .user-tools > a {
@@ -185,6 +261,10 @@ header a ion-icon {
     font-size: 1em;
 }
 
+header ion-icon.chat {
+    color: var(--text);
+}
+
 header .notification-bell {
     color: var(--text);
     background: none;
@@ -208,7 +288,7 @@ h2 {
     margin-bottom: 1rem;
     font-size: 2.2rem;
     font-weight: normal;
-    margin-top: 3.25rem;
+    margin-top: 2rem;
 }
 
 h2.one-line {
@@ -241,7 +321,7 @@ h2 ion-icon {
     font-size: 0.8em;
 }
 
-h2 ion-icon.big {
+ion-icon.big {
     transform: translateY(0.15em);
     font-size: 1em;
 }
@@ -261,6 +341,7 @@ h4 {
 h4 + p {
     margin: 0 auto 2rem auto;
     max-width: 320px;
+    text-align: justify;
 }
 
 strong {
@@ -275,6 +356,10 @@ strong {
     margin-top: 5rem;
 }
 
+blockquote p img {
+    vertical-align: bottom;
+}
+
 blockquote > .byline {
     text-align: right;
     padding-right: 3rem;
@@ -285,32 +370,36 @@ blockquote > .byline {
     flex-direction: column;
 }
 
-.flashes > * {
+.flashes .flash {
     background: var(--accent-bg);
     padding: 0.5rem 1rem 0.6rem;
     border: 1px solid var(--border);
     border-top: 0;
 }
 
-.flashes > .unbounded {
+.flashes .unbounded {
     border-top: 1px solid var(--border);
     margin: 0.5rem 0;
 }
 
-.flashes > .flash--success {
+.flashes .flash--success {
     color: var(--success);
 }
 
-.flashes > .flash--success::before {
+.flashes .flash--success::before {
     content: "✅"
 }
 
-.flashes > .flash--danger {
+.flashes .flash--danger {
     color: var(--danger);
 }
 
-.flashes > .flash--danger::before {
+.flashes .flash--danger::before {
     content: "🚫"
+}
+
+.flashes > turbo-frame {
+    display: contents;
 }
 
 p {
@@ -552,6 +641,16 @@ form.button_to {
     font-size: 1.2em;
 }
 
+.friendship__actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+
+    & > * {
+        word-break: keep-all;
+    }
+}
+
 label ion-icon {
     font-size: 1.1rem;
     transform: translateY(0.1rem);
@@ -681,12 +780,59 @@ a.small:hover {
     position: relative;
 }
 
+.accent-block > .scare-charm {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 110px;
+    mix-blend-mode: multiply;
+    color: #c2c2c2;
+    opacity: 0.75;
+}
+
+.big-charm {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 110px;
+    opacity: 0.25;
+    color: var(--accent);
+    z-index: -1;
+}
+
+.accent-block--warning {
+    background-image: linear-gradient(45deg, #ffb300 25%, #d0a536 25%, #d0a536 50%, #ffb300 50%, #ffb300 75%, #d0a536 75%, #d0a536 100%);
+    background-size: 56.57px 56.57px;
+    color: #212121;
+    text-shadow: 0 0 2px #ffb300;
+    font-weight: bold;
+}
+
+.accent-block .accent-block__button {
+    width: calc(100% + 3rem) !important;
+    margin: 0 -1.5rem 0 -1.5rem !important;
+    transform: translateY(1.5rem);
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.accent-block .accent-block__button--force-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.accent-block--warning strong, .accent-block--warning .accent-block__charm {
+    color: inherit;
+}
+
 .accent-block > p {
     margin: 0;
 }
 
 .accent-block.danger {
     border: 2px solid var(--danger);
+    padding-bottom: calc(1.5rem - 2px);
 }
 
 .accent-block.danger > p {
@@ -709,6 +855,10 @@ a.small:hover {
 .accent-block.spaced {
     margin-top: 1rem;
     margin-bottom: 1rem;
+}
+
+.accent-block.only_charm {
+    padding: 1.8rem 1.5rem;
 }
 
 .accent-block__charm {
@@ -836,7 +986,8 @@ footer small a {
     gap: 0.5rem;
 }
 
-.modal__buttons > a {
+.modal__buttons > a,
+.button-like {
     border: none;
     border-radius: 5px;
     background: var(--bg);
@@ -847,6 +998,11 @@ footer small a {
 
 .modal__buttons > a:hover {
     color: var(--text-light);
+}
+
+.button-like {
+    display: inline-block;
+    border: 1px solid var(--accent);
 }
 
 @media screen and (max-width: 475px) {
@@ -891,7 +1047,7 @@ footer small a {
     background: var(--accent);
     font-size: 0.9rem;
     text-align: left;
-    z-index: 9999;
+    z-index: 999999999;
     transform: translate(-0.5rem, 0.75rem);
 }
 
@@ -953,7 +1109,7 @@ footer small a {
     display: block !important;
 }
 
-header turbo-frame {
+header .user-tools turbo-frame {
     display: block;
     position: relative;
     font-size: 1.1rem;
@@ -1230,6 +1386,10 @@ section .then {
     transform: translateY(2.5px);
 }
 
+.one-col {
+    margin: 1rem 0;
+}
+
 .two-col {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1243,3 +1403,124 @@ section .then {
         gap: 1rem;
     }
 }
+
+.mod_tool__result {
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.mod_tool__result--success::before {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: var(--success);
+    margin-bottom: 1rem;
+}
+
+.mod_tool__result--fail::before {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: var(--danger);
+    margin-bottom: 1rem;
+}
+
+.mod_tool__result--success ion-icon {
+    color: var(--success);
+}
+
+.mod_tool__result--fail ion-icon {
+    color: var(--danger);
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.hang {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    gap: 1rem;
+    font-size: 0.7rem;
+}
+
+.hang a, .hang > div {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 0.25rem;
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-top: none;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding: 0.2rem 0.35rem 0.25rem;
+}
+
+.mascot-picker {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.mascot-picker button {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: 0;
+    font-size: 0.8rem;
+    height: 23px;
+    align-items: flex-start;
+    gap: 0.25rem;
+    text-decoration: none;
+    border: 1px solid var(--accent);
+    border-top: none;
+    border-radius: 0;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding: 0.2rem 0.35rem 0.25rem;
+    background: none;
+    color: var(--accent);
+}
+
+.mascot-picker button ion-icon {
+    font-size: 1rem;
+}
+
+.mascot-picker em {
+    display: flex;
+    align-items: center;
+}
+
+pre code.hljs {
+    background: transparent !important;
+}
+
+.accent-block > pre {
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+
+.important {
+    font-size: 1.5em;
+    text-align: center;
+    background: var(--accent);
+    padding: 1rem;
+    color: var(--bg) !important;
+    text-shadow: none !important;
+
+    strong {
+        text-decoration: underline;
+    }
+}
+

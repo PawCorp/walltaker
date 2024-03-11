@@ -1,0 +1,17 @@
+<%# locals: (surrender:) -%>
+
+<%= turbo_frame_tag dom_id(surrender), target: '_top' do %>
+  <div class="accent-block">
+    <div class="accent-block__charm">
+      <ion-icon role="presentation" name="eye-off"></ion-icon>
+      Only you see this
+    </div>
+    <p>
+      Surrendered to <%= surrender.controller.username %>
+    </p>
+
+    <%= button_to surrender_path(surrender), method: :delete, class: 'accent-block__button' do %>
+      Stop and return account
+    <% end %>
+  </div>
+<% end %>

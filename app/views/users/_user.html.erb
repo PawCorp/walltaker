@@ -1,0 +1,21 @@
+<%# locals: (user:) -%>
+
+<%= turbo_frame_tag user, class: 'user_segment' do %>
+  <div class="user-segement-tools">
+    <h3 data-controller="user-reference"><%= user.username %></h3>
+    <%= link_to 'See full profile', user_path(user.username), target: '_blank', class: 'button-like no-underline' %>
+  </div>
+
+  <%= turbo_frame_tag :kink_tools, src: user_kinks_path(user.username) %>
+
+  <p><%= truncate(strip_tags(user.details), length: 80, separator: ' ', escape: false) %></p>
+
+  <div class="wallpapers">
+    <% past_links = user.past_links.limit 12 %>
+    <% past_links.each do |pl| %>
+      <%= image_tag pl.post_thumbnail_url, style: "transform: scale(#{rand(2) + 1})" if pl.present? && pl.post_thumbnail_url.present? %>
+    <% end %>
+  </div>
+
+  <ion-icon name="person" class="big-charm"></ion-icon>
+<% end %>

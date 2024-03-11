@@ -4,7 +4,11 @@ class SessionController < ApplicationController
   def new; end
 
   def create
-    user = User.find_by_email(login_params[:email])
+    if current_visit&.banned_ip.present?
+      return
+    end
+
+    user = User.where("lower(email) = ?",login_params[:email]&.downcase).first
     if !user.nil?
       if user.username == 'PornBot'
         @error = 'You don\'t look like a robot... Your IP address has been flagged.'
@@ -12,6 +16,7 @@ class SessionController < ApplicationController
         render 'new', status: :unprocessable_entity
       else
         if user.authenticate(login_params[:password])
+          cookies.signed[:surrender_id] = nil
           session[:user_id] = user.id unless params[:keep_me_logged_in]
           cookies.signed[:permanent_session_id] = { value: user.id, expires: 14.days.from_now } if params[:keep_me_logged_in]
           ahoy.authenticate(user)
@@ -33,6 +38,7 @@ class SessionController < ApplicationController
   def destroy
     track :regular, :logged_out
     session[:user_id] = nil
+    cookies.signed[:surrender_id] = nil
     cookies.delete :permanent_session_id if cookies.signed[:permanent_session_id]
     redirect_to root_path, notice: 'Logged out!'
   end

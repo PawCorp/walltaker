@@ -11,6 +11,10 @@ class MessageThreadController < ApplicationController
   end
 
   def send_message
+    if current_visit&.banned_ip.present?
+      return
+    end
+
     message = params['message']
     if @message_thread && (message['content'].class == String) && (message['content'].length > 0)
       @new_message = @message_thread.messages.new
@@ -25,6 +29,10 @@ class MessageThreadController < ApplicationController
           if user.username != current_user.username
             Notification.create user: user, notification_type: :new_message, text: "#{current_user.username}: #{message['content'].truncate 24}", link: message_thread_path(@message_thread)
           end
+        end
+
+        if current_user&.current_surrender
+          Notification.create user: current_user, notification_type: :surrender_event, link: message_thread_path(@message_thread), text: "#{current_user.current_surrender.controller.username} said '#{@new_message.content}' in a message thread."
         end
         redirect_to message_thread_path @message_thread
       end

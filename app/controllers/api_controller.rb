@@ -1,6 +1,40 @@
 class ApiController < ApplicationController
   after_action :log_presence, only: %i[show_link show_link_widget]
   skip_before_action :verify_authenticity_token, only: :set_link_response
+  before_action :authorize_for_surrenderd_accounts, only: %i[update_mascot update_perviness]
+
+  def update_mascot
+    next_mascot = current_user&.mascot || 'ki'
+
+    case next_mascot
+    when 'warren'
+      next_mascot = 'taylor'
+
+    when 'taylor'
+      next_mascot = 'ki'
+
+    when 'ki'
+      next_mascot = 'warren'
+    end
+
+    current_user.mascot = next_mascot
+    current_user.save
+
+    render turbo_stream: [
+      turbo_stream.replace("title", partial: 'layouts/title', locals: { mascot: next_mascot, pervert: current_user.pervert }),
+      turbo_stream.replace("mascot_picker", partial: 'layouts/mascot_picker')
+    ]
+  end
+
+  def update_perviness
+    current_user.pervert = !current_user.pervert
+    current_user.save
+
+    render turbo_stream: [
+      turbo_stream.replace("title", partial: 'layouts/title', locals: { mascot: current_user.mascot, pervert: current_user.pervert }),
+      turbo_stream.replace("mascot_picker", partial: 'layouts/mascot_picker'),
+    ]
+  end
 
   # GET /api/links/:id.json
   def show_link
@@ -8,6 +42,12 @@ class ApiController < ApplicationController
     @set_by = User.find(@link.set_by_id) if @link.set_by_id
   rescue
     render json: { message: 'This link does not exist.' }, status: 404
+  end
+
+  def all_links
+    @force_online = params.has_key? :online
+    @links = Link.all.where(friends_only: false).and(Link.where('expires > ?', Time.now).or(Link.where(never_expires: true))) unless @force_online
+    @links = Link.all.where(friends_only: false).is_online.and(Link.where('expires > ?', Time.now).or(Link.where(never_expires: true))) if @force_online
   end
 
   def show_link_widget

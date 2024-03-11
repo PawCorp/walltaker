@@ -1,0 +1,39 @@
+<div class="task-tools">
+  <div class="left">
+    <%= link_to "Back", lizard_tools_index_path %>
+  </div>
+</div>
+
+<h2>
+  <ion-icon role="presentation" name="sparkles" class="big"></ion-icon>
+  <%= @name %> Browse
+  <small>Browse which users have <%= @name %> selected.</small>
+</h2>
+
+<% if @links[false] %>
+  <h5>Not Perverted</h5>
+  <% @links[false].each do |link| %>
+    <%= render(link) %>
+  <% end %>
+<% else %>
+  <div class="accent-block only_charm">
+    <div class="accent-block__charm">
+      <ion-icon role="presentation" name="warning"></ion-icon>
+      No <%= @name %> non-perverts online
+    </div>
+  </div>
+<% end %>
+
+<% if @links[true] %>
+  <h5>Perverted >:)</h5>
+  <% @links[true].each do |link| %>
+    <%= render(link) %>
+  <% end %>
+<% else %>
+  <div class="accent-block only_charm">
+    <div class="accent-block__charm">
+      <ion-icon role="presentation" name="warning"></ion-icon>
+      No <%= @name %> perverts online
+    </div>
+  </div>
+<% end %>

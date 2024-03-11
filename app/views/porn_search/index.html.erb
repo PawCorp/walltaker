@@ -1,15 +1,11 @@
 <%= turbo_frame_tag "pornsearch" do %>
+  <%= render 'input' %>
 
-  <%= form_with url: porn_search_search_url, method: :get, data: { turbo_frame: 'pornsearch_results', 'porn-search-target': 'search' } do |form| %>
-    <%= form.text_field :tags, placeholder: 'E621 Tags' %>
-    <%= form.hidden_field :link, value: params['link'] %>
-    <%= form.hidden_field :message_thread, value: params['message_thread'] %>
-    <%= form.button type: :submit do %>
-      <ion-icon role="presentation" name="search-outline"></ion-icon>
-      Search E621
-    <% end %>
+  <% if @link && @link.user.kinks.count > 0 %>
+    <br/>
+    <strong>Some of <%= @link.user.username %>'s kinks:</strong>
+    <%= turbo_frame_tag :kink_tools, src: search_kinks_path(@link), class: 'kinks' if params['link'] %>
   <% end %>
 
   <%= turbo_frame_tag "pornsearch_results" %>
-
 <% end %>

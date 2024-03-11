@@ -1,0 +1,74 @@
+<h2>
+  <ion-icon role="presentation" name="ticket" class="big"></ion-icon>
+  Surrender Account
+</h2>
+
+<% if @current_surrender.present? && !@current_surrender.expired? %>
+  <%= turbo_frame_tag dom_id(@current_surrender), src: surrender_path(@current_surrender), target: '_top' %>
+  <br>
+<% end %>
+
+<p>
+  Do you like <strong>profile play?</strong> Normally, accounts on most websites can only be given up to someone by
+  sharing a password. Not only is this a horrible idea for your own personal security, for a website, it's also
+  detrimental! We need to be able to attribute actions to a user to moderate and secure the site.
+</p>
+
+<p>
+  So wouldn't it be cool if you could just...
+  <strong>give your account to a friend for a bit, no questions asked?</strong>
+</p>
+
+<div class="accent-block accent-block--warning spaced">
+  <ion-icon role="presentation" name="skull" class="scare-charm"></ion-icon>
+  <div class="accent-block__charm">
+    <ion-icon role="presentation" name="warning"></ion-icon>
+    Your failure to read this is not a bug.
+  </div>
+  <p>
+    This tool instead allows you to give <strong>full</strong> access to your account to any friend. You do not need to
+    share your password. <strong>They will <em>not</em> see your email address, or login credentials.</strong> (not even
+    walltaker
+    can know what your plain-text password is in-fact!)
+  </p>
+  <br>
+  <p class="important">
+    A walltaker moderator will <strong>NEVER</strong> ask you to use this tool.
+  </p>
+  <br>
+  <p>
+    Full access, means <strong>full access.</strong> This is giving up your account to someone temporarily! You are able
+    to
+    abort during the time period when the other user has access to your account, but there is no easy undo option for
+    things they would've already done.
+  </p>
+  <br>
+
+  <strong>They can</strong>
+
+  <ul>
+    <li>chat,</li>
+    <li>make links,</li>
+    <li>send wallpapers to others,</li>
+    <li>change your profile and link settings,</li>
+    <li>delete or add friends,</li>
+    <li>and otherwise, use and abuse your account <strong>appearing as you.</strong>
+    </li>
+  </ul>
+
+  <strong>They cannot</strong>
+
+  <ul>
+    <li>see your password,</li>
+    <li>see your email address.</li>
+    <li>That's literally it. Have I made it clear yet? They can do a lot.</li>
+  </ul>
+</div>
+
+<br>
+
+<p>
+  If you aren't scared off, and want someone to control your account...
+</p>
+
+<%= turbo_frame_tag :surrender_form_wrapper, src: new_surrender_path, target: '_top' %>

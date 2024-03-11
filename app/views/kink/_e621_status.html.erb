@@ -1,0 +1,19 @@
+<%# locals: (kink:, failed: false) -%>
+
+<%= turbo_frame_tag dom_id(kink) + '_e621_status', class: 'kink__status' do %>
+  <% if kink.works_on_e621? %>
+    <%= link_to "https://e621.net/posts?tags=#{kink.name}", target: '_blanks', class: 'no-underline' do %>
+      <ion-icon role="presentation" name="arrow-redo"></ion-icon>
+      e621
+    <% end %>
+  <% else %>
+    <% if failed %>
+      Invalid tag, are you sure it's spelt right?
+    <% else %>
+      <%= button_to kink_e621_path(kink), method: :post do %>
+        <ion-icon role="presentation" name="arrow-redo"></ion-icon>
+        Test on e621
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

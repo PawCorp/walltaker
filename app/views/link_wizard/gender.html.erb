@@ -1,0 +1,124 @@
+<% content_for :step do %>
+  <div class="guide__container">
+    <div class="guide guide--centre">
+      <div class="thought thought--large">
+        My turn! We're going to sort out your sexuality... to the extent a lizard and a website can do that!
+      </div>
+      <%= image_tag 'mascot/Ki.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 160 %>
+    </div>
+
+    <div class="link-preview link-preview--static">
+      <%= render @link %>
+    </div>
+  </div>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/KiHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      Sexual preference and gender identity are diverse subjects, and I'm sure you know many of the details already.
+    </p>
+  </blockquote>
+
+  <blockquote class="right">
+    <p>
+      Many of our users aren't strictly male or female, or straight or gay.
+    </p>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/KiHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      Right! It's really important we understand that. Some people, (possibly
+      you <%= current_user.username.capitalize %>!) may feel deeply uncomfortable with depictions of genitalia or gender
+      identity that they would rather not see.
+    </p>
+  </blockquote>
+
+  <blockquote class="right">
+    <p>
+      We can't promise you that your link will always prevent content you'd rather not see from appearing, but we can
+      get you set up so it works most of the time.
+    </p>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/KiHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      <%= current_user.username.capitalize %>, can you select which of the following gender expressions and genitalia
+      you'd <strong>NOT</strong> like to see as your wallpaper? <strong>If you don't select something, you will see it. It's OK to select nothing at all as well!</strong>
+    </p>
+  </blockquote>
+
+  <div class="accent-block choice">
+    <div class="accent-block__charm">
+      <ion-icon role="presentation" name="build"></ion-icon>
+      You choose!
+    </div>
+
+
+    <%= form_with url: apply_link_wizard_path, class: 'full-width' do |f| %>
+      <h3>I don't like expressions of:</h3>
+      <div class="form__row">
+        <%= f.check_box :blacklisted_genders, {multiple: true}, :male, '' %>
+        <%= f.label :blacklisted_genders, 'Maleness' %>
+      </div>
+
+      <div class="form__row">
+        <%= f.check_box :blacklisted_genders, {multiple: true}, :female, '' %>
+        <%= f.label :blacklisted_genders, 'Femaleness' %>
+      </div>
+
+      <div class="form__row">
+        <%= f.check_box :blacklisted_genders, {multiple: true}, :nonbinary, '' %>
+        <%= f.label :blacklisted_genders, 'Non-Binary/Non-Conforming... ness?' %>
+      </div>
+
+      <div class="form__row">
+        <%= f.check_box :blacklisted_genders, {multiple: true}, :genderbends, '' %>
+        <%= f.label :blacklisted_genders, 'Gender Bent Characters' %>
+      </div>
+
+
+      <h3>I don't want to see:</h3>
+      <div class="form__row">
+        <%= f.check_box :blacklisted_parts, {multiple: true}, :cocks, '' %>
+        <%= f.label :blacklisted_parts, 'Cocks' %>
+      </div>
+
+      <div class="form__row">
+        <%= f.check_box :blacklisted_parts, {multiple: true}, :pussies, '' %>
+        <%= f.label :blacklisted_parts, 'Pussies' %>
+      </div>
+
+      <div class="form__row">
+        <%= f.check_box :blacklisted_parts, {multiple: true}, :breasts, '' %>
+        <%= f.label :blacklisted_parts, 'Boobs' %>
+      </div>
+
+      <div class="form__row">
+        <%= f.check_box :blacklisted_parts, {multiple: true}, :assholes, '' %>
+        <%= f.label :blacklisted_parts, 'Assholes' %>
+      </div>
+
+      <div class="form__row">
+        <%= f.check_box :blacklisted_parts, {multiple: true}, :cloacas, '' %>
+        <%= f.label :blacklisted_parts, 'Cloacas (it\'s e621 after all)' %>
+      </div>
+
+
+      <h3>I don't like seeing partners that are:</h3>
+      <div class="form__row">
+        <%= f.check_box :blacklisted_sexualities, {multiple: true}, :gay, '' %>
+        <%= f.label :blacklisted_sexualities, 'Similar (gay, bi, pan)' %>
+      </div>
+
+      <div class="form__row">
+        <%= f.check_box :blacklisted_sexualities, {multiple: true}, :straight, '' %>
+        <%= f.label :blacklisted_sexualities, 'Different (straight)' %>
+      </div>
+      <%= f.submit "I'm done!" %>
+    <% end %>
+  </div>
+<% end %>

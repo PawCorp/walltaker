@@ -8,3 +8,7 @@ Ahoy.api = false
 # we recommend configuring local geocoding as well
 # see https://github.com/ankane/ahoy#geocoding
 Ahoy.geocode = false
+
+Ahoy.exclude_method = lambda do |controller, request|
+  request.path.starts_with?("/api")
+end

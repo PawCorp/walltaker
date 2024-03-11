@@ -1,7 +1,4 @@
-<%
-  other_user = friendship.sender if friendship.sender.id != current_user.id
-  other_user = friendship.receiver if friendship.receiver.id != current_user.id
-%>
+<% other_user = friendship.other_user(current_user) %>
 
 <div class="friendship" id="<%= dom_id friendship %>" data-controller="friendship">
   <!-- modals -->
@@ -29,9 +26,15 @@
   </div>
   <div class="friendship__actions">
     <% if action_name == 'index' %>
+      <% if friendship.controllable(other_user) %>
+        <%= button_to assume_surrender_path(friendship.surrenders.for_user(other_user)), method: :post, class: 'no-underline primary' do %>
+          <ion-icon role="presentation" name="ticket"></ion-icon>
+          Take control
+        <% end %>
+      <% end %>
       <%= button_tag class: 'no-underline secondary', data: { action: 'click->friendship#confirm' } do %>
         <ion-icon role="presentation" name="heart-dislike"></ion-icon>
-        Unfriend
+        Delete
       <% end %>
     <% end %>
     <% if action_name == 'requests' %>

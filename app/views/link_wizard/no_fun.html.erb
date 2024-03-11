@@ -1,0 +1,78 @@
+<% content_for :step do %>
+  <div class="guide__container">
+    <div class="guide guide--centre">
+      <div class="thought thought--large">
+        You're pretty much done! There's just one more step!
+      </div>
+      <% if current_user.pervert %>
+        <%= image_tag 'mascot/TaylorNSFW.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 160 %>
+      <% else %>
+        <%= image_tag 'mascot/TaylorSFW.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 160 %>
+      <% end %>
+    </div>
+
+    <div class="link-preview link-preview--static">
+      <%= render @link %>
+    </div>
+  </div>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      Walltaker is all about controlled transfer of control. (and horny surprises.) But sometimes you might not want to give up all control to just... anyone (<%= image_tag 'mascot/WarrenHead.png', size: '25' %>) on the internet.
+    </p>
+  </blockquote>
+
+  <blockquote class="right">
+    <p>
+      Babe, you're all over the internet.
+    </p>
+    <div><%= image_tag 'mascot/WarrenHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <blockquote class="right">
+    <div><%= image_tag 'mascot/TaylorTitsSFW.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      <em>*shlick shlick shlick shlick shlick shlick shlick shlick*</em>
+    </p>
+    <div><%= image_tag 'mascot/WarrenJacking.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      Warren, I literally just let you cum in my panties. The begging was getting intense.
+    </p>
+  </blockquote>
+
+  <blockquote class="right">
+    <p>
+      ... hey NO! That's not ho-
+    </p>
+    <div><%= image_tag 'mascot/WarrenHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      <%= current_user.username.capitalize %> you can opt to not make your link public. This will mean that people <strong>MUST</strong> make an account (or already have one) and send you a friend request that you then accept in order to be able to set a wallpaper. <strong>This slows down wallpaper changes significantly, but it's the only way we can promise you won't get shock content.</strong> (as long as you're careful about who you accept!) Would you like to turn it on?
+    </p>
+  </blockquote>
+
+  <blockquote class="right">
+    <p>
+      You can always turn it off later!
+    </p>
+    <div><%= image_tag 'mascot/WarrenHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <div class="accent-block choice">
+    <div class="accent-block__charm">
+      <ion-icon role="presentation" name="build"></ion-icon>
+      You choose!
+    </div>
+
+    <%= button_to 'Limit to just friends, please!', apply_link_wizard_path(friends_only: true), class: 'secondary' %>
+    <%= button_to 'Anons on the internet for me, please!', apply_link_wizard_path(friends_only: false) %>
+  </div>
+<% end %>

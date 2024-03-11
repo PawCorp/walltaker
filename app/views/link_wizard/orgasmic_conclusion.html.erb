@@ -1,0 +1,50 @@
+<% content_for :step do %>
+  <div class="link-preview link-preview--done">
+    <%= render @link %>
+  </div>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/KiHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      Great job <%= current_user.username.capitalize %>!
+    </p>
+  </blockquote>
+
+  <blockquote class="right">
+    <p>
+      Yeah that's a great looking link!!
+    </p>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/WarrenHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      We really think you're going to like the site!
+    </p>
+  </blockquote>
+
+  <blockquote class="right">
+    <span>
+      Remember that you can change all of this later in link settings under the <div class="mock-link"><ion-icon role="presentation" name="build"></ion-icon> Edit</div> button located on the <div class="mock-link">links</div> page! We're just running this little wizard side business to help you get started! Make as many manual edits as you need later.
+    </span>
+    <div><%= image_tag 'mascot/TaylorHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+  </blockquote>
+
+  <blockquote>
+    <div><%= image_tag 'mascot/KiHead.png', alt: 'Two link mages crafting your link.', class: 'mascot', width: 70 %></div>
+    <p>
+      There's some stuff in there we didn't tell you about actually, you should check it out!
+    </p>
+  </blockquote>
+
+  <div class="accent-block choice">
+    <div class="accent-block__charm">
+      <ion-icon role="presentation" name="build"></ion-icon>
+      You choose!
+    </div>
+
+    <%= button_to "Settings please!", edit_link_path(@link.id), method: :get, class: 'secondary' %>
+    <%= button_to 'Let me use my link!', link_path(@link.id), method: :get %>
+  </div>
+<% end %>

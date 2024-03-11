@@ -1,7 +1,9 @@
 class Link < ApplicationRecord
+  include PgSearch::Model
   belongs_to :user
+  belongs_to :set_by, foreign_key: :set_by_id, class_name: 'User', optional: true
   belongs_to :forked_from, foreign_key: :forked_from_id, class_name: 'Link', inverse_of: :forks, optional: true
-  has_many :forks, foreign_key: :forked_from_id, class_name: 'Link', inverse_of: :forked_from
+  has_many :forks, foreign_key: :forked_from_id, class_name: 'Link', inverse_of: :forked_from, dependent: :nullify
   has_many :viewing_users, foreign_key: :viewing_link_id, class_name: 'User'
   has_many :past_links
   has_many :comments, dependent: :destroy
@@ -16,6 +18,12 @@ class Link < ApplicationRecord
   validates_uniqueness_of :custom_url, allow_nil: true, unless: ->(l) { l.custom_url.blank? }
   visitable :ahoy_visit
 
+  pg_search_scope :search_positive, against: %i[terms theme custom_url response_text post_description], associated_against: {
+    user: %i[username details]
+  }, using: { tsearch: { dictionary: 'english', prefix: true, any_word: true } }
+
+  pg_search_scope :search_negative, against: :blacklist, using: { tsearch: { dictionary: 'english', any_word: true } }
+
   scope :is_online, -> {
     where('last_ping > ?', Time.now - 1.minute)
       .or(where('live_client_started_at > ?', Time.now - 7.days))
@@ -24,8 +32,19 @@ class Link < ApplicationRecord
 
   scope :with_ability_to, ->(ability_name) { joins(:abilities).where('link_abilities.ability': ability_name) }
 
+  scope :is_public, -> {
+    (
+      where(friends_only: false)
+    ).and(
+      where('expires > ?', Time.now).or(where(never_expires: true))
+    )
+  }
+
   def is_online?
-    last_ping_online = last_ping > Time.now - 1.minute
+    is_ios = last_ping_user_agent&.match(/widgetExtension/) || false
+
+    last_ping_online = last_ping > Time.now - 20.minutes if is_ios && last_ping_user_agent && last_ping
+    last_ping_online = last_ping > Time.now - 1.minute if !is_ios && last_ping_user_agent && last_ping
     live_client_online = live_client_started_at && (live_client_started_at > Time.now - 7.days)
     last_ping_online || live_client_online
   end
@@ -33,6 +52,19 @@ class Link < ApplicationRecord
   # @param ["can_show_videos"] ability
   def check_ability(ability)
     abilities.any? { |edge| edge.ability == ability }
+  end
+
+  def toggle_ability(ability_name)
+    set_ability(ability_name, !check_ability(ability_name))
+  end
+
+  def set_ability(ability_name, value)
+    able_to = check_ability ability_name
+    if able_to && !value
+      abilities.delete_by ability: ability_name
+    elsif !able_to && value
+      abilities.create ability: ability_name
+    end
   end
 
   # @return [User | nil]

@@ -1,0 +1,155 @@
+<% content_for :stylesheets do %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/monokai.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/http.min.js"></script>
+<% end %>
+
+<h2>
+  <ion-icon name="build" class="big"></ion-icon>
+  Client Guide
+</h2>
+<p>
+  <%= image_tag 'mascot/WarrenAPIExtrodinaire.png', alt: "Warren making a client with great difficulty", width: 240, style: "float: right" %>
+  You can make your own Walltaker client! A user should be able to supply any link ID,
+  that you can then use to pull down the latest wallpaper for that instance. I suggest you poll the endpoint ~10 seconds
+  and cache the last post url, so you can skip downloading if it hasn't changed since the last one.
+</p>
+<p>
+  Something to know, <strong>this part of the docs is still being worked on!</strong> There are two ways to write clients. This only covers the simple way. It's still preferred you experiment with this version of the API, but a live web-socket based API is available, and will appear here soon™
+</p>
+
+<hr/>
+
+<h5><code>GET https://walltaker.joi.how/api/links/[id].json</code></h5>
+<p>Gets the current link status. This is what you could poll every 10 seconds to check if the wallpaper has changed. Use
+  <code>post_url</code> as the current wallpaper's URL. This is always an image by default, but users can enable
+  videos/gifs on a link, so please handle error checking if you see a file type you can't display.</p>
+<p>🔓 No API key required.</p>
+
+<div class="accent-block">
+  <div class="accent-block__charm">
+    <ion-icon role="presentation" name="arrow-down-circle"></ion-icon>
+    Response
+  </div>
+  <pre><code class="language-json">{
+  "id": 1,
+  "expires": "2025-03-05T00:00:00.000Z",
+  "username": "gray",
+  "terms": "I'm trying out something new, break this please! :)",
+  "blacklist": "feet blood",
+  "post_url": "https://static1.e621.net/data/5d/87/5d87428c4839b0dc7d585b87a25af61a.png",
+  "post_thumbnail_url": "https://static1.e621.net/data/preview/5d/87/5d87428c4839b0dc7d585b87a25af61a.jpg",
+  "post_description": "",
+  "created_at": "2022-03-08T01:01:50.142Z",
+  "updated_at": "2022-03-13T21:39:01.828Z",
+  "set_by": "name",
+  "response_type": "horny",
+  "response_text": "HUFF wow",
+  "online": true
+}</code></pre>
+</div>
+
+<hr>
+
+<h5><code>POST https://walltaker.joi.how/api/links/[id]/response.json</code></h5>
+<p>Set a response for a given link. There are 3 kinds of responses.</p>
+<p>🔑 Requires user's API Key.</p>
+
+<table>
+  <thead>
+  <tr>
+    <th><code>type</code></th>
+    <th>Shown In UI as</th>
+    <th>Effect</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><code>"horny"</code></td>
+    <td>Love it</td>
+    <td>User who set wallpaper gets notification, response <code>text</code> displayed on link in webapp</td>
+  </tr>
+  <tr>
+    <td><code>"disgust"</code></td>
+    <td>Hate it</td>
+    <td>User who set wallpaper gets notification, wallpaper rolled back to previous image</td>
+  </tr>
+  <tr>
+    <td><code>"came"</code></td>
+    <td>Came</td>
+    <td>User who set wallpaper gets notification, response <code>text</code> displayed on link in webapp</td>
+  </tr>
+
+  </tbody>
+</table>
+
+<p>⚠️ I suggest re-pinging the link after sending a "<code>disgust</code>" response, so you can reset the user's
+  wallpaper to the previous version as soon as possible.</p>
+
+<div class="accent-block">
+  <div class="accent-block__charm">
+    <ion-icon role="presentation" name="arrow-up-circle"></ion-icon>
+    Request
+  </div>
+  <pre><code class="language-http">POST https://walltaker.joi.how/api/links/[id]/response.json HTTP/1.1
+Content-Type: application/json;
+{
+  "api_key": "23unFe3i",
+  "type": "horny",
+  "text": "mmph nice"
+}
+</code></pre>
+</div>
+
+<div class="accent-block">
+  <div class="accent-block__charm">
+    <ion-icon role="presentation" name="arrow-down-circle"></ion-icon>
+    Response
+  </div>
+  <pre><code class="language-json">{
+  "id": 1,
+  "expires": "2025-03-05T00:00:00.000Z",
+  "username": "gray",
+  "terms": "I'm trying out something new, break this please! :)",
+  "blacklist": "feet blood",
+  "post_url": "https://static1.e621.net/data/5d/87/5d87428c4839b0dc7d585b87a25af61a.png",
+  "post_thumbnail_url": "https://static1.e621.net/data/preview/5d/87/5d87428c4839b0dc7d585b87a25af61a.jpg",
+  "post_description": "",
+  "created_at": "2022-03-08T01:01:50.142Z",
+  "updated_at": "2022-03-13T21:39:01.828Z",
+  "set_by": "name",
+  "response_type": "horny",
+  "response_text": "HUFF wow",
+  "online": true
+}</code></pre>
+</div>
+
+<hr>
+
+<h5><code>GET https://walltaker.joi.how/api/users/[username].json?api_key=xxxxxxxx</code></h5>
+<p>Get details about this user's status such as if they're online, a friend, or the currently authenticated user for a
+  given session.</p>
+<p>🔓/🔐 API key required for some, but not all data.</p>
+
+<p>ℹ️ To ensure this query is processed quickly, <code>set_by</code> has been excluded from the links array.</p>
+
+<div class="accent-block">
+  <div class="accent-block__charm">
+    <ion-icon role="presentation" name="arrow-down-circle"></ion-icon>
+    Response
+  </div>
+  <pre><code class="language-json">
+{
+  "username": "apple",
+  "id": 24,
+  "set_count": 540,
+  "online": true,
+  "links": [... see link response ...],
+  "authenticated": true,
+  "friend": true,
+  "self": false
+}
+</code></pre>
+</div>
+
+<script>hljs.highlightAll();</script>

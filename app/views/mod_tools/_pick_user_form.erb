@@ -1,0 +1,25 @@
+<%
+    user ||= nil
+    fail ||= nil
+%>
+
+<%= turbo_frame_tag :mod_tools_pick_user_form do %>
+  <%= form_with url: mod_tools_users_index_url, method: :get do |f| %>
+    <%= f.label :email, 'Email address user claims is theirs:', style: "display: block" %>
+    <%= f.text_field :email, value: params['email'] %>
+    <%= f.submit 'Lookup' %>
+  <% end %>
+  <% if user || fail %>
+    <div class="mod_tool__result mod_tool__result--<%= fail ? 'fail' : 'success' %>">
+      <% if fail %>
+        <ion-icon name="close-circle" class="big"></ion-icon> <%= fail %><br/>
+      <% end %>
+
+      <% if user %>
+        <ion-icon name="checkbox" class="big"></ion-icon>
+        Found 1 user, <strong><%= user.username %></strong><br/>
+        <%= render 'mod_tools/edit_user_form', user: user %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
