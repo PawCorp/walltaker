@@ -5,7 +5,14 @@ class Surrender < ApplicationRecord
   validates :user, uniqueness: { scope: :friendship }
   validates :expires_at, comparison: { greater_than: Time.now }, on: :create
 
+  scope :not_for_user, ->(user) { where.not(user: user) }
+  scope :for_user, ->(user) { find_by(user: user) }
+
   def controller
     friendship.other_user(user)
+  end
+
+  def expired?
+    expires_at.before? Time.now
   end
 end

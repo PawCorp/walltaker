@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
 
     flash.each do |type, msg|
       Turbo::StreamsChannel.broadcast_append_to("#{current_user.username}-flashes",
-                                                      target: 'flashes', partial: 'application/flash',
-                                                      locals: { msg:, type: })
+                                                target: 'flashes', partial: 'application/flash',
+                                                locals: { msg:, type: })
     end
   end
 
@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
         track :error, :e621_posts_api_fail, response: response
         return nil
       end
-  
+
       results = JSON.parse(response.body)['posts']
       if results.present? && results.class == Array
         if /order:random/i =~ padded_tag_string
@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
         else
           Rails.cache.write(key, results, expires_in: 45.minutes)
         end
-        
+
         unless link_can_show_videos
           results.filter do |post|
             %w[png jpg bmp webp].include? post['file']['ext']
@@ -97,7 +97,7 @@ class ApplicationController < ActionController::Base
     append_to_tags += ' ' + ((sanitized_blacklist.split.map { |tag| "-#{tag}" }).join ' ') unless (sanitized_blacklist.empty?)
     append_to_tags += ' score:>' + link.min_score.to_s if link.min_score.present? && link.min_score != 0
     append_to_tags += ' -animated' unless link.check_ability 'can_show_videos'
-    append_to_tags += ' ' + link.user.kinks.pluck(:name).map {|name| "~#{name}"}.join(' ') if link.check_ability('is_kink_aligned') && !kink_in_query
+    append_to_tags += ' ' + link.user.kinks.pluck(:name).map { |name| "~#{name}" }.join(' ') if link.check_ability('is_kink_aligned') && !kink_in_query
     append_to_tags
   end
 
@@ -204,7 +204,37 @@ class ApplicationController < ActionController::Base
     link
   end
 
+  # @param [User] user
+  # @param [Surrender] surrender
+  def log_in_as(user, surrender = nil)
+    session[:user_id] = user.id
+    cookies.signed[:permanent_session_id] = nil
+
+    if surrender
+      cookies.signed[:surrender_id] = surrender.id
+      redirect_to root_path, notice: "#{surrender.controller.username} has logged in as #{ user.username }"
+    else
+      cookies.signed[:surrender_id] = nil
+      redirect_to root_path
+    end
+
+  end
+
   def authorize
+    if cookies.signed[:surrender_id].present?
+      begin
+        surrender = Surrender.find(cookies.signed[:surrender_id])
+        if !surrender || surrender.expired?
+          session[:user_id] = nil
+          surrender.destroy if surrender
+          return redirect_to new_session_url, alert: 'Account surrender for user is over.'
+        end
+      rescue
+        session[:user_id] = nil
+        return redirect_to new_session_url, alert: 'Account surrender for user is over.'
+      end
+    end
+
     redirect_to new_session_url, alert: 'Not authorized' if current_user.nil?
 
     redirect_to new_session_url, alert: 'Error 500, service/E621 down?' if current_visit&.banned_ip.present?

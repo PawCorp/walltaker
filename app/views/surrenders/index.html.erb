@@ -3,7 +3,7 @@
   Surrender Account
 </h2>
 
-<% if @current_surrender.present? %>
+<% if @current_surrender.present? && !@current_surrender.expired? %>
   <%= turbo_frame_tag dom_id(@current_surrender), src: surrender_path(@current_surrender), target: '_top' %>
   <br>
 <% end %>

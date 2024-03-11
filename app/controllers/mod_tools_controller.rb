@@ -59,10 +59,7 @@ class ModToolsController < ApplicationController
       return
     end
 
-    session[:user_id] = user.id
-    cookies.signed[:permanent_session_id] = nil
-
-    redirect_to root_path
+    log_in_as(user)
   end
 
   def update_user
@@ -134,4 +131,6 @@ class ModToolsController < ApplicationController
 
     redirect_to mod_tools_events_index_url, notice: "IP banned #{event.visit.ip}"
   end
+
+
 end

@@ -28,6 +28,11 @@ class User < ApplicationRecord
     Friendship.find_friendship(other, self)
   }
 
+  scope :controllable_by, ->(other) {
+    controllable_user_ids = other.controllable_surrenders.pluck(:user_id).uniq
+    where(id: controllable_user_ids)
+  }
+
   # This was implemented so bad lol, should've been a relation.
   def find_pornlizard
     case mascot
@@ -55,6 +60,11 @@ class User < ApplicationRecord
   def leave_link
     self.viewing_link_id = nil
     save
+  end
+
+  def controllable_surrenders
+    friendship_ids = Friendship.involving(self).is_confirmed.pluck(:id)
+    Surrender.not_for_user(self).where(id: friendship_ids)
   end
 
   after_commit do

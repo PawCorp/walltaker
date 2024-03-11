@@ -1,7 +1,7 @@
 class SurrendersController < ApplicationController
   before_action :authorize
   before_action :set_friendship_options, only: %i[new edit]
-  before_action :set_surrender, only: %i[show edit destroy]
+  before_action :set_surrender, only: %i[show edit destroy assume]
   before_action :protect_own_surrender, only: %i[show destroy]
 
   def index
@@ -37,6 +37,13 @@ class SurrendersController < ApplicationController
     else
       redirect_to surrender_path(@surrender), alert: 'Surrender could not be destroyed.'
     end
+  end
+
+  def assume
+    return redirect_to root_path, alert: 'Not allowed.' unless Friendship.where(id: @surrender.friendship.id).involving(current_user).is_confirmed.exists?
+    return redirect_to surrender_path(surrender), alert: '... what? How does that even make sense? You chose to surrender you account, then assume your own account?' unless @surrender.user != current_user
+
+    log_in_as(@surrender.user, @surrender)
   end
 
   private

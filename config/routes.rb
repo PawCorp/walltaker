@@ -97,7 +97,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :surrenders
+  resources :surrenders do
+    member do
+      post 'assume', as: :assume
+    end
+  end
 
   get '/settings', to: 'settings#index', as: 'settings'
   post '/settings', to: 'settings#save'

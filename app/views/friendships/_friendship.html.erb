@@ -1,8 +1,10 @@
+<% other_user = friendship.other_user(current_user) %>
+
 <div class="friendship" id="<%= dom_id friendship %>" data-controller="friendship">
   <!-- modals -->
   <dialog class="modal" data-friendship-target="modal">
     <h4>Confirm Unfriend-ing</h4>
-    <p>Are you sure you want to unfriend <strong><%= friendship.other_user(current_user).username %></strong>?</p>
+    <p>Are you sure you want to unfriend <strong><%= other_user.username %></strong>?</p>
     <div class="modal__buttons">
       <%= button_tag class: 'no-underline primary', data: { 'friendship-target': 'cancel', action: 'click->friendship#cancel' } do %>
         <ion-icon role="presentation" name="close"></ion-icon>
@@ -18,12 +20,18 @@
   <!-- markup -->
   <div class="friendship__names">
     <ion-icon role="presentation" name="heart"></ion-icon>
-    <%= link_to friendship.other_user(current_user).username, user_path(friendship.other_user(current_user).username), data: { controller: "user-reference" } %>
+    <%= link_to other_user.username, user_path(other_user.username), data: { controller: "user-reference" } %>
     since
     <%= friendship.updated_at.strftime('%d/%m/%Y') %>
   </div>
   <div class="friendship__actions">
     <% if action_name == 'index' %>
+      <% if friendship.controllable(other_user) %>
+        <%= button_to assume_surrender_path(friendship.surrenders.for_user(other_user)), method: :post, class: 'no-underline primary' do %>
+          <ion-icon role="presentation" name="ticket"></ion-icon>
+          Take control
+        <% end %>
+      <% end %>
       <%= button_tag class: 'no-underline secondary', data: { action: 'click->friendship#confirm' } do %>
         <ion-icon role="presentation" name="heart-dislike"></ion-icon>
         Delete

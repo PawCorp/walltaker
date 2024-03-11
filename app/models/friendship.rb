@@ -39,4 +39,8 @@ class Friendship < ApplicationRecord
     return sender if sender.id != user.id
     receiver if receiver.id != user.id
   end
+
+  def controllable(user)
+    surrenders.where(user: user).any?
+  end
 end
