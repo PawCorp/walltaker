@@ -18,18 +18,4 @@
   Your Links
 </h2>
 
-<div id="links">
-  <% @links.each do |link| %>
-    <div data-controller="go" data-go-to-value="<%= link_url(link) %>">
-      <%= render link %>
-    </div>
-  <% end %>
-
-  <% if @links.count == 0 %>
-    <h4>No links?</h4>
-    <p>
-      You'll need to create a link that others can use to push wallpapers to your device. Try the 
-      <span class="mock-link"><ion-icon role="presentation" name="color-wand"></ion-icon> Link Wizard</span>for a guided tutorial!
-    </p>
-  <% end %>
-</div>
+<%= render 'links', links: @links %>

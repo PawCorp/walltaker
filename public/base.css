@@ -1047,7 +1047,7 @@ footer small a {
     background: var(--accent);
     font-size: 0.9rem;
     text-align: left;
-    z-index: 9999;
+    z-index: 999999999;
     transform: translate(-0.5rem, 0.75rem);
 }
 
@@ -1523,3 +1523,4 @@ pre code.hljs {
         text-decoration: underline;
     }
 }
+

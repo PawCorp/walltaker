@@ -1,7 +1,7 @@
 class ApiController < ApplicationController
   after_action :log_presence, only: %i[show_link show_link_widget]
   skip_before_action :verify_authenticity_token, only: :set_link_response
-  before_action :authorize, only: %i[update_mascot update_perviness]
+  before_action :authorize_for_surrenderd_accounts, only: %i[update_mascot update_perviness]
 
   def update_mascot
     next_mascot = current_user&.mascot || 'ki'

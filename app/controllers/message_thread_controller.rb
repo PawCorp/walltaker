@@ -30,6 +30,10 @@ class MessageThreadController < ApplicationController
             Notification.create user: user, notification_type: :new_message, text: "#{current_user.username}: #{message['content'].truncate 24}", link: message_thread_path(@message_thread)
           end
         end
+
+        if current_user&.current_surrender
+          Notification.create user: current_user, notification_type: :surrender_event, link: message_thread_path(@message_thread), text: "#{current_user.current_surrender.controller.username} said '#{@new_message.content}' in a message thread."
+        end
         redirect_to message_thread_path @message_thread
       end
     end

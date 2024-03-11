@@ -1,4 +1,6 @@
-<div id="<%= dom_id link %>">
+<%= turbo_stream_from link %>
+
+<%= turbo_frame_tag dom_id link do %>
   <% if !link.never_expires && link.expires <= Time.now.utc %>
     <div class="accent-block accent-block--link">
       <div class="accent-block__charm">
@@ -196,4 +198,4 @@
   <% if !link.never_expires && link.expires <= Time.now.utc %>
     </div>
   <% end %>
-</div>
+<% end %>

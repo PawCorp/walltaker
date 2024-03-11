@@ -194,6 +194,10 @@ form.orgasms .form__row {
     cursor: pointer;
 }
 
+.form__row--stacking {
+    flex-wrap: wrap;
+}
+
 .form__row input.full-width {
     width: 100%;
     margin-bottom: 0;

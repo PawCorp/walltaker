@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   after_action :track_visit, only: %i[new show edit]
+  before_action :authorize, only: %i[update]
 
   def new
     @user = User.new
@@ -32,6 +33,10 @@ class UsersController < ApplicationController
     @user.details = user_params[:details]
     if @user.save
       track :regular, :updated_details
+
+      if @user.current_surrender
+        Notification.create user: @user, notification_type: :surrender_event, link: user_path(@user.username), text: "#{@user.current_surrender.controller.username} changed a profile setting."
+      end
       redirect_to user_path(@user.username), { notice: 'Successfully updated user.' }
     else
       track :error, :updating_details_went_wrong

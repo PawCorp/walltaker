@@ -1053,7 +1053,7 @@ aside.comments-sidebar > button .toggle-badge[data-hidden=true] {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 999;
+    z-index: 90;
 }
 
 .link--anchor-shade-container {

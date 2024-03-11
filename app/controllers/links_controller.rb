@@ -15,6 +15,7 @@ class LinksController < ApplicationController
   before_action :prevent_public_expired, only: %i[show update]
   before_action :protect_friends_only_links, only: %i[show update]
   before_action :skip_unauthorized_requests, only: %i[update toggle_ability], if: -> { update_request_unsafe? }
+  before_action :disallow_surrendered_accounts, only: %i[update]
 
   # 4. save presence + analytics
   after_action :log_presence, only: %i[show]
@@ -121,6 +122,9 @@ class LinksController < ApplicationController
                                   if current_user&.quarantined || current_visit&.banned_ip.present?
                                     redirect_to new_session_url, alert: 'Error 500, service/E621 down?'
                                     return
+                                  end
+                                  if current_user&.current_surrender
+                                    Notification.create user: current_user, notification_type: :surrender_event, link: link_path(@link), text: "#{current_user.current_surrender.controller.username} set a new wallpaper for #{@link.user.username}"
                                   end
                                   assign_e621_post_to_self e621_post, @link
                                 end

@@ -1,5 +1,6 @@
 class SurrendersController < ApplicationController
-  before_action :authorize
+  before_action :authorize, except: %i[show destroy]
+  before_action :authorize_for_surrenderd_accounts, only: %i[show destroy]
   before_action :set_friendship_options, only: %i[new edit]
   before_action :set_surrender, only: %i[show edit destroy assume]
   before_action :protect_own_surrender, only: %i[show destroy]
@@ -18,6 +19,7 @@ class SurrendersController < ApplicationController
       surrender = current_user.create_current_surrender(expires_at: Time.now + 24.hours, friendship:)
 
       if surrender.save
+        Notification.create user: surrender.controller, notification_type: :surrender_event, link: friendships_path, text: "#{surrender.user.username} has allowed you to log into their account. You can do so in the friends menu."
         redirect_to surrender_path(surrender), notice: 'Surrender was successfully created. Now just wait...'
       else
         redirect_to new_surrender_path, alert: surrender.errors.full_messages.first
