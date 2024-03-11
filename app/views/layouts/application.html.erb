@@ -32,6 +32,13 @@
 <header>
   <div class="header__age-warning">
     <span id="age-warning__icon">🔞</span> This is an app for adults over the age of 18 only.
+    <% if current_user&.current_surrender && cookies.signed[:surrender_id].nil? %>
+      <% surrender = current_user.current_surrender %>
+      <br>
+      Your account is surrendered to <%= link_to surrender.controller.username, user_path(surrender.controller.username) %>.
+      <br>
+      <%= link_to 'Help me!', surrender_path(surrender) %>
+    <% end %>
   </div>
   <div class="header__inner">
     <h1>
