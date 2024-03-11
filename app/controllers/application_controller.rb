@@ -227,11 +227,13 @@ class ApplicationController < ActionController::Base
         surrender = Surrender.find(cookies.signed[:surrender_id])
         if !surrender || surrender.expired?
           session[:user_id] = nil
+          cookies.signed[:surrender_id] = nil
           surrender.destroy if surrender
           return redirect_to new_session_url, alert: 'Account surrender for user is over.'
         end
       rescue
         session[:user_id] = nil
+        cookies.signed[:surrender_id] = nil
         return redirect_to new_session_url, alert: 'Account surrender for user is over.'
       end
     end
